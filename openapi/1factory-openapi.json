@@ -1,0 +1,4243 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "1Factory API",
+    "description": "This API allows you to create and query a number of objects in your 1Factory account.\n\n The API accepts and returns request and response bodies as JSON, using UTF-8 encoding.\n\nClients may request that response bodies are compressed using gzip compression by passing 'gzip' in the 'Accept-Encoding' header.\n\nIn order to use the API, you need to generate an API key for your organization in the API section of the Settings page.\n\nEach API request must include the API key and your organization's ID as header parameters. You can also find your organization ID in the Settings page.\n\nAll date time values used in the API are in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) date-time format, and include a timezone offset value. Incoming values can specify any timezone offset.\n\nErrors returned by the API include an error code. An explanation of these error codes is available [here](./errors.html).\n\nUsage of the API is rate-limited - current default limits are:\n- 60 requests per minute\n- 1000 requests per day\n\nExceeding these limits will result in subsequent API requests returning a 429 error code. The daily request limit resets at midnight UTC.\n\n API responses include the following headers to allow clients to determine how close they are to exceeding them limits:\n- **x-ratelimit-minute-limit** permitted number of API calls per minute\n- **x-ratelimit-minute-reset** seconds remaining until minute limit resets\n- **x-ratelimit-minute-remaining** number of calls remaining until reaching limit\n- **x-ratelimit-day-limit** permitted number of API calls per minute\n- **x-ratelimit-day-reset** seconds remaining until minute limit resets\n- **x-ratelimit-day-remaining** number of calls remaining until reaching limit\n\nIf you find you require a higher usage limit, please contact 1Factory support to discuss your use case.",
+
+    "version": "24.31",
+    "termsOfService": "https://www.1factory.com/resources/TOS%20May%2020%202021.pdf",
+    "contact": {
+      "name": "API Support",
+      "url": "https://1factoryhelp.zendesk.com/hc/en-us",
+      "email": "support@1factory.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://www.1factory.co/api/v1",
+      "description": "Sandbox server"
+    },
+    {
+      "url": "https://www.1factory.com/api/v1",
+      "description": "Production server"
+    },
+    {
+      "url": "https://val.1factory.co/api/v1",
+      "description": "Validated Sandbox server"
+    },
+    {
+      "url": "https://val.1factory.com/api/v1",
+      "description": "Validated Production server"
+    },
+    {
+      "url": "https://localhost/api/v1",
+      "description": "Local development"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "OrgId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-1factory-org",
+        "description": "ID of your organization in 1Factory. Available in the Settings page of the 1Factory application."
+      },
+      "ApiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-1factory-key",
+        "description": "API key for your organization. Generated in the Settings page of the 1Factory application."
+
+      }
+    },
+    "parameters": {
+      "page": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "default": 0
+        },
+        "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
+      },
+      "pageSize": {
+        "name": "page_size",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 500,
+          "default": 100
+        },
+        "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
+      },
+      "part_number": {
+        "name": "part_number",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "nullable": false,
+          "example": "12-34567-89"
+        },
+        "description": "Part name / number to filter on."
+      },
+      "rev": {
+        "name": "rev",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "nullable": false,
+          "example": "A"
+        },
+        "description": "Part rev to filter on. Typically used in conjunction with the part_number query parameter."
+      },
+      "status": {
+        "name": "status",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "nullable": false,
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "example": "Active"
+        },
+        "description": "Status to filter on."
+      },
+      "version_status": {
+        "name": "version_status",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "nullable": false,
+          "enum": [
+            "Active",
+            "Draft",
+            "Approval",
+            "Released",
+            "Inactive"
+          ],
+          "example": "Active"
+        },
+        "description": "Version status to filter on. Approval status is only available to Organizations with plan approvals enabled. Active is the released and highest version."
+      },
+      "approval_status": {
+        "name": "approval_status",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": ["N/a","Pending","Assigned","Approved","Rejected"]
+        },
+        "description": "The status of an object that requires approval before releasing or closing.\n\n(Availability depends on Organization settings.)"
+      },
+      "is_tabulated": {
+        "name": "is_tablulated",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "example": false
+        },
+        "description": "If tabulated plans should be filtered on."
+      },
+      "is_spec_lib": {
+        "name": "is_spec_lib",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "example": false
+        },
+        "description": "If spec library plans should be filtered on."
+      },
+      "customer": {
+        "name": "customer",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "nullable": true,
+          "example": "Acme Industries"
+        },
+        "description": "Name of customer to filter on."
+      },
+      "supplier": {
+        "name": "supplier",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "nullable": true,
+          "example": "Acme Industries"
+        },
+        "description": "Name of supplier to filter on."
+      },
+      "supplier_id": {
+        "name": "supplier_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "example": 12345
+        }
+      },
+      "project_identifier": {
+        "name": "project_identifier",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "nullable": true,
+          "example": "Bearings"
+        },
+        "description": "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
+      },
+      "operation": {
+        "name": "operation",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "nullable": true,
+          "example": "OP 10"
+        },
+        "description": "Operation of the inspection, FAI or Plan. \n\n(Only available if Inspection By Operation or Plan By Operation are enabled.)"
+      },
+      "site": {
+        "name": "site",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "nullable": true,
+          "example": "QC Lab"
+        },
+        "description": "Location where inspection was performed. Must come from your organization's Sites List of Values."
+      },
+      "partNoRev": {
+        "name": "part_no_rev",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "10-12345-12 A"
+        },
+        "description": "Combination of part number and revision to filter on. Part number and revision should correspond to a Part Master entry. Revision should follow part number, and be separated with a space character."
+      },
+      "inspectionType": {
+        "name": "type",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "Final"
+        },
+        "description": "Type of inspection to filter on, from your organization's Inspection Types List of Values."
+      },
+      "planID": {
+        "name": "plan_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "example": 12345
+        }
+      },
+      "faiType": {
+        "name": "type",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "AS9102"
+          ],
+          "example": "Standard"
+        },
+        "description": "Type of first-article inspection to filter on."
+      },
+      "inspectionID": {
+        "name": "inspection_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "example": 12345
+        }
+      },
+      "inspIdent1": {
+        "name": "insp_ident_1",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "PO-12345"
+        },
+        "description": "Primary identifier to filter on for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'."
+      },
+      "inspIdent2": {
+        "name": "insp_ident_2",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "C-B12345"
+        },
+        "description": "Secondary identifier to filter on for an inspection or FAI, for example a Customer Purchase Order or Lot #. For FAIs this is the 'PO Number'."
+      },
+      "inspectionStatus": {
+        "name": "insp_status",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Accepted",
+            "Rejected"
+          ],
+          "example": "Accepted"
+        },
+        "description": "Inspection status to filter on."
+      },
+      "reviewStatus": {
+        "name": "review_status",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Reviewed"
+          ],
+          "example": "Reviewed"
+        },
+        "description": "Review status to filter on."
+      },
+      "createdAfter" : {
+        "name" : "created_after",
+        "in" : "query",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2021-07-14T08:00:00-08:00"
+        },
+        "description" : "Return objects created after the specified date-time"
+      },
+      "createdBefore" : {
+        "name" : "created_before",
+        "in" : "query",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2021-07-14T08:00:00-08:00"
+        },
+        "description" : "Return objects created before the specified date-time"
+      },
+      "updatedAfter" : {
+        "name" : "updated_after",
+        "in" : "query",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2021-07-14T08:00:00-08:00"
+        },
+        "description" : "Return objects updated after the specified date-time"
+      },
+      "updatedBefore" : {
+        "name" : "updated_before",
+        "in" : "query",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2021-07-14T08:00:00-08:00"
+        },
+        "description" : "Return objects updated before the specified date-time"
+      },
+      "closedAfter": {
+        "name": "closed_after",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2021-07-14T08:00:00-08:00"
+        },
+        "description": "Return only approved or rejected objects closed after the specified date-time."
+      },
+      "closedBefore": {
+        "name": "closed_before",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2021-07-14T08:00:00-08:00"
+        },
+        "description": "Return only approved or rejected objects closed before the specified date-time."
+      }
+    },
+    "requestBodies": {
+      "WorkOrderListRequest": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/WorkOrderList"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "401": {
+        "description": "Unauthorized. Missing or invalid API key.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "code": "FAC-2",
+              "message": "Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page."
+            }
+          }
+        }
+      },
+      "UpdateSuccess": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "string",
+              "example": "OK. Successfully updated."
+            }
+          }
+        },
+        "description": "OK. Success message returned."
+      },
+      "InvalidQueryParam": {
+        "description": "Invalid request. A problem with the request query parameters prevents it from being processed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "code": "FAC-11",
+              "message": "Invalid query parameter: '-1' is not a valid value for 'page_size'."
+            }
+          }
+        }
+      },
+      "InvalidPathParam": {
+        "description": "Invalid request. A problem with the request path parameters prevents it from being processed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "code": "FAC-12",
+              "message": "Invalid path parameter: 'badID' is not a valid value for 'ID'."
+            }
+          }
+        }
+      },
+      "DuplicateInspection": {
+        "description": "Conflict. An inspection using the same identifier(s) and type already exists.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "code": "FAC-21",
+              "message": "Duplicate resource: An inspection with insp_ident_1: 'PO-12345', insp_ident_2: 'C-B12345', and inspection_type: 'Final' already exists."
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Error": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code identifying type of error."
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message."
+          }
+        }
+      },
+      "NewPartMaster": {
+        "type": "object",
+        "required": [
+          "part_number"
+        ],
+        "properties": {
+          "part_number": {
+            "$ref": "#/components/schemas/part_number"
+          },
+          "rev": {
+            "$ref": "#/components/schemas/rev"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "Description of the part. (Optional).",
+            "example": "Three Lobe Shaft"
+          },
+          "status": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "Active",
+              "Inactive"
+            ],
+            "default": "Active",
+            "description": "Status of Part Master entry."
+          },
+          "alt_part_number": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "An alternative identifier used to identify a part, such as Drawing #, or customer / supplier part number.",
+            "example": "DN-1234568"
+          },
+          "alt_rev": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "An alternate part revision, such as a drawing revision, or customer / supplier part revision.",
+            "example": "B"
+          },
+          "alt_part_number2": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "A second alternative identifier used to identify a part, such as Drawing #, or customer / supplier part number.",
+            "example": "CN-1234569"
+          },
+          "alt_rev2": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "A second alternate part revision, such as a drawing revision, or customer / supplier part revision.",
+            "example": "C"
+          },
+          "project_identifier": {
+            "$ref": "#/components/schemas/project_identifier"
+          },
+          "cost": {
+            "type": "number",
+            "nullable": true,
+            "format": "double",
+            "description": "Cost of the part. (Optional).",
+            "example": 3.50
+          },
+          "unit": {
+            "type": "string",
+            "description": "Unit used for determine part cost. (Optional)",
+            "example": "Each"
+          },
+          "is_assembly": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, indicates part is an assembly. (Optional)"
+          },
+          "is_itar": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, indicates part is an ITAR part with additional controls. (Optional)"
+          },
+          "is_buy": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, indicates part is bought, rather than made. (Optional)"
+          },
+          "comments": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 32000,
+            "description": "Detailed comments regarding the part. (Optional)",
+            "example": "This is a brand new part that we are prototyping."
+          }
+        }
+      },
+      "PartMaster": {
+        "type": "object",
+        "required": [
+          "part_number"
+        ],
+        "properties": {
+          "ID": {
+            "$ref": "#/components/schemas/ID"
+          },
+          "part_number": {
+            "$ref": "#/components/schemas/part_number"
+          },
+          "rev": {
+            "$ref": "#/components/schemas/rev"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "Description of the part. (Optional).",
+            "example": "Three Lobe Shaft"
+          },
+          "status": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "Active",
+              "Inactive"
+            ],
+            "default": "Active",
+            "description": "Status of Part Master entry."
+          },
+          "alt_part_number": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "An alternative identifier used to identify a part, such as Drawing #, or customer / supplier part number.",
+            "example": "DN-1234568"
+          },
+          "alt_rev": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "An alternate part revision, such as a drawing revision, or customer / supplier part revision.",
+            "example": "B"
+          },
+          "alt_part_number2": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "A second alternative identifier used to identify a part, such as Drawing #, or customer / supplier part number.",
+            "example": "CN-1234569"
+          },
+          "alt_rev2": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "A second alternate part revision, such as a drawing revision, or customer / supplier part revision.",
+            "example": "C"
+          },
+          "project_identifier": {
+            "$ref": "#/components/schemas/project_identifier"
+          },
+          "plan_count": {
+            "type": "number",
+            "nullable": false,
+            "description": "The number of plans this Part Master is associated with.",
+            "example": 2
+          },
+          "ncr_count": {
+            "type": "number",
+            "nullable": false,
+            "description": "The number of NCRs this Part Master is associated with.",
+            "example": 3
+          },
+          "type": {
+            "type": "string",
+            "description": "Identify if the part is part of a regular part, tabulated part, or the parent tabulated part",
+            "enum": [
+              "Tabulated",
+              "ToS Entry",
+              "Standard"
+            ]
+          },
+          "parent_part_number": {
+            "type": "string",
+            "description": "The part number of the parent part if this part is a Table of Size entry."
+          },
+          "parent_rev": {
+            "type": "string",
+            "description": "The part revision of the parent part if this part is a Table of Size entry."
+          },
+          "cost": {
+            "type": "number",
+            "nullable": true,
+            "format": "double",
+            "description": "Cost of the part. (Optional).",
+            "example": 3.50
+          },
+          "unit": {
+            "type": "string",
+            "description": "Unit used for determine part cost. (Optional)",
+            "example": "Each"
+          },
+          "is_library": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, indicates the part is setup as a library for a Spec Library.",
+            "example": false
+          },
+          "is_assembly": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, indicates part is an assembly."
+          },
+          "is_itar": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, indicates part is an ITAR part with additional controls."
+          },
+          "has_ppap": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, indicates part has PPAP documents."
+          },
+          "component_parts": {
+            "type": "array",
+            "minItems": 0,
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/AssemblyEntry"
+            },
+            "example": []
+          },
+          "is_buy": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, indicates part is bought, rather than made. (Optional)"
+          },
+          "comments": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 32000,
+            "description": "Detailed comments regarding the part. (Optional)",
+            "example": "This is a brand new part that we are prototyping."
+          }
+        }
+      },
+      "PartMasterList": {
+        "type": "array",
+        "minItems": 0,
+        "maxItems": 500,
+        "items": {
+          "$ref": "#/components/schemas/PartMaster"
+        }
+      },
+      "WorkOrderList": {
+        "type": "array",
+        "minItems": 0,
+        "maxItems": 5000,
+        "items": {
+          "type": "object",
+          "required": [
+            "insp_ident_1"
+          ],
+          "properties": {
+            "insp_ident_1": {
+              "$ref": "#/components/schemas/insp_ident_1"
+            },
+            "insp_ident_2": {
+              "$ref": "#/components/schemas/insp_ident_2"
+            },
+            "lot_size": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true,
+              "minimum": 0,
+              "description": "The lot size for this order. (Optional).",
+              "example": 50
+            }
+          }
+        }
+      },
+      "Plan": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "$ref": "#/components/schemas/ID"
+          },
+          "part_number": {
+            "$ref": "#/components/schemas/part_number"
+          },
+          "rev": {
+            "$ref": "#/components/schemas/rev"
+          },
+          "part_description": {
+            "$ref": "#/components/schemas/part_description"
+          },
+          "operation": {
+            "$ref": "#/components/schemas/operation"
+          },
+          "project_identifier": {
+            "$ref": "#/components/schemas/project_identifier"
+          },
+          "status": {
+            "$ref": "#/components/schemas/status"
+          },
+          "version": {
+            "type": "number",
+            "description": "Version of the plan.",
+            "example": 4
+          },
+          "version_status": {
+            "type": "string",
+            "enum": [
+              "Active",
+              "Draft",
+              "Approval",
+              "Released",
+              "Inactive"
+            ]
+          },
+          "approval_status": {
+            "type": "string",
+            "enum": ["N/a","Pending","Assigned","Approved","Rejected"],
+            "description": "The status of a plan that requires approval before releasing or closing.\n\n(Availability depends on Organization settings.)"
+          },
+          "customer_name": {
+            "$ref": "#/components/schemas/customer_name"
+          },
+          "supplier_name": {
+            "$ref": "#/components/schemas/supplier_name"
+          },
+          "supplier_number": {
+            "$ref": "#/components/schemas/supplier_number"
+          },
+          "is_tabulated": {
+            "type": "boolean",
+            "example": false,
+            "description": "If the plan is for a tabulated part."
+          },
+          "is_spec_lib": {
+            "type": "boolean",
+            "example": false,
+            "description": "If the plan is a spec library"
+          },
+          "created_by_name": {
+            "$ref": "#/components/schemas/created_by_username"
+          },
+          "created_on": {
+            "$ref": "#/components/schemas/created_on"
+          },
+          "updated_on": {
+            "$ref": "#/components/schemas/updated_on"
+          }
+        }
+      },
+      "SpecInspectionType": {
+        "type": "object",
+        "properties": {
+          "inspection_type": {"$ref": "#/components/schemas/inspection_type"},
+          "inspection_method": {
+            "type": "string",
+            "nullable": true,
+            "description": "How the feature should be inspected.",
+            "example": "CMM"
+          },
+          "sampling_rule": {
+            "type": "string",
+            "nullable": true,
+            "description": "How frequently should the feature be checked.",
+            "example": "1 in 10"
+          },
+          "data_type": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "NUM", "P/F", "CALC"
+            ],
+            "description": "How the data for this specification is recorded - numerically, as a pass/fail, or calculated from other features.",
+            "example": "NUM"
+          }
+        }
+      },
+      "PlanDetail": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "$ref": "#/components/schemas/ID"
+          },
+          "part_number": {
+            "$ref": "#/components/schemas/part_number"
+          },
+          "rev": {
+            "$ref": "#/components/schemas/rev"
+          },
+          "part_description": {
+            "$ref": "#/components/schemas/part_description"
+          },
+          "operation": {
+            "$ref": "#/components/schemas/operation"
+          },
+          "project_identifier": {
+            "$ref": "#/components/schemas/project_identifier"
+          },
+          "status": {
+            "$ref": "#/components/schemas/status"
+          },
+          "version": {
+            "type": "number",
+            "description": "Version of the plan.",
+            "example": 4
+          },
+          "version_status": {
+            "type": "string",
+            "enum": [
+              "Active",
+              "Draft",
+              "Approval",
+              "Released",
+              "Inactive"
+            ]
+          },
+          "approval_status": {
+            "type": "string",
+            "enum": ["N/a","Pending","Assigned","Approved","Rejected"],
+            "description": "The status of a plan that requires approval before releasing or closing.\n\n(Availability depends on Organization settings.)"
+          },
+          "customer_name": {
+            "$ref": "#/components/schemas/customer_name"
+          },
+          "supplier_name": {
+            "$ref": "#/components/schemas/supplier_name"
+          },
+          "supplier_number": {
+            "$ref": "#/components/schemas/supplier_number"
+          },
+          "is_tabulated": {
+            "type": "boolean",
+            "example": false,
+            "description": "If the plan is for a tabulated part."
+          },
+          "is_spec_lib": {
+            "type": "boolean",
+            "example": false,
+            "description": "If the plan is a spec library"
+          },
+          "created_by_name": {
+            "$ref": "#/components/schemas/created_by_username"
+          },
+          "created_on": {
+            "$ref": "#/components/schemas/created_on"
+          },
+          "updated_on": {
+            "$ref": "#/components/schemas/updated_on"
+          },
+          "specifications": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {"$ref": "#/components/schemas/Specification"},
+                {
+                  "type": "object",
+                  "properties": {
+                    "inspection_types": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SpecInspectionType"}
+                      }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "PlanList": {
+        "type": "array",
+        "minItems": 0,
+        "maxItems": 500,
+        "items": {
+          "$ref": "#/components/schemas/Plan"
+        }
+      },
+      "SuperInspection": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "$ref": "#/components/schemas/ID"
+          },
+          "insp_ident_1": {
+            "$ref": "#/components/schemas/insp_ident_1"
+          },
+          "insp_ident_2": {
+            "$ref": "#/components/schemas/insp_ident_2"
+          },
+          "insp_ident_3": {
+            "$ref": "#/components/schemas/insp_ident_3"
+          },
+          "part_number": {
+            "$ref": "#/components/schemas/part_number"
+          },
+          "rev": {
+            "$ref": "#/components/schemas/rev"
+          },
+          "part_description": {
+            "$ref": "#/components/schemas/part_description"
+          },
+          "operation": {"$ref": "#/components/schemas/operation"},
+          "customer_name": {
+            "$ref": "#/components/schemas/customer_name"
+          },
+          "supplier_name": {
+            "$ref": "#/components/schemas/supplier_name"
+          },
+          "supplier_number": {
+            "$ref": "#/components/schemas/supplier_number"
+          },
+          "project_identifier": {
+            "$ref": "#/components/schemas/project_identifier"
+          },
+          "site": {
+            "type": "string",
+            "nullable": true,
+            "description": "Location where inspection was performed, from your organization's Site LOV.",
+            "example": "QC Lab"
+          },
+          "created_by_name": {
+            "$ref": "#/components/schemas/created_by_username"
+          },
+          "created_on": {
+            "$ref": "#/components/schemas/created_on"
+          },
+          "in_spec_pct": {
+            "type": "number",
+            "format": "double",
+            "nullable": false,
+            "description": "Percentage of in-spec parts for this inspection.",
+            "readOnly": false,
+            "minimum": 0.0,
+            "maximum": 100.0,
+            "example": 100.0
+          },
+          "inspection_status": {
+            "type": "string",
+            "enum": [
+              "Pending",
+              "Accepted",
+              "Rejected"
+            ],
+            "description": "Current status of inspection.",
+            "default": "Accepted"
+          },
+          "inspected_by_name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Name of user that last set inspection status.",
+            "example": "Will Stallard"
+          },
+          "inspected_on": {
+            "type": "string",
+            "nullable": true,
+            "format": "date-time",
+            "description": "Date & time that inspection status set.",
+            "example": "2021-07-16T17:42:31-08:00"
+          },
+          "review_status": {
+            "type": "string",
+            "enum": [
+              "Pending",
+              "Reviewed"
+            ],
+            "description": "Current review status of inspection.",
+            "default": "Pending"
+          },
+          "reviewed_by_name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Name of user that set review status.",
+            "example": "Nipun Girotra"
+          },
+          "reviewed_on": {
+            "type": "string",
+            "nullable": true,
+            "format": "date-time",
+            "description": "Date & time that review status was set.",
+            "example": "2021-07-16T17:53:41-08:00"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 32000,
+            "description": "Comments on this inspection",
+            "example": "Parts are discolored."
+          },
+          "ncrs": {
+            "type": "array",
+            "minItems": 0,
+            "items": {
+              "type": "string",
+              "nullable": false
+            },
+            "description": "List of NCR #s associated with this inspection",
+            "example": [
+              "NCR-123",
+              "NCR-456"
+            ]
+          },
+          "updated_on": {
+            "$ref": "#/components/schemas/updated_on"
+          },
+          "closed_on": {
+            "$ref": "#/components/schemas/closed_on"
+          }
+        }
+      },
+      "Inspection": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "$ref": "#/components/schemas/ID"
+          },
+          "insp_ident_1": {
+            "$ref": "#/components/schemas/insp_ident_1"
+          },
+          "insp_ident_2": {
+            "$ref": "#/components/schemas/insp_ident_2"
+          },
+          "insp_ident_3": {
+            "$ref": "#/components/schemas/insp_ident_3"
+          },
+          "part_number": {
+            "$ref": "#/components/schemas/part_number"
+          },
+          "rev": {
+            "$ref": "#/components/schemas/rev"
+          },
+          "part_description": {
+            "$ref": "#/components/schemas/part_description"
+          },
+          "operation": {"$ref": "#/components/schemas/operation"},
+          "customer_name": {
+            "$ref": "#/components/schemas/customer_name"
+          },
+          "supplier_name": {
+            "$ref": "#/components/schemas/supplier_name"
+          },
+          "supplier_number": {
+            "$ref": "#/components/schemas/supplier_number"
+          },
+          "project_identifier": {
+            "$ref": "#/components/schemas/project_identifier"
+          },
+          "site": {
+            "type": "string",
+            "nullable": true,
+            "description": "Location where inspection was performed, from your organization's Site LOV.",
+            "example": "QC Lab"
+          },
+          "created_by_name": {
+            "$ref": "#/components/schemas/created_by_username"
+          },
+          "created_on": {
+            "$ref": "#/components/schemas/created_on"
+          },
+          "in_spec_pct": {
+            "type": "number",
+            "format": "double",
+            "nullable": false,
+            "description": "Percentage of in-spec parts for this inspection.",
+            "readOnly": false,
+            "minimum": 0.0,
+            "maximum": 100.0,
+            "example": 100.0
+          },
+          "inspection_status": {
+            "type": "string",
+            "enum": [
+              "Pending",
+              "Accepted",
+              "Rejected"
+            ],
+            "description": "Current status of inspection.",
+            "default": "Accepted"
+          },
+          "inspected_by_name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Name of user that last set inspection status.",
+            "example": "Will Stallard"
+          },
+          "inspected_on": {
+            "type": "string",
+            "nullable": true,
+            "format": "date-time",
+            "description": "Date & time that inspection status set.",
+            "example": "2021-07-16T17:42:31-08:00"
+          },
+          "review_status": {
+            "type": "string",
+            "enum": [
+              "Pending",
+              "Reviewed"
+            ],
+            "description": "Current review status of inspection.",
+            "default": "Pending"
+          },
+          "reviewed_by_name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Name of user that set review status.",
+            "example": "Nipun Girotra"
+          },
+          "reviewed_on": {
+            "type": "string",
+            "nullable": true,
+            "format": "date-time",
+            "description": "Date & time that review status was set.",
+            "example": "2021-07-16T17:53:41-08:00"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 32000,
+            "description": "Comments on this inspection",
+            "example": "Parts are discolored."
+          },
+          "ncrs": {
+            "type": "array",
+            "minItems": 0,
+            "items": {
+              "type": "string",
+              "nullable": false
+            },
+            "description": "List of NCR #s associated with this inspection",
+            "example": [
+              "NCR-123",
+              "NCR-456"
+            ]
+          },
+          "updated_on": {
+            "$ref": "#/components/schemas/updated_on"
+          },
+          "closed_on": {
+            "$ref": "#/components/schemas/closed_on"
+          },
+          "inspection_type": {"$ref": "#/components/schemas/inspection_type"},
+          "machines": {"$ref": "#/components/schemas/machines"},
+          "lot_size": {"$ref": "#/components/schemas/lot_size"},
+          "parts_passed": {"$ref": "#/components/schemas/parts_passed"},
+          "parts_failed": {"$ref": "#/components/schemas/parts_failed"}
+        }
+      },
+      "InspectionList": {
+        "type": "array",
+        "minItems": 0,
+        "maxItems": 500,
+        "items": {
+          "$ref": "#/components/schemas/Inspection"
+        }
+      },
+      "NewMfgInspection": {
+        "allOf": [
+          {"$ref": "#/components/schemas/NewInspection"},
+          {
+            "type": "object",
+            "properties": {
+              "customer_name": {
+                "$ref": "#/components/schemas/customer_name"
+              },
+              "machines": {
+                "$ref": "#/components/schemas/machines"
+              },
+              "operation": {
+                "$ref": "#/components/schemas/operation"
+              }
+            }
+          }
+        ]
+      },
+      "NewRecInspection": {
+        "allOf": [
+          {"$ref": "#/components/schemas/NewInspection"},
+          {
+            "type": "object",
+            "properties": {
+              "supplier_name": {
+                "$ref": "#/components/schemas/supplier_name"
+              }
+            }
+          }
+        ]
+      },
+      "NewInspection": {
+        "type": "object",
+        "properties": {
+          "insp_ident_1": {
+            "$ref": "#/components/schemas/insp_ident_1"
+          },
+          "insp_ident_2": {
+            "$ref": "#/components/schemas/insp_ident_2"
+          },
+          "insp_ident_3": {
+            "$ref": "#/components/schemas/insp_ident_3"
+          },
+          "part_number": {
+            "$ref": "#/components/schemas/part_number"
+          },
+          "rev": {
+            "$ref": "#/components/schemas/rev"
+          },
+          "inspection_type": {
+            "$ref": "#/components/schemas/inspection_type"
+          },
+          "lot_size": {
+            "$ref": "#/components/schemas/lot_size"
+          }
+        }
+      },
+      "InspectionDetail": {
+        "type": "object",
+        "description": "Detailed inspection data, including feature specifications and measurement data.",
+        "allOf" : [
+          { "$ref": "#/components/schemas/Inspection"},
+          { "type":  "object",
+            "properties": {
+              "specifications": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                    "$ref": "#/components/schemas/Specification"
+                }
+              },
+              "part_data": {
+                "type": "array",
+                "minItems": 0,
+                "items": {
+                  "$ref": "#/components/schemas/PartData"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Fai": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "$ref": "#/components/schemas/ID"
+          },
+          "insp_ident_1": {
+            "$ref": "#/components/schemas/insp_ident_1"
+          },
+          "insp_ident_2": {
+            "$ref": "#/components/schemas/insp_ident_2"
+          },
+          "insp_ident_3": {
+            "$ref": "#/components/schemas/insp_ident_3"
+          },
+          "part_number": {
+            "$ref": "#/components/schemas/part_number"
+          },
+          "rev": {
+            "$ref": "#/components/schemas/rev"
+          },
+          "part_description": {
+            "$ref": "#/components/schemas/part_description"
+          },
+          "operation": {"$ref": "#/components/schemas/operation"},
+          "customer_name": {
+            "$ref": "#/components/schemas/customer_name"
+          },
+          "supplier_name": {
+            "$ref": "#/components/schemas/supplier_name"
+          },
+          "supplier_number": {
+            "$ref": "#/components/schemas/supplier_number"
+          },
+          "project_identifier": {
+            "$ref": "#/components/schemas/project_identifier"
+          },
+          "site": {
+            "type": "string",
+            "nullable": true,
+            "description": "Location where inspection was performed, from your organization's Site LOV.",
+            "example": "QC Lab"
+          },
+          "created_by_name": {
+            "$ref": "#/components/schemas/created_by_username"
+          },
+          "created_on": {
+            "$ref": "#/components/schemas/created_on"
+          },
+          "in_spec_pct": {
+            "type": "number",
+            "format": "double",
+            "nullable": false,
+            "description": "Percentage of in-spec parts for this inspection.",
+            "readOnly": false,
+            "minimum": 0.0,
+            "maximum": 100.0,
+            "example": 100.0
+          },
+          "inspection_status": {
+            "type": "string",
+            "enum": [
+              "Pending",
+              "Accepted",
+              "Rejected"
+            ],
+            "description": "Current status of inspection.",
+            "default": "Accepted"
+          },
+          "inspected_by_name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Name of user that last set inspection status.",
+            "example": "Will Stallard"
+          },
+          "inspected_on": {
+            "type": "string",
+            "nullable": true,
+            "format": "date-time",
+            "description": "Date & time that inspection status set.",
+            "example": "2021-07-16T17:42:31-08:00"
+          },
+          "review_status": {
+            "type": "string",
+            "enum": [
+              "Pending",
+              "Reviewed"
+            ],
+            "description": "Current review status of inspection.",
+            "default": "Pending"
+          },
+          "reviewed_by_name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Name of user that set review status.",
+            "example": "Nipun Girotra"
+          },
+          "reviewed_on": {
+            "type": "string",
+            "nullable": true,
+            "format": "date-time",
+            "description": "Date & time that review status was set.",
+            "example": "2021-07-16T17:53:41-08:00"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 32000,
+            "description": "Comments on this inspection",
+            "example": "Parts are discolored."
+          },
+          "ncrs": {
+            "type": "array",
+            "minItems": 0,
+            "items": {
+              "type": "string",
+              "nullable": false
+            },
+            "description": "List of NCR #s associated with this inspection",
+            "example": [
+              "NCR-123",
+              "NCR-456"
+            ]
+          },
+          "updated_on": {
+            "$ref": "#/components/schemas/updated_on"
+          },
+          "closed_on": {
+            "$ref": "#/components/schemas/closed_on"
+          },
+          "fai_type": {"$ref": "#/components/schemas/fai_type"},
+          "number_of_parts": {"$ref": "#/components/schemas/number_of_parts"}
+        }
+      },
+      "FaiList": {
+        "type": "array",
+        "minItems": 0,
+        "maxItems": 500,
+        "items": {
+          "$ref": "#/components/schemas/Fai"
+        }
+      },
+      "NewFai": {
+        "type": "object",
+        "properties": {
+          "insp_ident_1": {
+            "$ref": "#/components/schemas/insp_ident_1"
+          },
+          "insp_ident_2": {
+            "$ref": "#/components/schemas/insp_ident_2"
+          },
+          "part_number": {
+            "$ref": "#/components/schemas/part_number"
+          },
+          "rev": {
+            "$ref": "#/components/schemas/rev"
+          },
+          "fai_type": {
+            "$ref": "#/components/schemas/fai_type"
+          },
+          "number_of_parts": {
+            "$ref": "#/components/schemas/number_of_parts"
+          },
+          "customer_name": {
+            "$ref": "#/components/schemas/customer_name"
+          },
+          "supplier_name": {
+            "$ref": "#/components/schemas/supplier_name"
+          }
+        }
+      },
+      "FaiDetail": {
+        "type": "object",
+        "description": "Detailed first-article inspection data, including feature specifications and measurement data.",
+        "allOf" : [
+          { "$ref": "#/components/schemas/Fai"},
+          { "type":  "object",
+            "properties": {
+              "specifications": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/components/schemas/Specification"
+                }
+              },
+              "part_data": {
+                "type": "array",
+                "minItems": 0,
+                "items": {
+                  "$ref": "#/components/schemas/PartData"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Issue": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "$ref": "#/components/schemas/ID"
+          },
+          "number": {
+            "type": "number",
+            "example": 1234,
+            "description": "The reference number for the NCR, Complaint, or CAPA"
+          },
+          "part_number": {
+            "$ref": "#/components/schemas/part_number"
+          },
+          "rev": {
+            "$ref": "#/components/schemas/rev"
+          },
+          "part_description": {
+            "$ref": "#/components/schemas/part_description"
+          },
+          "customer_name": {
+            "$ref": "#/components/schemas/customer_name"
+          },
+          "customer_ident": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "Your Organization's custom identifier for customer NCRs (ex. Customer PO #)",
+            "example": "PO-1234"
+          },
+          "supplier_name": {
+            "$ref": "#/components/schemas/supplier_name"
+          },
+          "supplier_ident": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "Your Organization's custom identifier for supplier NCRs (ex. Supplier Lot #)",
+            "example": "123456"
+          },
+          "type": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "Type of NCR",
+            "example": "Rcvg.",
+            "enum": ["Rcvg.", "Mfg.", "Field", "Cust.", "Devn."]
+          },
+          "mfg_insp_ident_1": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "Your Organization's custom primary identifier for manufacturing inspection identifiers. (ex. Job #)",
+            "example": "job-20240003"
+          },
+          "mfg_insp_ident_2": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "Your Organization's custom secondary identifier for manufacturing inspection identifiers. (ex. PO #)",
+            "example": "po-20240065"
+          },
+          "rec_insp_ident_1": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "Your Organization's custom primary identifier for receiving inspection identifiers. (ex. Job #)",
+            "example": "job-20240003"
+          },
+          "rec_insp_ident_2": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "Your Organization's custom secondary identifier for receiving inspection identifiers. (ex. PO #)",
+            "example": "po-20240065"
+          },
+          "lot_quantity": {
+            "type":"number",
+            "nullable": false,
+            "description": "The number of parts in the lot of the NCR",
+            "example": 100
+          },
+          "inspection_quantity": {
+            "type":"number",
+            "nullable": false,
+            "description": "The number of parts in the lot that were inspected as part of the NCR",
+            "example": 10
+          },
+          "defective_quantity": {
+            "type":"number",
+            "nullable": false,
+            "description": "The number of parts rejected as part of the NCR",
+            "example": 3
+          },
+          "impact": {
+            "type": "string",
+            "description": "Business impact of the NCR",
+            "example": "LOW",
+            "enum": ["LOW", "MEDIUM", "HIGH"]
+          },
+          "detected_at": {
+            "type": "string",
+            "nullable": true,
+            "description": "Where the problem for the NCR was detected.",
+            "example": "Final Inspection"
+          },
+          "problem_type": {
+            "type": "string",
+            "nullable": true,
+            "description": "A simple description of the problem.",
+            "example": "Out-of-spec"
+          },
+          "root_cause": {
+            "type": "string",
+            "nullable": true,
+            "description": "The root cause of the problem.",
+            "example": "Machining Error"
+          },
+          "caused_by": {
+            "type": "string",
+            "nullable": true,
+            "description": "The department or group that caused the problem.",
+            "example": "Engineering"
+          },
+          "problem_summary": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "Problem summary of the NCR.",
+            "example": "Manufacturing defect"
+          },
+          "total_cost": {
+            "type": "number",
+            "nullable": true,
+            "description": "Cost of the NCR",
+            "example": 1000.0
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the NCR",
+            "example": "OPEN",
+            "enum": ["OPEN", "CLOSED"]
+          },
+          "task_status": {
+            "type": "string",
+            "nullable": false,
+            "description": "Status of all tasks on NCR.",
+            "example": "OPEN",
+            "enum": ["N/A","OPEN", "CLOSED"]
+          },
+          "task_count": {
+            "type": "number",
+            "nullable": false,
+            "description": "Number of tasks for the NCR.",
+            "example": 3
+          },
+          "owner": {
+            "$ref": "#/components/schemas/owner"
+          },
+          "created_by_name": {
+            "$ref": "#/components/schemas/created_by_username"
+          },
+          "created_on": {
+            "$ref": "#/components/schemas/created_on"
+          },
+          "updated_on": {
+            "$ref": "#/components/schemas/updated_on"
+          },
+          "closed_on": {
+            "$ref": "#/components/schemas/closed_on"
+          }
+        }
+      },
+      "Ncr": {
+        "type": "object",
+        "allOf": [
+          {"$ref": "#/components/schemas/Issue"},
+          {
+            "properties": {
+              "description": {
+                "type": "string",
+                "nullable": true,
+                "maxLength": 255,
+                "description": "Description of the part.",
+                "example": "Three Lobe Shaft"
+              },
+              "use_as_is_quantity": {
+                "type": "number",
+                "nullable": true,
+                "description": "The number of parts that failed inspection that can be used as-is without rework or scrapping.",
+                "example": 3
+              },
+              "scrap_quantity": {
+                "type": "number",
+                "nullable": true,
+                "description": "The number of parts that failed inspection that must be scrapped.",
+                "example": 3
+              },
+              "return_quantity": {
+                "type": "number",
+                "nullable": true,
+                "description": "The number of parts that failed inspection that must be returned to the supplier.",
+                "example": 3
+              },
+              "rework_quantity": {
+                "type": "number",
+                "nullable": true,
+                "description": "The number of parts that failed inspection that can be reworked to pass inspection.",
+                "example": 3
+              },
+              "repair_quantity": {
+                "type": "number",
+                "nullable": true,
+                "description": "The number of parts that failed inspection that can be repaired to pass inspection.",
+                "example": 3
+              },
+              "no_defect_quantity": {
+                "type": "number",
+                "nullable": true,
+                "description": "The number of parts in the lot that do not have any defects.",
+                "example": 3
+              },
+              "inventory_location": {
+                "type": "string",
+                "nullable": true,
+                "description": "",
+                "example": "Warehouse"
+              },
+              "rma_number": {
+                "type": "string",
+                "nullable": true,
+                "description": "RMA number, if any, for the returned parts in the NCR.",
+                "example": "rma-202405"
+              },
+              "rework_po": {
+                "type": "string",
+                "nullable": true,
+                "description": "",
+                "example": "po-202407-1"
+              },
+              "shipment": {
+                "type": "string",
+                "nullable": true,
+                "description": "Shipment number, if any, for parts in the NCR",
+                "example": ""
+              },
+              "mrb_meeting_notes": {
+                "type": "string",
+                "nullable": true,
+                "description": "Any meeting notes for this NCR from a MBR meeting.",
+                "example": ""
+              },
+              "mrb_dispositions": {
+                "type": "array",
+                "nullable": false,
+                "description": "MRB dispositions for this NCR.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "nullable": false,
+                      "example": "REWORK"
+                    },
+                    "qty": {
+                      "type": "number",
+                      "example": 2
+                    }
+                  }
+                }
+              },
+              "serial_numbers": {
+                "type": "string",
+                "nullable": true,
+                "description": "Serial number(s) for this NCR.",
+                "example": "SN123456"
+              }
+            }
+          }
+        ]
+      },
+      "Capa": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Issue"
+          },
+          {
+            "properties": {
+              "date_due": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Date & time that a CAPA is due.",
+                "example": "2021-07-21T07:14:42-08:00"
+              }
+            }
+          }
+        ]
+      },
+      "Complaint": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Issue"
+          },
+          {
+            "properties": {
+              "source": {
+                "type": "string",
+                "description": "Source of the complaint.",
+                "enum": [
+                  "Customer",
+                  "Field"
+                ]
+              },
+              "customer_address": {
+                "type": "string"
+              },
+              "contact_first_name": {
+                "type": "string"
+              },
+              "contact_last_name": {
+                "type": "string"
+              },
+              "contact_email": {
+                "type": "string"
+              },
+              "contact_phone": {
+                "type": "string"
+              },
+              "customer_ncr_no": {
+                "type": "string",
+                "description": "Customer NCR number if available."
+              },
+              "rma_no": {
+                "type": "string"
+              },
+              "device_identifier": {
+                "type": "string"
+              },
+              "serial_nos": {
+                "type": "string"
+              },
+              "capa_required": {
+                "type": "boolean"
+              },
+              "capa_id": {
+                "type": "number"
+              },
+              "date_due": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Date & time that a Complaint is due.",
+                "example": "2021-07-21T07:14:42-08:00"
+              },
+              "complaint_on": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Date & time of the original complaint.",
+                "example": "2021-07-21T07:14:42-08:00"
+              }
+            }
+          }
+        ]
+      },
+      "NcrList": {
+        "type": "array",
+        "minItems": 0,
+        "maxItems": 500,
+        "items": {
+          "$ref": "#/components/schemas/Ncr"
+        }
+      },
+      "CapaList": {
+        "type": "array",
+        "minItems": 0,
+        "maxItems": 500,
+        "items": {
+          "$ref": "#/components/schemas/Capa"
+        }
+      },
+      "ComplaintList": {
+        "type": "array",
+        "minItems": 0,
+        "maxItems": 500,
+        "items": {
+          "$ref": "#/components/schemas/Complaint"
+        }
+      },
+      "Specification": {
+        "type": "object",
+        "description": "Specification that defines feature to be measured.",
+        "properties": {
+          "bln_no": {
+            "type": "string",
+            "nullable": false,
+            "description": "Balloon number for feature.",
+            "example": "1"
+          },
+          "sheet_zone": {
+            "type": "string",
+            "nullable": false,
+            "description": "Sheet and zone of the specification",
+            "example": "1 : B1"
+          },
+          "place": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Place number - for features that have multiple places, feature specification is repeated for each place.",
+            "example": 1
+          },
+          "characteristic": {
+            "type": "string",
+            "nullable": false,
+            "description": "Characteristic being measured, or, in the case of a note, the text of the note.",
+            "example": "True position"
+          },
+          "characteristic_type": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "Nom ± Tol", "GD&T", "Basic", "Min - Max", "Note", "Nom++Tol", "Nom -- Tol", "Reference"
+            ],
+            "description": "Type of characteristic being measured.",
+            "example": "GD&T"
+          },
+          "dimension_type": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "STD", "MFG", "DVN"
+            ],
+            "description": "Dimension type for this specification - Standard, Manufacturing or Deviation.",
+            "example": "STD"
+          },
+          "referenced_feature": {
+            "type": "string",
+            "nullable": true,
+            "description": "Balloon number of specification that this feature references, for example a manufacturing dimension referencing the actual drawing dimension it corresponds to.",
+            "example": "1"
+          },
+          "data_type": {
+             "type": "string",
+            "nullable": false,
+            "enum": [
+              "NUM", "P/F", "CALC"
+            ],
+            "description": "How the data for this specification is recorded - numerically, as a pass/fail, or calculated from other features.",
+            "example": "NUM"
+          },
+          "nominal": {
+            "type":"number",
+            "nullable": true,
+            "description": "Nominal value for this specification.",
+            "example": 1.12
+          },
+          "lower_spec_limit": {
+            "type":"number",
+            "nullable": true,
+            "description": "Lower specification limit for the feature.",
+            "example": 1.11
+          },
+          "upper_spec_limit": {
+            "type":"number",
+            "nullable": true,
+            "description": "Upper specification limit for the feature.",
+            "example": 1.14
+          },
+          "unit": {
+            "type":"string",
+            "nullable": true,
+            "description": "Unit of measure for this feature.",
+            "example": "mm"
+          },
+          "descriptor_datum": {
+            "type": "string",
+            "nullable": true,
+            "description": "Descriptor of feature. For GD&T, this is used to record the datum.",
+            "example": "A"
+          },
+          "bonus_tolerance":{
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "MMC", "LMC"
+            ],
+            "description": "For GD&T features, defines the material condition for evaluating bonus tolerance, if applicable.",
+            "example": "MMC"
+          },
+          "label": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional label to add more information to the specification.",
+            "example": "COUNTERSINK"
+          },
+          "inspection_method": {
+            "type": "string",
+            "nullable": true,
+            "description": "How the feature should be inspected.",
+            "example": "CMM"
+          },
+          "sampling_rule": {
+            "type": "string",
+            "nullable": true,
+            "description": "How frequently should the feature be checked.",
+            "example": "1 in 10"
+          },
+          "operation": {
+            "type": "string",
+            "nullable": true,
+            "description": "Manufacturing operation for the feature.",
+            "example": "OP10"
+          },
+          "is_key": {
+            "type": "boolean",
+            "nullable": false,
+            "description": "Indicates if feature is key for quality.",
+            "example": true
+          }
+        }
+      },
+      "PartData": {
+        "type": "object",
+        "description": "Inspection data for a single part.",
+        "properties": {
+          "grp_ident": {
+            "type": "string",
+            "nullable":  true,
+            "description": "Identifier for a grouping of parts.",
+            "example": "CAVITY1"
+          },
+          "row_ident": {
+            "type": "string",
+            "nullable":  true,
+            "description": "Identifier for a unique part, sucha as a serial number.",
+            "example": "SN100001"
+          },
+          "updated_on": {
+            "type": "string",
+            "nullable": false,
+            "description": "Date & time that data for this part was last updated.",
+            "example": "2021-07-16T17:53:41-08:00"
+          },
+          "measurements": {
+            "type": "array",
+            "minimum": 1,
+            "description": "List of measurements recorded for part. Order of entries corresponds to order of specifications, so index of a measurement corresponds to the index of the feature specification & place it is for.",
+            "items": {
+              "type": "object",
+              "nullable": true,
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "nullable": false,
+                  "description": "Actual measurement recorded. For a pass/fail specification, 1.0 corresponds to PASS, 0.0 corresponds to FAIL.",
+                  "example": 1.1234
+                },
+                "bonus": {
+                  "type": "number",
+                  "nullable": true,
+                  "description": "For GD&T specs that allow a bonus tolerance, the bonus tolerance to apply to actual measurement.",
+                  "example": 0.02
+                }
+              }
+            }
+          }
+        }
+      },
+      "ID": {
+        "type": "integer",
+        "format": "int32",
+        "description": "Unique identifier for the Inspection, assigned by 1Factory.",
+        "readOnly": true,
+        "example": 12345
+      },
+      "insp_ident_1": {
+        "type": "string",
+        "nullable": false,
+        "minLength": 1,
+        "maxLength": 255,
+        "description": "Primary identifier for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'. Must be unique for each entry when used in a Work Order List.",
+        "example": "PO-12345"
+      },
+      "insp_ident_2": {
+        "type": "string",
+        "nullable": true,
+        "minLength": 0,
+        "maxLength": 255,
+        "description": "Secondary identifier for an inspection or FAI, for example a Customer Purchase Order or Lot #. For FAIs this is the 'PO Number'. (Optional)",
+        "example": "C-B12345"
+      },
+      "insp_ident_3": {
+        "type": "string",
+        "nullable": true,
+        "minLength": 0,
+        "maxLength": 255,
+        "description": "Tertiary identifier for an inspection, for example a Customer Purchase Order or Lot #. (Optional)",
+        "example": "1A"
+      },
+      "machines": {
+        "type": "array",
+        "description": "List of machines for the inspection. Only for manufacturing inspections. Entries in this list must match the Mfg. Resources - Machines LOV configured for your organization.",
+        "items": {
+          "type": "string",
+          "nullable": false,
+          "minItems": 0
+        }
+      },
+      "parts_passed": {
+        "type": "number",
+        "nullable": false,
+        "description": "The number of parts that pass inspection.",
+        "minimum": 0,
+        "example": 95
+      },
+      "parts_failed": {
+        "type": "number",
+        "nullable": false,
+        "description": "The number of parts that failed inspection.",
+        "minimum": 0,
+        "example": 5
+      },
+      "customer_name": {
+        "type": "string",
+        "nullable": true,
+        "description": "The name of the customer (for manufacturing inspections).",
+        "example": "Rocket Company"
+      },
+      "supplier_name": {
+        "type": "string",
+        "nullable": true,
+        "description": "The name of the supplier (for receiving or supplier inspections).",
+        "example": "Acme Industries"
+      },
+      "supplier_number": {
+        "type": "string",
+        "nullable": true,
+        "description": "The supplier number / vendor code (for receiving or supplier inspections).",
+        "example": "S12345"
+      },
+
+      "Supplier": {
+        "type": "object",
+        "required": [
+          "ID",
+          "name",
+          "vendor_code"
+        ],
+        "properties": {
+          "ID": {
+            "$ref": "#/components/schemas/ID"
+          },
+          "name": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/supplier_name"
+              },
+              {
+                "nullable": false
+              }
+            ]
+          },
+          "vendor_code": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/supplier_number"
+              },
+              {
+                "nullable": false
+              }
+            ]
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "supply_chain_manager": {
+            "$ref": "#/components/schemas/User"
+          },
+          "supplier_quality_manager": {
+            "$ref": "#/components/schemas/User"
+          },
+          "purchasing": {
+            "$ref": "#/components/schemas/User"
+          },
+          "direct": {
+            "type": "boolean",
+            "nullable": false,
+            "default": false,
+            "description": "Indicates if the supplier provides direct materials or services."
+          },
+          "indirect": {
+            "type": "boolean",
+            "nullable": false,
+            "default": false,
+            "description": "Indicates if the supplier provides indirect materials or services."
+          },
+          "strategic": {
+            "type": "boolean",
+            "nullable": false,
+            "default": false,
+            "description": "Indicates if the supplier is considered strategic to the organization."
+          },
+          "small_business": {
+            "type": "boolean",
+            "nullable": false,
+            "default": false,
+            "description": "Indicates if the supplier is classified as a small business."
+          },
+          "organization_codes": {
+            "type": "array",
+            "nullable": true,
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "maxLength": 50
+            },
+            "description": "List of organization codes associated with the supplier.",
+            "example": ["1001", "1002"]
+          },
+          "commodity_codes": {
+            "type": "array",
+            "nullable": true,
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "maxLength": 100
+            },
+            "description": "List of commodity codes that the supplier provides.",
+            "example": ["Machined", "Anodization"]
+          },
+          "qualifications": {
+            "type": "array",
+            "nullable": true,
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/Qualification"
+            },
+            "description": "List of supplier qualifications and their status history."
+          },
+          "certifications": {
+            "type": "array",
+            "nullable": true,
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/Certification"
+            },
+            "description": "List of supplier certifications and their expiration dates."
+          },
+          "qualification_status": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true,
+            "enum": [
+              "New",
+              "Approved",
+              "Conditional",
+              "Disqualified",
+              "Inactive"
+            ],
+            "description": "Current qualification status derived from the most recent qualification entry.",
+            "example": "Conditional"
+          },
+          "last_qualification_date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "description": "Date and time of the most recent qualification assessment.",
+            "example": "2016-12-02T00:00:00-08:00"
+          },
+          "re_qualification_date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "description": "Calculated date when the supplier needs to be re-qualified, based on the last qualification date plus frequency in months.",
+            "example": "2017-12-02T00:00:00-08:00"
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "nullable": true,
+        "properties": {
+          "street": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "Street address.",
+            "example": "Washington"
+          },
+          "city": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 100,
+            "description": "City name.",
+            "example": "Jefferson"
+          },
+          "state": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 50,
+            "description": "State or province.",
+            "example": "Il"
+          },
+          "postal_code": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 20,
+            "description": "Postal or ZIP code.",
+            "example": "60134"
+          },
+          "country": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 10,
+            "description": "Country code (ISO 3166-1 alpha-2 format recommended).",
+            "example": "US"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "nullable": true,
+        "required": [
+          "id",
+          "name",
+          "email"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false,
+            "description": "Unique identifier for the user.",
+            "example": 5127
+          },
+          "name": {
+            "type": "string",
+            "nullable": false,
+            "maxLength": 255,
+            "description": "Full name of the user.",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "nullable": false,
+            "format": "email",
+            "maxLength": 255,
+            "description": "Email address of the user.",
+            "example": "jon.doe@1factory.com"
+          }
+        }
+      },
+      "Qualification": {
+        "type": "object",
+        "required": [
+          "date",
+          "status",
+          "review_status",
+          "frequency"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false,
+            "description": "Date and time when the qualification was assessed or updated.",
+            "example": "2016-11-16T00:00:00-08:00"
+          },
+          "status": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "New",
+              "Approved",
+              "Conditional",
+              "Disqualified",
+              "Inactive"
+            ],
+            "description": "Current qualification status of the supplier.",
+            "example": "Conditional"
+          },
+          "review_status": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "Pending",
+              "Reviewed",
+              "N/A"
+            ],
+            "description": "Review status of the qualification assessment.",
+            "example": "Reviewed"
+          },
+          "frequency": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false,
+            "minimum": 1,
+            "description": "Review frequency in months for re-qualification.",
+            "example": 12
+          }
+        }
+      },
+      "Certification": {
+        "type": "object",
+        "required": [
+          "expiration_date",
+          "certification"
+        ],
+        "properties": {
+          "expiration_date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false,
+            "description": "Date and time when the certification expires.",
+            "example": "2021-10-05T00:00:00-07:00"
+          },
+          "certification": {
+            "type": "string",
+            "nullable": false,
+            "maxLength": 100,
+            "description": "Name or type of the certification.",
+            "example": "ISO 9001"
+          }
+        }
+      },
+      "SupplierList": {
+        "type": "array",
+        "minItems": 0,
+        "maxItems": 500,
+        "items": {
+          "$ref": "#/components/schemas/Supplier"
+        }
+      },
+      "part_number": {
+        "type": "string",
+        "maxLength": 255,
+        "description": "Part number. Together with rev, uniquely identifies a part.",
+        "example": "10-12345-12",
+        "minLength": 1
+      },
+      "rev": {
+        "type": "string",
+        "nullable": true,
+        "maxLength": 255,
+        "description": "Part revision. Together with part number, uniquely identifies a part.",
+        "example": "A"
+      },
+      "part_description": {
+        "type": "string",
+        "nullable": true,
+        "maxLength": 255,
+        "description": "Description of the part.",
+        "example": "Three Lobe Shaft"
+      },
+      "project_identifier": {
+        "name": "project_identifier",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "nullable": true,
+          "example": "Bearings"
+        },
+        "description": "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
+      },
+      "inspection_type": {
+        "type": "string",
+        "description": "Type of inspection, as defined in your organization's Inspection Types List of Values",
+        "example": "Final"
+      },
+      "operation": {
+        "type": "string",
+        "nullable": true,
+        "description": "Operation of the inspection. No operation specified or an operation of 'All' indicates that an inspection is for all operations in the inspection Plan. (Only for manufacturing inspections, and if the 'Inspections by Op' configuration is enabled for your organization.)",
+        "example": "OP 10"
+      },
+      "fai_type": {
+        "type": "string",
+        "description": "Type of first-article inspection.",
+        "enum": [
+          "Standard",
+          "AS9102"
+        ],
+        "example": "Standard"
+      },
+      "lot_size": {
+        "type": "integer",
+        "format": "int32",
+        "nullable": true,
+        "minimum": 0,
+        "description": "Number of parts in lot being inspected",
+        "example": 100
+      },
+      "number_of_parts": {
+        "type": "integer",
+        "format": "int32",
+        "nullable": false,
+        "minimum": 1,
+        "description": "Number of parts inspected.",
+        "example": 3
+      },
+      "status": {
+        "type": "string",
+        "nullable": false,
+        "description": "The status of the object",
+        "enum": [
+          "Active",
+          "Inactive"
+        ]
+      },
+      "Assembly": {
+        "type": "object",
+        "required": [
+          "part_number",
+          "rev"
+        ],
+        "properties": {
+          "part_number": { "$ref": "#/components/schemas/part_number" },
+          "rev": { "$ref": "#/components/schemas/rev" },
+          "sub_parts": {"$ref": "#/components/schemas/SubPartList"}
+        }
+      },
+      "SubPartList": {
+        "type": "array",
+        "minItems": 1,
+        "nullable": false,
+        "description": "List of parts that make up this assembly. Each listed part must already exist as a Part Master entry.",
+        "items": { "$ref": "#/components/schemas/AssemblyEntry" },
+        "example": [
+          {
+            "part_number": "12-54321-21",
+            "rev": "C",
+            "quantity": 4
+          },
+          {
+            "part_number": "12-54322-11",
+            "rev": "B",
+            "quantity": 2
+          }
+        ]
+      },
+      "AssemblyEntry": {
+        "type": "object",
+        "required": [
+          "part_number",
+          "rev",
+          "quantity"
+        ],
+        "properties": {
+          "part_number": {
+            "$ref": "#/components/schemas/part_number"
+          },
+          "rev": {
+            "$ref": "#/components/schemas/rev"
+          },
+          "quantity": {
+            "type": "number",
+            "nullable": false,
+            "minimum": 0,
+            "description": "Number of instances of this part in the assembly.",
+            "example": 4.0
+          }
+        }
+      },
+      "owner": {
+        "type": "string",
+        "description": "Name of user that owns the entity.",
+        "example": "Oleg Nickolayev"
+      },
+      "created_by_username": {
+        "type": "string",
+        "description": "Name of user that created the entity.",
+        "example": "Oleg Nickolayev"
+      },
+      "created_on": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Date & time that an object was created.",
+        "example": "2021-07-15T09:14:42-08:00"
+      },
+      "updated_on": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Date & time that an object was last updated.",
+        "example": "2021-07-17T12:14:42-08:00"
+      },
+      "closed_on": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Date & time that an object was closed.",
+        "example": "2021-07-21T07:14:42-08:00"
+      }
+    }
+  },
+  "security": [
+    {
+      "OrgId": [],
+      "ApiKey": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Part Master",
+      "description": "Part Master defines the part numbers, revisions and other information for parts referenced in Plans, Inspections, FAIs etc.",
+      "externalDocs": {
+        "url": "https://1factoryhelp.zendesk.com/hc/en-us/articles/360055386512-Jan-2021-Update-Part-Masters"
+      }
+    },
+    {
+      "name": "Manufacturing",
+      "description": "Data related to parts manufactured by your organization."
+    },
+    {
+      "name": "Receiving",
+      "description": "Data related to parts received by your organization."
+    },
+    {
+      "name": "Customers",
+      "description": "Data shared with your organization by your customers."
+    },
+    {
+      "name": "Suppliers",
+      "description": "Data shared with your organization by your suppliers, or details about your suppliers."
+    },
+    {
+      "name": "QMS",
+      "description": "Data related to Quality"
+    },
+    {
+      "name": "Work Orders",
+      "description": "Work Orders define a list of current work order primary & secondary identifiers that may be used as identifiers on Inspections & FAIs."
+    }
+  ],
+  "paths": {
+    "/partMasters": {
+      "put": {
+        "tags": ["Part Master"],
+        "summary": "Creates a new (or updates existing) part master entry for your organization.",
+        "description": "Create a new part master entry that can be used when referring to parts when creating Plans, Inspections, FAIs etc. \n\n The part number and rev must be unique - if a part master with the same part number and revision already exists, the existing Part Master entry will be overwritten.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/NewPartMaster"}
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PartMaster"}
+              }
+            },
+            "description": "Created. Successfully created part master entry is returned."
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PartMaster"}
+              }
+            },
+            "description": "OK. Successfully updated part master entry is returned."
+          },
+          "400": {
+            "description": "Invalid request. A problem with the request prevented it from being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "FAC-10",
+                  "message": "Invalid request body: 'READY' is not a valid value for 'status'."
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      },
+      "get": {
+        "tags": ["Part Master"],
+        "summary": "Gets a List of part masters for your organization.",
+        "description": "The list of part master entries that can be filtered by specifying query parameters. \n Paging parameters control the number of rows of part master objects returned. By default, the first 100 part masters are returned.",
+        "parameters": [
+          { "$ref": "#/components/parameters/page" },
+          { "$ref": "#/components/parameters/pageSize" },
+          { "$ref": "#/components/parameters/part_number" },
+          { "$ref": "#/components/parameters/rev" },
+          {
+            "name": "parent_part_number",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "nullable": false,
+              "example": "12-34567-89"
+            },
+            "description": "Parent Part number to filter on for Table of Size entries."
+          },
+          {
+            "name": "parent_rev",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "nullable": false,
+              "example": "A"
+            },
+            "description": "Parent Part rev to filter on for Table of Size entries."
+          },
+          {
+            "name": "is_library",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "nullable": false,
+              "example": true
+            },
+            "description": "If the part is a configured as a library."
+          },
+          {
+            "name": "is_assembly",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "nullable": false,
+              "example": true
+            },
+            "description": "If the part is a configured as an assembly."
+          },
+          {
+            "name": "is_itar",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "nullable": false,
+              "example": true
+            },
+            "description": "If the part is a configured as an ITAR part."
+          },
+          {
+            "name": "has_ppap",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "nullable": false,
+              "example": true
+            },
+            "description": "If the part has any PPAP documents."
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "nullable": false,
+              "enum": [
+                "Tabulated",
+                "ToS Entry",
+                "Standard"
+              ]
+            },
+            "description": "If the part has any PPAP documents."
+          },
+          { "$ref": "#/components/parameters/project_identifier" },
+          { "$ref": "#/components/parameters/status" },
+          { "$ref" : "#/components/parameters/createdAfter" },
+          { "$ref" : "#/components/parameters/createdBefore" },
+          { "$ref" : "#/components/parameters/updatedAfter" },
+          { "$ref" : "#/components/parameters/updatedBefore" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PartMasterList"}
+              }
+            },
+            "description": "Returns a list of part masters, most recently updated first. Utilize paging query parameters to query older part masters. By default the 100 most recent are returned."
+          },
+          "400": {
+            "description": "Invalid request. A problem with the request prevented it from being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "FAC-10",
+                  "message": "Invalid request body: 'READY' is not a valid value for 'status'."
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      }
+    },
+    "/partMasters/assemblies": {
+      "put": {
+        "tags": ["Part Master"],
+        "summary": "Defines assembly relationships between Part Masters.",
+        "description": "Defines (or replaces) the list of parts that make up an assembly part. All referenced part numbers & revisions must already exist as Part Master entries.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/Assembly"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartMaster"
+                },
+                "example": {
+                  "ID": 12345,
+                  "part_number": "10-12345-12",
+                  "rev": "A",
+                  "description": "Three Lobe Shaft",
+                  "status": "ACTIVE",
+                  "alt_part_number": "DN-1234568",
+                  "alt_rev": "B",
+                  "project_identifier": "Bearings",
+                  "cost": 3.5,
+                  "unit": "Each",
+                  "is_assembly": false,
+                  "component_parts": [
+                    {
+                      "part_number": "12-54321-21",
+                      "rev": "C",
+                      "quantity": 4.0
+                    },
+                    {
+                      "part_number": "12-54322-11",
+                      "rev": "B",
+                      "quantity": 2.0
+                    }
+                  ],
+                  "is_buy": false,
+                  "comments": "This is a brand new part that we are prototyping."
+                }
+              }
+            },
+            "description": "OK. Set assembly on Part Master entry. Part Master entry for which the assembly was created is returned."
+          },
+          "400": {
+            "description": "Invalid request. A problem with the request prevented it from being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "FAC-10",
+                  "message": "Invalid request body: '-1' is not a valid value for 'quantity'."
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Referenced PartMaster does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "code": "FAC-20",
+                  "message": "Not found: Part Master '12-54322-11 B' does not exist."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mfg/workOrderList": {
+      "put": {
+        "tags": ["Work Orders"],
+        "summary": "Updates the list of manufacturing work order numbers for your organization.",
+        "description": "Defines the current list of manufacturing work orders for your organization. If a work order list already exists, this request will overwrite it.\n\nThis list will be used to provide suggested values for manufacturing inspection identifiers in the 1Factory application, for example, when creating a new inspection. \n\nIt will also pre-populate the lot size for inspections created using an inspection identifier in this list, if the corresponding list entry has a lot size. \n\nNote that the names used to refer to inspection identifiers in the 1Factory application will depend on what is configured for Mfg. Insp. Ident. in your organization's settings page.\n\nThe combination of insp_ident1 and insp_ident2 uniquely identifies each work order. An error will be returned if the list contains duplicate entries.",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/WorkOrderListRequest"
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/UpdateSuccess"},
+          "400": {
+            "description": "Invalid request. A problem with the request prevented it from being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "FAC-10",
+                  "message": "Invalid request body: '-1' is not a valid value for 'lot_size'."
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      }
+    },
+    "/rec/workOrderList": {
+      "put": {
+        "tags": ["Work Orders"],
+        "summary": "Updates the list of receiving work order numbers for your organization.",
+        "description": "Defines the current list of receiving work orders for your organization. If a work order list already exists, this request will overwrite it.\n\nThis list will be used to provide suggested values for manufacturing inspection identifiers in the 1Factory application, for example, when creating a new inspection. \n\nIt will also pre-populate the lot size for inspections created using an inspection identifier in this list, if the corresponding list entry has a lot size. \n\nNote that the names used to refer to inspection identifiers in the 1Factory application will depend on what is configured for Rec. Insp. Ident. in your organization's settings page.\n\nThe combination of insp_ident1 and insp_ident2 uniquely identifies each work order. An error will be returned if the list contains duplicate entries.",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/WorkOrderListRequest"
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/UpdateSuccess"},
+          "400": {
+            "description": "Invalid request. A problem with the request prevented it from being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "FAC-10",
+                  "message": "Invalid request body: '-1' is not a valid value for 'lot_size'."
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      }
+    },
+    "/mfg/plans": {
+      "get": {
+        "tags": ["Manufacturing"],
+        "summary": "Gets a list of manufacturing plans for your organization.",
+        "description": "The list of manufacturing plans can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Plan objects returned. By default, the first 100 plans are returned.",
+        "parameters": [
+          { "$ref": "#/components/parameters/page" },
+          { "$ref": "#/components/parameters/pageSize" },
+          { "$ref": "#/components/parameters/part_number" },
+          { "$ref": "#/components/parameters/rev" },
+          { "$ref": "#/components/parameters/operation" },
+          { "$ref": "#/components/parameters/status" },
+          { "$ref": "#/components/parameters/version_status" },
+          { "$ref": "#/components/parameters/approval_status" },
+          { "$ref": "#/components/parameters/customer"},
+          { "$ref": "#/components/parameters/is_tabulated"},
+          { "$ref": "#/components/parameters/is_spec_lib"},
+          { "$ref" : "#/components/parameters/createdAfter" },
+          { "$ref" : "#/components/parameters/createdBefore" },
+          { "$ref" : "#/components/parameters/updatedAfter" },
+          { "$ref" : "#/components/parameters/updatedBefore" },
+          { "$ref" : "#/components/parameters/closedAfter" },
+          { "$ref" : "#/components/parameters/closedBefore" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PlanList"}
+              }
+            },
+            "description": "Returns a list of plans, most recently updated first. Utilize paging query parameters to query older plans. By default the 100 most recent are returned."
+          },
+          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      }
+    },
+    "/mfg/plans/{plan_id}": {
+      "get": {
+        "tags": [
+          "Manufacturing"
+        ],
+        "summary": "Gets a detailed manufacturing plan record.",
+        "description": "Returns the specified plan record, including specifications.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/planID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanDetail"
+                }
+              }
+            },
+            "description": "Returns a detailed plan record, including specification data."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidPathParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Plan does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "code": "FAC-20",
+                  "message": "Not found: Manufacturing Plan '12345' does not exist."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mfg/inspections": {
+      "get": {
+        "tags": ["Manufacturing"],
+        "summary": "Gets a list of manufacturing inspections for your organization.",
+        "description": "The list of manufacturing inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
+        "parameters": [
+          { "$ref": "#/components/parameters/page" },
+          { "$ref": "#/components/parameters/pageSize" },
+          { "$ref": "#/components/parameters/part_number" },
+          { "$ref": "#/components/parameters/rev" },
+          { "$ref": "#/components/parameters/inspIdent1" },
+          { "$ref": "#/components/parameters/inspIdent2" },
+          { "$ref": "#/components/parameters/customer"},
+          { "$ref": "#/components/parameters/project_identifier"},
+          { "$ref": "#/components/parameters/operation"},
+          { "$ref": "#/components/parameters/site"},
+          { "$ref": "#/components/parameters/inspectionType" },
+          { "$ref": "#/components/parameters/inspectionStatus" },
+          { "$ref": "#/components/parameters/reviewStatus" },
+          { "$ref" : "#/components/parameters/createdAfter" },
+          { "$ref" : "#/components/parameters/createdBefore" },
+          { "$ref" : "#/components/parameters/updatedAfter" },
+          { "$ref" : "#/components/parameters/updatedBefore" },
+          { "$ref" : "#/components/parameters/closedAfter" },
+          { "$ref" : "#/components/parameters/closedBefore" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/InspectionList"}
+              }
+            },
+            "description": "Returns a list of inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
+          },
+          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      },
+      "post": {
+        "tags": ["Manufacturing"],
+        "summary": "Creates a new manufacturing inspection for your organization.",
+        "description": "A new manufacturing inspection is created, ready for inspection data to be entered. \n\n ## Plan Identification \nThe plan used by the inspection is identified by part number and rev. An active version of a Plan for the specified part must exist when creating the inspection. \n\nFor Inspections that are for a Plan associated with a ToS part enter the part number and rev for the ToS entry.\n\n ## Uniqueness \nThe inspection is identified by its inspection identifiers and inspection type. A unique combination of work order identifiers and inspection type must be specified when creating a new inspection. If an inspection already exists with the specified identifiers and type, an error will be returned. \n\n ## Additional Details\n* Customer Name: The name must match the customer name in the system exactly\n* Operation: This field is optional, and only valid if your organization is configured for \"Inspections by Operation\". If enabled, the value must match an operation on the plan, or be blank or not included in the request to default to create all operation inspections for the plan\n* Machines - If included, a value must match a machine in the Mfg Resources -> Machines LOV configured for your organization",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/NewMfgInspection"}
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Inspection"}
+              }
+            },
+            "description": "Created. Successfully created inspection entry is returned."
+          },
+          "400": {
+            "description": "Invalid request. A problem with the request prevented it from being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "FAC-10",
+                  "message": "Invalid request body: 'Ad-hoc' is not a valid value for 'inspection_type'."
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/401"},
+          "409": { "$ref": "#/components/responses/DuplicateInspection"}
+        }
+      }
+    },
+    "/mfg/inspections/{inspection_id}": {
+      "get": {
+        "tags": [
+          "Manufacturing"
+        ],
+        "summary": "Gets a detailed manufacturing inspection record.",
+        "description": "Returns the specified inspection record, including measurement data.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/inspectionID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InspectionDetail"
+                }
+              }
+            },
+            "description": "Returns a detailed inspection record, including measurement data."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidPathParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Inspection does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "code": "FAC-20",
+                  "message": "Not found: Manufacturing Inspection '12345' does not exist."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rec/plans": {
+      "get": {
+        "tags": ["Receiving"],
+        "summary": "Gets a list of receiving plans for your organization.",
+        "description": "The list of receiving plans can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Plan objects returned. By default, the first 100 plans are returned.",
+        "parameters": [
+          { "$ref": "#/components/parameters/page" },
+          { "$ref": "#/components/parameters/pageSize" },
+          { "$ref": "#/components/parameters/part_number" },
+          { "$ref": "#/components/parameters/rev" },
+          { "$ref": "#/components/parameters/status" },
+          { "$ref": "#/components/parameters/version_status" },
+          { "$ref": "#/components/parameters/approval_status" },
+          { "$ref": "#/components/parameters/supplier"},
+          { "$ref": "#/components/parameters/is_tabulated"},
+          { "$ref": "#/components/parameters/is_spec_lib"},
+          { "$ref" : "#/components/parameters/createdAfter" },
+          { "$ref" : "#/components/parameters/createdBefore" },
+          { "$ref" : "#/components/parameters/updatedAfter" },
+          { "$ref" : "#/components/parameters/updatedBefore" },
+          { "$ref" : "#/components/parameters/closedAfter" },
+          { "$ref" : "#/components/parameters/closedBefore" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PlanList"}
+              }
+            },
+            "description": "Returns a list of plans, most recently updated first. Utilize paging query parameters to query older plans. By default the 100 most recent are returned."
+          },
+          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      }
+    },
+    "/rec/plans/{plan_id}": {
+      "get": {
+        "tags": [
+          "Receiving"
+        ],
+        "summary": "Gets a detailed receiving plan record.",
+        "description": "Returns the specified plan record, including specifications.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/planID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanDetail"
+                }
+              }
+            },
+            "description": "Returns a detailed plan record, including specification data."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidPathParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Plan does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "code": "FAC-20",
+                  "message": "Not found: Receiving Plan '12345' does not exist."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rec/inspections": {
+      "get": {
+        "tags": ["Receiving"],
+        "summary": "Gets a list of receiving inspections for your organization.",
+        "description": "The list of receiving inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
+        "parameters": [
+          { "$ref": "#/components/parameters/page" },
+          { "$ref": "#/components/parameters/pageSize" },
+          { "$ref": "#/components/parameters/part_number" },
+          { "$ref": "#/components/parameters/rev" },
+          { "$ref": "#/components/parameters/inspIdent1" },
+          { "$ref": "#/components/parameters/inspIdent2" },
+          { "$ref": "#/components/parameters/supplier"},
+          { "$ref": "#/components/parameters/project_identifier"},
+          { "$ref": "#/components/parameters/site"},
+          { "$ref": "#/components/parameters/inspectionType" },
+          { "$ref": "#/components/parameters/inspectionStatus" },
+          { "$ref": "#/components/parameters/reviewStatus" },
+          { "$ref" : "#/components/parameters/createdAfter" },
+          { "$ref" : "#/components/parameters/createdBefore" },
+          { "$ref" : "#/components/parameters/updatedAfter" },
+          { "$ref" : "#/components/parameters/updatedBefore" },
+          { "$ref" : "#/components/parameters/closedAfter" },
+          { "$ref" : "#/components/parameters/closedBefore" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/InspectionList"}
+              }
+            },
+            "description": "Returns a list of inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
+          },
+          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      },
+      "post": {
+        "tags": ["Receiving"],
+        "summary": "Creates a new receiving inspection for your organization.",
+        "description": "A new receiving inspection is created, ready for inspection data to be entered. \n\n ## Plan Identification \nThe plan used by the inspection is identified by part number and rev. An active version of a Plan for the specified part must exist when creating the inspection. \n\nFor Inspections that are for a Plan associated with a ToS part enter the part number and rev for the ToS entry.\n\n ## Uniqueness \nThe inspection is identified by its inspection identifiers and inspection type. A unique combination of work order identifiers and inspection type must be specified when creating a new inspection. If an inspection already exists with the specified identifiers and type, an error will be returned.\n\n ## Additional Details\n* Supplier Name: The name must match the supplier name in the system exactly\n",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/NewRecInspection"}
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Inspection"}
+              }
+            },
+            "description": "Created. Successfully created inspection entry is returned."
+          },
+          "400": {
+            "description": "Invalid request. A problem with the request prevented it from being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "FAC-10",
+                  "message": "Invalid request body: 'Ad-hoc' is not a valid value for 'inspection_type'."
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/401"},
+          "409": { "$ref": "#/components/responses/DuplicateInspection"}
+        }
+      }
+    },
+    "/rec/inspections/{inspection_id}": {
+      "get": {
+        "tags": [
+          "Receiving"
+        ],
+        "summary": "Gets a detailed receiving inspection record.",
+        "description": "Returns the specified inspection record, including measurement data.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/inspectionID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InspectionDetail"
+                }
+              }
+            },
+            "description": "Returns a detailed inspection record, including measurement data."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidPathParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Inspection does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "code": "FAC-20",
+                  "message": "Not found: Receiving Inspection '12345' does not exist."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sup": {
+      "get": {
+        "tags": ["Suppliers"],
+        "summary": "Gets a list of suppliers in your organization.",
+        "description": "The list of suppliers can be filtered by specifying query parameters. Paging parameters control the number of supplier objects returned. By default, the first 100 suppliers are returned.",
+        "parameters": [
+          { "$ref": "#/components/parameters/page" },
+          { "$ref": "#/components/parameters/pageSize" },
+          { "$ref": "#/components/parameters/createdAfter" },
+          { "$ref": "#/components/parameters/createdBefore" },
+          { "$ref": "#/components/parameters/updatedAfter" },
+          { "$ref": "#/components/parameters/updatedBefore" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SupplierList" }
+              }
+            },
+            "description": "Returns a list of suppliers, utilize paging query parameters to query older suppliers. By default the 100 most recent are returned."
+          },
+          "400": { "$ref": "#/components/responses/InvalidQueryParam" },
+          "401": { "$ref": "#/components/responses/401" }
+        }
+      }
+    },
+    "/sup/{supplier_id}": {
+      "get": {
+        "tags": ["Suppliers"],
+        "summary": "Get detailed supplier record",
+        "description": "Returns a specific supplier record, including qualification and certification data.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/supplier_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Supplier"
+                }
+              }
+            },
+            "description": "Returns a detailed inspection record, including measurement data."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidPathParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Supplier does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "code": "FAC-20",
+                  "message": "Not found: Supplier '12345' does not exist."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sup/plans": {
+      "get": {
+        "tags": ["Suppliers"],
+        "summary": "Gets a list of plans shared with your organization by your suppliers.",
+        "description": "The list of supplier plans can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Plan objects returned. By default, the first 100 plans are returned.",
+        "parameters": [
+          { "$ref": "#/components/parameters/page" },
+          { "$ref": "#/components/parameters/pageSize" },
+          { "$ref": "#/components/parameters/part_number" },
+          { "$ref": "#/components/parameters/rev" },
+          { "$ref": "#/components/parameters/status" },
+          { "$ref": "#/components/parameters/supplier"},
+          { "$ref": "#/components/parameters/is_tabulated"},
+          { "$ref" : "#/components/parameters/createdAfter" },
+          { "$ref" : "#/components/parameters/createdBefore" },
+          { "$ref" : "#/components/parameters/updatedAfter" },
+          { "$ref" : "#/components/parameters/updatedBefore" },
+          { "$ref" : "#/components/parameters/closedAfter" },
+          { "$ref" : "#/components/parameters/closedBefore" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PlanList"}
+              }
+            },
+            "description": "Returns a list of plans, most recently updated first. Utilize paging query parameters to query older plans. By default the 100 most recent are returned."
+          },
+          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      }
+    },
+    "/sup/plans/{plan_id}": {
+      "get": {
+        "tags": [
+          "Suppliers"
+        ],
+        "summary": "Gets a detailed Supplier plan record.",
+        "description": "Returns the specified plan record, including specifications.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/planID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanDetail"
+                }
+              }
+            },
+            "description": "Returns a detailed plan record, including specification data."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidPathParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Plan does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "code": "FAC-20",
+                  "message": "Not found: Supplier Plan '12345' does not exist."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sup/inspections": {
+      "get": {
+        "tags": ["Suppliers"],
+        "summary": "Gets a list of inspections shared with your organization by your suppliers.",
+        "description": "The list of supplier inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
+        "parameters": [
+          { "$ref": "#/components/parameters/page" },
+          { "$ref": "#/components/parameters/pageSize" },
+          { "$ref": "#/components/parameters/part_number" },
+          { "$ref": "#/components/parameters/rev" },
+          { "$ref": "#/components/parameters/inspIdent1" },
+          { "$ref": "#/components/parameters/inspIdent2" },
+          { "$ref": "#/components/parameters/supplier"},
+          { "$ref": "#/components/parameters/inspectionStatus" },
+          { "$ref": "#/components/parameters/reviewStatus" },
+          { "$ref" : "#/components/parameters/createdAfter" },
+          { "$ref" : "#/components/parameters/createdBefore" },
+          { "$ref" : "#/components/parameters/updatedAfter" },
+          { "$ref" : "#/components/parameters/updatedBefore" },
+          { "$ref" : "#/components/parameters/closedAfter" },
+          { "$ref" : "#/components/parameters/closedBefore" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/InspectionList"}
+              }
+            },
+            "description": "Returns a list of inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
+          },
+          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      }
+    },
+    "/sup/inspections/{inspection_id}": {
+      "get": {
+        "tags": [
+          "Suppliers"
+        ],
+        "summary": "Gets a detailed supplier inspection record.",
+        "description": "Returns the specified inspection record, including measurement data.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/inspectionID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InspectionDetail"
+                }
+              }
+            },
+            "description": "Returns a detailed inspection record, including measurement data."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidPathParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Inspection does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "code": "FAC-20",
+                  "message": "Not found: Supplier Inspection '12345' does not exist."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cus/plans": {
+      "get": {
+        "tags": ["Customers"],
+        "summary": "Gets a list of plans shared with your organization by your customers.",
+        "description": "The list of customer plans can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Plan objects returned. By default, the first 100 plans are returned.",
+        "parameters": [
+          { "$ref": "#/components/parameters/page" },
+          { "$ref": "#/components/parameters/pageSize" },
+          { "$ref": "#/components/parameters/part_number" },
+          { "$ref": "#/components/parameters/rev" },
+          { "$ref": "#/components/parameters/status" },
+          { "$ref": "#/components/parameters/approval_status" },
+          { "$ref": "#/components/parameters/customer"},
+          { "$ref": "#/components/parameters/is_tabulated"},
+          { "$ref" : "#/components/parameters/createdAfter" },
+          { "$ref" : "#/components/parameters/createdBefore" },
+          { "$ref" : "#/components/parameters/updatedAfter" },
+          { "$ref" : "#/components/parameters/updatedBefore" },
+          { "$ref" : "#/components/parameters/closedAfter" },
+          { "$ref" : "#/components/parameters/closedBefore" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PlanList"}
+              }
+            },
+            "description": "Returns a list of plans, most recently updated first. Utilize paging query parameters to query older plans. By default the 100 most recent are returned."
+          },
+          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      }
+    },
+    "/cus/plans/{plan_id}": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Gets a detailed Customer plan record.",
+        "description": "Returns the specified plan record, including specifications.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/planID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanDetail"
+                }
+              }
+            },
+            "description": "Returns a detailed plan record, including specification data."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidPathParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Plan does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "code": "FAC-20",
+                  "message": "Not found: Customer Plan '12345' does not exist."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cus/inspections": {
+      "get": {
+        "tags": ["Customers"],
+        "summary": "Gets a list of inspections shared with your organization by your customers.",
+        "description": "The list of customer inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
+        "parameters": [
+          { "$ref": "#/components/parameters/page" },
+          { "$ref": "#/components/parameters/pageSize" },
+          { "$ref": "#/components/parameters/part_number" },
+          { "$ref": "#/components/parameters/rev" },
+          { "$ref": "#/components/parameters/inspIdent1" },
+          { "$ref": "#/components/parameters/inspIdent2" },
+          { "$ref": "#/components/parameters/customer"},
+          { "$ref": "#/components/parameters/inspectionStatus" },
+          { "$ref": "#/components/parameters/closedAfter"},
+          { "$ref": "#/components/parameters/reviewStatus" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/InspectionList"}
+              }
+            },
+            "description": "Returns a list of inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
+          },
+          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      }
+    },
+    "/cus/inspections/{inspection_id}": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Gets a detailed customer inspection record.",
+        "description": "Returns the specified inspection record, including measurement data.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/inspectionID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InspectionDetail"
+                }
+              }
+            },
+            "description": "Returns a detailed inspection record, including measurement data."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidPathParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Inspection does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "code": "FAC-20",
+                  "message": "Not found: Customer Inspection '12345' does not exist."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mfg/fais": {
+      "get": {
+        "tags": ["Manufacturing"],
+        "summary": "Gets a list of manufacturing first-article inspections for your organization.",
+        "description": "The list of manufacturing first-article inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
+        "parameters": [
+          { "$ref": "#/components/parameters/page" },
+          { "$ref": "#/components/parameters/pageSize" },
+          { "$ref": "#/components/parameters/part_number" },
+          { "$ref": "#/components/parameters/rev" },
+          { "$ref": "#/components/parameters/operation" },
+          { "$ref": "#/components/parameters/inspIdent1" },
+          { "$ref": "#/components/parameters/inspIdent2" },
+          { "$ref": "#/components/parameters/customer"},
+          { "$ref": "#/components/parameters/project_identifier"},
+          { "$ref": "#/components/parameters/site"},
+          { "$ref": "#/components/parameters/faiType" },
+          { "$ref": "#/components/parameters/inspectionStatus" },
+          { "$ref": "#/components/parameters/closedAfter"},
+          { "$ref": "#/components/parameters/reviewStatus" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/FaiList"}
+              }
+            },
+            "description": "Returns a list of first-article inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
+          },
+          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      },
+      "post": {
+        "tags": ["Manufacturing"],
+        "summary": "Creates a new manufacturing first-article inspection for your organization.",
+        "description": "A new manufacturing first-article inspection is created, ready for inspection data to be entered. \n\nThe plan used by the inspection is identified by part number and rev. An active version of a Plan for the specified part must exist when creating the inspection. \n\nThe inspection is identified by its inspection identifiers and inspection type. A unique combination of work order identifiers and inspection type must be specified when creating a new inspection. If an inspection already exists with the specified identifiers and type, an error will be returned.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/NewFai"}
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Fai"}
+              }
+            },
+            "description": "Created. Successfully created first-article inspection entry is returned."
+          },
+          "400": {
+            "description": "Invalid request. A problem with the request prevented it from being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "FAC-10",
+                  "message": "Invalid request body: 'Ad-hoc' is not a valid value for 'fai_type'."
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      }
+    },
+    "/mfg/fais/{inspection_id}": {
+      "get": {
+        "tags": ["Manufacturing"],
+        "summary": "Gets a detailed manufacturing first-article inspection record.",
+        "description": "Returns the specified first-article inspection record, including measurement data.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/inspectionID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FaiDetail"
+                }
+              }
+            },
+            "description": "Returns a detailed first-article inspection record, including measurement data."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidPathParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Inspection does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "code": "FAC-20",
+                  "message": "Not found: Manufacturing FAI '12345' does not exist."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rec/fais": {
+      "get": {
+        "tags": ["Receiving"],
+        "summary": "Gets a list of receiving first-article inspections for your organization.",
+        "description": "The list of receiving first-article inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
+        "parameters": [
+          { "$ref": "#/components/parameters/page" },
+          { "$ref": "#/components/parameters/pageSize" },
+          { "$ref": "#/components/parameters/part_number" },
+          { "$ref": "#/components/parameters/rev" },
+          { "$ref": "#/components/parameters/inspIdent1" },
+          { "$ref": "#/components/parameters/inspIdent2" },
+          { "$ref": "#/components/parameters/supplier"},
+          { "$ref": "#/components/parameters/project_identifier"},
+          { "$ref": "#/components/parameters/site"},
+          { "$ref": "#/components/parameters/faiType" },
+          { "$ref": "#/components/parameters/inspectionStatus" },
+          { "$ref": "#/components/parameters/closedAfter"},
+          { "$ref": "#/components/parameters/reviewStatus" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/FaiList"}
+              }
+            },
+            "description": "Returns a list of first-article inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
+          },
+          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      },
+      "post": {
+        "tags": ["Receiving"],
+        "summary": "Creates a new receiving first-article inspection for your organization.",
+        "description": "A new receiving first-article inspection is created, ready for inspection data to be entered. \n\nThe plan used by the inspection is identified by part number and rev. An active version of a Plan for the specified part must exist when creating the inspection. \n\nThe inspection is identified by its inspection identifiers and inspection type. A unique combination of work order identifiers and inspection type must be specified when creating a new inspection. If an inspection already exists with the specified identifiers and type, an error will be returned.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/NewFai"}
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Fai"}
+              }
+            },
+            "description": "Created. Successfully created first-article inspection entry is returned."
+          },
+          "400": {
+            "description": "Invalid request. A problem with the request prevented it from being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "FAC-10",
+                  "message": "Invalid request body: 'Ad-hoc' is not a valid value for 'inspection_type'."
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      }
+    },
+    "/rec/fais/{inspection_id}": {
+      "get": {
+        "tags": ["Receiving"],
+        "summary": "Gets a detailed receiving first-article inspection record.",
+        "description": "Returns the specified first-article inspection record, including measurement data.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/inspectionID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FaiDetail"
+                }
+              }
+            },
+            "description": "Returns a detailed first-article inspection record, including measurement data."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidPathParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Inspection does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "code": "FAC-20",
+                  "message": "Not found: Receiving FAI '12345' does not exist."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/qms/ncrs" : {
+      "get" : {
+        "tags" : [ "QMS" ],
+        "summary" : "Gets a list of NCRs for your organization",
+        "description" : "The list of NCRs can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows NCR objects returned. By default, the first 100 NCRs are returned.",
+        "parameters" : [
+          { "$ref" : "#/components/parameters/page" },
+          { "$ref" : "#/components/parameters/pageSize" },
+          { "$ref" : "#/components/parameters/createdAfter" },
+          { "$ref" : "#/components/parameters/createdBefore" },
+          { "$ref" : "#/components/parameters/updatedAfter" },
+          { "$ref" : "#/components/parameters/updatedBefore" },
+          { "$ref" : "#/components/parameters/closedAfter" },
+          { "$ref" : "#/components/parameters/closedBefore" }
+        ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/NcrList"
+                }
+              }
+            },
+            "description" : "Returns a list of NCRs, most recently created first. Utilize paging query parameters to query older NCRs. By default the 100 most recent are returned."
+          },
+          "400" : {
+            "$ref" : "#/components/responses/InvalidQueryParam"
+          },
+          "401" : {
+            "$ref" : "#/components/responses/401"
+          }
+        }
+      }
+    },
+    "/qms/capas" : {
+      "get" : {
+        "tags" : [ "QMS" ],
+        "summary" : "Gets a list of CAPAs for your organization",
+        "description" : "The list of CAPAs can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows CAPA objects returned. By default, the first 100 CAPAs are returned.",
+        "parameters" : [
+          { "$ref" : "#/components/parameters/page" },
+          { "$ref" : "#/components/parameters/pageSize" },
+          { "$ref" : "#/components/parameters/createdAfter" },
+          { "$ref" : "#/components/parameters/createdBefore" },
+          { "$ref" : "#/components/parameters/updatedAfter" },
+          { "$ref" : "#/components/parameters/updatedBefore" },
+          { "$ref" : "#/components/parameters/closedAfter" },
+          { "$ref" : "#/components/parameters/closedBefore" }
+        ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CapaList"
+                }
+              }
+            },
+            "description" : "Returns a list of CAPAs, most recently created first. Utilize paging query parameters to query older CAPAs. By default the 100 most recent are returned."
+          },
+          "400" : {
+            "$ref" : "#/components/responses/InvalidQueryParam"
+          },
+          "401" : {
+            "$ref" : "#/components/responses/401"
+          }
+        }
+      }
+    },
+    "/qms/complaints" : {
+      "get" : {
+        "tags" : [ "QMS" ],
+        "summary" : "Gets a list of Complaints for your organization",
+        "description" : "The list of Complaints can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Complaint objects returned. By default, the first 100 Complaints are returned.",
+        "parameters" : [
+          { "$ref" : "#/components/parameters/page" },
+          { "$ref" : "#/components/parameters/pageSize" },
+          { "$ref" : "#/components/parameters/createdAfter" },
+          { "$ref" : "#/components/parameters/createdBefore" },
+          { "$ref" : "#/components/parameters/updatedAfter" },
+          { "$ref" : "#/components/parameters/updatedBefore" },
+          { "$ref" : "#/components/parameters/closedAfter" },
+          { "$ref" : "#/components/parameters/closedBefore" }
+        ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ComplaintList"
+                }
+              }
+            },
+            "description" : "Returns a list of Complaints, most recently created first. Utilize paging query parameters to query older Complaints. By default the 100 most recent are returned."
+          },
+          "400" : {
+            "$ref" : "#/components/responses/InvalidQueryParam"
+          },
+          "401" : {
+            "$ref" : "#/components/responses/401"
+          }
+        }
+      }
+    },
+    "/sup/fais": {
+      "get": {
+        "tags": ["Suppliers"],
+        "summary": "Gets a list of first-article inspections shared with your organization by your suppliers.",
+        "description": "The list of supplier first-article inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
+        "parameters": [
+          { "$ref": "#/components/parameters/page" },
+          { "$ref": "#/components/parameters/pageSize" },
+          { "$ref": "#/components/parameters/part_number" },
+          { "$ref": "#/components/parameters/rev" },
+          { "$ref": "#/components/parameters/inspIdent1" },
+          { "$ref": "#/components/parameters/inspIdent2" },
+          { "$ref": "#/components/parameters/supplier"},
+          { "$ref": "#/components/parameters/faiType" },
+          { "$ref": "#/components/parameters/inspectionStatus" },
+          { "$ref": "#/components/parameters/closedAfter"},
+          { "$ref": "#/components/parameters/reviewStatus" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/FaiList"}
+              }
+            },
+            "description": "Returns a list of first-article inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
+          },
+          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      }
+    },
+    "/sup/fais/{inspection_id}": {
+      "get": {
+        "tags": ["Suppliers"],
+        "summary": "Gets a detailed supplier first-article inspection record.",
+        "description": "Returns the specified first-article inspection record, including measurement data.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/inspectionID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FaiDetail"
+                }
+              }
+            },
+            "description": "Returns a detailed first-article inspection record, including measurement data."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidPathParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Inspection does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "code": "FAC-20",
+                  "message": "Not found: Supplier FAI '12345' does not exist."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cus/fais": {
+      "get": {
+        "tags": ["Customers"],
+        "summary": "Gets a list of first-article inspections shared with your organization by your customers.",
+        "description": "The list of customer first-article inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
+        "parameters": [
+          { "$ref": "#/components/parameters/page" },
+          { "$ref": "#/components/parameters/pageSize" },
+          { "$ref": "#/components/parameters/part_number" },
+          { "$ref": "#/components/parameters/rev" },
+          { "$ref": "#/components/parameters/inspIdent1" },
+          { "$ref": "#/components/parameters/inspIdent2" },
+          { "$ref": "#/components/parameters/customer"},
+          { "$ref": "#/components/parameters/faiType" },
+          { "$ref": "#/components/parameters/inspectionStatus" },
+          { "$ref": "#/components/parameters/closedAfter"},
+          { "$ref": "#/components/parameters/reviewStatus" }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/FaiList"}
+              }
+            },
+            "description": "Returns a list of first-article inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
+          },
+          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
+          "401": { "$ref": "#/components/responses/401"}
+        }
+      }
+    },
+    "/cus/fais/{inspection_id}": {
+      "get": {
+        "tags": ["Customers"],
+        "summary": "Gets a detailed customer first-article inspection record.",
+        "description": "Returns the specified first-article inspection record, including measurement data.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/inspectionID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FaiDetail"
+                }
+              }
+            },
+            "description": "Returns a detailed first-article inspection record, including measurement data."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidPathParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Inspection does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "code": "FAC-20",
+                  "message": "Not found: Customer FAI '12345' does not exist."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

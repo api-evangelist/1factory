@@ -21,7 +21,7 @@ description: >-
   their quality and productivity goals, while also providing exceptional
   customer support and service.
 created: '2025-02-08'
-modified: '2026-03-16'
+modified: '2026-04-01'
 specificationVersion: '0.19'
 apis:
   - aid: 1factory:1factory
@@ -34,6 +34,8 @@ apis:
     properties:
       - url: https://www.1factory.com/api-doc/index.html
         type: Documentation
+      - url: openapi/1factory-openapi.json
+        type: OpenAPI
     description: >-
       This API allows you to create and query a number of objects in your
       1Factory account. The API accepts and returns request and response bodies
@@ -43,6 +45,8 @@ common:
     url: https://www.1factory.com/
   - type: Documentation
     url: https://www.1factory.com/api-doc/index.html
+  - type: Security
+    url: https://www.1factory.com/technical-overview.html
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
