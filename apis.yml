@@ -5,11 +5,11 @@ name: 1Factory
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Quality
-  - Monitoring
-  - Data Collection
   - Analytics
+  - Data Collection
   - Manufacturing
+  - Monitoring
+  - Quality
 description: >-
   1Factory is a leading provider of quality management software solutions for manufacturing
   companies. Our innovative platform helps businesses streamline their operations,
@@ -24,8 +24,8 @@ apis:
   - aid: 1factory:1factory
     name: 1Factory API
     tags:
-      - Quality
       - Manufacturing
+      - Quality
     humanURL: https://www.1factory.com/api-doc/index.html
     baseURL: https://api.1factory.com
     properties:
