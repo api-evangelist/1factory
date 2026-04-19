@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-status-schema.json",
+  "title": "status",
+  "description": "The status of the object",
+  "type": "string",
+  "enum": [
+    "Active",
+    "Inactive"
+  ]
+}

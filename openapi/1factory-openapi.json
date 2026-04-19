@@ -3,7 +3,6 @@
   "info": {
     "title": "1Factory API",
     "description": "This API allows you to create and query a number of objects in your 1Factory account.\n\n The API accepts and returns request and response bodies as JSON, using UTF-8 encoding.\n\nClients may request that response bodies are compressed using gzip compression by passing 'gzip' in the 'Accept-Encoding' header.\n\nIn order to use the API, you need to generate an API key for your organization in the API section of the Settings page.\n\nEach API request must include the API key and your organization's ID as header parameters. You can also find your organization ID in the Settings page.\n\nAll date time values used in the API are in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) date-time format, and include a timezone offset value. Incoming values can specify any timezone offset.\n\nErrors returned by the API include an error code. An explanation of these error codes is available [here](./errors.html).\n\nUsage of the API is rate-limited - current default limits are:\n- 60 requests per minute\n- 1000 requests per day\n\nExceeding these limits will result in subsequent API requests returning a 429 error code. The daily request limit resets at midnight UTC.\n\n API responses include the following headers to allow clients to determine how close they are to exceeding them limits:\n- **x-ratelimit-minute-limit** permitted number of API calls per minute\n- **x-ratelimit-minute-reset** seconds remaining until minute limit resets\n- **x-ratelimit-minute-remaining** number of calls remaining until reaching limit\n- **x-ratelimit-day-limit** permitted number of API calls per minute\n- **x-ratelimit-day-reset** seconds remaining until minute limit resets\n- **x-ratelimit-day-remaining** number of calls remaining until reaching limit\n\nIf you find you require a higher usage limit, please contact 1Factory support to discuss your use case.",
-
     "version": "24.31",
     "termsOfService": "https://www.1factory.com/resources/TOS%20May%2020%202021.pdf",
     "contact": {
@@ -47,7 +46,6 @@
         "in": "header",
         "name": "x-1factory-key",
         "description": "API key for your organization. Generated in the Settings page of the 1Factory application."
-
       }
     },
     "parameters": {
@@ -137,7 +135,13 @@
         "required": false,
         "schema": {
           "type": "string",
-          "enum": ["N/a","Pending","Assigned","Approved","Rejected"]
+          "enum": [
+            "N/a",
+            "Pending",
+            "Assigned",
+            "Approved",
+            "Rejected"
+          ]
         },
         "description": "The status of an object that requires approval before releasing or closing.\n\n(Availability depends on Organization settings.)"
       },
@@ -326,49 +330,49 @@
         },
         "description": "Review status to filter on."
       },
-      "createdAfter" : {
-        "name" : "created_after",
-        "in" : "query",
-        "required" : false,
-        "schema" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2021-07-14T08:00:00-08:00"
+      "createdAfter": {
+        "name": "created_after",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2021-07-14T08:00:00-08:00"
         },
-        "description" : "Return objects created after the specified date-time"
+        "description": "Return objects created after the specified date-time"
       },
-      "createdBefore" : {
-        "name" : "created_before",
-        "in" : "query",
-        "required" : false,
-        "schema" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2021-07-14T08:00:00-08:00"
+      "createdBefore": {
+        "name": "created_before",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2021-07-14T08:00:00-08:00"
         },
-        "description" : "Return objects created before the specified date-time"
+        "description": "Return objects created before the specified date-time"
       },
-      "updatedAfter" : {
-        "name" : "updated_after",
-        "in" : "query",
-        "required" : false,
-        "schema" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2021-07-14T08:00:00-08:00"
+      "updatedAfter": {
+        "name": "updated_after",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2021-07-14T08:00:00-08:00"
         },
-        "description" : "Return objects updated after the specified date-time"
+        "description": "Return objects updated after the specified date-time"
       },
-      "updatedBefore" : {
-        "name" : "updated_before",
-        "in" : "query",
-        "required" : false,
-        "schema" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2021-07-14T08:00:00-08:00"
+      "updatedBefore": {
+        "name": "updated_before",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2021-07-14T08:00:00-08:00"
         },
-        "description" : "Return objects updated before the specified date-time"
+        "description": "Return objects updated before the specified date-time"
       },
       "closedAfter": {
         "name": "closed_after",
@@ -552,7 +556,7 @@
             "nullable": true,
             "format": "double",
             "description": "Cost of the part. (Optional).",
-            "example": 3.50
+            "example": 3.5
           },
           "unit": {
             "type": "string",
@@ -680,7 +684,7 @@
             "nullable": true,
             "format": "double",
             "description": "Cost of the part. (Optional).",
-            "example": 3.50
+            "example": 3.5
           },
           "unit": {
             "type": "string",
@@ -807,7 +811,13 @@
           },
           "approval_status": {
             "type": "string",
-            "enum": ["N/a","Pending","Assigned","Approved","Rejected"],
+            "enum": [
+              "N/a",
+              "Pending",
+              "Assigned",
+              "Approved",
+              "Rejected"
+            ],
             "description": "The status of a plan that requires approval before releasing or closing.\n\n(Availability depends on Organization settings.)"
           },
           "customer_name": {
@@ -843,7 +853,9 @@
       "SpecInspectionType": {
         "type": "object",
         "properties": {
-          "inspection_type": {"$ref": "#/components/schemas/inspection_type"},
+          "inspection_type": {
+            "$ref": "#/components/schemas/inspection_type"
+          },
           "inspection_method": {
             "type": "string",
             "nullable": true,
@@ -860,7 +872,9 @@
             "type": "string",
             "nullable": false,
             "enum": [
-              "NUM", "P/F", "CALC"
+              "NUM",
+              "P/F",
+              "CALC"
             ],
             "description": "How the data for this specification is recorded - numerically, as a pass/fail, or calculated from other features.",
             "example": "NUM"
@@ -908,7 +922,13 @@
           },
           "approval_status": {
             "type": "string",
-            "enum": ["N/a","Pending","Assigned","Approved","Rejected"],
+            "enum": [
+              "N/a",
+              "Pending",
+              "Assigned",
+              "Approved",
+              "Rejected"
+            ],
             "description": "The status of a plan that requires approval before releasing or closing.\n\n(Availability depends on Organization settings.)"
           },
           "customer_name": {
@@ -943,15 +963,18 @@
             "type": "array",
             "items": {
               "allOf": [
-                {"$ref": "#/components/schemas/Specification"},
+                {
+                  "$ref": "#/components/schemas/Specification"
+                },
                 {
                   "type": "object",
                   "properties": {
                     "inspection_types": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/SpecInspectionType"}
+                        "$ref": "#/components/schemas/SpecInspectionType"
                       }
+                    }
                   }
                 }
               ]
@@ -991,7 +1014,9 @@
           "part_description": {
             "$ref": "#/components/schemas/part_description"
           },
-          "operation": {"$ref": "#/components/schemas/operation"},
+          "operation": {
+            "$ref": "#/components/schemas/operation"
+          },
           "customer_name": {
             "$ref": "#/components/schemas/customer_name"
           },
@@ -1123,7 +1148,9 @@
           "part_description": {
             "$ref": "#/components/schemas/part_description"
           },
-          "operation": {"$ref": "#/components/schemas/operation"},
+          "operation": {
+            "$ref": "#/components/schemas/operation"
+          },
           "customer_name": {
             "$ref": "#/components/schemas/customer_name"
           },
@@ -1229,11 +1256,21 @@
           "closed_on": {
             "$ref": "#/components/schemas/closed_on"
           },
-          "inspection_type": {"$ref": "#/components/schemas/inspection_type"},
-          "machines": {"$ref": "#/components/schemas/machines"},
-          "lot_size": {"$ref": "#/components/schemas/lot_size"},
-          "parts_passed": {"$ref": "#/components/schemas/parts_passed"},
-          "parts_failed": {"$ref": "#/components/schemas/parts_failed"}
+          "inspection_type": {
+            "$ref": "#/components/schemas/inspection_type"
+          },
+          "machines": {
+            "$ref": "#/components/schemas/machines"
+          },
+          "lot_size": {
+            "$ref": "#/components/schemas/lot_size"
+          },
+          "parts_passed": {
+            "$ref": "#/components/schemas/parts_passed"
+          },
+          "parts_failed": {
+            "$ref": "#/components/schemas/parts_failed"
+          }
         }
       },
       "InspectionList": {
@@ -1246,7 +1283,9 @@
       },
       "NewMfgInspection": {
         "allOf": [
-          {"$ref": "#/components/schemas/NewInspection"},
+          {
+            "$ref": "#/components/schemas/NewInspection"
+          },
           {
             "type": "object",
             "properties": {
@@ -1265,7 +1304,9 @@
       },
       "NewRecInspection": {
         "allOf": [
-          {"$ref": "#/components/schemas/NewInspection"},
+          {
+            "$ref": "#/components/schemas/NewInspection"
+          },
           {
             "type": "object",
             "properties": {
@@ -1305,15 +1346,18 @@
       "InspectionDetail": {
         "type": "object",
         "description": "Detailed inspection data, including feature specifications and measurement data.",
-        "allOf" : [
-          { "$ref": "#/components/schemas/Inspection"},
-          { "type":  "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Inspection"
+          },
+          {
+            "type": "object",
             "properties": {
               "specifications": {
                 "type": "array",
                 "minItems": 1,
                 "items": {
-                    "$ref": "#/components/schemas/Specification"
+                  "$ref": "#/components/schemas/Specification"
                 }
               },
               "part_data": {
@@ -1351,7 +1395,9 @@
           "part_description": {
             "$ref": "#/components/schemas/part_description"
           },
-          "operation": {"$ref": "#/components/schemas/operation"},
+          "operation": {
+            "$ref": "#/components/schemas/operation"
+          },
           "customer_name": {
             "$ref": "#/components/schemas/customer_name"
           },
@@ -1457,8 +1503,12 @@
           "closed_on": {
             "$ref": "#/components/schemas/closed_on"
           },
-          "fai_type": {"$ref": "#/components/schemas/fai_type"},
-          "number_of_parts": {"$ref": "#/components/schemas/number_of_parts"}
+          "fai_type": {
+            "$ref": "#/components/schemas/fai_type"
+          },
+          "number_of_parts": {
+            "$ref": "#/components/schemas/number_of_parts"
+          }
         }
       },
       "FaiList": {
@@ -1501,9 +1551,12 @@
       "FaiDetail": {
         "type": "object",
         "description": "Detailed first-article inspection data, including feature specifications and measurement data.",
-        "allOf" : [
-          { "$ref": "#/components/schemas/Fai"},
-          { "type":  "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Fai"
+          },
+          {
+            "type": "object",
             "properties": {
               "specifications": {
                 "type": "array",
@@ -1568,7 +1621,13 @@
             "maxLength": 255,
             "description": "Type of NCR",
             "example": "Rcvg.",
-            "enum": ["Rcvg.", "Mfg.", "Field", "Cust.", "Devn."]
+            "enum": [
+              "Rcvg.",
+              "Mfg.",
+              "Field",
+              "Cust.",
+              "Devn."
+            ]
           },
           "mfg_insp_ident_1": {
             "type": "string",
@@ -1599,19 +1658,19 @@
             "example": "po-20240065"
           },
           "lot_quantity": {
-            "type":"number",
+            "type": "number",
             "nullable": false,
             "description": "The number of parts in the lot of the NCR",
             "example": 100
           },
           "inspection_quantity": {
-            "type":"number",
+            "type": "number",
             "nullable": false,
             "description": "The number of parts in the lot that were inspected as part of the NCR",
             "example": 10
           },
           "defective_quantity": {
-            "type":"number",
+            "type": "number",
             "nullable": false,
             "description": "The number of parts rejected as part of the NCR",
             "example": 3
@@ -1620,7 +1679,11 @@
             "type": "string",
             "description": "Business impact of the NCR",
             "example": "LOW",
-            "enum": ["LOW", "MEDIUM", "HIGH"]
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH"
+            ]
           },
           "detected_at": {
             "type": "string",
@@ -1663,14 +1726,21 @@
             "type": "string",
             "description": "Status of the NCR",
             "example": "OPEN",
-            "enum": ["OPEN", "CLOSED"]
+            "enum": [
+              "OPEN",
+              "CLOSED"
+            ]
           },
           "task_status": {
             "type": "string",
             "nullable": false,
             "description": "Status of all tasks on NCR.",
             "example": "OPEN",
-            "enum": ["N/A","OPEN", "CLOSED"]
+            "enum": [
+              "N/A",
+              "OPEN",
+              "CLOSED"
+            ]
           },
           "task_count": {
             "type": "number",
@@ -1698,7 +1768,9 @@
       "Ncr": {
         "type": "object",
         "allOf": [
-          {"$ref": "#/components/schemas/Issue"},
+          {
+            "$ref": "#/components/schemas/Issue"
+          },
           {
             "properties": {
               "description": {
@@ -1943,7 +2015,14 @@
             "type": "string",
             "nullable": false,
             "enum": [
-              "Nom ± Tol", "GD&T", "Basic", "Min - Max", "Note", "Nom++Tol", "Nom -- Tol", "Reference"
+              "Nom \u00b1 Tol",
+              "GD&T",
+              "Basic",
+              "Min - Max",
+              "Note",
+              "Nom++Tol",
+              "Nom -- Tol",
+              "Reference"
             ],
             "description": "Type of characteristic being measured.",
             "example": "GD&T"
@@ -1952,7 +2031,9 @@
             "type": "string",
             "nullable": false,
             "enum": [
-              "STD", "MFG", "DVN"
+              "STD",
+              "MFG",
+              "DVN"
             ],
             "description": "Dimension type for this specification - Standard, Manufacturing or Deviation.",
             "example": "STD"
@@ -1964,34 +2045,36 @@
             "example": "1"
           },
           "data_type": {
-             "type": "string",
+            "type": "string",
             "nullable": false,
             "enum": [
-              "NUM", "P/F", "CALC"
+              "NUM",
+              "P/F",
+              "CALC"
             ],
             "description": "How the data for this specification is recorded - numerically, as a pass/fail, or calculated from other features.",
             "example": "NUM"
           },
           "nominal": {
-            "type":"number",
+            "type": "number",
             "nullable": true,
             "description": "Nominal value for this specification.",
             "example": 1.12
           },
           "lower_spec_limit": {
-            "type":"number",
+            "type": "number",
             "nullable": true,
             "description": "Lower specification limit for the feature.",
             "example": 1.11
           },
           "upper_spec_limit": {
-            "type":"number",
+            "type": "number",
             "nullable": true,
             "description": "Upper specification limit for the feature.",
             "example": 1.14
           },
           "unit": {
-            "type":"string",
+            "type": "string",
             "nullable": true,
             "description": "Unit of measure for this feature.",
             "example": "mm"
@@ -2002,11 +2085,12 @@
             "description": "Descriptor of feature. For GD&T, this is used to record the datum.",
             "example": "A"
           },
-          "bonus_tolerance":{
+          "bonus_tolerance": {
             "type": "string",
             "nullable": true,
             "enum": [
-              "MMC", "LMC"
+              "MMC",
+              "LMC"
             ],
             "description": "For GD&T features, defines the material condition for evaluating bonus tolerance, if applicable.",
             "example": "MMC"
@@ -2049,13 +2133,13 @@
         "properties": {
           "grp_ident": {
             "type": "string",
-            "nullable":  true,
+            "nullable": true,
             "description": "Identifier for a grouping of parts.",
             "example": "CAVITY1"
           },
           "row_ident": {
             "type": "string",
-            "nullable":  true,
+            "nullable": true,
             "description": "Identifier for a unique part, sucha as a serial number.",
             "example": "SN100001"
           },
@@ -2162,7 +2246,6 @@
         "description": "The supplier number / vendor code (for receiving or supplier inspections).",
         "example": "S12345"
       },
-
       "Supplier": {
         "type": "object",
         "required": [
@@ -2239,7 +2322,10 @@
               "maxLength": 50
             },
             "description": "List of organization codes associated with the supplier.",
-            "example": ["1001", "1002"]
+            "example": [
+              "1001",
+              "1002"
+            ]
           },
           "commodity_codes": {
             "type": "array",
@@ -2250,7 +2336,10 @@
               "maxLength": 100
             },
             "description": "List of commodity codes that the supplier provides.",
-            "example": ["Machined", "Anodization"]
+            "example": [
+              "Machined",
+              "Anodization"
+            ]
           },
           "qualifications": {
             "type": "array",
@@ -2541,9 +2630,15 @@
           "rev"
         ],
         "properties": {
-          "part_number": { "$ref": "#/components/schemas/part_number" },
-          "rev": { "$ref": "#/components/schemas/rev" },
-          "sub_parts": {"$ref": "#/components/schemas/SubPartList"}
+          "part_number": {
+            "$ref": "#/components/schemas/part_number"
+          },
+          "rev": {
+            "$ref": "#/components/schemas/rev"
+          },
+          "sub_parts": {
+            "$ref": "#/components/schemas/SubPartList"
+          }
         }
       },
       "SubPartList": {
@@ -2551,7 +2646,9 @@
         "minItems": 1,
         "nullable": false,
         "description": "List of parts that make up this assembly. Each listed part must already exist as a Part Master entry.",
-        "items": { "$ref": "#/components/schemas/AssemblyEntry" },
+        "items": {
+          "$ref": "#/components/schemas/AssemblyEntry"
+        },
         "example": [
           {
             "part_number": "12-54321-21",
@@ -2660,14 +2757,41 @@
   "paths": {
     "/partMasters": {
       "put": {
-        "tags": ["Part Master"],
-        "summary": "Creates a new (or updates existing) part master entry for your organization.",
+        "tags": [
+          "Part Master"
+        ],
+        "summary": "1Factory Creates a New (or Updates Existing) Part Master Entry for Your Organization.",
         "description": "Create a new part master entry that can be used when referring to parts when creating Plans, Inspections, FAIs etc. \n\n The part number and rev must be unique - if a part master with the same part number and revision already exists, the existing Part Master entry will be overwritten.",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {"$ref": "#/components/schemas/NewPartMaster"}
+              "schema": {
+                "$ref": "#/components/schemas/NewPartMaster"
+              },
+              "examples": {
+                "PutpartmastersRequestExample": {
+                  "summary": "Default putpartMasters request",
+                  "x-microcks-default": true,
+                  "value": {
+                    "part_number": "example-value",
+                    "rev": "example-value",
+                    "description": "example-value",
+                    "status": "Active",
+                    "alt_part_number": "example-value",
+                    "alt_rev": "example-value",
+                    "alt_part_number2": "example-value",
+                    "alt_rev2": "example-value",
+                    "project_identifier": "example-value",
+                    "cost": 3.14,
+                    "unit": "example-value",
+                    "is_assembly": true,
+                    "is_itar": true,
+                    "is_buy": true,
+                    "comments": "example-value"
+                  }
+                }
+              }
             }
           }
         },
@@ -2675,7 +2799,47 @@
           "201": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/PartMaster"}
+                "schema": {
+                  "$ref": "#/components/schemas/PartMaster"
+                },
+                "examples": {
+                  "Putpartmasters201Example": {
+                    "summary": "Default putpartMasters 201 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "ID": 42,
+                      "part_number": "example-value",
+                      "rev": "example-value",
+                      "description": "example-value",
+                      "status": "Inactive",
+                      "alt_part_number": "example-value",
+                      "alt_rev": "example-value",
+                      "alt_part_number2": "example-value",
+                      "alt_rev2": "example-value",
+                      "project_identifier": "example-value",
+                      "plan_count": 3.14,
+                      "ncr_count": 3.14,
+                      "type": "ToS Entry",
+                      "parent_part_number": "example-value",
+                      "parent_rev": "example-value",
+                      "cost": 3.14,
+                      "unit": "example-value",
+                      "is_library": true,
+                      "is_assembly": true,
+                      "is_itar": true,
+                      "has_ppap": true,
+                      "component_parts": [
+                        {
+                          "part_number": "example-value",
+                          "rev": "example-value",
+                          "quantity": 3.14
+                        }
+                      ],
+                      "is_buy": true,
+                      "comments": "example-value"
+                    }
+                  }
+                }
               }
             },
             "description": "Created. Successfully created part master entry is returned."
@@ -2683,7 +2847,47 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/PartMaster"}
+                "schema": {
+                  "$ref": "#/components/schemas/PartMaster"
+                },
+                "examples": {
+                  "Putpartmasters200Example": {
+                    "summary": "Default putpartMasters 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "ID": 42,
+                      "part_number": "example-value",
+                      "rev": "example-value",
+                      "description": "example-value",
+                      "status": "Inactive",
+                      "alt_part_number": "example-value",
+                      "alt_rev": "example-value",
+                      "alt_part_number2": "example-value",
+                      "alt_rev2": "example-value",
+                      "project_identifier": "example-value",
+                      "plan_count": 3.14,
+                      "ncr_count": 3.14,
+                      "type": "Standard",
+                      "parent_part_number": "example-value",
+                      "parent_rev": "example-value",
+                      "cost": 3.14,
+                      "unit": "example-value",
+                      "is_library": true,
+                      "is_assembly": true,
+                      "is_itar": true,
+                      "has_ppap": true,
+                      "component_parts": [
+                        {
+                          "part_number": "example-value",
+                          "rev": "example-value",
+                          "quantity": 3.14
+                        }
+                      ],
+                      "is_buy": true,
+                      "comments": "example-value"
+                    }
+                  }
+                }
               }
             },
             "description": "OK. Successfully updated part master entry is returned."
@@ -2702,18 +2906,38 @@
               }
             }
           },
-          "401": { "$ref": "#/components/responses/401"}
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       },
       "get": {
-        "tags": ["Part Master"],
-        "summary": "Gets a List of part masters for your organization.",
+        "tags": [
+          "Part Master"
+        ],
+        "summary": "1Factory Gets a List of Part Masters for Your Organization.",
         "description": "The list of part master entries that can be filtered by specifying query parameters. \n Paging parameters control the number of rows of part master objects returned. By default, the first 100 part masters are returned.",
         "parameters": [
-          { "$ref": "#/components/parameters/page" },
-          { "$ref": "#/components/parameters/pageSize" },
-          { "$ref": "#/components/parameters/part_number" },
-          { "$ref": "#/components/parameters/rev" },
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/part_number",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/rev",
+            "example": "example-value"
+          },
           {
             "name": "parent_part_number",
             "in": "query",
@@ -2723,7 +2947,8 @@
               "nullable": false,
               "example": "12-34567-89"
             },
-            "description": "Parent Part number to filter on for Table of Size entries."
+            "description": "Parent Part number to filter on for Table of Size entries.",
+            "example": "example-value"
           },
           {
             "name": "parent_rev",
@@ -2734,7 +2959,8 @@
               "nullable": false,
               "example": "A"
             },
-            "description": "Parent Part rev to filter on for Table of Size entries."
+            "description": "Parent Part rev to filter on for Table of Size entries.",
+            "example": "example-value"
           },
           {
             "name": "is_library",
@@ -2793,20 +3019,81 @@
                 "Standard"
               ]
             },
-            "description": "If the part has any PPAP documents."
+            "description": "If the part has any PPAP documents.",
+            "example": "example-value"
           },
-          { "$ref": "#/components/parameters/project_identifier" },
-          { "$ref": "#/components/parameters/status" },
-          { "$ref" : "#/components/parameters/createdAfter" },
-          { "$ref" : "#/components/parameters/createdBefore" },
-          { "$ref" : "#/components/parameters/updatedAfter" },
-          { "$ref" : "#/components/parameters/updatedBefore" }
+          {
+            "$ref": "#/components/parameters/project_identifier",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/status",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedBefore",
+            "example": "example-value"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/PartMasterList"}
+                "schema": {
+                  "$ref": "#/components/schemas/PartMasterList"
+                },
+                "examples": {
+                  "Getpartmasters200Example": {
+                    "summary": "Default getpartMasters 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {
+                        "ID": 42,
+                        "part_number": "example-value",
+                        "rev": "example-value",
+                        "description": "example-value",
+                        "status": "Active",
+                        "alt_part_number": "example-value",
+                        "alt_rev": "example-value",
+                        "alt_part_number2": "example-value",
+                        "alt_rev2": "example-value",
+                        "project_identifier": "example-value",
+                        "plan_count": 3.14,
+                        "ncr_count": 3.14,
+                        "type": "Standard",
+                        "parent_part_number": "example-value",
+                        "parent_rev": "example-value",
+                        "cost": 3.14,
+                        "unit": "example-value",
+                        "is_library": true,
+                        "is_assembly": true,
+                        "is_itar": true,
+                        "has_ppap": true,
+                        "component_parts": [
+                          {
+                            "part_number": {},
+                            "rev": {},
+                            "quantity": {}
+                          }
+                        ],
+                        "is_buy": true,
+                        "comments": "example-value"
+                      }
+                    ]
+                  }
+                }
               }
             },
             "description": "Returns a list of part masters, most recently updated first. Utilize paging query parameters to query older part masters. By default the 100 most recent are returned."
@@ -2825,20 +3112,47 @@
               }
             }
           },
-          "401": { "$ref": "#/components/responses/401"}
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/partMasters/assemblies": {
       "put": {
-        "tags": ["Part Master"],
-        "summary": "Defines assembly relationships between Part Masters.",
+        "tags": [
+          "Part Master"
+        ],
+        "summary": "1Factory Defines Assembly Relationships Between Part Masters.",
         "description": "Defines (or replaces) the list of parts that make up an assembly part. All referenced part numbers & revisions must already exist as Part Master entries.",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {"$ref": "#/components/schemas/Assembly"}
+              "schema": {
+                "$ref": "#/components/schemas/Assembly"
+              },
+              "examples": {
+                "PutpartmastersassembliesRequestExample": {
+                  "summary": "Default putpartMastersassemblies request",
+                  "x-microcks-default": true,
+                  "value": {
+                    "part_number": "example-value",
+                    "rev": "example-value",
+                    "sub_parts": [
+                      {
+                        "part_number": "example-value",
+                        "rev": "example-value",
+                        "quantity": 3.14
+                      }
+                    ]
+                  }
+                }
+              }
             }
           }
         },
@@ -2901,7 +3215,9 @@
             "description": "Referenced PartMaster does not exist.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
                 "example": {
                   "code": "FAC-20",
                   "message": "Not found: Part Master '12-54322-11 B' does not exist."
@@ -2909,19 +3225,27 @@
               }
             }
           }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/mfg/workOrderList": {
       "put": {
-        "tags": ["Work Orders"],
-        "summary": "Updates the list of manufacturing work order numbers for your organization.",
+        "tags": [
+          "Work Orders"
+        ],
+        "summary": "1Factory Updates the List of Manufacturing Work Order Numbers for Your Organization.",
         "description": "Defines the current list of manufacturing work orders for your organization. If a work order list already exists, this request will overwrite it.\n\nThis list will be used to provide suggested values for manufacturing inspection identifiers in the 1Factory application, for example, when creating a new inspection. \n\nIt will also pre-populate the lot size for inspections created using an inspection identifier in this list, if the corresponding list entry has a lot size. \n\nNote that the names used to refer to inspection identifiers in the 1Factory application will depend on what is configured for Mfg. Insp. Ident. in your organization's settings page.\n\nThe combination of insp_ident1 and insp_ident2 uniquely identifies each work order. An error will be returned if the list contains duplicate entries.",
         "requestBody": {
           "$ref": "#/components/requestBodies/WorkOrderListRequest"
         },
         "responses": {
-          "200": { "$ref": "#/components/responses/UpdateSuccess"},
+          "200": {
+            "$ref": "#/components/responses/UpdateSuccess"
+          },
           "400": {
             "description": "Invalid request. A problem with the request prevented it from being processed.",
             "content": {
@@ -2936,20 +3260,30 @@
               }
             }
           },
-          "401": { "$ref": "#/components/responses/401"}
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/rec/workOrderList": {
       "put": {
-        "tags": ["Work Orders"],
-        "summary": "Updates the list of receiving work order numbers for your organization.",
+        "tags": [
+          "Work Orders"
+        ],
+        "summary": "1Factory Updates the List of Receiving Work Order Numbers for Your Organization.",
         "description": "Defines the current list of receiving work orders for your organization. If a work order list already exists, this request will overwrite it.\n\nThis list will be used to provide suggested values for manufacturing inspection identifiers in the 1Factory application, for example, when creating a new inspection. \n\nIt will also pre-populate the lot size for inspections created using an inspection identifier in this list, if the corresponding list entry has a lot size. \n\nNote that the names used to refer to inspection identifiers in the 1Factory application will depend on what is configured for Rec. Insp. Ident. in your organization's settings page.\n\nThe combination of insp_ident1 and insp_ident2 uniquely identifies each work order. An error will be returned if the list contains duplicate entries.",
         "requestBody": {
           "$ref": "#/components/requestBodies/WorkOrderListRequest"
         },
         "responses": {
-          "200": { "$ref": "#/components/responses/UpdateSuccess"},
+          "200": {
+            "$ref": "#/components/responses/UpdateSuccess"
+          },
           "400": {
             "description": "Invalid request. A problem with the request prevented it from being processed.",
             "content": {
@@ -2964,45 +3298,142 @@
               }
             }
           },
-          "401": { "$ref": "#/components/responses/401"}
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/mfg/plans": {
       "get": {
-        "tags": ["Manufacturing"],
-        "summary": "Gets a list of manufacturing plans for your organization.",
+        "tags": [
+          "Manufacturing"
+        ],
+        "summary": "1Factory Gets a List of Manufacturing Plans for Your Organization.",
         "description": "The list of manufacturing plans can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Plan objects returned. By default, the first 100 plans are returned.",
         "parameters": [
-          { "$ref": "#/components/parameters/page" },
-          { "$ref": "#/components/parameters/pageSize" },
-          { "$ref": "#/components/parameters/part_number" },
-          { "$ref": "#/components/parameters/rev" },
-          { "$ref": "#/components/parameters/operation" },
-          { "$ref": "#/components/parameters/status" },
-          { "$ref": "#/components/parameters/version_status" },
-          { "$ref": "#/components/parameters/approval_status" },
-          { "$ref": "#/components/parameters/customer"},
-          { "$ref": "#/components/parameters/is_tabulated"},
-          { "$ref": "#/components/parameters/is_spec_lib"},
-          { "$ref" : "#/components/parameters/createdAfter" },
-          { "$ref" : "#/components/parameters/createdBefore" },
-          { "$ref" : "#/components/parameters/updatedAfter" },
-          { "$ref" : "#/components/parameters/updatedBefore" },
-          { "$ref" : "#/components/parameters/closedAfter" },
-          { "$ref" : "#/components/parameters/closedBefore" }
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/part_number",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/rev",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/operation",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/status",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/version_status",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/approval_status",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/customer",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/is_tabulated",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/is_spec_lib",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedBefore",
+            "example": "example-value"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/PlanList"}
+                "schema": {
+                  "$ref": "#/components/schemas/PlanList"
+                },
+                "examples": {
+                  "Getmfgplans200Example": {
+                    "summary": "Default getmfgplans 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {
+                        "ID": 42,
+                        "part_number": "example-value",
+                        "rev": "example-value",
+                        "part_description": "example-value",
+                        "operation": "example-value",
+                        "project_identifier": "example-value",
+                        "status": "Inactive",
+                        "version": 3.14,
+                        "version_status": "Draft",
+                        "approval_status": "Approved",
+                        "customer_name": "example-value",
+                        "supplier_name": "example-value",
+                        "supplier_number": "example-value",
+                        "is_tabulated": true,
+                        "is_spec_lib": true,
+                        "created_by_name": "example-value",
+                        "created_on": "2025-03-15T14:30:00Z",
+                        "updated_on": "2025-03-15T14:30:00Z"
+                      }
+                    ]
+                  }
+                }
               }
             },
             "description": "Returns a list of plans, most recently updated first. Utilize paging query parameters to query older plans. By default the 100 most recent are returned."
           },
-          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
-          "401": { "$ref": "#/components/responses/401"}
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
@@ -3011,11 +3442,12 @@
         "tags": [
           "Manufacturing"
         ],
-        "summary": "Gets a detailed manufacturing plan record.",
+        "summary": "1Factory Gets a Detailed Manufacturing Plan Record.",
         "description": "Returns the specified plan record, including specifications.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/planID"
+            "$ref": "#/components/parameters/planID",
+            "example": "example-value"
           }
         ],
         "responses": {
@@ -3024,6 +3456,35 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlanDetail"
+                },
+                "examples": {
+                  "GetmfgplansplanId200Example": {
+                    "summary": "Default getmfgplansplan_id 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "ID": 42,
+                      "part_number": "example-value",
+                      "rev": "example-value",
+                      "part_description": "example-value",
+                      "operation": "example-value",
+                      "project_identifier": "example-value",
+                      "status": "Inactive",
+                      "version": 3.14,
+                      "version_status": "Released",
+                      "approval_status": "Pending",
+                      "customer_name": "example-value",
+                      "supplier_name": "example-value",
+                      "supplier_number": "example-value",
+                      "is_tabulated": true,
+                      "is_spec_lib": true,
+                      "created_by_name": "example-value",
+                      "created_on": "2025-03-15T14:30:00Z",
+                      "updated_on": "2025-03-15T14:30:00Z",
+                      "specifications": [
+                        "example-value"
+                      ]
+                    }
+                  }
                 }
               }
             },
@@ -3039,7 +3500,9 @@
             "description": "Plan does not exist.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
                 "example": {
                   "code": "FAC-20",
                   "message": "Not found: Manufacturing Plan '12345' does not exist."
@@ -3047,57 +3510,186 @@
               }
             }
           }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/mfg/inspections": {
       "get": {
-        "tags": ["Manufacturing"],
-        "summary": "Gets a list of manufacturing inspections for your organization.",
+        "tags": [
+          "Manufacturing"
+        ],
+        "summary": "1Factory Gets a List of Manufacturing Inspections for Your Organization.",
         "description": "The list of manufacturing inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
         "parameters": [
-          { "$ref": "#/components/parameters/page" },
-          { "$ref": "#/components/parameters/pageSize" },
-          { "$ref": "#/components/parameters/part_number" },
-          { "$ref": "#/components/parameters/rev" },
-          { "$ref": "#/components/parameters/inspIdent1" },
-          { "$ref": "#/components/parameters/inspIdent2" },
-          { "$ref": "#/components/parameters/customer"},
-          { "$ref": "#/components/parameters/project_identifier"},
-          { "$ref": "#/components/parameters/operation"},
-          { "$ref": "#/components/parameters/site"},
-          { "$ref": "#/components/parameters/inspectionType" },
-          { "$ref": "#/components/parameters/inspectionStatus" },
-          { "$ref": "#/components/parameters/reviewStatus" },
-          { "$ref" : "#/components/parameters/createdAfter" },
-          { "$ref" : "#/components/parameters/createdBefore" },
-          { "$ref" : "#/components/parameters/updatedAfter" },
-          { "$ref" : "#/components/parameters/updatedBefore" },
-          { "$ref" : "#/components/parameters/closedAfter" },
-          { "$ref" : "#/components/parameters/closedBefore" }
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/part_number",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/rev",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent1",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent2",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/customer",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/project_identifier",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/operation",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/site",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspectionType",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspectionStatus",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/reviewStatus",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedBefore",
+            "example": "example-value"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/InspectionList"}
+                "schema": {
+                  "$ref": "#/components/schemas/InspectionList"
+                },
+                "examples": {
+                  "Getmfginspections200Example": {
+                    "summary": "Default getmfginspections 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {
+                        "ID": 42,
+                        "insp_ident_1": "example-value",
+                        "insp_ident_2": "example-value",
+                        "insp_ident_3": "example-value",
+                        "part_number": "example-value",
+                        "rev": "example-value",
+                        "part_description": "example-value",
+                        "operation": "example-value",
+                        "customer_name": "example-value",
+                        "supplier_name": "example-value",
+                        "supplier_number": "example-value",
+                        "project_identifier": "example-value",
+                        "site": "example-value",
+                        "created_by_name": "example-value",
+                        "created_on": "2025-03-15T14:30:00Z",
+                        "in_spec_pct": 3.14,
+                        "inspection_status": "Rejected",
+                        "inspected_by_name": "example-value",
+                        "inspected_on": "2025-03-15T14:30:00Z",
+                        "review_status": "Pending",
+                        "reviewed_by_name": "example-value",
+                        "reviewed_on": "2025-03-15T14:30:00Z",
+                        "notes": "example-value",
+                        "ncrs": [
+                          "example-value"
+                        ],
+                        "updated_on": "2025-03-15T14:30:00Z",
+                        "closed_on": "2025-03-15T14:30:00Z",
+                        "inspection_type": "example-value",
+                        "machines": [
+                          "example-value"
+                        ],
+                        "lot_size": 42,
+                        "parts_passed": 3.14,
+                        "parts_failed": 3.14
+                      }
+                    ]
+                  }
+                }
               }
             },
             "description": "Returns a list of inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
           },
-          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
-          "401": { "$ref": "#/components/responses/401"}
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       },
       "post": {
-        "tags": ["Manufacturing"],
-        "summary": "Creates a new manufacturing inspection for your organization.",
+        "tags": [
+          "Manufacturing"
+        ],
+        "summary": "1Factory Creates a New Manufacturing Inspection for Your Organization.",
         "description": "A new manufacturing inspection is created, ready for inspection data to be entered. \n\n ## Plan Identification \nThe plan used by the inspection is identified by part number and rev. An active version of a Plan for the specified part must exist when creating the inspection. \n\nFor Inspections that are for a Plan associated with a ToS part enter the part number and rev for the ToS entry.\n\n ## Uniqueness \nThe inspection is identified by its inspection identifiers and inspection type. A unique combination of work order identifiers and inspection type must be specified when creating a new inspection. If an inspection already exists with the specified identifiers and type, an error will be returned. \n\n ## Additional Details\n* Customer Name: The name must match the customer name in the system exactly\n* Operation: This field is optional, and only valid if your organization is configured for \"Inspections by Operation\". If enabled, the value must match an operation on the plan, or be blank or not included in the request to default to create all operation inspections for the plan\n* Machines - If included, a value must match a machine in the Mfg Resources -> Machines LOV configured for your organization",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {"$ref": "#/components/schemas/NewMfgInspection"}
+              "schema": {
+                "$ref": "#/components/schemas/NewMfgInspection"
+              },
+              "examples": {
+                "PostmfginspectionsRequestExample": {
+                  "summary": "Default postmfginspections request",
+                  "x-microcks-default": true,
+                  "value": "example-value"
+                }
+              }
             }
           }
         },
@@ -3105,7 +3697,52 @@
           "201": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Inspection"}
+                "schema": {
+                  "$ref": "#/components/schemas/Inspection"
+                },
+                "examples": {
+                  "Postmfginspections201Example": {
+                    "summary": "Default postmfginspections 201 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "ID": 42,
+                      "insp_ident_1": "example-value",
+                      "insp_ident_2": "example-value",
+                      "insp_ident_3": "example-value",
+                      "part_number": "example-value",
+                      "rev": "example-value",
+                      "part_description": "example-value",
+                      "operation": "example-value",
+                      "customer_name": "example-value",
+                      "supplier_name": "example-value",
+                      "supplier_number": "example-value",
+                      "project_identifier": "example-value",
+                      "site": "example-value",
+                      "created_by_name": "example-value",
+                      "created_on": "2025-03-15T14:30:00Z",
+                      "in_spec_pct": 3.14,
+                      "inspection_status": "Pending",
+                      "inspected_by_name": "example-value",
+                      "inspected_on": "2025-03-15T14:30:00Z",
+                      "review_status": "Pending",
+                      "reviewed_by_name": "example-value",
+                      "reviewed_on": "2025-03-15T14:30:00Z",
+                      "notes": "example-value",
+                      "ncrs": [
+                        "example-value"
+                      ],
+                      "updated_on": "2025-03-15T14:30:00Z",
+                      "closed_on": "2025-03-15T14:30:00Z",
+                      "inspection_type": "example-value",
+                      "machines": [
+                        "example-value"
+                      ],
+                      "lot_size": 42,
+                      "parts_passed": 3.14,
+                      "parts_failed": 3.14
+                    }
+                  }
+                }
               }
             },
             "description": "Created. Successfully created inspection entry is returned."
@@ -3124,8 +3761,16 @@
               }
             }
           },
-          "401": { "$ref": "#/components/responses/401"},
-          "409": { "$ref": "#/components/responses/DuplicateInspection"}
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "409": {
+            "$ref": "#/components/responses/DuplicateInspection"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
@@ -3134,11 +3779,12 @@
         "tags": [
           "Manufacturing"
         ],
-        "summary": "Gets a detailed manufacturing inspection record.",
+        "summary": "1Factory Gets a Detailed Manufacturing Inspection Record.",
         "description": "Returns the specified inspection record, including measurement data.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/inspectionID"
+            "$ref": "#/components/parameters/inspectionID",
+            "example": "example-value"
           }
         ],
         "responses": {
@@ -3147,6 +3793,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/InspectionDetail"
+                },
+                "examples": {
+                  "GetmfginspectionsinspectionId200Example": {
+                    "summary": "Default getmfginspectionsinspection_id 200 response",
+                    "x-microcks-default": true,
+                    "value": {}
+                  }
                 }
               }
             },
@@ -3162,7 +3815,9 @@
             "description": "Inspection does not exist.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
                 "example": {
                   "code": "FAC-20",
                   "message": "Not found: Manufacturing Inspection '12345' does not exist."
@@ -3170,43 +3825,135 @@
               }
             }
           }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/rec/plans": {
       "get": {
-        "tags": ["Receiving"],
-        "summary": "Gets a list of receiving plans for your organization.",
+        "tags": [
+          "Receiving"
+        ],
+        "summary": "1Factory Gets a List of Receiving Plans for Your Organization.",
         "description": "The list of receiving plans can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Plan objects returned. By default, the first 100 plans are returned.",
         "parameters": [
-          { "$ref": "#/components/parameters/page" },
-          { "$ref": "#/components/parameters/pageSize" },
-          { "$ref": "#/components/parameters/part_number" },
-          { "$ref": "#/components/parameters/rev" },
-          { "$ref": "#/components/parameters/status" },
-          { "$ref": "#/components/parameters/version_status" },
-          { "$ref": "#/components/parameters/approval_status" },
-          { "$ref": "#/components/parameters/supplier"},
-          { "$ref": "#/components/parameters/is_tabulated"},
-          { "$ref": "#/components/parameters/is_spec_lib"},
-          { "$ref" : "#/components/parameters/createdAfter" },
-          { "$ref" : "#/components/parameters/createdBefore" },
-          { "$ref" : "#/components/parameters/updatedAfter" },
-          { "$ref" : "#/components/parameters/updatedBefore" },
-          { "$ref" : "#/components/parameters/closedAfter" },
-          { "$ref" : "#/components/parameters/closedBefore" }
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/part_number",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/rev",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/status",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/version_status",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/approval_status",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/supplier",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/is_tabulated",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/is_spec_lib",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedBefore",
+            "example": "example-value"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/PlanList"}
+                "schema": {
+                  "$ref": "#/components/schemas/PlanList"
+                },
+                "examples": {
+                  "Getrecplans200Example": {
+                    "summary": "Default getrecplans 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {
+                        "ID": 42,
+                        "part_number": "example-value",
+                        "rev": "example-value",
+                        "part_description": "example-value",
+                        "operation": "example-value",
+                        "project_identifier": "example-value",
+                        "status": "Active",
+                        "version": 3.14,
+                        "version_status": "Active",
+                        "approval_status": "Approved",
+                        "customer_name": "example-value",
+                        "supplier_name": "example-value",
+                        "supplier_number": "example-value",
+                        "is_tabulated": true,
+                        "is_spec_lib": true,
+                        "created_by_name": "example-value",
+                        "created_on": "2025-03-15T14:30:00Z",
+                        "updated_on": "2025-03-15T14:30:00Z"
+                      }
+                    ]
+                  }
+                }
               }
             },
             "description": "Returns a list of plans, most recently updated first. Utilize paging query parameters to query older plans. By default the 100 most recent are returned."
           },
-          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
-          "401": { "$ref": "#/components/responses/401"}
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
@@ -3215,11 +3962,12 @@
         "tags": [
           "Receiving"
         ],
-        "summary": "Gets a detailed receiving plan record.",
+        "summary": "1Factory Gets a Detailed Receiving Plan Record.",
         "description": "Returns the specified plan record, including specifications.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/planID"
+            "$ref": "#/components/parameters/planID",
+            "example": "example-value"
           }
         ],
         "responses": {
@@ -3228,6 +3976,35 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlanDetail"
+                },
+                "examples": {
+                  "GetrecplansplanId200Example": {
+                    "summary": "Default getrecplansplan_id 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "ID": 42,
+                      "part_number": "example-value",
+                      "rev": "example-value",
+                      "part_description": "example-value",
+                      "operation": "example-value",
+                      "project_identifier": "example-value",
+                      "status": "Inactive",
+                      "version": 3.14,
+                      "version_status": "Inactive",
+                      "approval_status": "N/a",
+                      "customer_name": "example-value",
+                      "supplier_name": "example-value",
+                      "supplier_number": "example-value",
+                      "is_tabulated": true,
+                      "is_spec_lib": true,
+                      "created_by_name": "example-value",
+                      "created_on": "2025-03-15T14:30:00Z",
+                      "updated_on": "2025-03-15T14:30:00Z",
+                      "specifications": [
+                        "example-value"
+                      ]
+                    }
+                  }
                 }
               }
             },
@@ -3243,7 +4020,9 @@
             "description": "Plan does not exist.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
                 "example": {
                   "code": "FAC-20",
                   "message": "Not found: Receiving Plan '12345' does not exist."
@@ -3251,56 +4030,182 @@
               }
             }
           }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/rec/inspections": {
       "get": {
-        "tags": ["Receiving"],
-        "summary": "Gets a list of receiving inspections for your organization.",
+        "tags": [
+          "Receiving"
+        ],
+        "summary": "1Factory Gets a List of Receiving Inspections for Your Organization.",
         "description": "The list of receiving inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
         "parameters": [
-          { "$ref": "#/components/parameters/page" },
-          { "$ref": "#/components/parameters/pageSize" },
-          { "$ref": "#/components/parameters/part_number" },
-          { "$ref": "#/components/parameters/rev" },
-          { "$ref": "#/components/parameters/inspIdent1" },
-          { "$ref": "#/components/parameters/inspIdent2" },
-          { "$ref": "#/components/parameters/supplier"},
-          { "$ref": "#/components/parameters/project_identifier"},
-          { "$ref": "#/components/parameters/site"},
-          { "$ref": "#/components/parameters/inspectionType" },
-          { "$ref": "#/components/parameters/inspectionStatus" },
-          { "$ref": "#/components/parameters/reviewStatus" },
-          { "$ref" : "#/components/parameters/createdAfter" },
-          { "$ref" : "#/components/parameters/createdBefore" },
-          { "$ref" : "#/components/parameters/updatedAfter" },
-          { "$ref" : "#/components/parameters/updatedBefore" },
-          { "$ref" : "#/components/parameters/closedAfter" },
-          { "$ref" : "#/components/parameters/closedBefore" }
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/part_number",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/rev",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent1",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent2",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/supplier",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/project_identifier",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/site",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspectionType",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspectionStatus",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/reviewStatus",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedBefore",
+            "example": "example-value"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/InspectionList"}
+                "schema": {
+                  "$ref": "#/components/schemas/InspectionList"
+                },
+                "examples": {
+                  "Getrecinspections200Example": {
+                    "summary": "Default getrecinspections 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {
+                        "ID": 42,
+                        "insp_ident_1": "example-value",
+                        "insp_ident_2": "example-value",
+                        "insp_ident_3": "example-value",
+                        "part_number": "example-value",
+                        "rev": "example-value",
+                        "part_description": "example-value",
+                        "operation": "example-value",
+                        "customer_name": "example-value",
+                        "supplier_name": "example-value",
+                        "supplier_number": "example-value",
+                        "project_identifier": "example-value",
+                        "site": "example-value",
+                        "created_by_name": "example-value",
+                        "created_on": "2025-03-15T14:30:00Z",
+                        "in_spec_pct": 3.14,
+                        "inspection_status": "Accepted",
+                        "inspected_by_name": "example-value",
+                        "inspected_on": "2025-03-15T14:30:00Z",
+                        "review_status": "Reviewed",
+                        "reviewed_by_name": "example-value",
+                        "reviewed_on": "2025-03-15T14:30:00Z",
+                        "notes": "example-value",
+                        "ncrs": [
+                          "example-value"
+                        ],
+                        "updated_on": "2025-03-15T14:30:00Z",
+                        "closed_on": "2025-03-15T14:30:00Z",
+                        "inspection_type": "example-value",
+                        "machines": [
+                          "example-value"
+                        ],
+                        "lot_size": 42,
+                        "parts_passed": 3.14,
+                        "parts_failed": 3.14
+                      }
+                    ]
+                  }
+                }
               }
             },
             "description": "Returns a list of inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
           },
-          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
-          "401": { "$ref": "#/components/responses/401"}
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       },
       "post": {
-        "tags": ["Receiving"],
-        "summary": "Creates a new receiving inspection for your organization.",
+        "tags": [
+          "Receiving"
+        ],
+        "summary": "1Factory Creates a New Receiving Inspection for Your Organization.",
         "description": "A new receiving inspection is created, ready for inspection data to be entered. \n\n ## Plan Identification \nThe plan used by the inspection is identified by part number and rev. An active version of a Plan for the specified part must exist when creating the inspection. \n\nFor Inspections that are for a Plan associated with a ToS part enter the part number and rev for the ToS entry.\n\n ## Uniqueness \nThe inspection is identified by its inspection identifiers and inspection type. A unique combination of work order identifiers and inspection type must be specified when creating a new inspection. If an inspection already exists with the specified identifiers and type, an error will be returned.\n\n ## Additional Details\n* Supplier Name: The name must match the supplier name in the system exactly\n",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {"$ref": "#/components/schemas/NewRecInspection"}
+              "schema": {
+                "$ref": "#/components/schemas/NewRecInspection"
+              },
+              "examples": {
+                "PostrecinspectionsRequestExample": {
+                  "summary": "Default postrecinspections request",
+                  "x-microcks-default": true,
+                  "value": "example-value"
+                }
+              }
             }
           }
         },
@@ -3308,7 +4213,52 @@
           "201": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Inspection"}
+                "schema": {
+                  "$ref": "#/components/schemas/Inspection"
+                },
+                "examples": {
+                  "Postrecinspections201Example": {
+                    "summary": "Default postrecinspections 201 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "ID": 42,
+                      "insp_ident_1": "example-value",
+                      "insp_ident_2": "example-value",
+                      "insp_ident_3": "example-value",
+                      "part_number": "example-value",
+                      "rev": "example-value",
+                      "part_description": "example-value",
+                      "operation": "example-value",
+                      "customer_name": "example-value",
+                      "supplier_name": "example-value",
+                      "supplier_number": "example-value",
+                      "project_identifier": "example-value",
+                      "site": "example-value",
+                      "created_by_name": "example-value",
+                      "created_on": "2025-03-15T14:30:00Z",
+                      "in_spec_pct": 3.14,
+                      "inspection_status": "Accepted",
+                      "inspected_by_name": "example-value",
+                      "inspected_on": "2025-03-15T14:30:00Z",
+                      "review_status": "Pending",
+                      "reviewed_by_name": "example-value",
+                      "reviewed_on": "2025-03-15T14:30:00Z",
+                      "notes": "example-value",
+                      "ncrs": [
+                        "example-value"
+                      ],
+                      "updated_on": "2025-03-15T14:30:00Z",
+                      "closed_on": "2025-03-15T14:30:00Z",
+                      "inspection_type": "example-value",
+                      "machines": [
+                        "example-value"
+                      ],
+                      "lot_size": 42,
+                      "parts_passed": 3.14,
+                      "parts_failed": 3.14
+                    }
+                  }
+                }
               }
             },
             "description": "Created. Successfully created inspection entry is returned."
@@ -3327,8 +4277,16 @@
               }
             }
           },
-          "401": { "$ref": "#/components/responses/401"},
-          "409": { "$ref": "#/components/responses/DuplicateInspection"}
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "409": {
+            "$ref": "#/components/responses/DuplicateInspection"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
@@ -3337,11 +4295,12 @@
         "tags": [
           "Receiving"
         ],
-        "summary": "Gets a detailed receiving inspection record.",
+        "summary": "1Factory Gets a Detailed Receiving Inspection Record.",
         "description": "Returns the specified inspection record, including measurement data.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/inspectionID"
+            "$ref": "#/components/parameters/inspectionID",
+            "example": "example-value"
           }
         ],
         "responses": {
@@ -3350,6 +4309,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/InspectionDetail"
+                },
+                "examples": {
+                  "GetrecinspectionsinspectionId200Example": {
+                    "summary": "Default getrecinspectionsinspection_id 200 response",
+                    "x-microcks-default": true,
+                    "value": {}
+                  }
                 }
               }
             },
@@ -3365,7 +4331,9 @@
             "description": "Inspection does not exist.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
                 "example": {
                   "code": "FAC-20",
                   "message": "Not found: Receiving Inspection '12345' does not exist."
@@ -3373,44 +4341,143 @@
               }
             }
           }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/sup": {
       "get": {
-        "tags": ["Suppliers"],
-        "summary": "Gets a list of suppliers in your organization.",
+        "tags": [
+          "Suppliers"
+        ],
+        "summary": "1Factory Gets a List of Suppliers in Your Organization.",
         "description": "The list of suppliers can be filtered by specifying query parameters. Paging parameters control the number of supplier objects returned. By default, the first 100 suppliers are returned.",
         "parameters": [
-          { "$ref": "#/components/parameters/page" },
-          { "$ref": "#/components/parameters/pageSize" },
-          { "$ref": "#/components/parameters/createdAfter" },
-          { "$ref": "#/components/parameters/createdBefore" },
-          { "$ref": "#/components/parameters/updatedAfter" },
-          { "$ref": "#/components/parameters/updatedBefore" }
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedBefore",
+            "example": "example-value"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/SupplierList" }
+                "schema": {
+                  "$ref": "#/components/schemas/SupplierList"
+                },
+                "examples": {
+                  "Getsup200Example": {
+                    "summary": "Default getsup 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {
+                        "ID": 42,
+                        "name": "example-value",
+                        "vendor_code": "example-value",
+                        "address": {
+                          "street": "example-value",
+                          "city": "example-value",
+                          "state": "example-value",
+                          "postal_code": "example-value",
+                          "country": "example-value"
+                        },
+                        "supply_chain_manager": {
+                          "id": 42,
+                          "name": "example-value",
+                          "email": "example-value"
+                        },
+                        "supplier_quality_manager": {
+                          "id": 42,
+                          "name": "example-value",
+                          "email": "example-value"
+                        },
+                        "purchasing": {
+                          "id": 42,
+                          "name": "example-value",
+                          "email": "example-value"
+                        },
+                        "direct": true,
+                        "indirect": true,
+                        "strategic": true,
+                        "small_business": true,
+                        "organization_codes": [
+                          "example-value"
+                        ],
+                        "commodity_codes": [
+                          "example-value"
+                        ],
+                        "qualifications": [
+                          {
+                            "date": {},
+                            "status": {},
+                            "review_status": {},
+                            "frequency": {}
+                          }
+                        ],
+                        "certifications": [
+                          {
+                            "expiration_date": {},
+                            "certification": {}
+                          }
+                        ],
+                        "qualification_status": "Inactive",
+                        "last_qualification_date": "2025-03-15T14:30:00Z",
+                        "re_qualification_date": "2025-03-15T14:30:00Z"
+                      }
+                    ]
+                  }
+                }
               }
             },
             "description": "Returns a list of suppliers, utilize paging query parameters to query older suppliers. By default the 100 most recent are returned."
           },
-          "400": { "$ref": "#/components/responses/InvalidQueryParam" },
-          "401": { "$ref": "#/components/responses/401" }
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/sup/{supplier_id}": {
       "get": {
-        "tags": ["Suppliers"],
-        "summary": "Get detailed supplier record",
+        "tags": [
+          "Suppliers"
+        ],
+        "summary": "1Factory Get Detailed Supplier Record",
         "description": "Returns a specific supplier record, including qualification and certification data.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/supplier_id"
+            "$ref": "#/components/parameters/supplier_id",
+            "example": "example-value"
           }
         ],
         "responses": {
@@ -3419,6 +4486,66 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Supplier"
+                },
+                "examples": {
+                  "GetsupsupplierId200Example": {
+                    "summary": "Default getsupsupplier_id 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "ID": 42,
+                      "name": "example-value",
+                      "vendor_code": "example-value",
+                      "address": {
+                        "street": "example-value",
+                        "city": "example-value",
+                        "state": "example-value",
+                        "postal_code": "example-value",
+                        "country": "example-value"
+                      },
+                      "supply_chain_manager": {
+                        "id": 42,
+                        "name": "example-value",
+                        "email": "example-value"
+                      },
+                      "supplier_quality_manager": {
+                        "id": 42,
+                        "name": "example-value",
+                        "email": "example-value"
+                      },
+                      "purchasing": {
+                        "id": 42,
+                        "name": "example-value",
+                        "email": "example-value"
+                      },
+                      "direct": true,
+                      "indirect": true,
+                      "strategic": true,
+                      "small_business": true,
+                      "organization_codes": [
+                        "example-value"
+                      ],
+                      "commodity_codes": [
+                        "example-value"
+                      ],
+                      "qualifications": [
+                        {
+                          "date": "2025-03-15T14:30:00Z",
+                          "status": "Disqualified",
+                          "review_status": "N/A",
+                          "frequency": 42
+                        }
+                      ],
+                      "certifications": [
+                        {
+                          "expiration_date": "2025-03-15T14:30:00Z",
+                          "certification": "example-value"
+                        }
+                      ],
+                      "qualification_status": "Approved",
+                      "last_qualification_date": "2025-03-15T14:30:00Z",
+                      "re_qualification_date": "2025-03-15T14:30:00Z"
+                    }
+                  }
                 }
               }
             },
@@ -3434,7 +4561,9 @@
             "description": "Supplier does not exist.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
                 "example": {
                   "code": "FAC-20",
                   "message": "Not found: Supplier '12345' does not exist."
@@ -3442,40 +4571,123 @@
               }
             }
           }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/sup/plans": {
       "get": {
-        "tags": ["Suppliers"],
-        "summary": "Gets a list of plans shared with your organization by your suppliers.",
+        "tags": [
+          "Suppliers"
+        ],
+        "summary": "1Factory Gets a List of Plans Shared with Your Organization by Your Suppliers.",
         "description": "The list of supplier plans can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Plan objects returned. By default, the first 100 plans are returned.",
         "parameters": [
-          { "$ref": "#/components/parameters/page" },
-          { "$ref": "#/components/parameters/pageSize" },
-          { "$ref": "#/components/parameters/part_number" },
-          { "$ref": "#/components/parameters/rev" },
-          { "$ref": "#/components/parameters/status" },
-          { "$ref": "#/components/parameters/supplier"},
-          { "$ref": "#/components/parameters/is_tabulated"},
-          { "$ref" : "#/components/parameters/createdAfter" },
-          { "$ref" : "#/components/parameters/createdBefore" },
-          { "$ref" : "#/components/parameters/updatedAfter" },
-          { "$ref" : "#/components/parameters/updatedBefore" },
-          { "$ref" : "#/components/parameters/closedAfter" },
-          { "$ref" : "#/components/parameters/closedBefore" }
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/part_number",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/rev",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/status",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/supplier",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/is_tabulated",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedBefore",
+            "example": "example-value"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/PlanList"}
+                "schema": {
+                  "$ref": "#/components/schemas/PlanList"
+                },
+                "examples": {
+                  "Getsupplans200Example": {
+                    "summary": "Default getsupplans 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {
+                        "ID": 42,
+                        "part_number": "example-value",
+                        "rev": "example-value",
+                        "part_description": "example-value",
+                        "operation": "example-value",
+                        "project_identifier": "example-value",
+                        "status": "Inactive",
+                        "version": 3.14,
+                        "version_status": "Draft",
+                        "approval_status": "Assigned",
+                        "customer_name": "example-value",
+                        "supplier_name": "example-value",
+                        "supplier_number": "example-value",
+                        "is_tabulated": true,
+                        "is_spec_lib": true,
+                        "created_by_name": "example-value",
+                        "created_on": "2025-03-15T14:30:00Z",
+                        "updated_on": "2025-03-15T14:30:00Z"
+                      }
+                    ]
+                  }
+                }
               }
             },
             "description": "Returns a list of plans, most recently updated first. Utilize paging query parameters to query older plans. By default the 100 most recent are returned."
           },
-          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
-          "401": { "$ref": "#/components/responses/401"}
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
@@ -3484,11 +4696,12 @@
         "tags": [
           "Suppliers"
         ],
-        "summary": "Gets a detailed Supplier plan record.",
+        "summary": "1Factory Gets a Detailed Supplier Plan Record.",
         "description": "Returns the specified plan record, including specifications.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/planID"
+            "$ref": "#/components/parameters/planID",
+            "example": "example-value"
           }
         ],
         "responses": {
@@ -3497,6 +4710,35 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlanDetail"
+                },
+                "examples": {
+                  "GetsupplansplanId200Example": {
+                    "summary": "Default getsupplansplan_id 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "ID": 42,
+                      "part_number": "example-value",
+                      "rev": "example-value",
+                      "part_description": "example-value",
+                      "operation": "example-value",
+                      "project_identifier": "example-value",
+                      "status": "Active",
+                      "version": 3.14,
+                      "version_status": "Draft",
+                      "approval_status": "Rejected",
+                      "customer_name": "example-value",
+                      "supplier_name": "example-value",
+                      "supplier_number": "example-value",
+                      "is_tabulated": true,
+                      "is_spec_lib": true,
+                      "created_by_name": "example-value",
+                      "created_on": "2025-03-15T14:30:00Z",
+                      "updated_on": "2025-03-15T14:30:00Z",
+                      "specifications": [
+                        "example-value"
+                      ]
+                    }
+                  }
                 }
               }
             },
@@ -3512,7 +4754,9 @@
             "description": "Plan does not exist.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
                 "example": {
                   "code": "FAC-20",
                   "message": "Not found: Supplier Plan '12345' does not exist."
@@ -3520,42 +4764,148 @@
               }
             }
           }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/sup/inspections": {
       "get": {
-        "tags": ["Suppliers"],
-        "summary": "Gets a list of inspections shared with your organization by your suppliers.",
+        "tags": [
+          "Suppliers"
+        ],
+        "summary": "1Factory Gets a List of Inspections Shared with Your Organization by Your Suppliers.",
         "description": "The list of supplier inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
         "parameters": [
-          { "$ref": "#/components/parameters/page" },
-          { "$ref": "#/components/parameters/pageSize" },
-          { "$ref": "#/components/parameters/part_number" },
-          { "$ref": "#/components/parameters/rev" },
-          { "$ref": "#/components/parameters/inspIdent1" },
-          { "$ref": "#/components/parameters/inspIdent2" },
-          { "$ref": "#/components/parameters/supplier"},
-          { "$ref": "#/components/parameters/inspectionStatus" },
-          { "$ref": "#/components/parameters/reviewStatus" },
-          { "$ref" : "#/components/parameters/createdAfter" },
-          { "$ref" : "#/components/parameters/createdBefore" },
-          { "$ref" : "#/components/parameters/updatedAfter" },
-          { "$ref" : "#/components/parameters/updatedBefore" },
-          { "$ref" : "#/components/parameters/closedAfter" },
-          { "$ref" : "#/components/parameters/closedBefore" }
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/part_number",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/rev",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent1",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent2",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/supplier",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspectionStatus",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/reviewStatus",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedBefore",
+            "example": "example-value"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/InspectionList"}
+                "schema": {
+                  "$ref": "#/components/schemas/InspectionList"
+                },
+                "examples": {
+                  "Getsupinspections200Example": {
+                    "summary": "Default getsupinspections 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {
+                        "ID": 42,
+                        "insp_ident_1": "example-value",
+                        "insp_ident_2": "example-value",
+                        "insp_ident_3": "example-value",
+                        "part_number": "example-value",
+                        "rev": "example-value",
+                        "part_description": "example-value",
+                        "operation": "example-value",
+                        "customer_name": "example-value",
+                        "supplier_name": "example-value",
+                        "supplier_number": "example-value",
+                        "project_identifier": "example-value",
+                        "site": "example-value",
+                        "created_by_name": "example-value",
+                        "created_on": "2025-03-15T14:30:00Z",
+                        "in_spec_pct": 3.14,
+                        "inspection_status": "Pending",
+                        "inspected_by_name": "example-value",
+                        "inspected_on": "2025-03-15T14:30:00Z",
+                        "review_status": "Reviewed",
+                        "reviewed_by_name": "example-value",
+                        "reviewed_on": "2025-03-15T14:30:00Z",
+                        "notes": "example-value",
+                        "ncrs": [
+                          "example-value"
+                        ],
+                        "updated_on": "2025-03-15T14:30:00Z",
+                        "closed_on": "2025-03-15T14:30:00Z",
+                        "inspection_type": "example-value",
+                        "machines": [
+                          "example-value"
+                        ],
+                        "lot_size": 42,
+                        "parts_passed": 3.14,
+                        "parts_failed": 3.14
+                      }
+                    ]
+                  }
+                }
               }
             },
             "description": "Returns a list of inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
           },
-          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
-          "401": { "$ref": "#/components/responses/401"}
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
@@ -3564,11 +4914,12 @@
         "tags": [
           "Suppliers"
         ],
-        "summary": "Gets a detailed supplier inspection record.",
+        "summary": "1Factory Gets a Detailed Supplier Inspection Record.",
         "description": "Returns the specified inspection record, including measurement data.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/inspectionID"
+            "$ref": "#/components/parameters/inspectionID",
+            "example": "example-value"
           }
         ],
         "responses": {
@@ -3577,6 +4928,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/InspectionDetail"
+                },
+                "examples": {
+                  "GetsupinspectionsinspectionId200Example": {
+                    "summary": "Default getsupinspectionsinspection_id 200 response",
+                    "x-microcks-default": true,
+                    "value": {}
+                  }
                 }
               }
             },
@@ -3592,7 +4950,9 @@
             "description": "Inspection does not exist.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
                 "example": {
                   "code": "FAC-20",
                   "message": "Not found: Supplier Inspection '12345' does not exist."
@@ -3600,41 +4960,127 @@
               }
             }
           }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/cus/plans": {
       "get": {
-        "tags": ["Customers"],
-        "summary": "Gets a list of plans shared with your organization by your customers.",
+        "tags": [
+          "Customers"
+        ],
+        "summary": "1Factory Gets a List of Plans Shared with Your Organization by Your Customers.",
         "description": "The list of customer plans can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Plan objects returned. By default, the first 100 plans are returned.",
         "parameters": [
-          { "$ref": "#/components/parameters/page" },
-          { "$ref": "#/components/parameters/pageSize" },
-          { "$ref": "#/components/parameters/part_number" },
-          { "$ref": "#/components/parameters/rev" },
-          { "$ref": "#/components/parameters/status" },
-          { "$ref": "#/components/parameters/approval_status" },
-          { "$ref": "#/components/parameters/customer"},
-          { "$ref": "#/components/parameters/is_tabulated"},
-          { "$ref" : "#/components/parameters/createdAfter" },
-          { "$ref" : "#/components/parameters/createdBefore" },
-          { "$ref" : "#/components/parameters/updatedAfter" },
-          { "$ref" : "#/components/parameters/updatedBefore" },
-          { "$ref" : "#/components/parameters/closedAfter" },
-          { "$ref" : "#/components/parameters/closedBefore" }
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/part_number",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/rev",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/status",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/approval_status",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/customer",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/is_tabulated",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedBefore",
+            "example": "example-value"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/PlanList"}
+                "schema": {
+                  "$ref": "#/components/schemas/PlanList"
+                },
+                "examples": {
+                  "Getcusplans200Example": {
+                    "summary": "Default getcusplans 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {
+                        "ID": 42,
+                        "part_number": "example-value",
+                        "rev": "example-value",
+                        "part_description": "example-value",
+                        "operation": "example-value",
+                        "project_identifier": "example-value",
+                        "status": "Inactive",
+                        "version": 3.14,
+                        "version_status": "Released",
+                        "approval_status": "Assigned",
+                        "customer_name": "example-value",
+                        "supplier_name": "example-value",
+                        "supplier_number": "example-value",
+                        "is_tabulated": true,
+                        "is_spec_lib": true,
+                        "created_by_name": "example-value",
+                        "created_on": "2025-03-15T14:30:00Z",
+                        "updated_on": "2025-03-15T14:30:00Z"
+                      }
+                    ]
+                  }
+                }
               }
             },
             "description": "Returns a list of plans, most recently updated first. Utilize paging query parameters to query older plans. By default the 100 most recent are returned."
           },
-          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
-          "401": { "$ref": "#/components/responses/401"}
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
@@ -3643,11 +5089,12 @@
         "tags": [
           "Customers"
         ],
-        "summary": "Gets a detailed Customer plan record.",
+        "summary": "1Factory Gets a Detailed Customer Plan Record.",
         "description": "Returns the specified plan record, including specifications.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/planID"
+            "$ref": "#/components/parameters/planID",
+            "example": "example-value"
           }
         ],
         "responses": {
@@ -3656,6 +5103,35 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlanDetail"
+                },
+                "examples": {
+                  "GetcusplansplanId200Example": {
+                    "summary": "Default getcusplansplan_id 200 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "ID": 42,
+                      "part_number": "example-value",
+                      "rev": "example-value",
+                      "part_description": "example-value",
+                      "operation": "example-value",
+                      "project_identifier": "example-value",
+                      "status": "Inactive",
+                      "version": 3.14,
+                      "version_status": "Released",
+                      "approval_status": "Approved",
+                      "customer_name": "example-value",
+                      "supplier_name": "example-value",
+                      "supplier_number": "example-value",
+                      "is_tabulated": true,
+                      "is_spec_lib": true,
+                      "created_by_name": "example-value",
+                      "created_on": "2025-03-15T14:30:00Z",
+                      "updated_on": "2025-03-15T14:30:00Z",
+                      "specifications": [
+                        "example-value"
+                      ]
+                    }
+                  }
                 }
               }
             },
@@ -3671,7 +5147,9 @@
             "description": "Plan does not exist.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
                 "example": {
                   "code": "FAC-20",
                   "message": "Not found: Customer Plan '12345' does not exist."
@@ -3679,37 +5157,128 @@
               }
             }
           }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/cus/inspections": {
       "get": {
-        "tags": ["Customers"],
-        "summary": "Gets a list of inspections shared with your organization by your customers.",
+        "tags": [
+          "Customers"
+        ],
+        "summary": "1Factory Gets a List of Inspections Shared with Your Organization by Your Customers.",
         "description": "The list of customer inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
         "parameters": [
-          { "$ref": "#/components/parameters/page" },
-          { "$ref": "#/components/parameters/pageSize" },
-          { "$ref": "#/components/parameters/part_number" },
-          { "$ref": "#/components/parameters/rev" },
-          { "$ref": "#/components/parameters/inspIdent1" },
-          { "$ref": "#/components/parameters/inspIdent2" },
-          { "$ref": "#/components/parameters/customer"},
-          { "$ref": "#/components/parameters/inspectionStatus" },
-          { "$ref": "#/components/parameters/closedAfter"},
-          { "$ref": "#/components/parameters/reviewStatus" }
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/part_number",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/rev",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent1",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent2",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/customer",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspectionStatus",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/reviewStatus",
+            "example": "example-value"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/InspectionList"}
+                "schema": {
+                  "$ref": "#/components/schemas/InspectionList"
+                },
+                "examples": {
+                  "Getcusinspections200Example": {
+                    "summary": "Default getcusinspections 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {
+                        "ID": 42,
+                        "insp_ident_1": "example-value",
+                        "insp_ident_2": "example-value",
+                        "insp_ident_3": "example-value",
+                        "part_number": "example-value",
+                        "rev": "example-value",
+                        "part_description": "example-value",
+                        "operation": "example-value",
+                        "customer_name": "example-value",
+                        "supplier_name": "example-value",
+                        "supplier_number": "example-value",
+                        "project_identifier": "example-value",
+                        "site": "example-value",
+                        "created_by_name": "example-value",
+                        "created_on": "2025-03-15T14:30:00Z",
+                        "in_spec_pct": 3.14,
+                        "inspection_status": "Rejected",
+                        "inspected_by_name": "example-value",
+                        "inspected_on": "2025-03-15T14:30:00Z",
+                        "review_status": "Reviewed",
+                        "reviewed_by_name": "example-value",
+                        "reviewed_on": "2025-03-15T14:30:00Z",
+                        "notes": "example-value",
+                        "ncrs": [
+                          "example-value"
+                        ],
+                        "updated_on": "2025-03-15T14:30:00Z",
+                        "closed_on": "2025-03-15T14:30:00Z",
+                        "inspection_type": "example-value",
+                        "machines": [
+                          "example-value"
+                        ],
+                        "lot_size": 42,
+                        "parts_passed": 3.14,
+                        "parts_failed": 3.14
+                      }
+                    ]
+                  }
+                }
               }
             },
             "description": "Returns a list of inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
           },
-          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
-          "401": { "$ref": "#/components/responses/401"}
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
@@ -3718,11 +5287,12 @@
         "tags": [
           "Customers"
         ],
-        "summary": "Gets a detailed customer inspection record.",
+        "summary": "1Factory Gets a Detailed Customer Inspection Record.",
         "description": "Returns the specified inspection record, including measurement data.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/inspectionID"
+            "$ref": "#/components/parameters/inspectionID",
+            "example": "example-value"
           }
         ],
         "responses": {
@@ -3731,6 +5301,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/InspectionDetail"
+                },
+                "examples": {
+                  "GetcusinspectionsinspectionId200Example": {
+                    "summary": "Default getcusinspectionsinspection_id 200 response",
+                    "x-microcks-default": true,
+                    "value": {}
+                  }
                 }
               }
             },
@@ -3746,7 +5323,9 @@
             "description": "Inspection does not exist.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
                 "example": {
                   "code": "FAC-20",
                   "message": "Not found: Customer Inspection '12345' does not exist."
@@ -3754,52 +5333,170 @@
               }
             }
           }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/mfg/fais": {
       "get": {
-        "tags": ["Manufacturing"],
-        "summary": "Gets a list of manufacturing first-article inspections for your organization.",
+        "tags": [
+          "Manufacturing"
+        ],
+        "summary": "1Factory Gets a List of Manufacturing First-article Inspections for Your Organization.",
         "description": "The list of manufacturing first-article inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
         "parameters": [
-          { "$ref": "#/components/parameters/page" },
-          { "$ref": "#/components/parameters/pageSize" },
-          { "$ref": "#/components/parameters/part_number" },
-          { "$ref": "#/components/parameters/rev" },
-          { "$ref": "#/components/parameters/operation" },
-          { "$ref": "#/components/parameters/inspIdent1" },
-          { "$ref": "#/components/parameters/inspIdent2" },
-          { "$ref": "#/components/parameters/customer"},
-          { "$ref": "#/components/parameters/project_identifier"},
-          { "$ref": "#/components/parameters/site"},
-          { "$ref": "#/components/parameters/faiType" },
-          { "$ref": "#/components/parameters/inspectionStatus" },
-          { "$ref": "#/components/parameters/closedAfter"},
-          { "$ref": "#/components/parameters/reviewStatus" }
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/part_number",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/rev",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/operation",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent1",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent2",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/customer",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/project_identifier",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/site",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/faiType",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspectionStatus",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/reviewStatus",
+            "example": "example-value"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/FaiList"}
+                "schema": {
+                  "$ref": "#/components/schemas/FaiList"
+                },
+                "examples": {
+                  "Getmfgfais200Example": {
+                    "summary": "Default getmfgfais 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {
+                        "ID": 42,
+                        "insp_ident_1": "example-value",
+                        "insp_ident_2": "example-value",
+                        "insp_ident_3": "example-value",
+                        "part_number": "example-value",
+                        "rev": "example-value",
+                        "part_description": "example-value",
+                        "operation": "example-value",
+                        "customer_name": "example-value",
+                        "supplier_name": "example-value",
+                        "supplier_number": "example-value",
+                        "project_identifier": "example-value",
+                        "site": "example-value",
+                        "created_by_name": "example-value",
+                        "created_on": "2025-03-15T14:30:00Z",
+                        "in_spec_pct": 3.14,
+                        "inspection_status": "Accepted",
+                        "inspected_by_name": "example-value",
+                        "inspected_on": "2025-03-15T14:30:00Z",
+                        "review_status": "Reviewed",
+                        "reviewed_by_name": "example-value",
+                        "reviewed_on": "2025-03-15T14:30:00Z",
+                        "notes": "example-value",
+                        "ncrs": [
+                          "example-value"
+                        ],
+                        "updated_on": "2025-03-15T14:30:00Z",
+                        "closed_on": "2025-03-15T14:30:00Z",
+                        "fai_type": "Standard",
+                        "number_of_parts": 42
+                      }
+                    ]
+                  }
+                }
               }
             },
             "description": "Returns a list of first-article inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
           },
-          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
-          "401": { "$ref": "#/components/responses/401"}
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       },
       "post": {
-        "tags": ["Manufacturing"],
-        "summary": "Creates a new manufacturing first-article inspection for your organization.",
+        "tags": [
+          "Manufacturing"
+        ],
+        "summary": "1Factory Creates a New Manufacturing First-article Inspection for Your Organization.",
         "description": "A new manufacturing first-article inspection is created, ready for inspection data to be entered. \n\nThe plan used by the inspection is identified by part number and rev. An active version of a Plan for the specified part must exist when creating the inspection. \n\nThe inspection is identified by its inspection identifiers and inspection type. A unique combination of work order identifiers and inspection type must be specified when creating a new inspection. If an inspection already exists with the specified identifiers and type, an error will be returned.",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {"$ref": "#/components/schemas/NewFai"}
+              "schema": {
+                "$ref": "#/components/schemas/NewFai"
+              },
+              "examples": {
+                "PostmfgfaisRequestExample": {
+                  "summary": "Default postmfgfais request",
+                  "x-microcks-default": true,
+                  "value": {
+                    "insp_ident_1": "example-value",
+                    "insp_ident_2": "example-value",
+                    "part_number": "example-value",
+                    "rev": "example-value",
+                    "fai_type": "AS9102",
+                    "number_of_parts": 42,
+                    "customer_name": "example-value",
+                    "supplier_name": "example-value"
+                  }
+                }
+              }
             }
           }
         },
@@ -3807,7 +5504,47 @@
           "201": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Fai"}
+                "schema": {
+                  "$ref": "#/components/schemas/Fai"
+                },
+                "examples": {
+                  "Postmfgfais201Example": {
+                    "summary": "Default postmfgfais 201 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "ID": 42,
+                      "insp_ident_1": "example-value",
+                      "insp_ident_2": "example-value",
+                      "insp_ident_3": "example-value",
+                      "part_number": "example-value",
+                      "rev": "example-value",
+                      "part_description": "example-value",
+                      "operation": "example-value",
+                      "customer_name": "example-value",
+                      "supplier_name": "example-value",
+                      "supplier_number": "example-value",
+                      "project_identifier": "example-value",
+                      "site": "example-value",
+                      "created_by_name": "example-value",
+                      "created_on": "2025-03-15T14:30:00Z",
+                      "in_spec_pct": 3.14,
+                      "inspection_status": "Pending",
+                      "inspected_by_name": "example-value",
+                      "inspected_on": "2025-03-15T14:30:00Z",
+                      "review_status": "Pending",
+                      "reviewed_by_name": "example-value",
+                      "reviewed_on": "2025-03-15T14:30:00Z",
+                      "notes": "example-value",
+                      "ncrs": [
+                        "example-value"
+                      ],
+                      "updated_on": "2025-03-15T14:30:00Z",
+                      "closed_on": "2025-03-15T14:30:00Z",
+                      "fai_type": "AS9102",
+                      "number_of_parts": 42
+                    }
+                  }
+                }
               }
             },
             "description": "Created. Successfully created first-article inspection entry is returned."
@@ -3826,18 +5563,27 @@
               }
             }
           },
-          "401": { "$ref": "#/components/responses/401"}
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/mfg/fais/{inspection_id}": {
       "get": {
-        "tags": ["Manufacturing"],
-        "summary": "Gets a detailed manufacturing first-article inspection record.",
+        "tags": [
+          "Manufacturing"
+        ],
+        "summary": "1Factory Gets a Detailed Manufacturing First-article Inspection Record.",
         "description": "Returns the specified first-article inspection record, including measurement data.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/inspectionID"
+            "$ref": "#/components/parameters/inspectionID",
+            "example": "example-value"
           }
         ],
         "responses": {
@@ -3846,6 +5592,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FaiDetail"
+                },
+                "examples": {
+                  "GetmfgfaisinspectionId200Example": {
+                    "summary": "Default getmfgfaisinspection_id 200 response",
+                    "x-microcks-default": true,
+                    "value": {}
+                  }
                 }
               }
             },
@@ -3861,7 +5614,9 @@
             "description": "Inspection does not exist.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
                 "example": {
                   "code": "FAC-20",
                   "message": "Not found: Manufacturing FAI '12345' does not exist."
@@ -3869,51 +5624,166 @@
               }
             }
           }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/rec/fais": {
       "get": {
-        "tags": ["Receiving"],
-        "summary": "Gets a list of receiving first-article inspections for your organization.",
+        "tags": [
+          "Receiving"
+        ],
+        "summary": "1Factory Gets a List of Receiving First-article Inspections for Your Organization.",
         "description": "The list of receiving first-article inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
         "parameters": [
-          { "$ref": "#/components/parameters/page" },
-          { "$ref": "#/components/parameters/pageSize" },
-          { "$ref": "#/components/parameters/part_number" },
-          { "$ref": "#/components/parameters/rev" },
-          { "$ref": "#/components/parameters/inspIdent1" },
-          { "$ref": "#/components/parameters/inspIdent2" },
-          { "$ref": "#/components/parameters/supplier"},
-          { "$ref": "#/components/parameters/project_identifier"},
-          { "$ref": "#/components/parameters/site"},
-          { "$ref": "#/components/parameters/faiType" },
-          { "$ref": "#/components/parameters/inspectionStatus" },
-          { "$ref": "#/components/parameters/closedAfter"},
-          { "$ref": "#/components/parameters/reviewStatus" }
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/part_number",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/rev",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent1",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent2",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/supplier",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/project_identifier",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/site",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/faiType",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspectionStatus",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/reviewStatus",
+            "example": "example-value"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/FaiList"}
+                "schema": {
+                  "$ref": "#/components/schemas/FaiList"
+                },
+                "examples": {
+                  "Getrecfais200Example": {
+                    "summary": "Default getrecfais 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {
+                        "ID": 42,
+                        "insp_ident_1": "example-value",
+                        "insp_ident_2": "example-value",
+                        "insp_ident_3": "example-value",
+                        "part_number": "example-value",
+                        "rev": "example-value",
+                        "part_description": "example-value",
+                        "operation": "example-value",
+                        "customer_name": "example-value",
+                        "supplier_name": "example-value",
+                        "supplier_number": "example-value",
+                        "project_identifier": "example-value",
+                        "site": "example-value",
+                        "created_by_name": "example-value",
+                        "created_on": "2025-03-15T14:30:00Z",
+                        "in_spec_pct": 3.14,
+                        "inspection_status": "Accepted",
+                        "inspected_by_name": "example-value",
+                        "inspected_on": "2025-03-15T14:30:00Z",
+                        "review_status": "Pending",
+                        "reviewed_by_name": "example-value",
+                        "reviewed_on": "2025-03-15T14:30:00Z",
+                        "notes": "example-value",
+                        "ncrs": [
+                          "example-value"
+                        ],
+                        "updated_on": "2025-03-15T14:30:00Z",
+                        "closed_on": "2025-03-15T14:30:00Z",
+                        "fai_type": "Standard",
+                        "number_of_parts": 42
+                      }
+                    ]
+                  }
+                }
               }
             },
             "description": "Returns a list of first-article inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
           },
-          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
-          "401": { "$ref": "#/components/responses/401"}
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       },
       "post": {
-        "tags": ["Receiving"],
-        "summary": "Creates a new receiving first-article inspection for your organization.",
+        "tags": [
+          "Receiving"
+        ],
+        "summary": "1Factory Creates a New Receiving First-article Inspection for Your Organization.",
         "description": "A new receiving first-article inspection is created, ready for inspection data to be entered. \n\nThe plan used by the inspection is identified by part number and rev. An active version of a Plan for the specified part must exist when creating the inspection. \n\nThe inspection is identified by its inspection identifiers and inspection type. A unique combination of work order identifiers and inspection type must be specified when creating a new inspection. If an inspection already exists with the specified identifiers and type, an error will be returned.",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {"$ref": "#/components/schemas/NewFai"}
+              "schema": {
+                "$ref": "#/components/schemas/NewFai"
+              },
+              "examples": {
+                "PostrecfaisRequestExample": {
+                  "summary": "Default postrecfais request",
+                  "x-microcks-default": true,
+                  "value": {
+                    "insp_ident_1": "example-value",
+                    "insp_ident_2": "example-value",
+                    "part_number": "example-value",
+                    "rev": "example-value",
+                    "fai_type": "Standard",
+                    "number_of_parts": 42,
+                    "customer_name": "example-value",
+                    "supplier_name": "example-value"
+                  }
+                }
+              }
             }
           }
         },
@@ -3921,7 +5791,47 @@
           "201": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Fai"}
+                "schema": {
+                  "$ref": "#/components/schemas/Fai"
+                },
+                "examples": {
+                  "Postrecfais201Example": {
+                    "summary": "Default postrecfais 201 response",
+                    "x-microcks-default": true,
+                    "value": {
+                      "ID": 42,
+                      "insp_ident_1": "example-value",
+                      "insp_ident_2": "example-value",
+                      "insp_ident_3": "example-value",
+                      "part_number": "example-value",
+                      "rev": "example-value",
+                      "part_description": "example-value",
+                      "operation": "example-value",
+                      "customer_name": "example-value",
+                      "supplier_name": "example-value",
+                      "supplier_number": "example-value",
+                      "project_identifier": "example-value",
+                      "site": "example-value",
+                      "created_by_name": "example-value",
+                      "created_on": "2025-03-15T14:30:00Z",
+                      "in_spec_pct": 3.14,
+                      "inspection_status": "Pending",
+                      "inspected_by_name": "example-value",
+                      "inspected_on": "2025-03-15T14:30:00Z",
+                      "review_status": "Reviewed",
+                      "reviewed_by_name": "example-value",
+                      "reviewed_on": "2025-03-15T14:30:00Z",
+                      "notes": "example-value",
+                      "ncrs": [
+                        "example-value"
+                      ],
+                      "updated_on": "2025-03-15T14:30:00Z",
+                      "closed_on": "2025-03-15T14:30:00Z",
+                      "fai_type": "AS9102",
+                      "number_of_parts": 42
+                    }
+                  }
+                }
               }
             },
             "description": "Created. Successfully created first-article inspection entry is returned."
@@ -3940,18 +5850,27 @@
               }
             }
           },
-          "401": { "$ref": "#/components/responses/401"}
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/rec/fais/{inspection_id}": {
       "get": {
-        "tags": ["Receiving"],
-        "summary": "Gets a detailed receiving first-article inspection record.",
+        "tags": [
+          "Receiving"
+        ],
+        "summary": "1Factory Gets a Detailed Receiving First-article Inspection Record.",
         "description": "Returns the specified first-article inspection record, including measurement data.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/inspectionID"
+            "$ref": "#/components/parameters/inspectionID",
+            "example": "example-value"
           }
         ],
         "responses": {
@@ -3960,6 +5879,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FaiDetail"
+                },
+                "examples": {
+                  "GetrecfaisinspectionId200Example": {
+                    "summary": "Default getrecfaisinspection_id 200 response",
+                    "x-microcks-default": true,
+                    "value": {}
+                  }
                 }
               }
             },
@@ -3975,7 +5901,9 @@
             "description": "Inspection does not exist.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
                 "example": {
                   "code": "FAC-20",
                   "message": "Not found: Receiving FAI '12345' does not exist."
@@ -3983,154 +5911,363 @@
               }
             }
           }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
-    "/qms/ncrs" : {
-      "get" : {
-        "tags" : [ "QMS" ],
-        "summary" : "Gets a list of NCRs for your organization",
-        "description" : "The list of NCRs can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows NCR objects returned. By default, the first 100 NCRs are returned.",
-        "parameters" : [
-          { "$ref" : "#/components/parameters/page" },
-          { "$ref" : "#/components/parameters/pageSize" },
-          { "$ref" : "#/components/parameters/createdAfter" },
-          { "$ref" : "#/components/parameters/createdBefore" },
-          { "$ref" : "#/components/parameters/updatedAfter" },
-          { "$ref" : "#/components/parameters/updatedBefore" },
-          { "$ref" : "#/components/parameters/closedAfter" },
-          { "$ref" : "#/components/parameters/closedBefore" }
-        ],
-        "responses" : {
-          "200" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/NcrList"
-                }
-              }
-            },
-            "description" : "Returns a list of NCRs, most recently created first. Utilize paging query parameters to query older NCRs. By default the 100 most recent are returned."
-          },
-          "400" : {
-            "$ref" : "#/components/responses/InvalidQueryParam"
-          },
-          "401" : {
-            "$ref" : "#/components/responses/401"
-          }
-        }
-      }
-    },
-    "/qms/capas" : {
-      "get" : {
-        "tags" : [ "QMS" ],
-        "summary" : "Gets a list of CAPAs for your organization",
-        "description" : "The list of CAPAs can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows CAPA objects returned. By default, the first 100 CAPAs are returned.",
-        "parameters" : [
-          { "$ref" : "#/components/parameters/page" },
-          { "$ref" : "#/components/parameters/pageSize" },
-          { "$ref" : "#/components/parameters/createdAfter" },
-          { "$ref" : "#/components/parameters/createdBefore" },
-          { "$ref" : "#/components/parameters/updatedAfter" },
-          { "$ref" : "#/components/parameters/updatedBefore" },
-          { "$ref" : "#/components/parameters/closedAfter" },
-          { "$ref" : "#/components/parameters/closedBefore" }
-        ],
-        "responses" : {
-          "200" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/CapaList"
-                }
-              }
-            },
-            "description" : "Returns a list of CAPAs, most recently created first. Utilize paging query parameters to query older CAPAs. By default the 100 most recent are returned."
-          },
-          "400" : {
-            "$ref" : "#/components/responses/InvalidQueryParam"
-          },
-          "401" : {
-            "$ref" : "#/components/responses/401"
-          }
-        }
-      }
-    },
-    "/qms/complaints" : {
-      "get" : {
-        "tags" : [ "QMS" ],
-        "summary" : "Gets a list of Complaints for your organization",
-        "description" : "The list of Complaints can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Complaint objects returned. By default, the first 100 Complaints are returned.",
-        "parameters" : [
-          { "$ref" : "#/components/parameters/page" },
-          { "$ref" : "#/components/parameters/pageSize" },
-          { "$ref" : "#/components/parameters/createdAfter" },
-          { "$ref" : "#/components/parameters/createdBefore" },
-          { "$ref" : "#/components/parameters/updatedAfter" },
-          { "$ref" : "#/components/parameters/updatedBefore" },
-          { "$ref" : "#/components/parameters/closedAfter" },
-          { "$ref" : "#/components/parameters/closedBefore" }
-        ],
-        "responses" : {
-          "200" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ComplaintList"
-                }
-              }
-            },
-            "description" : "Returns a list of Complaints, most recently created first. Utilize paging query parameters to query older Complaints. By default the 100 most recent are returned."
-          },
-          "400" : {
-            "$ref" : "#/components/responses/InvalidQueryParam"
-          },
-          "401" : {
-            "$ref" : "#/components/responses/401"
-          }
-        }
-      }
-    },
-    "/sup/fais": {
+    "/qms/ncrs": {
       "get": {
-        "tags": ["Suppliers"],
-        "summary": "Gets a list of first-article inspections shared with your organization by your suppliers.",
-        "description": "The list of supplier first-article inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
+        "tags": [
+          "QMS"
+        ],
+        "summary": "1Factory Gets a List of NCRs for Your Organization",
+        "description": "The list of NCRs can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows NCR objects returned. By default, the first 100 NCRs are returned.",
         "parameters": [
-          { "$ref": "#/components/parameters/page" },
-          { "$ref": "#/components/parameters/pageSize" },
-          { "$ref": "#/components/parameters/part_number" },
-          { "$ref": "#/components/parameters/rev" },
-          { "$ref": "#/components/parameters/inspIdent1" },
-          { "$ref": "#/components/parameters/inspIdent2" },
-          { "$ref": "#/components/parameters/supplier"},
-          { "$ref": "#/components/parameters/faiType" },
-          { "$ref": "#/components/parameters/inspectionStatus" },
-          { "$ref": "#/components/parameters/closedAfter"},
-          { "$ref": "#/components/parameters/reviewStatus" }
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedBefore",
+            "example": "example-value"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/FaiList"}
+                "schema": {
+                  "$ref": "#/components/schemas/NcrList"
+                },
+                "examples": {
+                  "Getqmsncrs200Example": {
+                    "summary": "Default getqmsncrs 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {}
+                    ]
+                  }
+                }
+              }
+            },
+            "description": "Returns a list of NCRs, most recently created first. Utilize paging query parameters to query older NCRs. By default the 100 most recent are returned."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/qms/capas": {
+      "get": {
+        "tags": [
+          "QMS"
+        ],
+        "summary": "1Factory Gets a List of CAPAs for Your Organization",
+        "description": "The list of CAPAs can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows CAPA objects returned. By default, the first 100 CAPAs are returned.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedBefore",
+            "example": "example-value"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CapaList"
+                },
+                "examples": {
+                  "Getqmscapas200Example": {
+                    "summary": "Default getqmscapas 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {}
+                    ]
+                  }
+                }
+              }
+            },
+            "description": "Returns a list of CAPAs, most recently created first. Utilize paging query parameters to query older CAPAs. By default the 100 most recent are returned."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/qms/complaints": {
+      "get": {
+        "tags": [
+          "QMS"
+        ],
+        "summary": "1Factory Gets a List of Complaints for Your Organization",
+        "description": "The list of Complaints can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Complaint objects returned. By default, the first 100 Complaints are returned.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/createdBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/updatedBefore",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedBefore",
+            "example": "example-value"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplaintList"
+                },
+                "examples": {
+                  "Getqmscomplaints200Example": {
+                    "summary": "Default getqmscomplaints 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {}
+                    ]
+                  }
+                }
+              }
+            },
+            "description": "Returns a list of Complaints, most recently created first. Utilize paging query parameters to query older Complaints. By default the 100 most recent are returned."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
+        }
+      }
+    },
+    "/sup/fais": {
+      "get": {
+        "tags": [
+          "Suppliers"
+        ],
+        "summary": "1Factory Gets a List of First-article Inspections Shared with Your Organization by Your Suppliers.",
+        "description": "The list of supplier first-article inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/part_number",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/rev",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent1",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent2",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/supplier",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/faiType",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspectionStatus",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/reviewStatus",
+            "example": "example-value"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FaiList"
+                },
+                "examples": {
+                  "Getsupfais200Example": {
+                    "summary": "Default getsupfais 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {
+                        "ID": 42,
+                        "insp_ident_1": "example-value",
+                        "insp_ident_2": "example-value",
+                        "insp_ident_3": "example-value",
+                        "part_number": "example-value",
+                        "rev": "example-value",
+                        "part_description": "example-value",
+                        "operation": "example-value",
+                        "customer_name": "example-value",
+                        "supplier_name": "example-value",
+                        "supplier_number": "example-value",
+                        "project_identifier": "example-value",
+                        "site": "example-value",
+                        "created_by_name": "example-value",
+                        "created_on": "2025-03-15T14:30:00Z",
+                        "in_spec_pct": 3.14,
+                        "inspection_status": "Accepted",
+                        "inspected_by_name": "example-value",
+                        "inspected_on": "2025-03-15T14:30:00Z",
+                        "review_status": "Pending",
+                        "reviewed_by_name": "example-value",
+                        "reviewed_on": "2025-03-15T14:30:00Z",
+                        "notes": "example-value",
+                        "ncrs": [
+                          "example-value"
+                        ],
+                        "updated_on": "2025-03-15T14:30:00Z",
+                        "closed_on": "2025-03-15T14:30:00Z",
+                        "fai_type": "Standard",
+                        "number_of_parts": 42
+                      }
+                    ]
+                  }
+                }
               }
             },
             "description": "Returns a list of first-article inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
           },
-          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
-          "401": { "$ref": "#/components/responses/401"}
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/sup/fais/{inspection_id}": {
       "get": {
-        "tags": ["Suppliers"],
-        "summary": "Gets a detailed supplier first-article inspection record.",
+        "tags": [
+          "Suppliers"
+        ],
+        "summary": "1Factory Gets a Detailed Supplier First-article Inspection Record.",
         "description": "Returns the specified first-article inspection record, including measurement data.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/inspectionID"
+            "$ref": "#/components/parameters/inspectionID",
+            "example": "example-value"
           }
         ],
         "responses": {
@@ -4139,6 +6276,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FaiDetail"
+                },
+                "examples": {
+                  "GetsupfaisinspectionId200Example": {
+                    "summary": "Default getsupfaisinspection_id 200 response",
+                    "x-microcks-default": true,
+                    "value": {}
+                  }
                 }
               }
             },
@@ -4154,7 +6298,9 @@
             "description": "Inspection does not exist.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
                 "example": {
                   "code": "FAC-20",
                   "message": "Not found: Supplier FAI '12345' does not exist."
@@ -4162,49 +6308,141 @@
               }
             }
           }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/cus/fais": {
       "get": {
-        "tags": ["Customers"],
-        "summary": "Gets a list of first-article inspections shared with your organization by your customers.",
+        "tags": [
+          "Customers"
+        ],
+        "summary": "1Factory Gets a List of First-article Inspections Shared with Your Organization by Your Customers.",
         "description": "The list of customer first-article inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
         "parameters": [
-          { "$ref": "#/components/parameters/page" },
-          { "$ref": "#/components/parameters/pageSize" },
-          { "$ref": "#/components/parameters/part_number" },
-          { "$ref": "#/components/parameters/rev" },
-          { "$ref": "#/components/parameters/inspIdent1" },
-          { "$ref": "#/components/parameters/inspIdent2" },
-          { "$ref": "#/components/parameters/customer"},
-          { "$ref": "#/components/parameters/faiType" },
-          { "$ref": "#/components/parameters/inspectionStatus" },
-          { "$ref": "#/components/parameters/closedAfter"},
-          { "$ref": "#/components/parameters/reviewStatus" }
+          {
+            "$ref": "#/components/parameters/page",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/pageSize",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/part_number",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/rev",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent1",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspIdent2",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/customer",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/faiType",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/inspectionStatus",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/closedAfter",
+            "example": "example-value"
+          },
+          {
+            "$ref": "#/components/parameters/reviewStatus",
+            "example": "example-value"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/FaiList"}
+                "schema": {
+                  "$ref": "#/components/schemas/FaiList"
+                },
+                "examples": {
+                  "Getcusfais200Example": {
+                    "summary": "Default getcusfais 200 response",
+                    "x-microcks-default": true,
+                    "value": [
+                      {
+                        "ID": 42,
+                        "insp_ident_1": "example-value",
+                        "insp_ident_2": "example-value",
+                        "insp_ident_3": "example-value",
+                        "part_number": "example-value",
+                        "rev": "example-value",
+                        "part_description": "example-value",
+                        "operation": "example-value",
+                        "customer_name": "example-value",
+                        "supplier_name": "example-value",
+                        "supplier_number": "example-value",
+                        "project_identifier": "example-value",
+                        "site": "example-value",
+                        "created_by_name": "example-value",
+                        "created_on": "2025-03-15T14:30:00Z",
+                        "in_spec_pct": 3.14,
+                        "inspection_status": "Pending",
+                        "inspected_by_name": "example-value",
+                        "inspected_on": "2025-03-15T14:30:00Z",
+                        "review_status": "Pending",
+                        "reviewed_by_name": "example-value",
+                        "reviewed_on": "2025-03-15T14:30:00Z",
+                        "notes": "example-value",
+                        "ncrs": [
+                          "example-value"
+                        ],
+                        "updated_on": "2025-03-15T14:30:00Z",
+                        "closed_on": "2025-03-15T14:30:00Z",
+                        "fai_type": "Standard",
+                        "number_of_parts": 42
+                      }
+                    ]
+                  }
+                }
               }
             },
             "description": "Returns a list of first-article inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned."
           },
-          "400": { "$ref": "#/components/responses/InvalidQueryParam"},
-          "401": { "$ref": "#/components/responses/401"}
+          "400": {
+            "$ref": "#/components/responses/InvalidQueryParam"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     },
     "/cus/fais/{inspection_id}": {
       "get": {
-        "tags": ["Customers"],
-        "summary": "Gets a detailed customer first-article inspection record.",
+        "tags": [
+          "Customers"
+        ],
+        "summary": "1Factory Gets a Detailed Customer First-article Inspection Record.",
         "description": "Returns the specified first-article inspection record, including measurement data.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/inspectionID"
+            "$ref": "#/components/parameters/inspectionID",
+            "example": "example-value"
           }
         ],
         "responses": {
@@ -4213,6 +6451,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FaiDetail"
+                },
+                "examples": {
+                  "GetcusfaisinspectionId200Example": {
+                    "summary": "Default getcusfaisinspection_id 200 response",
+                    "x-microcks-default": true,
+                    "value": {}
+                  }
                 }
               }
             },
@@ -4228,7 +6473,9 @@
             "description": "Inspection does not exist.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
                 "example": {
                   "code": "FAC-20",
                   "message": "Not found: Customer FAI '12345' does not exist."
@@ -4236,6 +6483,10 @@
               }
             }
           }
+        },
+        "x-microcks-operation": {
+          "delay": 0,
+          "dispatcher": "FALLBACK"
         }
       }
     }

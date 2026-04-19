@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-part-number-schema.json",
+  "title": "part_number",
+  "description": "Part number. Together with rev, uniquely identifies a part.",
+  "type": "string",
+  "minLength": 1,
+  "maxLength": 255,
+  "example": "10-12345-12"
+}

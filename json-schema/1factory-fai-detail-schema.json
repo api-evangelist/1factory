@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-fai-detail-schema.json",
+  "title": "FaiDetail",
+  "description": "Detailed first-article inspection data, including feature specifications and measurement data.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Fai"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "specifications": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/components/schemas/Specification"
+          }
+        },
+        "part_data": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "$ref": "#/components/schemas/PartData"
+          }
+        }
+      }
+    }
+  ]
+}

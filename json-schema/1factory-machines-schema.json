@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-machines-schema.json",
+  "title": "machines",
+  "description": "List of machines for the inspection. Only for manufacturing inspections. Entries in this list must match the Mfg. Resources - Machines LOV configured for your organization.",
+  "type": "array",
+  "items": {
+    "type": "string",
+    "nullable": false,
+    "minItems": 0
+  }
+}

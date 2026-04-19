@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-plan-list-structure.json",
+  "name": "PlanList",
+  "description": "PlanList schema from 1Factory API",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/Plan"
+  },
+  "minItems": 0,
+  "maxItems": 500
+}

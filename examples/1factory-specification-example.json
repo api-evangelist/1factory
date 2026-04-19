@@ -1,0 +1,21 @@
+{
+  "bln_no": "1",
+  "sheet_zone": "1 : B1",
+  "place": 1,
+  "characteristic": "True position",
+  "characteristic_type": "GD&T",
+  "dimension_type": "STD",
+  "referenced_feature": "1",
+  "data_type": "NUM",
+  "nominal": 1.12,
+  "lower_spec_limit": 1.11,
+  "upper_spec_limit": 1.14,
+  "unit": "mm",
+  "descriptor_datum": "A",
+  "bonus_tolerance": "MMC",
+  "label": "COUNTERSINK",
+  "inspection_method": "CMM",
+  "sampling_rule": "1 in 10",
+  "operation": "OP10",
+  "is_key": true
+}

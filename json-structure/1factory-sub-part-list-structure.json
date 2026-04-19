@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-sub-part-list-structure.json",
+  "name": "SubPartList",
+  "description": "List of parts that make up this assembly. Each listed part must already exist as a Part Master entry.",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/AssemblyEntry"
+  },
+  "minItems": 1,
+  "example": [
+    {
+      "part_number": "12-54321-21",
+      "rev": "C",
+      "quantity": 4
+    },
+    {
+      "part_number": "12-54322-11",
+      "rev": "B",
+      "quantity": 2
+    }
+  ]
+}

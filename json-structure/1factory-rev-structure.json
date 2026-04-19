@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-rev-structure.json",
+  "name": "rev",
+  "description": "Part revision. Together with part number, uniquely identifies a part.",
+  "type": "string",
+  "maxLength": 255,
+  "example": "A"
+}

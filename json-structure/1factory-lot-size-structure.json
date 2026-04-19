@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-lot-size-structure.json",
+  "name": "lot_size",
+  "description": "Number of parts in lot being inspected",
+  "type": "int32",
+  "minimum": 0,
+  "example": 100
+}

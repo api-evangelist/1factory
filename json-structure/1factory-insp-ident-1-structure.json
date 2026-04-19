@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-insp-ident-1-structure.json",
+  "name": "insp_ident_1",
+  "description": "Primary identifier for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'. Must be unique for each entry when used in a Work Order List.",
+  "type": "string",
+  "minLength": 1,
+  "maxLength": 255,
+  "example": "PO-12345"
+}

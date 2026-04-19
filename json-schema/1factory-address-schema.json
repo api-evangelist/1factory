@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-address-schema.json",
+  "title": "Address",
+  "description": "Address schema from 1Factory API",
+  "type": "object",
+  "properties": {
+    "street": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 255,
+      "description": "Street address.",
+      "example": "Washington"
+    },
+    "city": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 100,
+      "description": "City name.",
+      "example": "Jefferson"
+    },
+    "state": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 50,
+      "description": "State or province.",
+      "example": "Il"
+    },
+    "postal_code": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 20,
+      "description": "Postal or ZIP code.",
+      "example": "60134"
+    },
+    "country": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 10,
+      "description": "Country code (ISO 3166-1 alpha-2 format recommended).",
+      "example": "US"
+    }
+  }
+}

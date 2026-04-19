@@ -1,0 +1,11 @@
+{
+  "grp_ident": "CAVITY1",
+  "row_ident": "SN100001",
+  "updated_on": "2021-07-16T17:53:41-08:00",
+  "measurements": [
+    {
+      "value": 1.1234,
+      "bonus": 0.02
+    }
+  ]
+}

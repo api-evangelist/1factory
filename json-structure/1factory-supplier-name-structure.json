@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-supplier-name-structure.json",
+  "name": "supplier_name",
+  "description": "The name of the supplier (for receiving or supplier inspections).",
+  "type": "string",
+  "example": "Acme Industries"
+}

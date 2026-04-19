@@ -1,0 +1,6 @@
+{
+  "inspection_type": "standard",
+  "inspection_method": "CMM",
+  "sampling_rule": "1 in 10",
+  "data_type": "NUM"
+}

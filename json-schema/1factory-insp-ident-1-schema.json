@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-insp-ident-1-schema.json",
+  "title": "insp_ident_1",
+  "description": "Primary identifier for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'. Must be unique for each entry when used in a Work Order List.",
+  "type": "string",
+  "minLength": 1,
+  "maxLength": 255,
+  "example": "PO-12345"
+}

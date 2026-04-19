@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-status-structure.json",
+  "name": "status",
+  "description": "The status of the object",
+  "type": "string",
+  "enum": [
+    "Active",
+    "Inactive"
+  ]
+}

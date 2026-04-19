@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-customer-name-structure.json",
+  "name": "customer_name",
+  "description": "The name of the customer (for manufacturing inspections).",
+  "type": "string",
+  "example": "Rocket Company"
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-insp-ident-3-structure.json",
+  "name": "insp_ident_3",
+  "description": "Tertiary identifier for an inspection, for example a Customer Purchase Order or Lot #. (Optional)",
+  "type": "string",
+  "minLength": 0,
+  "maxLength": 255,
+  "example": "1A"
+}

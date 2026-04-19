@@ -1,0 +1,227 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: 1Factory Quality Management
+  description: >-
+    Unified quality management workflow for 1Factory. Combines manufacturing inspections,
+    receiving inspections, supplier quality, customer quality, FAI, part master management,
+    and QMS records (NCRs, CAPAs, complaints) into a single workflow for quality engineers,
+    production managers, and supplier quality teams.
+  tags:
+    - Manufacturing
+    - Quality
+    - Inspections
+    - Suppliers
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      FACTORY_ORG_ID: FACTORY_ORG_ID
+      FACTORY_API_KEY: FACTORY_API_KEY
+
+capability:
+  consumes:
+    - import: 1factory
+      location: ./shared/1factory.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: 1factory-quality-api
+      description: "Unified REST API for 1Factory quality management workflows."
+      resources:
+        - path: /v1/part-masters
+          name: part-masters
+          description: "Manage part master records and assembly relationships."
+          operations:
+            - method: GET
+              name: list-part-masters
+              description: "List all part masters in the 1Factory account."
+              call: "1factory.get-partmasters"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: create-part-master
+              description: "Create or update a part master entry."
+              call: "1factory.put-partmasters"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/inspections
+          name: inspections
+          description: "Manufacturing, receiving, supplier, and customer inspections."
+          operations:
+            - method: GET
+              name: list-manufacturing-inspections
+              description: "List all manufacturing inspections."
+              call: "1factory.get-mfg-inspections"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: list-receiving-inspections
+              description: "List all receiving inspections."
+              call: "1factory.get-rec-inspections"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/qms
+          name: qms
+          description: "Quality Management System records including NCRs, CAPAs, and complaints."
+          operations:
+            - method: GET
+              name: list-ncrs
+              description: "List all non-conformance reports."
+              call: "1factory.get-qms-ncrs"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: list-capas
+              description: "List all corrective and preventive actions."
+              call: "1factory.get-qms-capas"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: list-complaints
+              description: "List all quality complaints."
+              call: "1factory.get-qms-complaints"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/suppliers
+          name: suppliers
+          description: "Supplier management and qualification tracking."
+          operations:
+            - method: GET
+              name: list-suppliers
+              description: "List all suppliers."
+              call: "1factory.get-sup"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/fai
+          name: fai
+          description: "First Article Inspection records."
+          operations:
+            - method: GET
+              name: list-manufacturing-fai
+              description: "List all manufacturing first article inspections."
+              call: "1factory.get-mfg-fais"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: 1factory-quality-mcp
+      transport: http
+      description: "MCP server for AI-assisted quality management using 1Factory APIs."
+      tools:
+        - name: list-part-masters
+          description: "List all part master records in the 1Factory account."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "1factory.get-partmasters"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-part-master
+          description: "Create or update a part master record."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "1factory.put-partmasters"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-manufacturing-inspections
+          description: "List all manufacturing inspections with optional filters."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "1factory.get-mfg-inspections"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-manufacturing-inspection
+          description: "Create a new manufacturing inspection record."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "1factory.post-mfg-inspections"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-receiving-inspections
+          description: "List all receiving inspections."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "1factory.get-rec-inspections"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-suppliers
+          description: "List all supplier records."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "1factory.get-sup"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-ncrs
+          description: "List all non-conformance reports for quality issue tracking."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "1factory.get-qms-ncrs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-capas
+          description: "List all corrective and preventive actions."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "1factory.get-qms-capas"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-complaints
+          description: "List all quality complaints from customers."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "1factory.get-qms-complaints"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-fai-manufacturing
+          description: "List all manufacturing first article inspections."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "1factory.get-mfg-fais"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-assembly-structure.json",
+  "name": "Assembly",
+  "description": "Assembly schema from 1Factory API",
+  "type": "object",
+  "properties": {
+    "part_number": {
+      "$ref": "#/components/schemas/part_number"
+    },
+    "rev": {
+      "$ref": "#/components/schemas/rev"
+    },
+    "sub_parts": {
+      "$ref": "#/components/schemas/SubPartList"
+    }
+  },
+  "required": [
+    "part_number",
+    "rev"
+  ]
+}

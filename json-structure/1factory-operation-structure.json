@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-operation-structure.json",
+  "name": "operation",
+  "description": "Operation of the inspection. No operation specified or an operation of 'All' indicates that an inspection is for all operations in the inspection Plan. (Only for manufacturing inspections, and if the 'Inspections by Op' configuration is enabled for your organization.)",
+  "type": "string",
+  "example": "OP 10"
+}

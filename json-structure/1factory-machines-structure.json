@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-machines-structure.json",
+  "name": "machines",
+  "description": "List of machines for the inspection. Only for manufacturing inspections. Entries in this list must match the Mfg. Resources - Machines LOV configured for your organization.",
+  "type": "array",
+  "items": {
+    "type": "string",
+    "nullable": false,
+    "minItems": 0
+  }
+}

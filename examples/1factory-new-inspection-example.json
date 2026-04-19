@@ -1,0 +1,9 @@
+{
+  "insp_ident_1": "example-value",
+  "insp_ident_2": "example-value",
+  "insp_ident_3": "example-value",
+  "part_number": "PART-001",
+  "rev": "example-value",
+  "inspection_type": "standard",
+  "lot_size": "example-value"
+}

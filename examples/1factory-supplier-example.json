@@ -1,0 +1,30 @@
+{
+  "ID": "abc123",
+  "name": "Example Item",
+  "vendor_code": "example-value",
+  "address": "example-value",
+  "supply_chain_manager": "example-value",
+  "supplier_quality_manager": "example-value",
+  "purchasing": "example-value",
+  "direct": false,
+  "indirect": false,
+  "strategic": false,
+  "small_business": false,
+  "organization_codes": [
+    "1001",
+    "1002"
+  ],
+  "commodity_codes": [
+    "Machined",
+    "Anodization"
+  ],
+  "qualifications": [
+    "example-value"
+  ],
+  "certifications": [
+    "example-value"
+  ],
+  "qualification_status": "Conditional",
+  "last_qualification_date": "2016-12-02T00:00:00-08:00",
+  "re_qualification_date": "2017-12-02T00:00:00-08:00"
+}

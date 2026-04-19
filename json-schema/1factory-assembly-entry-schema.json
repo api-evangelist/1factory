@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-assembly-entry-schema.json",
+  "title": "AssemblyEntry",
+  "description": "AssemblyEntry schema from 1Factory API",
+  "type": "object",
+  "properties": {
+    "part_number": {
+      "$ref": "#/components/schemas/part_number"
+    },
+    "rev": {
+      "$ref": "#/components/schemas/rev"
+    },
+    "quantity": {
+      "type": "number",
+      "nullable": false,
+      "minimum": 0,
+      "description": "Number of instances of this part in the assembly.",
+      "example": 4.0
+    }
+  },
+  "required": [
+    "part_number",
+    "rev",
+    "quantity"
+  ]
+}

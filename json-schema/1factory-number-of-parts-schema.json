@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-number-of-parts-schema.json",
+  "title": "number_of_parts",
+  "description": "Number of parts inspected.",
+  "type": "integer",
+  "format": "int32",
+  "minimum": 1,
+  "example": 3
+}

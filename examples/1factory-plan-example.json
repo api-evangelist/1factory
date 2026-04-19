@@ -1,0 +1,20 @@
+{
+  "ID": "abc123",
+  "part_number": "PART-001",
+  "rev": "example-value",
+  "part_description": "This is an example description.",
+  "operation": "example-value",
+  "project_identifier": "example-value",
+  "status": "active",
+  "version": 4,
+  "version_status": "Approval",
+  "approval_status": "Approved",
+  "customer_name": "Example Item",
+  "supplier_name": "Example Item",
+  "supplier_number": "12345",
+  "is_tabulated": false,
+  "is_spec_lib": false,
+  "created_by_name": "Example Item",
+  "created_on": "example-value",
+  "updated_on": "example-value"
+}

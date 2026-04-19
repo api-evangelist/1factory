@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-part-master-list-structure.json",
+  "name": "PartMasterList",
+  "description": "PartMasterList schema from 1Factory API",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/PartMaster"
+  },
+  "minItems": 0,
+  "maxItems": 500
+}

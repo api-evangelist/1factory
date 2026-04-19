@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-part-description-structure.json",
+  "name": "part_description",
+  "description": "Description of the part.",
+  "type": "string",
+  "maxLength": 255,
+  "example": "Three Lobe Shaft"
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-supplier-number-schema.json",
+  "title": "supplier_number",
+  "description": "The supplier number / vendor code (for receiving or supplier inspections).",
+  "type": "string",
+  "example": "S12345"
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-number-of-parts-structure.json",
+  "name": "number_of_parts",
+  "description": "Number of parts inspected.",
+  "type": "int32",
+  "minimum": 1,
+  "example": 3
+}

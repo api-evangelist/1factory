@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-updated-on-schema.json",
+  "title": "updated_on",
+  "description": "Date & time that an object was last updated.",
+  "type": "string",
+  "format": "date-time",
+  "example": "2021-07-17T12:14:42-08:00"
+}

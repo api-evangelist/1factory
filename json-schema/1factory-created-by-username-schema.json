@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-created-by-username-schema.json",
+  "title": "created_by_username",
+  "description": "Name of user that created the entity.",
+  "type": "string",
+  "example": "Oleg Nickolayev"
+}

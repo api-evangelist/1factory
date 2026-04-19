@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-inspection-type-schema.json",
+  "title": "inspection_type",
+  "description": "Type of inspection, as defined in your organization's Inspection Types List of Values",
+  "type": "string",
+  "example": "Final"
+}

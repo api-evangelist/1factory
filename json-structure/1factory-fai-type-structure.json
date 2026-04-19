@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-fai-type-structure.json",
+  "name": "fai_type",
+  "description": "Type of first-article inspection.",
+  "type": "string",
+  "enum": [
+    "Standard",
+    "AS9102"
+  ],
+  "example": "Standard"
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-customer-name-schema.json",
+  "title": "customer_name",
+  "description": "The name of the customer (for manufacturing inspections).",
+  "type": "string",
+  "example": "Rocket Company"
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-qualification-structure.json",
+  "name": "Qualification",
+  "description": "Qualification schema from 1Factory API",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "datetime",
+      "nullable": false,
+      "description": "Date and time when the qualification was assessed or updated.",
+      "example": "2016-11-16T00:00:00-08:00"
+    },
+    "status": {
+      "type": "string",
+      "nullable": false,
+      "enum": [
+        "New",
+        "Approved",
+        "Conditional",
+        "Disqualified",
+        "Inactive"
+      ],
+      "description": "Current qualification status of the supplier.",
+      "example": "Conditional"
+    },
+    "review_status": {
+      "type": "string",
+      "nullable": false,
+      "enum": [
+        "Pending",
+        "Reviewed",
+        "N/A"
+      ],
+      "description": "Review status of the qualification assessment.",
+      "example": "Reviewed"
+    },
+    "frequency": {
+      "type": "int32",
+      "nullable": false,
+      "minimum": 1,
+      "description": "Review frequency in months for re-qualification.",
+      "example": 12
+    }
+  },
+  "required": [
+    "date",
+    "status",
+    "review_status",
+    "frequency"
+  ]
+}

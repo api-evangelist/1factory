@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-inspection-type-structure.json",
+  "name": "inspection_type",
+  "description": "Type of inspection, as defined in your organization's Inspection Types List of Values",
+  "type": "string",
+  "example": "Final"
+}

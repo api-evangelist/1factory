@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-complaint-structure.json",
+  "name": "Complaint",
+  "description": "Complaint schema from 1Factory API",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Issue"
+    },
+    {
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source of the complaint.",
+          "enum": [
+            "Customer",
+            "Field"
+          ]
+        },
+        "customer_address": {
+          "type": "string"
+        },
+        "contact_first_name": {
+          "type": "string"
+        },
+        "contact_last_name": {
+          "type": "string"
+        },
+        "contact_email": {
+          "type": "string"
+        },
+        "contact_phone": {
+          "type": "string"
+        },
+        "customer_ncr_no": {
+          "type": "string",
+          "description": "Customer NCR number if available."
+        },
+        "rma_no": {
+          "type": "string"
+        },
+        "device_identifier": {
+          "type": "string"
+        },
+        "serial_nos": {
+          "type": "string"
+        },
+        "capa_required": {
+          "type": "boolean"
+        },
+        "capa_id": {
+          "type": "double"
+        },
+        "date_due": {
+          "type": "datetime",
+          "description": "Date & time that a Complaint is due.",
+          "example": "2021-07-21T07:14:42-08:00"
+        },
+        "complaint_on": {
+          "type": "datetime",
+          "description": "Date & time of the original complaint.",
+          "example": "2021-07-21T07:14:42-08:00"
+        }
+      }
+    }
+  ]
+}

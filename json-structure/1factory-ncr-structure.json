@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-ncr-structure.json",
+  "name": "Ncr",
+  "description": "Ncr schema from 1Factory API",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Issue"
+    },
+    {
+      "properties": {
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "maxLength": 255,
+          "description": "Description of the part.",
+          "example": "Three Lobe Shaft"
+        },
+        "use_as_is_quantity": {
+          "type": "double",
+          "nullable": true,
+          "description": "The number of parts that failed inspection that can be used as-is without rework or scrapping.",
+          "example": 3
+        },
+        "scrap_quantity": {
+          "type": "double",
+          "nullable": true,
+          "description": "The number of parts that failed inspection that must be scrapped.",
+          "example": 3
+        },
+        "return_quantity": {
+          "type": "double",
+          "nullable": true,
+          "description": "The number of parts that failed inspection that must be returned to the supplier.",
+          "example": 3
+        },
+        "rework_quantity": {
+          "type": "double",
+          "nullable": true,
+          "description": "The number of parts that failed inspection that can be reworked to pass inspection.",
+          "example": 3
+        },
+        "repair_quantity": {
+          "type": "double",
+          "nullable": true,
+          "description": "The number of parts that failed inspection that can be repaired to pass inspection.",
+          "example": 3
+        },
+        "no_defect_quantity": {
+          "type": "double",
+          "nullable": true,
+          "description": "The number of parts in the lot that do not have any defects.",
+          "example": 3
+        },
+        "inventory_location": {
+          "type": "string",
+          "nullable": true,
+          "description": "",
+          "example": "Warehouse"
+        },
+        "rma_number": {
+          "type": "string",
+          "nullable": true,
+          "description": "RMA number, if any, for the returned parts in the NCR.",
+          "example": "rma-202405"
+        },
+        "rework_po": {
+          "type": "string",
+          "nullable": true,
+          "description": "",
+          "example": "po-202407-1"
+        },
+        "shipment": {
+          "type": "string",
+          "nullable": true,
+          "description": "Shipment number, if any, for parts in the NCR",
+          "example": ""
+        },
+        "mrb_meeting_notes": {
+          "type": "string",
+          "nullable": true,
+          "description": "Any meeting notes for this NCR from a MBR meeting.",
+          "example": ""
+        },
+        "mrb_dispositions": {
+          "type": "array",
+          "nullable": false,
+          "description": "MRB dispositions for this NCR.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "nullable": false,
+                "example": "REWORK"
+              },
+              "qty": {
+                "type": "double",
+                "example": 2
+              }
+            }
+          }
+        },
+        "serial_numbers": {
+          "type": "string",
+          "nullable": true,
+          "description": "Serial number(s) for this NCR.",
+          "example": "SN123456"
+        }
+      }
+    }
+  ]
+}

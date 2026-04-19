@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-part-data-structure.json",
+  "name": "PartData",
+  "description": "Inspection data for a single part.",
+  "type": "object",
+  "properties": {
+    "grp_ident": {
+      "type": "string",
+      "nullable": true,
+      "description": "Identifier for a grouping of parts.",
+      "example": "CAVITY1"
+    },
+    "row_ident": {
+      "type": "string",
+      "nullable": true,
+      "description": "Identifier for a unique part, sucha as a serial number.",
+      "example": "SN100001"
+    },
+    "updated_on": {
+      "type": "string",
+      "nullable": false,
+      "description": "Date & time that data for this part was last updated.",
+      "example": "2021-07-16T17:53:41-08:00"
+    },
+    "measurements": {
+      "type": "array",
+      "minimum": 1,
+      "description": "List of measurements recorded for part. Order of entries corresponds to order of specifications, so index of a measurement corresponds to the index of the feature specification & place it is for.",
+      "items": {
+        "type": "object",
+        "nullable": true,
+        "properties": {
+          "value": {
+            "type": "double",
+            "nullable": false,
+            "description": "Actual measurement recorded. For a pass/fail specification, 1.0 corresponds to PASS, 0.0 corresponds to FAIL.",
+            "example": 1.1234
+          },
+          "bonus": {
+            "type": "double",
+            "nullable": true,
+            "description": "For GD&T specs that allow a bonus tolerance, the bonus tolerance to apply to actual measurement.",
+            "example": 0.02
+          }
+        }
+      }
+    }
+  }
+}

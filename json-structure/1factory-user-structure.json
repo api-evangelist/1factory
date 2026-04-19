@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-user-structure.json",
+  "name": "User",
+  "description": "User schema from 1Factory API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "nullable": false,
+      "description": "Unique identifier for the user.",
+      "example": 5127
+    },
+    "name": {
+      "type": "string",
+      "nullable": false,
+      "maxLength": 255,
+      "description": "Full name of the user.",
+      "example": "John Doe"
+    },
+    "email": {
+      "type": "string",
+      "nullable": false,
+      "format": "email",
+      "maxLength": 255,
+      "description": "Email address of the user.",
+      "example": "jon.doe@1factory.com"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "email"
+  ]
+}

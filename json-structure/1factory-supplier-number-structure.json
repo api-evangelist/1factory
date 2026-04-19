@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-supplier-number-structure.json",
+  "name": "supplier_number",
+  "description": "The supplier number / vendor code (for receiving or supplier inspections).",
+  "type": "string",
+  "example": "S12345"
+}

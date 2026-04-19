@@ -1,0 +1,282 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: 1Factory
+  description: >-
+    Unified taxonomy of the 1Factory quality management API, mapping operational
+    dimensions (endpoints, schemas, parameters) and capability dimensions (workflows,
+    personas, tools) into a single reference vocabulary.
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - name: 1Factory API
+      namespace: 1factory
+      version: "24.31"
+      baseUrl: https://www.1factory.com/api/v1
+      status: active
+
+  resources:
+    - name: part-masters
+      description: Part master records and assembly definitions
+      api: 1factory
+      actions:
+        - list
+        - create
+        - update
+    - name: work-orders
+      description: Manufacturing and receiving work orders
+      api: 1factory
+      actions:
+        - list
+    - name: manufacturing-inspections
+      description: Manufacturing floor inspection records
+      api: 1factory
+      actions:
+        - list
+        - create
+        - get
+        - update
+    - name: receiving-inspections
+      description: Incoming receiving inspection records
+      api: 1factory
+      actions:
+        - list
+        - create
+        - get
+        - update
+    - name: supplier-inspections
+      description: Supplier quality inspection records
+      api: 1factory
+      actions:
+        - list
+        - create
+        - get
+        - update
+    - name: customer-inspections
+      description: Customer-facing inspection records
+      api: 1factory
+      actions:
+        - list
+        - create
+        - get
+        - update
+    - name: fai
+      description: First Article Inspection records (manufacturing, receiving, supplier, customer)
+      api: 1factory
+      actions:
+        - list
+        - create
+        - get
+        - update
+    - name: suppliers
+      description: Supplier profiles and qualification data
+      api: 1factory
+      actions:
+        - list
+        - get
+        - create
+        - update
+    - name: ncrs
+      description: Non-Conformance Reports for quality issue tracking
+      api: 1factory
+      actions:
+        - list
+    - name: capas
+      description: Corrective and Preventive Actions
+      api: 1factory
+      actions:
+        - list
+    - name: complaints
+      description: Customer and quality complaints
+      api: 1factory
+      actions:
+        - list
+
+  actions:
+    - name: list
+      http_method: GET
+      pattern: read
+    - name: get
+      http_method: GET
+      pattern: read
+    - name: create
+      http_method: POST
+      pattern: write
+    - name: update
+      http_method: PUT
+      pattern: write
+
+  schemas:
+    core:
+      - name: PartMaster
+        description: Part master record with revision and qualification status
+      - name: Inspection
+        description: Base inspection record with measurements
+      - name: Plan
+        description: Inspection plan defining what to measure
+      - name: FAI
+        description: First Article Inspection record
+    quality:
+      - name: NCR
+        description: Non-conformance report
+      - name: CAPA
+        description: Corrective and preventive action
+      - name: Complaint
+        description: Quality or customer complaint
+    suppliers:
+      - name: Supplier
+        description: Supplier profile and qualification data
+      - name: Certification
+        description: Supplier certification record
+
+  parameters:
+    pagination:
+      - name: offset
+        description: Pagination offset
+      - name: limit
+        description: Number of records per page
+    identifiers:
+      - name: inspection_id
+        description: Unique inspection identifier
+      - name: plan_id
+        description: Unique plan identifier
+      - name: supplier_id
+        description: Unique supplier identifier
+    filters:
+      - name: part_number
+        description: Filter by part number
+      - name: revision
+        description: Filter by part revision
+      - name: status
+        description: Filter by record status
+      - name: start_date
+        description: Filter records from this date
+      - name: end_date
+        description: Filter records up to this date
+
+  authentication:
+    schemes:
+      - name: OrgId
+        type: apiKey
+        placement: header
+        headerName: x-1factory-org
+      - name: ApiKey
+        type: apiKey
+        placement: header
+        headerName: x-1factory-key
+
+capability:
+  workflows:
+    - name: 1Factory Quality Management
+      file: capabilities/1factory-quality-management.yaml
+      description: End-to-end quality management workflow covering inspections, FAI, suppliers, and QMS
+      apis:
+        - 1factory
+      tools: 10
+      personas:
+        - Quality Engineer
+        - Production Manager
+        - Supplier Quality Manager
+
+  personas:
+    - id: quality-engineer
+      name: Quality Engineer
+      description: Manages inspection plans, reviews NCRs/CAPAs, and tracks quality metrics
+      workflows:
+        - 1Factory Quality Management
+    - id: production-manager
+      name: Production Manager
+      description: Monitors manufacturing inspections and work order quality status
+      workflows:
+        - 1Factory Quality Management
+    - id: supplier-quality-manager
+      name: Supplier Quality Manager
+      description: Manages supplier qualifications, receiving inspections, and supplier CAPAs
+      workflows:
+        - 1Factory Quality Management
+
+  domains:
+    - name: Inspections
+      description: All types of quality inspections (manufacturing, receiving, supplier, customer)
+      resources:
+        - manufacturing-inspections
+        - receiving-inspections
+        - supplier-inspections
+        - customer-inspections
+    - name: Quality System
+      description: Quality management system records
+      resources:
+        - ncrs
+        - capas
+        - complaints
+    - name: Parts and Planning
+      description: Part master data and inspection planning
+      resources:
+        - part-masters
+        - work-orders
+    - name: Supplier Management
+      description: Supplier qualification and performance management
+      resources:
+        - suppliers
+        - supplier-inspections
+
+  namespaces:
+    consumed:
+      - name: 1factory
+        baseUri: https://www.1factory.com/api/v1
+    rest:
+      - name: 1factory-quality-api
+        port: 8080
+    mcp:
+      - name: 1factory-quality-mcp
+        port: 9090
+        transport: http
+
+  binds:
+    - name: FACTORY_ORG_ID
+      description: 1Factory organization ID from Settings page
+      workflows:
+        - 1Factory Quality Management
+    - name: FACTORY_API_KEY
+      description: 1Factory API key generated in Settings page
+      workflows:
+        - 1Factory Quality Management
+
+crossReference:
+  - resource: manufacturing-inspections
+    operations:
+      - method: GET
+        path: /mfg/inspections
+      - method: POST
+        path: /mfg/inspections
+      - method: GET
+        path: /mfg/inspections/{inspection_id}
+      - method: PUT
+        path: /mfg/inspections/{inspection_id}
+    workflows:
+      - 1Factory Quality Management
+    personas:
+      - Quality Engineer
+      - Production Manager
+
+  - resource: ncrs
+    operations:
+      - method: GET
+        path: /qms/ncrs
+    workflows:
+      - 1Factory Quality Management
+    personas:
+      - Quality Engineer
+
+  - resource: suppliers
+    operations:
+      - method: GET
+        path: /sup
+      - method: GET
+        path: /sup/{supplier_id}
+    workflows:
+      - 1Factory Quality Management
+    personas:
+      - Supplier Quality Manager

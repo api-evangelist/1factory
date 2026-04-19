@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-created-by-username-structure.json",
+  "name": "created_by_username",
+  "description": "Name of user that created the entity.",
+  "type": "string",
+  "example": "Oleg Nickolayev"
+}

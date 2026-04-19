@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-plan-schema.json",
+  "title": "Plan",
+  "description": "Plan schema from 1Factory API",
+  "type": "object",
+  "properties": {
+    "ID": {
+      "$ref": "#/components/schemas/ID"
+    },
+    "part_number": {
+      "$ref": "#/components/schemas/part_number"
+    },
+    "rev": {
+      "$ref": "#/components/schemas/rev"
+    },
+    "part_description": {
+      "$ref": "#/components/schemas/part_description"
+    },
+    "operation": {
+      "$ref": "#/components/schemas/operation"
+    },
+    "project_identifier": {
+      "$ref": "#/components/schemas/project_identifier"
+    },
+    "status": {
+      "$ref": "#/components/schemas/status"
+    },
+    "version": {
+      "type": "number",
+      "description": "Version of the plan.",
+      "example": 4
+    },
+    "version_status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Draft",
+        "Approval",
+        "Released",
+        "Inactive"
+      ]
+    },
+    "approval_status": {
+      "type": "string",
+      "enum": [
+        "N/a",
+        "Pending",
+        "Assigned",
+        "Approved",
+        "Rejected"
+      ],
+      "description": "The status of a plan that requires approval before releasing or closing.\n\n(Availability depends on Organization settings.)"
+    },
+    "customer_name": {
+      "$ref": "#/components/schemas/customer_name"
+    },
+    "supplier_name": {
+      "$ref": "#/components/schemas/supplier_name"
+    },
+    "supplier_number": {
+      "$ref": "#/components/schemas/supplier_number"
+    },
+    "is_tabulated": {
+      "type": "boolean",
+      "example": false,
+      "description": "If the plan is for a tabulated part."
+    },
+    "is_spec_lib": {
+      "type": "boolean",
+      "example": false,
+      "description": "If the plan is a spec library"
+    },
+    "created_by_name": {
+      "$ref": "#/components/schemas/created_by_username"
+    },
+    "created_on": {
+      "$ref": "#/components/schemas/created_on"
+    },
+    "updated_on": {
+      "$ref": "#/components/schemas/updated_on"
+    }
+  }
+}

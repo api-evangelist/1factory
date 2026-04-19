@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-certification-structure.json",
+  "name": "Certification",
+  "description": "Certification schema from 1Factory API",
+  "type": "object",
+  "properties": {
+    "expiration_date": {
+      "type": "datetime",
+      "nullable": false,
+      "description": "Date and time when the certification expires.",
+      "example": "2021-10-05T00:00:00-07:00"
+    },
+    "certification": {
+      "type": "string",
+      "nullable": false,
+      "maxLength": 100,
+      "description": "Name or type of the certification.",
+      "example": "ISO 9001"
+    }
+  },
+  "required": [
+    "expiration_date",
+    "certification"
+  ]
+}

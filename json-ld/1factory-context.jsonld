@@ -1,0 +1,554 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "factory": "https://1factory.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Address": "factory:Address",
+    "AssemblyEntry": "factory:AssemblyEntry",
+    "Assembly": "factory:Assembly",
+    "Capa": "factory:Capa",
+    "Certification": "factory:Certification",
+    "Complaint": "factory:Complaint",
+    "FaiDetail": "factory:FaiDetail",
+    "Fai": "factory:Fai",
+    "InspectionDetail": "factory:InspectionDetail",
+    "Inspection": "factory:Inspection",
+    "Issue": "factory:Issue",
+    "Ncr": "factory:Ncr",
+    "NewFai": "factory:NewFai",
+    "NewInspection": "factory:NewInspection",
+    "NewPartMaster": "factory:NewPartMaster",
+    "PartData": "factory:PartData",
+    "PartMaster": "factory:PartMaster",
+    "PlanDetail": "factory:PlanDetail",
+    "Plan": "factory:Plan",
+    "Qualification": "factory:Qualification",
+    "SpecInspectionType": "factory:SpecInspectionType",
+    "Specification": "factory:Specification",
+    "SuperInspection": "factory:SuperInspection",
+    "Supplier": "factory:Supplier",
+    "User": "factory:User",
+    "ID": {
+      "@id": "factory:ID",
+      "@type": "xsd:string"
+    },
+    "address": {
+      "@id": "factory:address",
+      "@type": "xsd:string"
+    },
+    "altPartNumber": {
+      "@id": "factory:alt_part_number",
+      "@type": "xsd:string"
+    },
+    "altPartNumber2": {
+      "@id": "factory:alt_part_number2",
+      "@type": "xsd:string"
+    },
+    "altRev": {
+      "@id": "factory:alt_rev",
+      "@type": "xsd:string"
+    },
+    "altRev2": {
+      "@id": "factory:alt_rev2",
+      "@type": "xsd:string"
+    },
+    "approvalStatus": {
+      "@id": "factory:approval_status",
+      "@type": "xsd:string"
+    },
+    "blnNo": {
+      "@id": "factory:bln_no",
+      "@type": "xsd:string"
+    },
+    "bonus": {
+      "@id": "factory:bonus",
+      "@type": "xsd:decimal"
+    },
+    "bonusTolerance": {
+      "@id": "factory:bonus_tolerance",
+      "@type": "xsd:string"
+    },
+    "causedBy": {
+      "@id": "factory:caused_by",
+      "@type": "xsd:string"
+    },
+    "certification": {
+      "@id": "factory:certification",
+      "@type": "xsd:string"
+    },
+    "certifications": {
+      "@id": "factory:certifications",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "characteristic": {
+      "@id": "factory:characteristic",
+      "@type": "xsd:string"
+    },
+    "characteristicType": {
+      "@id": "factory:characteristic_type",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "factory:city",
+      "@type": "xsd:string"
+    },
+    "closedOn": {
+      "@id": "factory:closed_on",
+      "@type": "xsd:string"
+    },
+    "comments": {
+      "@id": "factory:comments",
+      "@type": "xsd:string"
+    },
+    "commodityCodes": {
+      "@id": "factory:commodity_codes",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "componentParts": {
+      "@id": "factory:component_parts",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "cost": {
+      "@id": "factory:cost",
+      "@type": "xsd:double"
+    },
+    "country": {
+      "@id": "factory:country",
+      "@type": "xsd:string"
+    },
+    "createdByName": {
+      "@id": "factory:created_by_name",
+      "@type": "xsd:string"
+    },
+    "createdOn": {
+      "@id": "factory:created_on",
+      "@type": "xsd:string"
+    },
+    "customerIdent": {
+      "@id": "factory:customer_ident",
+      "@type": "xsd:string"
+    },
+    "customerName": {
+      "@id": "factory:customer_name",
+      "@type": "xsd:string"
+    },
+    "dataType": {
+      "@id": "factory:data_type",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "factory:date",
+      "@type": "xsd:dateTime"
+    },
+    "defectiveQuantity": {
+      "@id": "factory:defective_quantity",
+      "@type": "xsd:decimal"
+    },
+    "description": "schema:description",
+    "descriptorDatum": {
+      "@id": "factory:descriptor_datum",
+      "@type": "xsd:string"
+    },
+    "detectedAt": {
+      "@id": "factory:detected_at",
+      "@type": "xsd:string"
+    },
+    "dimensionType": {
+      "@id": "factory:dimension_type",
+      "@type": "xsd:string"
+    },
+    "direct": {
+      "@id": "factory:direct",
+      "@type": "xsd:boolean"
+    },
+    "email": "schema:email",
+    "expirationDate": {
+      "@id": "factory:expiration_date",
+      "@type": "xsd:dateTime"
+    },
+    "faiType": {
+      "@id": "factory:fai_type",
+      "@type": "xsd:string"
+    },
+    "frequency": {
+      "@id": "factory:frequency",
+      "@type": "xsd:integer"
+    },
+    "grpIdent": {
+      "@id": "factory:grp_ident",
+      "@type": "xsd:string"
+    },
+    "hasPpap": {
+      "@id": "factory:has_ppap",
+      "@type": "xsd:boolean"
+    },
+    "id": {
+      "@id": "factory:id",
+      "@type": "xsd:integer"
+    },
+    "impact": {
+      "@id": "factory:impact",
+      "@type": "xsd:string"
+    },
+    "inSpecPct": {
+      "@id": "factory:in_spec_pct",
+      "@type": "xsd:double"
+    },
+    "indirect": {
+      "@id": "factory:indirect",
+      "@type": "xsd:boolean"
+    },
+    "inspIdent1": {
+      "@id": "factory:insp_ident_1",
+      "@type": "xsd:string"
+    },
+    "inspIdent2": {
+      "@id": "factory:insp_ident_2",
+      "@type": "xsd:string"
+    },
+    "inspIdent3": {
+      "@id": "factory:insp_ident_3",
+      "@type": "xsd:string"
+    },
+    "inspectedByName": {
+      "@id": "factory:inspected_by_name",
+      "@type": "xsd:string"
+    },
+    "inspectedOn": {
+      "@id": "factory:inspected_on",
+      "@type": "xsd:dateTime"
+    },
+    "inspectionMethod": {
+      "@id": "factory:inspection_method",
+      "@type": "xsd:string"
+    },
+    "inspectionQuantity": {
+      "@id": "factory:inspection_quantity",
+      "@type": "xsd:decimal"
+    },
+    "inspectionStatus": {
+      "@id": "factory:inspection_status",
+      "@type": "xsd:string"
+    },
+    "inspectionType": {
+      "@id": "factory:inspection_type",
+      "@type": "xsd:string"
+    },
+    "isAssembly": {
+      "@id": "factory:is_assembly",
+      "@type": "xsd:boolean"
+    },
+    "isBuy": {
+      "@id": "factory:is_buy",
+      "@type": "xsd:boolean"
+    },
+    "isItar": {
+      "@id": "factory:is_itar",
+      "@type": "xsd:boolean"
+    },
+    "isKey": {
+      "@id": "factory:is_key",
+      "@type": "xsd:boolean"
+    },
+    "isLibrary": {
+      "@id": "factory:is_library",
+      "@type": "xsd:boolean"
+    },
+    "isSpecLib": {
+      "@id": "factory:is_spec_lib",
+      "@type": "xsd:boolean"
+    },
+    "isTabulated": {
+      "@id": "factory:is_tabulated",
+      "@type": "xsd:boolean"
+    },
+    "label": {
+      "@id": "factory:label",
+      "@type": "xsd:string"
+    },
+    "lastQualificationDate": {
+      "@id": "factory:last_qualification_date",
+      "@type": "xsd:dateTime"
+    },
+    "lotQuantity": {
+      "@id": "factory:lot_quantity",
+      "@type": "xsd:decimal"
+    },
+    "lotSize": {
+      "@id": "factory:lot_size",
+      "@type": "xsd:string"
+    },
+    "lowerSpecLimit": {
+      "@id": "factory:lower_spec_limit",
+      "@type": "xsd:decimal"
+    },
+    "machines": {
+      "@id": "factory:machines",
+      "@type": "xsd:string"
+    },
+    "measurements": {
+      "@id": "factory:measurements",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "mfgInspIdent1": {
+      "@id": "factory:mfg_insp_ident_1",
+      "@type": "xsd:string"
+    },
+    "mfgInspIdent2": {
+      "@id": "factory:mfg_insp_ident_2",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "ncrCount": {
+      "@id": "factory:ncr_count",
+      "@type": "xsd:decimal"
+    },
+    "ncrs": {
+      "@id": "factory:ncrs",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "nominal": {
+      "@id": "factory:nominal",
+      "@type": "xsd:decimal"
+    },
+    "notes": {
+      "@id": "factory:notes",
+      "@type": "xsd:string"
+    },
+    "number": {
+      "@id": "factory:number",
+      "@type": "xsd:decimal"
+    },
+    "numberOfParts": {
+      "@id": "factory:number_of_parts",
+      "@type": "xsd:string"
+    },
+    "operation": {
+      "@id": "factory:operation",
+      "@type": "xsd:string"
+    },
+    "organizationCodes": {
+      "@id": "factory:organization_codes",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "owner": {
+      "@id": "factory:owner",
+      "@type": "xsd:string"
+    },
+    "parentPartNumber": {
+      "@id": "factory:parent_part_number",
+      "@type": "xsd:string"
+    },
+    "parentRev": {
+      "@id": "factory:parent_rev",
+      "@type": "xsd:string"
+    },
+    "partDescription": {
+      "@id": "factory:part_description",
+      "@type": "xsd:string"
+    },
+    "partNumber": {
+      "@id": "factory:part_number",
+      "@type": "xsd:string"
+    },
+    "partsFailed": {
+      "@id": "factory:parts_failed",
+      "@type": "xsd:string"
+    },
+    "partsPassed": {
+      "@id": "factory:parts_passed",
+      "@type": "xsd:string"
+    },
+    "place": {
+      "@id": "factory:place",
+      "@type": "xsd:integer"
+    },
+    "planCount": {
+      "@id": "factory:plan_count",
+      "@type": "xsd:decimal"
+    },
+    "postalCode": {
+      "@id": "factory:postal_code",
+      "@type": "xsd:string"
+    },
+    "problemSummary": {
+      "@id": "factory:problem_summary",
+      "@type": "xsd:string"
+    },
+    "problemType": {
+      "@id": "factory:problem_type",
+      "@type": "xsd:string"
+    },
+    "projectIdentifier": {
+      "@id": "factory:project_identifier",
+      "@type": "xsd:string"
+    },
+    "purchasing": {
+      "@id": "factory:purchasing",
+      "@type": "xsd:string"
+    },
+    "qualificationStatus": {
+      "@id": "factory:qualification_status",
+      "@type": "xsd:string"
+    },
+    "qualifications": {
+      "@id": "factory:qualifications",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "factory:quantity",
+      "@type": "xsd:decimal"
+    },
+    "reQualificationDate": {
+      "@id": "factory:re_qualification_date",
+      "@type": "xsd:dateTime"
+    },
+    "recInspIdent1": {
+      "@id": "factory:rec_insp_ident_1",
+      "@type": "xsd:string"
+    },
+    "recInspIdent2": {
+      "@id": "factory:rec_insp_ident_2",
+      "@type": "xsd:string"
+    },
+    "referencedFeature": {
+      "@id": "factory:referenced_feature",
+      "@type": "xsd:string"
+    },
+    "rev": {
+      "@id": "factory:rev",
+      "@type": "xsd:string"
+    },
+    "reviewStatus": {
+      "@id": "factory:review_status",
+      "@type": "xsd:string"
+    },
+    "reviewedByName": {
+      "@id": "factory:reviewed_by_name",
+      "@type": "xsd:string"
+    },
+    "reviewedOn": {
+      "@id": "factory:reviewed_on",
+      "@type": "xsd:dateTime"
+    },
+    "rootCause": {
+      "@id": "factory:root_cause",
+      "@type": "xsd:string"
+    },
+    "rowIdent": {
+      "@id": "factory:row_ident",
+      "@type": "xsd:string"
+    },
+    "samplingRule": {
+      "@id": "factory:sampling_rule",
+      "@type": "xsd:string"
+    },
+    "sheetZone": {
+      "@id": "factory:sheet_zone",
+      "@type": "xsd:string"
+    },
+    "site": {
+      "@id": "factory:site",
+      "@type": "xsd:string"
+    },
+    "smallBusiness": {
+      "@id": "factory:small_business",
+      "@type": "xsd:boolean"
+    },
+    "specifications": {
+      "@id": "factory:specifications",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "factory:state",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "factory:status",
+      "@type": "xsd:string"
+    },
+    "strategic": {
+      "@id": "factory:strategic",
+      "@type": "xsd:boolean"
+    },
+    "street": {
+      "@id": "factory:street",
+      "@type": "xsd:string"
+    },
+    "subParts": {
+      "@id": "factory:sub_parts",
+      "@type": "xsd:string"
+    },
+    "supplierIdent": {
+      "@id": "factory:supplier_ident",
+      "@type": "xsd:string"
+    },
+    "supplierName": {
+      "@id": "factory:supplier_name",
+      "@type": "xsd:string"
+    },
+    "supplierNumber": {
+      "@id": "factory:supplier_number",
+      "@type": "xsd:string"
+    },
+    "supplierQualityManager": {
+      "@id": "factory:supplier_quality_manager",
+      "@type": "xsd:string"
+    },
+    "supplyChainManager": {
+      "@id": "factory:supply_chain_manager",
+      "@type": "xsd:string"
+    },
+    "taskCount": {
+      "@id": "factory:task_count",
+      "@type": "xsd:decimal"
+    },
+    "taskStatus": {
+      "@id": "factory:task_status",
+      "@type": "xsd:string"
+    },
+    "totalCost": {
+      "@id": "factory:total_cost",
+      "@type": "xsd:decimal"
+    },
+    "type": {
+      "@id": "factory:type",
+      "@type": "xsd:string"
+    },
+    "unit": {
+      "@id": "factory:unit",
+      "@type": "xsd:string"
+    },
+    "updatedOn": {
+      "@id": "factory:updated_on",
+      "@type": "xsd:string"
+    },
+    "upperSpecLimit": {
+      "@id": "factory:upper_spec_limit",
+      "@type": "xsd:decimal"
+    },
+    "value": {
+      "@id": "factory:value",
+      "@type": "xsd:decimal"
+    },
+    "vendorCode": {
+      "@id": "factory:vendor_code",
+      "@type": "xsd:string"
+    },
+    "version": "schema:version",
+    "versionStatus": {
+      "@id": "factory:version_status",
+      "@type": "xsd:string"
+    }
+  }
+}

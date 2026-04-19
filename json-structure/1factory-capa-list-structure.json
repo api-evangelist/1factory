@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-capa-list-structure.json",
+  "name": "CapaList",
+  "description": "CapaList schema from 1Factory API",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/Capa"
+  },
+  "minItems": 0,
+  "maxItems": 500
+}

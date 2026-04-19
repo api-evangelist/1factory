@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-owner-structure.json",
+  "name": "owner",
+  "description": "Name of user that owns the entity.",
+  "type": "string",
+  "example": "Oleg Nickolayev"
+}

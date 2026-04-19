@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-specification-schema.json",
+  "title": "Specification",
+  "description": "Specification that defines feature to be measured.",
+  "type": "object",
+  "properties": {
+    "bln_no": {
+      "type": "string",
+      "nullable": false,
+      "description": "Balloon number for feature.",
+      "example": "1"
+    },
+    "sheet_zone": {
+      "type": "string",
+      "nullable": false,
+      "description": "Sheet and zone of the specification",
+      "example": "1 : B1"
+    },
+    "place": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Place number - for features that have multiple places, feature specification is repeated for each place.",
+      "example": 1
+    },
+    "characteristic": {
+      "type": "string",
+      "nullable": false,
+      "description": "Characteristic being measured, or, in the case of a note, the text of the note.",
+      "example": "True position"
+    },
+    "characteristic_type": {
+      "type": "string",
+      "nullable": false,
+      "enum": [
+        "Nom \u00b1 Tol",
+        "GD&T",
+        "Basic",
+        "Min - Max",
+        "Note",
+        "Nom++Tol",
+        "Nom -- Tol",
+        "Reference"
+      ],
+      "description": "Type of characteristic being measured.",
+      "example": "GD&T"
+    },
+    "dimension_type": {
+      "type": "string",
+      "nullable": false,
+      "enum": [
+        "STD",
+        "MFG",
+        "DVN"
+      ],
+      "description": "Dimension type for this specification - Standard, Manufacturing or Deviation.",
+      "example": "STD"
+    },
+    "referenced_feature": {
+      "type": "string",
+      "nullable": true,
+      "description": "Balloon number of specification that this feature references, for example a manufacturing dimension referencing the actual drawing dimension it corresponds to.",
+      "example": "1"
+    },
+    "data_type": {
+      "type": "string",
+      "nullable": false,
+      "enum": [
+        "NUM",
+        "P/F",
+        "CALC"
+      ],
+      "description": "How the data for this specification is recorded - numerically, as a pass/fail, or calculated from other features.",
+      "example": "NUM"
+    },
+    "nominal": {
+      "type": "number",
+      "nullable": true,
+      "description": "Nominal value for this specification.",
+      "example": 1.12
+    },
+    "lower_spec_limit": {
+      "type": "number",
+      "nullable": true,
+      "description": "Lower specification limit for the feature.",
+      "example": 1.11
+    },
+    "upper_spec_limit": {
+      "type": "number",
+      "nullable": true,
+      "description": "Upper specification limit for the feature.",
+      "example": 1.14
+    },
+    "unit": {
+      "type": "string",
+      "nullable": true,
+      "description": "Unit of measure for this feature.",
+      "example": "mm"
+    },
+    "descriptor_datum": {
+      "type": "string",
+      "nullable": true,
+      "description": "Descriptor of feature. For GD&T, this is used to record the datum.",
+      "example": "A"
+    },
+    "bonus_tolerance": {
+      "type": "string",
+      "nullable": true,
+      "enum": [
+        "MMC",
+        "LMC"
+      ],
+      "description": "For GD&T features, defines the material condition for evaluating bonus tolerance, if applicable.",
+      "example": "MMC"
+    },
+    "label": {
+      "type": "string",
+      "nullable": true,
+      "description": "Optional label to add more information to the specification.",
+      "example": "COUNTERSINK"
+    },
+    "inspection_method": {
+      "type": "string",
+      "nullable": true,
+      "description": "How the feature should be inspected.",
+      "example": "CMM"
+    },
+    "sampling_rule": {
+      "type": "string",
+      "nullable": true,
+      "description": "How frequently should the feature be checked.",
+      "example": "1 in 10"
+    },
+    "operation": {
+      "type": "string",
+      "nullable": true,
+      "description": "Manufacturing operation for the feature.",
+      "example": "OP10"
+    },
+    "is_key": {
+      "type": "boolean",
+      "nullable": false,
+      "description": "Indicates if feature is key for quality.",
+      "example": true
+    }
+  }
+}

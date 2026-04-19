@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-structure/1factory-capa-structure.json",
+  "name": "Capa",
+  "description": "Capa schema from 1Factory API",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Issue"
+    },
+    {
+      "properties": {
+        "date_due": {
+          "type": "datetime",
+          "description": "Date & time that a CAPA is due.",
+          "example": "2021-07-21T07:14:42-08:00"
+        }
+      }
+    }
+  ]
+}

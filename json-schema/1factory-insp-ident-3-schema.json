@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/1factory/refs/heads/main/json-schema/1factory-insp-ident-3-schema.json",
+  "title": "insp_ident_3",
+  "description": "Tertiary identifier for an inspection, for example a Customer Purchase Order or Lot #. (Optional)",
+  "type": "string",
+  "minLength": 0,
+  "maxLength": 255,
+  "example": "1A"
+}
