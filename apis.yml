@@ -79,7 +79,7 @@ common:
     url: capabilities/1factory-quality-management.yaml
   - type: Vocabulary
     url: vocabulary/1factory-vocabulary.yaml
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/1factory-context.jsonld
   - type: Features
     data:
