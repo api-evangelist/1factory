@@ -1,0 +1,232 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 1Factory API — Customers
+  description: '1Factory API — Customers. 6 operations. Lead operation: 1Factory Gets a List of First-article Inspections
+    Shared with Your Organization by Your Customers.. Self-contained Naftiko capability covering one 1factory business surface.'
+  tags:
+  - 1factory
+  - Customers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    1FACTORY_API_KEY: 1FACTORY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: 1factory-customers
+    baseUri: https://www.1factory.co/api/v1
+    description: 1Factory API — Customers business capability. Self-contained, no shared references.
+    resources:
+    - name: cus-fais
+      path: /cus/fais
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of First-article Inspections Shared with Your Organization by Your Customers.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: cus-fais-inspection_id
+      path: /cus/fais/{inspection_id}
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a Detailed Customer First-article Inspection Record.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: cus-inspections
+      path: /cus/inspections
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of Inspections Shared with Your Organization by Your Customers.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: cus-inspections-inspection_id
+      path: /cus/inspections/{inspection_id}
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a Detailed Customer Inspection Record.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: cus-plans
+      path: /cus/plans
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of Plans Shared with Your Organization by Your Customers.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: cus-plans-plan_id
+      path: /cus/plans/{plan_id}
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a Detailed Customer Plan Record.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: x-1factory-org
+      value: '{{env.1FACTORY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: 1factory-customers-rest
+    port: 8080
+    description: REST adapter for 1Factory API — Customers. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/cus/fais
+      name: cus-fais
+      description: REST surface for cus-fais.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of First-article Inspections Shared with Your Organization by Your Customers.
+        call: 1factory-customers.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cus/fais/{inspection-id}
+      name: cus-fais-inspection-id
+      description: REST surface for cus-fais-inspection_id.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a Detailed Customer First-article Inspection Record.
+        call: 1factory-customers.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cus/inspections
+      name: cus-inspections
+      description: REST surface for cus-inspections.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of Inspections Shared with Your Organization by Your Customers.
+        call: 1factory-customers.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cus/inspections/{inspection-id}
+      name: cus-inspections-inspection-id
+      description: REST surface for cus-inspections-inspection_id.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a Detailed Customer Inspection Record.
+        call: 1factory-customers.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cus/plans
+      name: cus-plans
+      description: REST surface for cus-plans.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of Plans Shared with Your Organization by Your Customers.
+        call: 1factory-customers.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cus/plans/{plan-id}
+      name: cus-plans-plan-id
+      description: REST surface for cus-plans-plan_id.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a Detailed Customer Plan Record.
+        call: 1factory-customers.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: 1factory-customers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for 1Factory API — Customers. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: 1factory-gets-list-first-article
+      description: 1Factory Gets a List of First-article Inspections Shared with Your Organization by Your Customers.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-customers.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-detailed-customer-first
+      description: 1Factory Gets a Detailed Customer First-article Inspection Record.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-customers.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-list-inspections-shared
+      description: 1Factory Gets a List of Inspections Shared with Your Organization by Your Customers.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-customers.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-detailed-customer-inspection
+      description: 1Factory Gets a Detailed Customer Inspection Record.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-customers.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-list-plans-shared
+      description: 1Factory Gets a List of Plans Shared with Your Organization by Your Customers.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-customers.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-detailed-customer-plan
+      description: 1Factory Gets a Detailed Customer Plan Record.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-customers.get
+      outputParameters:
+      - type: object
+        mapping: $.

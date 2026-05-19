@@ -1,0 +1,296 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 1Factory API — Suppliers
+  description: '1Factory API — Suppliers. 8 operations. Lead operation: 1Factory Gets a List of Suppliers in Your Organization..
+    Self-contained Naftiko capability covering one 1factory business surface.'
+  tags:
+  - 1factory
+  - Suppliers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    1FACTORY_API_KEY: 1FACTORY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: 1factory-suppliers
+    baseUri: https://www.1factory.co/api/v1
+    description: 1Factory API — Suppliers business capability. Self-contained, no shared references.
+    resources:
+    - name: sup
+      path: /sup
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of Suppliers in Your Organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sup-fais
+      path: /sup/fais
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of First-article Inspections Shared with Your Organization by Your Suppliers.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sup-fais-inspection_id
+      path: /sup/fais/{inspection_id}
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a Detailed Supplier First-article Inspection Record.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sup-inspections
+      path: /sup/inspections
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of Inspections Shared with Your Organization by Your Suppliers.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sup-inspections-inspection_id
+      path: /sup/inspections/{inspection_id}
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a Detailed Supplier Inspection Record.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sup-plans
+      path: /sup/plans
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of Plans Shared with Your Organization by Your Suppliers.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sup-plans-plan_id
+      path: /sup/plans/{plan_id}
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a Detailed Supplier Plan Record.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sup-supplier_id
+      path: /sup/{supplier_id}
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Get Detailed Supplier Record
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: x-1factory-org
+      value: '{{env.1FACTORY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: 1factory-suppliers-rest
+    port: 8080
+    description: REST adapter for 1Factory API — Suppliers. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/sup
+      name: sup
+      description: REST surface for sup.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of Suppliers in Your Organization.
+        call: 1factory-suppliers.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sup/fais
+      name: sup-fais
+      description: REST surface for sup-fais.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of First-article Inspections Shared with Your Organization by Your Suppliers.
+        call: 1factory-suppliers.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sup/fais/{inspection-id}
+      name: sup-fais-inspection-id
+      description: REST surface for sup-fais-inspection_id.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a Detailed Supplier First-article Inspection Record.
+        call: 1factory-suppliers.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sup/inspections
+      name: sup-inspections
+      description: REST surface for sup-inspections.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of Inspections Shared with Your Organization by Your Suppliers.
+        call: 1factory-suppliers.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sup/inspections/{inspection-id}
+      name: sup-inspections-inspection-id
+      description: REST surface for sup-inspections-inspection_id.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a Detailed Supplier Inspection Record.
+        call: 1factory-suppliers.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sup/plans
+      name: sup-plans
+      description: REST surface for sup-plans.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of Plans Shared with Your Organization by Your Suppliers.
+        call: 1factory-suppliers.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sup/plans/{plan-id}
+      name: sup-plans-plan-id
+      description: REST surface for sup-plans-plan_id.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a Detailed Supplier Plan Record.
+        call: 1factory-suppliers.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sup/{supplier-id}
+      name: sup-supplier-id
+      description: REST surface for sup-supplier_id.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Get Detailed Supplier Record
+        call: 1factory-suppliers.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: 1factory-suppliers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for 1Factory API — Suppliers. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: 1factory-gets-list-suppliers-your
+      description: 1Factory Gets a List of Suppliers in Your Organization.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-suppliers.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-list-first-article
+      description: 1Factory Gets a List of First-article Inspections Shared with Your Organization by Your Suppliers.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-suppliers.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-detailed-supplier-first
+      description: 1Factory Gets a Detailed Supplier First-article Inspection Record.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-suppliers.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-list-inspections-shared
+      description: 1Factory Gets a List of Inspections Shared with Your Organization by Your Suppliers.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-suppliers.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-detailed-supplier-inspection
+      description: 1Factory Gets a Detailed Supplier Inspection Record.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-suppliers.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-list-plans-shared
+      description: 1Factory Gets a List of Plans Shared with Your Organization by Your Suppliers.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-suppliers.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-detailed-supplier-plan
+      description: 1Factory Gets a Detailed Supplier Plan Record.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-suppliers.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-get-detailed-supplier-record
+      description: 1Factory Get Detailed Supplier Record
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-suppliers.get
+      outputParameters:
+      - type: object
+        mapping: $.

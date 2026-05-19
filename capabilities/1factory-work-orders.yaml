@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 1Factory API — Work Orders
+  description: '1Factory API — Work Orders. 2 operations. Lead operation: 1Factory Updates the List of Manufacturing Work
+    Order Numbers for Your Organization.. Self-contained Naftiko capability covering one 1factory business surface.'
+  tags:
+  - 1factory
+  - Work Orders
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    1FACTORY_API_KEY: 1FACTORY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: 1factory-work-orders
+    baseUri: https://www.1factory.co/api/v1
+    description: 1Factory API — Work Orders business capability. Self-contained, no shared references.
+    resources:
+    - name: mfg-workOrderList
+      path: /mfg/workOrderList
+      operations:
+      - name: put
+        method: PUT
+        description: 1Factory Updates the List of Manufacturing Work Order Numbers for Your Organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: rec-workOrderList
+      path: /rec/workOrderList
+      operations:
+      - name: put
+        method: PUT
+        description: 1Factory Updates the List of Receiving Work Order Numbers for Your Organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: x-1factory-org
+      value: '{{env.1FACTORY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: 1factory-work-orders-rest
+    port: 8080
+    description: REST adapter for 1Factory API — Work Orders. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/mfg/workorderlist
+      name: mfg-workorderlist
+      description: REST surface for mfg-workOrderList.
+      operations:
+      - method: PUT
+        name: put
+        description: 1Factory Updates the List of Manufacturing Work Order Numbers for Your Organization.
+        call: 1factory-work-orders.put
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rec/workorderlist
+      name: rec-workorderlist
+      description: REST surface for rec-workOrderList.
+      operations:
+      - method: PUT
+        name: put
+        description: 1Factory Updates the List of Receiving Work Order Numbers for Your Organization.
+        call: 1factory-work-orders.put
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: 1factory-work-orders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for 1Factory API — Work Orders. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: 1factory-updates-list-manufacturing-work
+      description: 1Factory Updates the List of Manufacturing Work Order Numbers for Your Organization.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: 1factory-work-orders.put
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-updates-list-receiving-work
+      description: 1Factory Updates the List of Receiving Work Order Numbers for Your Organization.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: 1factory-work-orders.put
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,136 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 1Factory API — QMS
+  description: '1Factory API — QMS. 3 operations. Lead operation: 1Factory Gets a List of CAPAs for Your Organization. Self-contained
+    Naftiko capability covering one 1factory business surface.'
+  tags:
+  - 1factory
+  - QMS
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    1FACTORY_API_KEY: 1FACTORY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: 1factory-qms
+    baseUri: https://www.1factory.co/api/v1
+    description: 1Factory API — QMS business capability. Self-contained, no shared references.
+    resources:
+    - name: qms-capas
+      path: /qms/capas
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of CAPAs for Your Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: qms-complaints
+      path: /qms/complaints
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of Complaints for Your Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: qms-ncrs
+      path: /qms/ncrs
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of NCRs for Your Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: x-1factory-org
+      value: '{{env.1FACTORY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: 1factory-qms-rest
+    port: 8080
+    description: REST adapter for 1Factory API — QMS. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/qms/capas
+      name: qms-capas
+      description: REST surface for qms-capas.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of CAPAs for Your Organization
+        call: 1factory-qms.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/qms/complaints
+      name: qms-complaints
+      description: REST surface for qms-complaints.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of Complaints for Your Organization
+        call: 1factory-qms.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/qms/ncrs
+      name: qms-ncrs
+      description: REST surface for qms-ncrs.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of NCRs for Your Organization
+        call: 1factory-qms.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: 1factory-qms-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for 1Factory API — QMS. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: 1factory-gets-list-capas-your
+      description: 1Factory Gets a List of CAPAs for Your Organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-qms.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-list-complaints-your
+      description: 1Factory Gets a List of Complaints for Your Organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-qms.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-list-ncrs-your
+      description: 1Factory Gets a List of NCRs for Your Organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-qms.get
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,302 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 1Factory API — Receiving
+  description: '1Factory API — Receiving. 8 operations. Lead operation: 1Factory Gets a List of Receiving First-article Inspections
+    for Your Organization.. Self-contained Naftiko capability covering one 1factory business surface.'
+  tags:
+  - 1factory
+  - Receiving
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    1FACTORY_API_KEY: 1FACTORY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: 1factory-receiving
+    baseUri: https://www.1factory.co/api/v1
+    description: 1Factory API — Receiving business capability. Self-contained, no shared references.
+    resources:
+    - name: rec-fais
+      path: /rec/fais
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of Receiving First-article Inspections for Your Organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post
+        method: POST
+        description: 1Factory Creates a New Receiving First-article Inspection for Your Organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rec-fais-inspection_id
+      path: /rec/fais/{inspection_id}
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a Detailed Receiving First-article Inspection Record.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rec-inspections
+      path: /rec/inspections
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of Receiving Inspections for Your Organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post
+        method: POST
+        description: 1Factory Creates a New Receiving Inspection for Your Organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rec-inspections-inspection_id
+      path: /rec/inspections/{inspection_id}
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a Detailed Receiving Inspection Record.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rec-plans
+      path: /rec/plans
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of Receiving Plans for Your Organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rec-plans-plan_id
+      path: /rec/plans/{plan_id}
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a Detailed Receiving Plan Record.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: x-1factory-org
+      value: '{{env.1FACTORY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: 1factory-receiving-rest
+    port: 8080
+    description: REST adapter for 1Factory API — Receiving. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/rec/fais
+      name: rec-fais
+      description: REST surface for rec-fais.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of Receiving First-article Inspections for Your Organization.
+        call: 1factory-receiving.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: 1Factory Creates a New Receiving First-article Inspection for Your Organization.
+        call: 1factory-receiving.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rec/fais/{inspection-id}
+      name: rec-fais-inspection-id
+      description: REST surface for rec-fais-inspection_id.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a Detailed Receiving First-article Inspection Record.
+        call: 1factory-receiving.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rec/inspections
+      name: rec-inspections
+      description: REST surface for rec-inspections.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of Receiving Inspections for Your Organization.
+        call: 1factory-receiving.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: 1Factory Creates a New Receiving Inspection for Your Organization.
+        call: 1factory-receiving.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rec/inspections/{inspection-id}
+      name: rec-inspections-inspection-id
+      description: REST surface for rec-inspections-inspection_id.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a Detailed Receiving Inspection Record.
+        call: 1factory-receiving.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rec/plans
+      name: rec-plans
+      description: REST surface for rec-plans.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of Receiving Plans for Your Organization.
+        call: 1factory-receiving.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rec/plans/{plan-id}
+      name: rec-plans-plan-id
+      description: REST surface for rec-plans-plan_id.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a Detailed Receiving Plan Record.
+        call: 1factory-receiving.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: 1factory-receiving-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for 1Factory API — Receiving. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: 1factory-gets-list-receiving-first
+      description: 1Factory Gets a List of Receiving First-article Inspections for Your Organization.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-receiving.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-creates-new-receiving-first
+      description: 1Factory Creates a New Receiving First-article Inspection for Your Organization.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: 1factory-receiving.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-detailed-receiving-first
+      description: 1Factory Gets a Detailed Receiving First-article Inspection Record.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-receiving.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-list-receiving-inspections
+      description: 1Factory Gets a List of Receiving Inspections for Your Organization.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-receiving.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-creates-new-receiving-inspection
+      description: 1Factory Creates a New Receiving Inspection for Your Organization.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: 1factory-receiving.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-detailed-receiving-inspection
+      description: 1Factory Gets a Detailed Receiving Inspection Record.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-receiving.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-list-receiving-plans
+      description: 1Factory Gets a List of Receiving Plans for Your Organization.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-receiving.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-detailed-receiving-plan
+      description: 1Factory Gets a Detailed Receiving Plan Record.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-receiving.get
+      outputParameters:
+      - type: object
+        mapping: $.

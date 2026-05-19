@@ -1,0 +1,302 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 1Factory API — Manufacturing
+  description: '1Factory API — Manufacturing. 8 operations. Lead operation: 1Factory Gets a List of Manufacturing First-article
+    Inspections for Your Organization.. Self-contained Naftiko capability covering one 1factory business surface.'
+  tags:
+  - 1factory
+  - Manufacturing
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    1FACTORY_API_KEY: 1FACTORY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: 1factory-manufacturing
+    baseUri: https://www.1factory.co/api/v1
+    description: 1Factory API — Manufacturing business capability. Self-contained, no shared references.
+    resources:
+    - name: mfg-fais
+      path: /mfg/fais
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of Manufacturing First-article Inspections for Your Organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post
+        method: POST
+        description: 1Factory Creates a New Manufacturing First-article Inspection for Your Organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: mfg-fais-inspection_id
+      path: /mfg/fais/{inspection_id}
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a Detailed Manufacturing First-article Inspection Record.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: mfg-inspections
+      path: /mfg/inspections
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of Manufacturing Inspections for Your Organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post
+        method: POST
+        description: 1Factory Creates a New Manufacturing Inspection for Your Organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: mfg-inspections-inspection_id
+      path: /mfg/inspections/{inspection_id}
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a Detailed Manufacturing Inspection Record.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: mfg-plans
+      path: /mfg/plans
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a List of Manufacturing Plans for Your Organization.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: mfg-plans-plan_id
+      path: /mfg/plans/{plan_id}
+      operations:
+      - name: get
+        method: GET
+        description: 1Factory Gets a Detailed Manufacturing Plan Record.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: x-1factory-org
+      value: '{{env.1FACTORY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: 1factory-manufacturing-rest
+    port: 8080
+    description: REST adapter for 1Factory API — Manufacturing. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/mfg/fais
+      name: mfg-fais
+      description: REST surface for mfg-fais.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of Manufacturing First-article Inspections for Your Organization.
+        call: 1factory-manufacturing.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: 1Factory Creates a New Manufacturing First-article Inspection for Your Organization.
+        call: 1factory-manufacturing.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/mfg/fais/{inspection-id}
+      name: mfg-fais-inspection-id
+      description: REST surface for mfg-fais-inspection_id.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a Detailed Manufacturing First-article Inspection Record.
+        call: 1factory-manufacturing.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/mfg/inspections
+      name: mfg-inspections
+      description: REST surface for mfg-inspections.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of Manufacturing Inspections for Your Organization.
+        call: 1factory-manufacturing.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: 1Factory Creates a New Manufacturing Inspection for Your Organization.
+        call: 1factory-manufacturing.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/mfg/inspections/{inspection-id}
+      name: mfg-inspections-inspection-id
+      description: REST surface for mfg-inspections-inspection_id.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a Detailed Manufacturing Inspection Record.
+        call: 1factory-manufacturing.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/mfg/plans
+      name: mfg-plans
+      description: REST surface for mfg-plans.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a List of Manufacturing Plans for Your Organization.
+        call: 1factory-manufacturing.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/mfg/plans/{plan-id}
+      name: mfg-plans-plan-id
+      description: REST surface for mfg-plans-plan_id.
+      operations:
+      - method: GET
+        name: get
+        description: 1Factory Gets a Detailed Manufacturing Plan Record.
+        call: 1factory-manufacturing.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: 1factory-manufacturing-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for 1Factory API — Manufacturing. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: 1factory-gets-list-manufacturing-first
+      description: 1Factory Gets a List of Manufacturing First-article Inspections for Your Organization.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-manufacturing.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-creates-new-manufacturing-first
+      description: 1Factory Creates a New Manufacturing First-article Inspection for Your Organization.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: 1factory-manufacturing.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-detailed-manufacturing-first
+      description: 1Factory Gets a Detailed Manufacturing First-article Inspection Record.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-manufacturing.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-list-manufacturing-inspections
+      description: 1Factory Gets a List of Manufacturing Inspections for Your Organization.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-manufacturing.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-creates-new-manufacturing-inspection
+      description: 1Factory Creates a New Manufacturing Inspection for Your Organization.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: 1factory-manufacturing.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-detailed-manufacturing-inspection
+      description: 1Factory Gets a Detailed Manufacturing Inspection Record.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-manufacturing.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-list-manufacturing-plans
+      description: 1Factory Gets a List of Manufacturing Plans for Your Organization.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-manufacturing.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: 1factory-gets-detailed-manufacturing-plan
+      description: 1Factory Gets a Detailed Manufacturing Plan Record.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: 1factory-manufacturing.get
+      outputParameters:
+      - type: object
+        mapping: $.
