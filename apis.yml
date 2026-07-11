@@ -53,6 +53,10 @@ apis:
       receiving inspections, supplier quality, first article inspections (FAI), and quality management system records
       (NCRs, CAPAs, complaints).
 common:
+  - type: DomainSecurity
+    url: security/1factory-domain-security.yml
+  - type: Authentication
+    url: authentication/1factory-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/1factory
   - type: Website

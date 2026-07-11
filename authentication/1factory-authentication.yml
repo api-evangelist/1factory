@@ -1,0 +1,25 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/1factory-openapi.json
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: OrgId
+  type: apiKey
+  in: header
+  parameter: x-1factory-org
+  description: ID of your organization in 1Factory. Available in the Settings page of the 1Factory
+    application.
+  sources:
+  - openapi/1factory-openapi.json
+- name: ApiKey
+  type: apiKey
+  in: header
+  parameter: x-1factory-key
+  description: API key for your organization. Generated in the Settings page of the 1Factory
+    application.
+  sources:
+  - openapi/1factory-openapi.json
