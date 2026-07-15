@@ -53,6 +53,8 @@ apis:
       receiving inspections, supplier quality, first article inspections (FAI), and quality management system records
       (NCRs, CAPAs, complaints).
 common:
+  - type: AgenticAccess
+    url: agentic-access/1factory-agentic-access.yml
   - type: DomainSecurity
     url: security/1factory-domain-security.yml
   - type: Authentication
