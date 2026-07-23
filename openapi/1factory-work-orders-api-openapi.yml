@@ -1,0 +1,157 @@
+openapi: 3.0.3
+info:
+  title: 1Factory Customers Work Orders API
+  description: "This API allows you to create and query a number of objects in your 1Factory account.\n\n The API accepts and returns request and response bodies as JSON, using UTF-8 encoding.\n\nClients may request that response bodies are compressed using gzip compression by passing 'gzip' in the 'Accept-Encoding' header.\n\nIn order to use the API, you need to generate an API key for your organization in the API section of the Settings page.\n\nEach API request must include the API key and your organization's ID as header parameters. You can also find your organization ID in the Settings page.\n\nAll date time values used in the API are in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) date-time format, and include a timezone offset value. Incoming values can specify any timezone offset.\n\nErrors returned by the API include an error code. An explanation of these error codes is available [here](./errors.html).\n\nUsage of the API is rate-limited - current default limits are:\n- 60 requests per minute\n- 1000 requests per day\n\nExceeding these limits will result in subsequent API requests returning a 429 error code. The daily request limit resets at midnight UTC.\n\n API responses include the following headers to allow clients to determine how close they are to exceeding them limits:\n- **x-ratelimit-minute-limit** permitted number of API calls per minute\n- **x-ratelimit-minute-reset** seconds remaining until minute limit resets\n- **x-ratelimit-minute-remaining** number of calls remaining until reaching limit\n- **x-ratelimit-day-limit** permitted number of API calls per minute\n- **x-ratelimit-day-reset** seconds remaining until minute limit resets\n- **x-ratelimit-day-remaining** number of calls remaining until reaching limit\n\nIf you find you require a higher usage limit, please contact 1Factory support to discuss your use case."
+  version: '24.31'
+  termsOfService: https://www.1factory.com/resources/TOS%20May%2020%202021.pdf
+  contact:
+    name: API Support
+    url: https://1factoryhelp.zendesk.com/hc/en-us
+    email: support@1factory.com
+servers:
+- url: https://www.1factory.co/api/v1
+  description: Sandbox server
+- url: https://www.1factory.com/api/v1
+  description: Production server
+- url: https://val.1factory.co/api/v1
+  description: Validated Sandbox server
+- url: https://val.1factory.com/api/v1
+  description: Validated Production server
+- url: https://localhost/api/v1
+  description: Local development
+security:
+- OrgId: []
+  ApiKey: []
+tags:
+- name: Work Orders
+  description: Work Orders define a list of current work order primary & secondary identifiers that may be used as identifiers on Inspections & FAIs.
+paths:
+  /mfg/workOrderList:
+    put:
+      tags:
+      - Work Orders
+      summary: 1Factory Updates the List of Manufacturing Work Order Numbers for Your Organization.
+      description: "Defines the current list of manufacturing work orders for your organization. If a work order list already exists, this request will overwrite it.\n\nThis list will be used to provide suggested values for manufacturing inspection identifiers in the 1Factory application, for example, when creating a new inspection. \n\nIt will also pre-populate the lot size for inspections created using an inspection identifier in this list, if the corresponding list entry has a lot size. \n\nNote that the names used to refer to inspection identifiers in the 1Factory application will depend on what is configured for Mfg. Insp. Ident. in your organization's settings page.\n\nThe combination of insp_ident1 and insp_ident2 uniquely identifies each work order. An error will be returned if the list contains duplicate entries."
+      requestBody:
+        $ref: '#/components/requestBodies/WorkOrderListRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateSuccess'
+        '400':
+          description: Invalid request. A problem with the request prevented it from being processed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: FAC-10
+                message: 'Invalid request body: ''-1'' is not a valid value for ''lot_size''.'
+        '401':
+          $ref: '#/components/responses/401'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /rec/workOrderList:
+    put:
+      tags:
+      - Work Orders
+      summary: 1Factory Updates the List of Receiving Work Order Numbers for Your Organization.
+      description: "Defines the current list of receiving work orders for your organization. If a work order list already exists, this request will overwrite it.\n\nThis list will be used to provide suggested values for manufacturing inspection identifiers in the 1Factory application, for example, when creating a new inspection. \n\nIt will also pre-populate the lot size for inspections created using an inspection identifier in this list, if the corresponding list entry has a lot size. \n\nNote that the names used to refer to inspection identifiers in the 1Factory application will depend on what is configured for Rec. Insp. Ident. in your organization's settings page.\n\nThe combination of insp_ident1 and insp_ident2 uniquely identifies each work order. An error will be returned if the list contains duplicate entries."
+      requestBody:
+        $ref: '#/components/requestBodies/WorkOrderListRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateSuccess'
+        '400':
+          description: Invalid request. A problem with the request prevented it from being processed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: FAC-10
+                message: 'Invalid request body: ''-1'' is not a valid value for ''lot_size''.'
+        '401':
+          $ref: '#/components/responses/401'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    insp_ident_1:
+      type: string
+      nullable: false
+      minLength: 1
+      maxLength: 255
+      description: Primary identifier for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'. Must be unique for each entry when used in a Work Order List.
+      example: PO-12345
+    insp_ident_2:
+      type: string
+      nullable: true
+      minLength: 0
+      maxLength: 255
+      description: 'Secondary identifier for an inspection or FAI, for example a Customer Purchase Order or Lot #. For FAIs this is the ''PO Number''. (Optional)'
+      example: C-B12345
+    Error:
+      properties:
+        code:
+          type: string
+          description: Error code identifying type of error.
+        message:
+          type: string
+          description: Error message.
+    WorkOrderList:
+      type: array
+      minItems: 0
+      maxItems: 5000
+      items:
+        type: object
+        required:
+        - insp_ident_1
+        properties:
+          insp_ident_1:
+            $ref: '#/components/schemas/insp_ident_1'
+          insp_ident_2:
+            $ref: '#/components/schemas/insp_ident_2'
+          lot_size:
+            type: integer
+            format: int32
+            nullable: true
+            minimum: 0
+            description: The lot size for this order. (Optional).
+            example: 50
+  responses:
+    UpdateSuccess:
+      content:
+        application/json:
+          schema:
+            type: string
+            example: OK. Successfully updated.
+      description: OK. Success message returned.
+    '401':
+      description: Unauthorized. Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: FAC-2
+            message: Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.
+  requestBodies:
+    WorkOrderListRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WorkOrderList'
+  securitySchemes:
+    OrgId:
+      type: apiKey
+      in: header
+      name: x-1factory-org
+      description: ID of your organization in 1Factory. Available in the Settings page of the 1Factory application.
+    ApiKey:
+      type: apiKey
+      in: header
+      name: x-1factory-key
+      description: API key for your organization. Generated in the Settings page of the 1Factory application.
