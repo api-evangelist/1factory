@@ -1,0 +1,26 @@
+{
+  "provider": "1factory",
+  "sources": [
+    "1factory-customers-api-openapi.yml",
+    "1factory-manufacturing-api-openapi.yml",
+    "1factory-part-master-api-openapi.yml",
+    "1factory-qms-api-openapi.yml",
+    "1factory-receiving-api-openapi.yml",
+    "1factory-suppliers-api-openapi.yml",
+    "1factory-work-orders-api-openapi.yml"
+  ],
+  "outputs": [
+    "1factory-customers-api-openapi.yml",
+    "1factory-manufacturing-api-openapi.yml",
+    "1factory-part-master-api-openapi.yml",
+    "1factory-qms-api-openapi.yml",
+    "1factory-receiving-api-openapi.yml",
+    "1factory-suppliers-api-openapi.yml",
+    "1factory-work-orders-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
