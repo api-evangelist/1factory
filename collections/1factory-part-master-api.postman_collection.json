@@ -1,0 +1,1032 @@
+{
+  "item": [
+    {
+      "id": "63a24f24-353c-452f-b174-d2f35fbce5a6",
+      "name": "Part Master",
+      "description": {
+        "content": "Part Master defines the part numbers, revisions and other information for parts referenced in Plans, Inspections, FAIs etc.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3d087cbc-8adb-408a-bfca-8a30a16dc9d7",
+          "name": "1Factory Creates a New (or Updates Existing) Part Master Entry for Your Organization.",
+          "request": {
+            "name": "1Factory Creates a New (or Updates Existing) Part Master Entry for Your Organization.",
+            "description": {
+              "content": "Create a new part master entry that can be used when referring to parts when creating Plans, Inspections, FAIs etc. \n\n The part number and rev must be unique - if a part master with the same part number and revision already exists, the existing Part Master entry will be overwritten.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partMasters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"part_number\": \"<string>\",\n  \"rev\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"Active\",\n  \"alt_part_number\": \"<string>\",\n  \"alt_rev\": \"<string>\",\n  \"alt_part_number2\": \"<string>\",\n  \"alt_rev2\": \"<string>\",\n  \"project_identifier\": {},\n  \"cost\": \"<double>\",\n  \"unit\": \"<string>\",\n  \"is_assembly\": false,\n  \"is_itar\": false,\n  \"is_buy\": false,\n  \"comments\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "16901fc2-ee25-4d59-95ed-bda377c97d5c",
+              "name": "OK. Successfully updated part master entry is returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partMasters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"description\": \"example-value\",\n  \"status\": \"Active\",\n  \"alt_part_number\": \"example-value\",\n  \"alt_rev\": \"example-value\",\n  \"alt_part_number2\": \"example-value\",\n  \"alt_rev2\": \"example-value\",\n  \"project_identifier\": \"example-value\",\n  \"cost\": 3.14,\n  \"unit\": \"example-value\",\n  \"is_assembly\": true,\n  \"is_itar\": true,\n  \"is_buy\": true,\n  \"comments\": \"example-value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ID\": 42,\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"description\": \"example-value\",\n  \"status\": \"Inactive\",\n  \"alt_part_number\": \"example-value\",\n  \"alt_rev\": \"example-value\",\n  \"alt_part_number2\": \"example-value\",\n  \"alt_rev2\": \"example-value\",\n  \"project_identifier\": \"example-value\",\n  \"plan_count\": 3.14,\n  \"ncr_count\": 3.14,\n  \"type\": \"Standard\",\n  \"parent_part_number\": \"example-value\",\n  \"parent_rev\": \"example-value\",\n  \"cost\": 3.14,\n  \"unit\": \"example-value\",\n  \"is_library\": true,\n  \"is_assembly\": true,\n  \"is_itar\": true,\n  \"has_ppap\": true,\n  \"component_parts\": [\n    {\n      \"part_number\": \"example-value\",\n      \"rev\": \"example-value\",\n      \"quantity\": 3.14\n    }\n  ],\n  \"is_buy\": true,\n  \"comments\": \"example-value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adb947e8-b802-4b60-b89b-0b4d05dea5a7",
+              "name": "Created. Successfully created part master entry is returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partMasters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"description\": \"example-value\",\n  \"status\": \"Active\",\n  \"alt_part_number\": \"example-value\",\n  \"alt_rev\": \"example-value\",\n  \"alt_part_number2\": \"example-value\",\n  \"alt_rev2\": \"example-value\",\n  \"project_identifier\": \"example-value\",\n  \"cost\": 3.14,\n  \"unit\": \"example-value\",\n  \"is_assembly\": true,\n  \"is_itar\": true,\n  \"is_buy\": true,\n  \"comments\": \"example-value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ID\": 42,\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"description\": \"example-value\",\n  \"status\": \"Inactive\",\n  \"alt_part_number\": \"example-value\",\n  \"alt_rev\": \"example-value\",\n  \"alt_part_number2\": \"example-value\",\n  \"alt_rev2\": \"example-value\",\n  \"project_identifier\": \"example-value\",\n  \"plan_count\": 3.14,\n  \"ncr_count\": 3.14,\n  \"type\": \"ToS Entry\",\n  \"parent_part_number\": \"example-value\",\n  \"parent_rev\": \"example-value\",\n  \"cost\": 3.14,\n  \"unit\": \"example-value\",\n  \"is_library\": true,\n  \"is_assembly\": true,\n  \"is_itar\": true,\n  \"has_ppap\": true,\n  \"component_parts\": [\n    {\n      \"part_number\": \"example-value\",\n      \"rev\": \"example-value\",\n      \"quantity\": 3.14\n    }\n  ],\n  \"is_buy\": true,\n  \"comments\": \"example-value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c20b2887-9cfc-48f0-8783-26bf23457121",
+              "name": "Invalid request. A problem with the request prevented it from being processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partMasters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"description\": \"example-value\",\n  \"status\": \"Active\",\n  \"alt_part_number\": \"example-value\",\n  \"alt_rev\": \"example-value\",\n  \"alt_part_number2\": \"example-value\",\n  \"alt_rev2\": \"example-value\",\n  \"project_identifier\": \"example-value\",\n  \"cost\": 3.14,\n  \"unit\": \"example-value\",\n  \"is_assembly\": true,\n  \"is_itar\": true,\n  \"is_buy\": true,\n  \"comments\": \"example-value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-10\",\n  \"message\": \"Invalid request body: 'READY' is not a valid value for 'status'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a46a6c17-5763-4511-a003-822de9033ed3",
+              "name": "Unauthorized. Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partMasters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"description\": \"example-value\",\n  \"status\": \"Active\",\n  \"alt_part_number\": \"example-value\",\n  \"alt_rev\": \"example-value\",\n  \"alt_part_number2\": \"example-value\",\n  \"alt_rev2\": \"example-value\",\n  \"project_identifier\": \"example-value\",\n  \"cost\": 3.14,\n  \"unit\": \"example-value\",\n  \"is_assembly\": true,\n  \"is_itar\": true,\n  \"is_buy\": true,\n  \"comments\": \"example-value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6aeaeee-e510-4119-957d-b0c14cc9b16d",
+          "name": "1Factory Gets a List of Part Masters for Your Organization.",
+          "request": {
+            "name": "1Factory Gets a List of Part Masters for Your Organization.",
+            "description": {
+              "content": "The list of part master entries that can be filtered by specifying query parameters. \n Paging parameters control the number of rows of part master objects returned. By default, the first 100 part masters are returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partMasters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
+                },
+                {
+                  "disabled": false,
+                  "key": "part_number",
+                  "value": "<string>",
+                  "description": "Part name / number to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "rev",
+                  "value": "<string>",
+                  "description": "Part rev to filter on. Typically used in conjunction with the part_number query parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "parent_part_number",
+                  "value": "<string>",
+                  "description": "Parent Part number to filter on for Table of Size entries."
+                },
+                {
+                  "disabled": false,
+                  "key": "parent_rev",
+                  "value": "<string>",
+                  "description": "Parent Part rev to filter on for Table of Size entries."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_library",
+                  "value": "<boolean>",
+                  "description": "If the part is a configured as a library."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_assembly",
+                  "value": "<boolean>",
+                  "description": "If the part is a configured as an assembly."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_itar",
+                  "value": "<boolean>",
+                  "description": "If the part is a configured as an ITAR part."
+                },
+                {
+                  "disabled": false,
+                  "key": "has_ppap",
+                  "value": "<boolean>",
+                  "description": "If the part has any PPAP documents."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "If the part has any PPAP documents."
+                },
+                {
+                  "disabled": false,
+                  "key": "project_identifier",
+                  "value": "<string>",
+                  "description": "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<dateTime>",
+                  "description": "Return objects created after the specified date-time"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<dateTime>",
+                  "description": "Return objects created before the specified date-time"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_after",
+                  "value": "<dateTime>",
+                  "description": "Return objects updated after the specified date-time"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_before",
+                  "value": "<dateTime>",
+                  "description": "Return objects updated before the specified date-time"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b27fceba-a2f4-486d-8e90-2754aa48a47b",
+              "name": "Returns a list of part masters, most recently updated first. Utilize paging query parameters to query older part masters. By default the 100 most recent are returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partMasters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "part_number",
+                      "value": "12-34567-89"
+                    },
+                    {
+                      "key": "rev",
+                      "value": "A"
+                    },
+                    {
+                      "key": "parent_part_number",
+                      "value": "example-value"
+                    },
+                    {
+                      "key": "parent_rev",
+                      "value": "example-value"
+                    },
+                    {
+                      "key": "is_library",
+                      "value": "true"
+                    },
+                    {
+                      "key": "is_assembly",
+                      "value": "true"
+                    },
+                    {
+                      "key": "is_itar",
+                      "value": "true"
+                    },
+                    {
+                      "key": "has_ppap",
+                      "value": "true"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project_identifier",
+                      "value": "Bearings"
+                    },
+                    {
+                      "key": "status",
+                      "value": "Active"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"ID\": 42,\n    \"part_number\": \"example-value\",\n    \"rev\": \"example-value\",\n    \"description\": \"example-value\",\n    \"status\": \"Active\",\n    \"alt_part_number\": \"example-value\",\n    \"alt_rev\": \"example-value\",\n    \"alt_part_number2\": \"example-value\",\n    \"alt_rev2\": \"example-value\",\n    \"project_identifier\": \"example-value\",\n    \"plan_count\": 3.14,\n    \"ncr_count\": 3.14,\n    \"type\": \"Standard\",\n    \"parent_part_number\": \"example-value\",\n    \"parent_rev\": \"example-value\",\n    \"cost\": 3.14,\n    \"unit\": \"example-value\",\n    \"is_library\": true,\n    \"is_assembly\": true,\n    \"is_itar\": true,\n    \"has_ppap\": true,\n    \"component_parts\": [\n      {\n        \"part_number\": {},\n        \"rev\": {},\n        \"quantity\": {}\n      }\n    ],\n    \"is_buy\": true,\n    \"comments\": \"example-value\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3eb10b3-0f20-4001-a312-acd42cf5b013",
+              "name": "Invalid request. A problem with the request prevented it from being processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partMasters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "part_number",
+                      "value": "12-34567-89"
+                    },
+                    {
+                      "key": "rev",
+                      "value": "A"
+                    },
+                    {
+                      "key": "parent_part_number",
+                      "value": "example-value"
+                    },
+                    {
+                      "key": "parent_rev",
+                      "value": "example-value"
+                    },
+                    {
+                      "key": "is_library",
+                      "value": "true"
+                    },
+                    {
+                      "key": "is_assembly",
+                      "value": "true"
+                    },
+                    {
+                      "key": "is_itar",
+                      "value": "true"
+                    },
+                    {
+                      "key": "has_ppap",
+                      "value": "true"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project_identifier",
+                      "value": "Bearings"
+                    },
+                    {
+                      "key": "status",
+                      "value": "Active"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-10\",\n  \"message\": \"Invalid request body: 'READY' is not a valid value for 'status'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2db51b41-e9df-4bd4-b831-57a4f8d22cd8",
+              "name": "Unauthorized. Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partMasters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "part_number",
+                      "value": "12-34567-89"
+                    },
+                    {
+                      "key": "rev",
+                      "value": "A"
+                    },
+                    {
+                      "key": "parent_part_number",
+                      "value": "example-value"
+                    },
+                    {
+                      "key": "parent_rev",
+                      "value": "example-value"
+                    },
+                    {
+                      "key": "is_library",
+                      "value": "true"
+                    },
+                    {
+                      "key": "is_assembly",
+                      "value": "true"
+                    },
+                    {
+                      "key": "is_itar",
+                      "value": "true"
+                    },
+                    {
+                      "key": "has_ppap",
+                      "value": "true"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project_identifier",
+                      "value": "Bearings"
+                    },
+                    {
+                      "key": "status",
+                      "value": "Active"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1449a826-aeb2-4748-aab0-2afe326e091a",
+          "name": "1Factory Defines Assembly Relationships Between Part Masters.",
+          "request": {
+            "name": "1Factory Defines Assembly Relationships Between Part Masters.",
+            "description": {
+              "content": "Defines (or replaces) the list of parts that make up an assembly part. All referenced part numbers & revisions must already exist as Part Master entries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partMasters",
+                "assemblies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"part_number\": \"<string>\",\n  \"rev\": \"<string>\",\n  \"sub_parts\": [\n    {\n      \"part_number\": \"<string>\",\n      \"rev\": \"<string>\",\n      \"quantity\": \"<number>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "68b33d62-8863-4a8b-89a4-f856e6289425",
+              "name": "OK. Set assembly on Part Master entry. Part Master entry for which the assembly was created is returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partMasters",
+                    "assemblies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"sub_parts\": [\n    {\n      \"part_number\": \"example-value\",\n      \"rev\": \"example-value\",\n      \"quantity\": 3.14\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ID\": 12345,\n  \"part_number\": \"10-12345-12\",\n  \"rev\": \"A\",\n  \"description\": \"Three Lobe Shaft\",\n  \"status\": \"ACTIVE\",\n  \"alt_part_number\": \"DN-1234568\",\n  \"alt_rev\": \"B\",\n  \"project_identifier\": \"Bearings\",\n  \"cost\": 3.5,\n  \"unit\": \"Each\",\n  \"is_assembly\": false,\n  \"component_parts\": [\n    {\n      \"part_number\": \"12-54321-21\",\n      \"rev\": \"C\",\n      \"quantity\": 4\n    },\n    {\n      \"part_number\": \"12-54322-11\",\n      \"rev\": \"B\",\n      \"quantity\": 2\n    }\n  ],\n  \"is_buy\": false,\n  \"comments\": \"This is a brand new part that we are prototyping.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00b8a166-f6ee-4ea8-9156-b71abe3f6115",
+              "name": "Invalid request. A problem with the request prevented it from being processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partMasters",
+                    "assemblies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"sub_parts\": [\n    {\n      \"part_number\": \"example-value\",\n      \"rev\": \"example-value\",\n      \"quantity\": 3.14\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-10\",\n  \"message\": \"Invalid request body: '-1' is not a valid value for 'quantity'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "345b3ee4-0f58-472e-8220-bb666ba8c7f9",
+              "name": "Unauthorized. Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partMasters",
+                    "assemblies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"sub_parts\": [\n    {\n      \"part_number\": \"example-value\",\n      \"rev\": \"example-value\",\n      \"quantity\": 3.14\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "164611bc-d427-489e-bde7-8a069a4be657",
+              "name": "Referenced PartMaster does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partMasters",
+                    "assemblies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"sub_parts\": [\n    {\n      \"part_number\": \"example-value\",\n      \"rev\": \"example-value\",\n      \"quantity\": 3.14\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-20\",\n  \"message\": \"Not found: Part Master '12-54322-11 B' does not exist.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.1factory.co/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-1factory-org"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "558f5ab6-8a65-495b-9f76-5b52de46281e",
+    "name": "1Factory Customers Part Master API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This API allows you to create and query a number of objects in your 1Factory account.\n\n The API accepts and returns request and response bodies as JSON, using UTF-8 encoding.\n\nClients may request that response bodies are compressed using gzip compression by passing 'gzip' in the 'Accept-Encoding' header.\n\nIn order to use the API, you need to generate an API key for your organization in the API section of the Settings page.\n\nEach API request must include the API key and your organization's ID as header parameters. You can also find your organization ID in the Settings page.\n\nAll date time values used in the API are in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) date-time format, and include a timezone offset value. Incoming values can specify any timezone offset.\n\nErrors returned by the API include an error code. An explanation of these error codes is available [here](./errors.html).\n\nUsage of the API is rate-limited - current default limits are:\n- 60 requests per minute\n- 1000 requests per day\n\nExceeding these limits will result in subsequent API requests returning a 429 error code. The daily request limit resets at midnight UTC.\n\n API responses include the following headers to allow clients to determine how close they are to exceeding them limits:\n- **x-ratelimit-minute-limit** permitted number of API calls per minute\n- **x-ratelimit-minute-reset** seconds remaining until minute limit resets\n- **x-ratelimit-minute-remaining** number of calls remaining until reaching limit\n- **x-ratelimit-day-limit** permitted number of API calls per minute\n- **x-ratelimit-day-reset** seconds remaining until minute limit resets\n- **x-ratelimit-day-remaining** number of calls remaining until reaching limit\n\nIf you find you require a higher usage limit, please contact 1Factory support to discuss your use case.\n\nContact Support:\n Name: API Support\n Email: support@1factory.com",
+      "type": "text/plain"
+    }
+  }
+}

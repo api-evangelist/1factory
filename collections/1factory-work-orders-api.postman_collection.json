@@ -1,0 +1,411 @@
+{
+  "item": [
+    {
+      "id": "b35eba3d-03e7-45d7-b43f-b973b5ae15eb",
+      "name": "Work Orders",
+      "description": {
+        "content": "Work Orders define a list of current work order primary & secondary identifiers that may be used as identifiers on Inspections & FAIs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c5b28b26-f99a-4d05-ba7d-4aaccf67a721",
+          "name": "1Factory Updates the List of Manufacturing Work Order Numbers for Your Organization.",
+          "request": {
+            "name": "1Factory Updates the List of Manufacturing Work Order Numbers for Your Organization.",
+            "description": {
+              "content": "Defines the current list of manufacturing work orders for your organization. If a work order list already exists, this request will overwrite it.\n\nThis list will be used to provide suggested values for manufacturing inspection identifiers in the 1Factory application, for example, when creating a new inspection. \n\nIt will also pre-populate the lot size for inspections created using an inspection identifier in this list, if the corresponding list entry has a lot size. \n\nNote that the names used to refer to inspection identifiers in the 1Factory application will depend on what is configured for Mfg. Insp. Ident. in your organization's settings page.\n\nThe combination of insp_ident1 and insp_ident2 uniquely identifies each work order. An error will be returned if the list contains duplicate entries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mfg",
+                "workOrderList"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "82cf3022-2b36-4d8f-867c-db2e8db353a7",
+              "name": "OK. Success message returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "workOrderList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"OK. Successfully updated.\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16fb2ce2-a167-4a25-8157-c1ade470ca03",
+              "name": "Invalid request. A problem with the request prevented it from being processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "workOrderList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-10\",\n  \"message\": \"Invalid request body: '-1' is not a valid value for 'lot_size'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e72f001-125e-40aa-8217-eb81165898f2",
+              "name": "Unauthorized. Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "workOrderList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08c665d8-253d-47b5-8483-528af0ddda61",
+          "name": "1Factory Updates the List of Receiving Work Order Numbers for Your Organization.",
+          "request": {
+            "name": "1Factory Updates the List of Receiving Work Order Numbers for Your Organization.",
+            "description": {
+              "content": "Defines the current list of receiving work orders for your organization. If a work order list already exists, this request will overwrite it.\n\nThis list will be used to provide suggested values for manufacturing inspection identifiers in the 1Factory application, for example, when creating a new inspection. \n\nIt will also pre-populate the lot size for inspections created using an inspection identifier in this list, if the corresponding list entry has a lot size. \n\nNote that the names used to refer to inspection identifiers in the 1Factory application will depend on what is configured for Rec. Insp. Ident. in your organization's settings page.\n\nThe combination of insp_ident1 and insp_ident2 uniquely identifies each work order. An error will be returned if the list contains duplicate entries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rec",
+                "workOrderList"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  },\n  {\n    \"insp_ident_1\": \"<string>\",\n    \"insp_ident_2\": \"<string>\",\n    \"lot_size\": \"<integer>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7382b43b-bd34-4a10-84e2-103fb8099bde",
+              "name": "OK. Success message returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rec",
+                    "workOrderList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"OK. Successfully updated.\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad4f8464-610c-4da6-8aba-a16a37a9f3d6",
+              "name": "Invalid request. A problem with the request prevented it from being processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rec",
+                    "workOrderList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-10\",\n  \"message\": \"Invalid request body: '-1' is not a valid value for 'lot_size'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fdda812-a88f-4d85-91cc-5c8127747f26",
+              "name": "Unauthorized. Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rec",
+                    "workOrderList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.1factory.co/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-1factory-org"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "75f5adbd-efa2-4af6-9a95-a8a3e90d6e18",
+    "name": "1Factory Customers Work Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This API allows you to create and query a number of objects in your 1Factory account.\n\n The API accepts and returns request and response bodies as JSON, using UTF-8 encoding.\n\nClients may request that response bodies are compressed using gzip compression by passing 'gzip' in the 'Accept-Encoding' header.\n\nIn order to use the API, you need to generate an API key for your organization in the API section of the Settings page.\n\nEach API request must include the API key and your organization's ID as header parameters. You can also find your organization ID in the Settings page.\n\nAll date time values used in the API are in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) date-time format, and include a timezone offset value. Incoming values can specify any timezone offset.\n\nErrors returned by the API include an error code. An explanation of these error codes is available [here](./errors.html).\n\nUsage of the API is rate-limited - current default limits are:\n- 60 requests per minute\n- 1000 requests per day\n\nExceeding these limits will result in subsequent API requests returning a 429 error code. The daily request limit resets at midnight UTC.\n\n API responses include the following headers to allow clients to determine how close they are to exceeding them limits:\n- **x-ratelimit-minute-limit** permitted number of API calls per minute\n- **x-ratelimit-minute-reset** seconds remaining until minute limit resets\n- **x-ratelimit-minute-remaining** number of calls remaining until reaching limit\n- **x-ratelimit-day-limit** permitted number of API calls per minute\n- **x-ratelimit-day-reset** seconds remaining until minute limit resets\n- **x-ratelimit-day-remaining** number of calls remaining until reaching limit\n\nIf you find you require a higher usage limit, please contact 1Factory support to discuss your use case.\n\nContact Support:\n Name: API Support\n Email: support@1factory.com",
+      "type": "text/plain"
+    }
+  }
+}

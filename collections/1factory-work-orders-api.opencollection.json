@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Factory Customers Work Orders API",
+    "version": "24.31"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-1factory-org",
+      "value": "{{x-1factory-org}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Work Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "1Factory Updates the List of Manufacturing Work Order Numbers for Your Organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.1factory.co/api/v1/mfg/workOrderList",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Defines the current list of manufacturing work orders for your organization. If a work order list already exists, this request will overwrite it.\n\nThis list will be used to provide suggested values for manufacturing inspection identifiers in the 1Factory application, for example, when creating a new inspection. \n\nIt will also pre-populate the lot size for inspections created using an inspection identifier in this list, if the corresponding list entry has a lot size. \n\nNote that the names used to"
+        },
+        {
+          "info": {
+            "name": "1Factory Updates the List of Receiving Work Order Numbers for Your Organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.1factory.co/api/v1/rec/workOrderList",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Defines the current list of receiving work orders for your organization. If a work order list already exists, this request will overwrite it.\n\nThis list will be used to provide suggested values for manufacturing inspection identifiers in the 1Factory application, for example, when creating a new inspection. \n\nIt will also pre-populate the lot size for inspections created using an inspection identifier in this list, if the corresponding list entry has a lot size. \n\nNote that the names used to ref"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2698 @@
+{
+  "item": [
+    {
+      "id": "f8e9d461-3d28-434d-9402-f926af852828",
+      "name": "Manufacturing",
+      "description": {
+        "content": "Data related to parts manufactured by your organization.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "db225bd9-f834-426b-98ac-4d5ffa9f3b29",
+          "name": "1Factory Gets a List of Manufacturing Plans for Your Organization.",
+          "request": {
+            "name": "1Factory Gets a List of Manufacturing Plans for Your Organization.",
+            "description": {
+              "content": "The list of manufacturing plans can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Plan objects returned. By default, the first 100 plans are returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mfg",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
+                },
+                {
+                  "disabled": false,
+                  "key": "part_number",
+                  "value": "<string>",
+                  "description": "Part name / number to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "rev",
+                  "value": "<string>",
+                  "description": "Part rev to filter on. Typically used in conjunction with the part_number query parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "operation",
+                  "value": "<string>",
+                  "description": "Operation of the inspection, FAI or Plan. \n\n(Only available if Inspection By Operation or Plan By Operation are enabled.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "version_status",
+                  "value": "<string>",
+                  "description": "Version status to filter on. Approval status is only available to Organizations with plan approvals enabled. Active is the released and highest version."
+                },
+                {
+                  "disabled": false,
+                  "key": "approval_status",
+                  "value": "<string>",
+                  "description": "The status of an object that requires approval before releasing or closing.\n\n(Availability depends on Organization settings.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "customer",
+                  "value": "<string>",
+                  "description": "Name of customer to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_tablulated",
+                  "value": "<boolean>",
+                  "description": "If tabulated plans should be filtered on."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_spec_lib",
+                  "value": "<boolean>",
+                  "description": "If spec library plans should be filtered on."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<dateTime>",
+                  "description": "Return objects created after the specified date-time"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<dateTime>",
+                  "description": "Return objects created before the specified date-time"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_after",
+                  "value": "<dateTime>",
+                  "description": "Return objects updated after the specified date-time"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_before",
+                  "value": "<dateTime>",
+                  "description": "Return objects updated before the specified date-time"
+                },
+                {
+                  "disabled": false,
+                  "key": "closed_after",
+                  "value": "<dateTime>",
+                  "description": "Return only approved or rejected objects closed after the specified date-time."
+                },
+                {
+                  "disabled": false,
+                  "key": "closed_before",
+                  "value": "<dateTime>",
+                  "description": "Return only approved or rejected objects closed before the specified date-time."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dabfaabb-7ae9-4c57-a606-62cb08002aab",
+              "name": "Returns a list of plans, most recently updated first. Utilize paging query parameters to query older plans. By default the 100 most recent are returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "part_number",
+                      "value": "12-34567-89"
+                    },
+                    {
+                      "key": "rev",
+                      "value": "A"
+                    },
+                    {
+                      "key": "operation",
+                      "value": "OP 10"
+                    },
+                    {
+                      "key": "status",
+                      "value": "Active"
+                    },
+                    {
+                      "key": "version_status",
+                      "value": "Active"
+                    },
+                    {
+                      "key": "approval_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "Acme Industries"
+                    },
+                    {
+                      "key": "is_tablulated",
+                      "value": "false"
+                    },
+                    {
+                      "key": "is_spec_lib",
+                      "value": "false"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "closed_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "closed_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"ID\": 42,\n    \"part_number\": \"example-value\",\n    \"rev\": \"example-value\",\n    \"part_description\": \"example-value\",\n    \"operation\": \"example-value\",\n    \"project_identifier\": \"example-value\",\n    \"status\": \"Inactive\",\n    \"version\": 3.14,\n    \"version_status\": \"Draft\",\n    \"approval_status\": \"Approved\",\n    \"customer_name\": \"example-value\",\n    \"supplier_name\": \"example-value\",\n    \"supplier_number\": \"example-value\",\n    \"is_tabulated\": true,\n    \"is_spec_lib\": true,\n    \"created_by_name\": \"example-value\",\n    \"created_on\": \"2025-03-15T14:30:00Z\",\n    \"updated_on\": \"2025-03-15T14:30:00Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "add15ac4-a3e7-4383-b8cc-b781f6a937df",
+              "name": "Invalid request. A problem with the request query parameters prevents it from being processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "part_number",
+                      "value": "12-34567-89"
+                    },
+                    {
+                      "key": "rev",
+                      "value": "A"
+                    },
+                    {
+                      "key": "operation",
+                      "value": "OP 10"
+                    },
+                    {
+                      "key": "status",
+                      "value": "Active"
+                    },
+                    {
+                      "key": "version_status",
+                      "value": "Active"
+                    },
+                    {
+                      "key": "approval_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "Acme Industries"
+                    },
+                    {
+                      "key": "is_tablulated",
+                      "value": "false"
+                    },
+                    {
+                      "key": "is_spec_lib",
+                      "value": "false"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "closed_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "closed_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-11\",\n  \"message\": \"Invalid query parameter: '-1' is not a valid value for 'page_size'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af50b830-58bb-4528-93e2-d08dc5df48e4",
+              "name": "Unauthorized. Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "part_number",
+                      "value": "12-34567-89"
+                    },
+                    {
+                      "key": "rev",
+                      "value": "A"
+                    },
+                    {
+                      "key": "operation",
+                      "value": "OP 10"
+                    },
+                    {
+                      "key": "status",
+                      "value": "Active"
+                    },
+                    {
+                      "key": "version_status",
+                      "value": "Active"
+                    },
+                    {
+                      "key": "approval_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "Acme Industries"
+                    },
+                    {
+                      "key": "is_tablulated",
+                      "value": "false"
+                    },
+                    {
+                      "key": "is_spec_lib",
+                      "value": "false"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "closed_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "closed_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ad9dec7-7805-4ced-9e31-fcfb107ae9db",
+          "name": "1Factory Gets a Detailed Manufacturing Plan Record.",
+          "request": {
+            "name": "1Factory Gets a Detailed Manufacturing Plan Record.",
+            "description": {
+              "content": "Returns the specified plan record, including specifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mfg",
+                "plans",
+                ":plan_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "plan_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cbb6ccf6-2a0e-42bb-bf28-b339d6be663c",
+              "name": "Returns a detailed plan record, including specification data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "plans",
+                    ":plan_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "plan_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ID\": 42,\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"part_description\": \"example-value\",\n  \"operation\": \"example-value\",\n  \"project_identifier\": \"example-value\",\n  \"status\": \"Inactive\",\n  \"version\": 3.14,\n  \"version_status\": \"Released\",\n  \"approval_status\": \"Pending\",\n  \"customer_name\": \"example-value\",\n  \"supplier_name\": \"example-value\",\n  \"supplier_number\": \"example-value\",\n  \"is_tabulated\": true,\n  \"is_spec_lib\": true,\n  \"created_by_name\": \"example-value\",\n  \"created_on\": \"2025-03-15T14:30:00Z\",\n  \"updated_on\": \"2025-03-15T14:30:00Z\",\n  \"specifications\": [\n    \"example-value\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cabfc98d-86ef-42c7-9d76-055f6c68a10b",
+              "name": "Invalid request. A problem with the request path parameters prevents it from being processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "plans",
+                    ":plan_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "plan_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-12\",\n  \"message\": \"Invalid path parameter: 'badID' is not a valid value for 'ID'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "160b3e92-dc14-498c-bc2e-a4878207c38a",
+              "name": "Unauthorized. Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "plans",
+                    ":plan_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "plan_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78cef64e-6a80-4393-a48e-df8c1d282e1c",
+              "name": "Plan does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "plans",
+                    ":plan_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "plan_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-20\",\n  \"message\": \"Not found: Manufacturing Plan '12345' does not exist.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18b68dcf-9f93-4e6a-9747-c1e800c17ad3",
+          "name": "1Factory Gets a List of Manufacturing Inspections for Your Organization.",
+          "request": {
+            "name": "1Factory Gets a List of Manufacturing Inspections for Your Organization.",
+            "description": {
+              "content": "The list of manufacturing inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mfg",
+                "inspections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
+                },
+                {
+                  "disabled": false,
+                  "key": "part_number",
+                  "value": "<string>",
+                  "description": "Part name / number to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "rev",
+                  "value": "<string>",
+                  "description": "Part rev to filter on. Typically used in conjunction with the part_number query parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "insp_ident_1",
+                  "value": "<string>",
+                  "description": "Primary identifier to filter on for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'."
+                },
+                {
+                  "disabled": false,
+                  "key": "insp_ident_2",
+                  "value": "<string>",
+                  "description": "Secondary identifier to filter on for an inspection or FAI, for example a Customer Purchase Order or Lot #. For FAIs this is the 'PO Number'."
+                },
+                {
+                  "disabled": false,
+                  "key": "customer",
+                  "value": "<string>",
+                  "description": "Name of customer to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "project_identifier",
+                  "value": "<string>",
+                  "description": "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
+                },
+                {
+                  "disabled": false,
+                  "key": "operation",
+                  "value": "<string>",
+                  "description": "Operation of the inspection, FAI or Plan. \n\n(Only available if Inspection By Operation or Plan By Operation are enabled.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "site",
+                  "value": "<string>",
+                  "description": "Location where inspection was performed. Must come from your organization's Sites List of Values."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Type of inspection to filter on, from your organization's Inspection Types List of Values."
+                },
+                {
+                  "disabled": false,
+                  "key": "insp_status",
+                  "value": "<string>",
+                  "description": "Inspection status to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "review_status",
+                  "value": "<string>",
+                  "description": "Review status to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<dateTime>",
+                  "description": "Return objects created after the specified date-time"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<dateTime>",
+                  "description": "Return objects created before the specified date-time"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_after",
+                  "value": "<dateTime>",
+                  "description": "Return objects updated after the specified date-time"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_before",
+                  "value": "<dateTime>",
+                  "description": "Return objects updated before the specified date-time"
+                },
+                {
+                  "disabled": false,
+                  "key": "closed_after",
+                  "value": "<dateTime>",
+                  "description": "Return only approved or rejected objects closed after the specified date-time."
+                },
+                {
+                  "disabled": false,
+                  "key": "closed_before",
+                  "value": "<dateTime>",
+                  "description": "Return only approved or rejected objects closed before the specified date-time."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9a19bb37-f0a4-40c6-b278-2967022dbff3",
+              "name": "Returns a list of inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "inspections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "part_number",
+                      "value": "12-34567-89"
+                    },
+                    {
+                      "key": "rev",
+                      "value": "A"
+                    },
+                    {
+                      "key": "insp_ident_1",
+                      "value": "PO-12345"
+                    },
+                    {
+                      "key": "insp_ident_2",
+                      "value": "C-B12345"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "Acme Industries"
+                    },
+                    {
+                      "key": "project_identifier",
+                      "value": "Bearings"
+                    },
+                    {
+                      "key": "operation",
+                      "value": "OP 10"
+                    },
+                    {
+                      "key": "site",
+                      "value": "QC Lab"
+                    },
+                    {
+                      "key": "type",
+                      "value": "Final"
+                    },
+                    {
+                      "key": "insp_status",
+                      "value": "Accepted"
+                    },
+                    {
+                      "key": "review_status",
+                      "value": "Reviewed"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "closed_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "closed_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"ID\": 42,\n    \"insp_ident_1\": \"example-value\",\n    \"insp_ident_2\": \"example-value\",\n    \"insp_ident_3\": \"example-value\",\n    \"part_number\": \"example-value\",\n    \"rev\": \"example-value\",\n    \"part_description\": \"example-value\",\n    \"operation\": \"example-value\",\n    \"customer_name\": \"example-value\",\n    \"supplier_name\": \"example-value\",\n    \"supplier_number\": \"example-value\",\n    \"project_identifier\": \"example-value\",\n    \"site\": \"example-value\",\n    \"created_by_name\": \"example-value\",\n    \"created_on\": \"2025-03-15T14:30:00Z\",\n    \"in_spec_pct\": 3.14,\n    \"inspection_status\": \"Rejected\",\n    \"inspected_by_name\": \"example-value\",\n    \"inspected_on\": \"2025-03-15T14:30:00Z\",\n    \"review_status\": \"Pending\",\n    \"reviewed_by_name\": \"example-value\",\n    \"reviewed_on\": \"2025-03-15T14:30:00Z\",\n    \"notes\": \"example-value\",\n    \"ncrs\": [\n      \"example-value\"\n    ],\n    \"updated_on\": \"2025-03-15T14:30:00Z\",\n    \"closed_on\": \"2025-03-15T14:30:00Z\",\n    \"inspection_type\": \"example-value\",\n    \"machines\": [\n      \"example-value\"\n    ],\n    \"lot_size\": 42,\n    \"parts_passed\": 3.14,\n    \"parts_failed\": 3.14\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fd69c4c-ace9-4224-9394-46f36aa6e420",
+              "name": "Invalid request. A problem with the request query parameters prevents it from being processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "inspections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "part_number",
+                      "value": "12-34567-89"
+                    },
+                    {
+                      "key": "rev",
+                      "value": "A"
+                    },
+                    {
+                      "key": "insp_ident_1",
+                      "value": "PO-12345"
+                    },
+                    {
+                      "key": "insp_ident_2",
+                      "value": "C-B12345"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "Acme Industries"
+                    },
+                    {
+                      "key": "project_identifier",
+                      "value": "Bearings"
+                    },
+                    {
+                      "key": "operation",
+                      "value": "OP 10"
+                    },
+                    {
+                      "key": "site",
+                      "value": "QC Lab"
+                    },
+                    {
+                      "key": "type",
+                      "value": "Final"
+                    },
+                    {
+                      "key": "insp_status",
+                      "value": "Accepted"
+                    },
+                    {
+                      "key": "review_status",
+                      "value": "Reviewed"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "closed_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "closed_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-11\",\n  \"message\": \"Invalid query parameter: '-1' is not a valid value for 'page_size'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ffbbdd2-eeca-4be7-8c0a-e032b60cf025",
+              "name": "Unauthorized. Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "inspections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "part_number",
+                      "value": "12-34567-89"
+                    },
+                    {
+                      "key": "rev",
+                      "value": "A"
+                    },
+                    {
+                      "key": "insp_ident_1",
+                      "value": "PO-12345"
+                    },
+                    {
+                      "key": "insp_ident_2",
+                      "value": "C-B12345"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "Acme Industries"
+                    },
+                    {
+                      "key": "project_identifier",
+                      "value": "Bearings"
+                    },
+                    {
+                      "key": "operation",
+                      "value": "OP 10"
+                    },
+                    {
+                      "key": "site",
+                      "value": "QC Lab"
+                    },
+                    {
+                      "key": "type",
+                      "value": "Final"
+                    },
+                    {
+                      "key": "insp_status",
+                      "value": "Accepted"
+                    },
+                    {
+                      "key": "review_status",
+                      "value": "Reviewed"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "closed_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "closed_before",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff7fbe4d-5749-4935-a057-949a84175675",
+          "name": "1Factory Creates a New Manufacturing Inspection for Your Organization.",
+          "request": {
+            "name": "1Factory Creates a New Manufacturing Inspection for Your Organization.",
+            "description": {
+              "content": "A new manufacturing inspection is created, ready for inspection data to be entered. \n\n ## Plan Identification \nThe plan used by the inspection is identified by part number and rev. An active version of a Plan for the specified part must exist when creating the inspection. \n\nFor Inspections that are for a Plan associated with a ToS part enter the part number and rev for the ToS entry.\n\n ## Uniqueness \nThe inspection is identified by its inspection identifiers and inspection type. A unique combination of work order identifiers and inspection type must be specified when creating a new inspection. If an inspection already exists with the specified identifiers and type, an error will be returned. \n\n ## Additional Details\n* Customer Name: The name must match the customer name in the system exactly\n* Operation: This field is optional, and only valid if your organization is configured for \"Inspections by Operation\". If enabled, the value must match an operation on the plan, or be blank or not included in the request to default to create all operation inspections for the plan\n* Machines - If included, a value must match a machine in the Mfg Resources -> Machines LOV configured for your organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mfg",
+                "inspections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"insp_ident_1\": \"<string>\",\n  \"insp_ident_2\": \"<string>\",\n  \"insp_ident_3\": \"<string>\",\n  \"part_number\": \"<string>\",\n  \"rev\": \"<string>\",\n  \"inspection_type\": \"<string>\",\n  \"lot_size\": \"<integer>\",\n  \"customer_name\": \"<string>\",\n  \"machines\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"operation\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d37af646-9f47-48df-af87-77a59e875132",
+              "name": "Created. Successfully created inspection entry is returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "inspections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "example-value",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ID\": 42,\n  \"insp_ident_1\": \"example-value\",\n  \"insp_ident_2\": \"example-value\",\n  \"insp_ident_3\": \"example-value\",\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"part_description\": \"example-value\",\n  \"operation\": \"example-value\",\n  \"customer_name\": \"example-value\",\n  \"supplier_name\": \"example-value\",\n  \"supplier_number\": \"example-value\",\n  \"project_identifier\": \"example-value\",\n  \"site\": \"example-value\",\n  \"created_by_name\": \"example-value\",\n  \"created_on\": \"2025-03-15T14:30:00Z\",\n  \"in_spec_pct\": 3.14,\n  \"inspection_status\": \"Pending\",\n  \"inspected_by_name\": \"example-value\",\n  \"inspected_on\": \"2025-03-15T14:30:00Z\",\n  \"review_status\": \"Pending\",\n  \"reviewed_by_name\": \"example-value\",\n  \"reviewed_on\": \"2025-03-15T14:30:00Z\",\n  \"notes\": \"example-value\",\n  \"ncrs\": [\n    \"example-value\"\n  ],\n  \"updated_on\": \"2025-03-15T14:30:00Z\",\n  \"closed_on\": \"2025-03-15T14:30:00Z\",\n  \"inspection_type\": \"example-value\",\n  \"machines\": [\n    \"example-value\"\n  ],\n  \"lot_size\": 42,\n  \"parts_passed\": 3.14,\n  \"parts_failed\": 3.14\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14ec9096-5f0a-44d3-b109-9ba73678cdbe",
+              "name": "Invalid request. A problem with the request prevented it from being processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "inspections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "example-value",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-10\",\n  \"message\": \"Invalid request body: 'Ad-hoc' is not a valid value for 'inspection_type'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab57264c-1af4-44ba-83b7-67054b436b0d",
+              "name": "Unauthorized. Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "inspections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "example-value",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a4fb216-e70d-47bc-b50d-58cb6a0a968d",
+              "name": "Conflict. An inspection using the same identifier(s) and type already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "inspections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "example-value",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-21\",\n  \"message\": \"Duplicate resource: An inspection with insp_ident_1: 'PO-12345', insp_ident_2: 'C-B12345', and inspection_type: 'Final' already exists.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad267682-50b9-4e08-ad92-2da32eaf4b0e",
+          "name": "1Factory Gets a Detailed Manufacturing Inspection Record.",
+          "request": {
+            "name": "1Factory Gets a Detailed Manufacturing Inspection Record.",
+            "description": {
+              "content": "Returns the specified inspection record, including measurement data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mfg",
+                "inspections",
+                ":inspection_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "inspection_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa67832d-6c61-4bda-9935-56f7f3fac87f",
+              "name": "Returns a detailed inspection record, including measurement data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "inspections",
+                    ":inspection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "inspection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a62cd42c-9d26-47d9-9bc1-f291459604c5",
+              "name": "Invalid request. A problem with the request path parameters prevents it from being processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "inspections",
+                    ":inspection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "inspection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-12\",\n  \"message\": \"Invalid path parameter: 'badID' is not a valid value for 'ID'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4875ab18-69f6-4316-8a5c-2942d7a95c56",
+              "name": "Unauthorized. Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "inspections",
+                    ":inspection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "inspection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a582bd6-718a-45df-a278-5945d170823a",
+              "name": "Inspection does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "inspections",
+                    ":inspection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "inspection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-20\",\n  \"message\": \"Not found: Manufacturing Inspection '12345' does not exist.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea8769f9-47a0-42d4-805b-506f6c0b69c2",
+          "name": "1Factory Gets a List of Manufacturing First-article Inspections for Your Organization.",
+          "request": {
+            "name": "1Factory Gets a List of Manufacturing First-article Inspections for Your Organization.",
+            "description": {
+              "content": "The list of manufacturing first-article inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mfg",
+                "fais"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
+                },
+                {
+                  "disabled": false,
+                  "key": "part_number",
+                  "value": "<string>",
+                  "description": "Part name / number to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "rev",
+                  "value": "<string>",
+                  "description": "Part rev to filter on. Typically used in conjunction with the part_number query parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "operation",
+                  "value": "<string>",
+                  "description": "Operation of the inspection, FAI or Plan. \n\n(Only available if Inspection By Operation or Plan By Operation are enabled.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "insp_ident_1",
+                  "value": "<string>",
+                  "description": "Primary identifier to filter on for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'."
+                },
+                {
+                  "disabled": false,
+                  "key": "insp_ident_2",
+                  "value": "<string>",
+                  "description": "Secondary identifier to filter on for an inspection or FAI, for example a Customer Purchase Order or Lot #. For FAIs this is the 'PO Number'."
+                },
+                {
+                  "disabled": false,
+                  "key": "customer",
+                  "value": "<string>",
+                  "description": "Name of customer to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "project_identifier",
+                  "value": "<string>",
+                  "description": "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
+                },
+                {
+                  "disabled": false,
+                  "key": "site",
+                  "value": "<string>",
+                  "description": "Location where inspection was performed. Must come from your organization's Sites List of Values."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Type of first-article inspection to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "insp_status",
+                  "value": "<string>",
+                  "description": "Inspection status to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "closed_after",
+                  "value": "<dateTime>",
+                  "description": "Return only approved or rejected objects closed after the specified date-time."
+                },
+                {
+                  "disabled": false,
+                  "key": "review_status",
+                  "value": "<string>",
+                  "description": "Review status to filter on."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c631bfc3-b471-4d65-96be-c15b9ddaa728",
+              "name": "Returns a list of first-article inspections, most recently updated first. Utilize paging query parameters to query older inspections. By default the 100 most recent are returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "fais"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "part_number",
+                      "value": "12-34567-89"
+                    },
+                    {
+                      "key": "rev",
+                      "value": "A"
+                    },
+                    {
+                      "key": "operation",
+                      "value": "OP 10"
+                    },
+                    {
+                      "key": "insp_ident_1",
+                      "value": "PO-12345"
+                    },
+                    {
+                      "key": "insp_ident_2",
+                      "value": "C-B12345"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "Acme Industries"
+                    },
+                    {
+                      "key": "project_identifier",
+                      "value": "Bearings"
+                    },
+                    {
+                      "key": "site",
+                      "value": "QC Lab"
+                    },
+                    {
+                      "key": "type",
+                      "value": "Standard"
+                    },
+                    {
+                      "key": "insp_status",
+                      "value": "Accepted"
+                    },
+                    {
+                      "key": "closed_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "review_status",
+                      "value": "Reviewed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"ID\": 42,\n    \"insp_ident_1\": \"example-value\",\n    \"insp_ident_2\": \"example-value\",\n    \"insp_ident_3\": \"example-value\",\n    \"part_number\": \"example-value\",\n    \"rev\": \"example-value\",\n    \"part_description\": \"example-value\",\n    \"operation\": \"example-value\",\n    \"customer_name\": \"example-value\",\n    \"supplier_name\": \"example-value\",\n    \"supplier_number\": \"example-value\",\n    \"project_identifier\": \"example-value\",\n    \"site\": \"example-value\",\n    \"created_by_name\": \"example-value\",\n    \"created_on\": \"2025-03-15T14:30:00Z\",\n    \"in_spec_pct\": 3.14,\n    \"inspection_status\": \"Accepted\",\n    \"inspected_by_name\": \"example-value\",\n    \"inspected_on\": \"2025-03-15T14:30:00Z\",\n    \"review_status\": \"Reviewed\",\n    \"reviewed_by_name\": \"example-value\",\n    \"reviewed_on\": \"2025-03-15T14:30:00Z\",\n    \"notes\": \"example-value\",\n    \"ncrs\": [\n      \"example-value\"\n    ],\n    \"updated_on\": \"2025-03-15T14:30:00Z\",\n    \"closed_on\": \"2025-03-15T14:30:00Z\",\n    \"fai_type\": \"Standard\",\n    \"number_of_parts\": 42\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e69623f-24db-48ba-9891-7241c8371350",
+              "name": "Invalid request. A problem with the request query parameters prevents it from being processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "fais"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "part_number",
+                      "value": "12-34567-89"
+                    },
+                    {
+                      "key": "rev",
+                      "value": "A"
+                    },
+                    {
+                      "key": "operation",
+                      "value": "OP 10"
+                    },
+                    {
+                      "key": "insp_ident_1",
+                      "value": "PO-12345"
+                    },
+                    {
+                      "key": "insp_ident_2",
+                      "value": "C-B12345"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "Acme Industries"
+                    },
+                    {
+                      "key": "project_identifier",
+                      "value": "Bearings"
+                    },
+                    {
+                      "key": "site",
+                      "value": "QC Lab"
+                    },
+                    {
+                      "key": "type",
+                      "value": "Standard"
+                    },
+                    {
+                      "key": "insp_status",
+                      "value": "Accepted"
+                    },
+                    {
+                      "key": "closed_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "review_status",
+                      "value": "Reviewed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-11\",\n  \"message\": \"Invalid query parameter: '-1' is not a valid value for 'page_size'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e366912-901d-4628-a14e-09c7f9edc48a",
+              "name": "Unauthorized. Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "fais"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "part_number",
+                      "value": "12-34567-89"
+                    },
+                    {
+                      "key": "rev",
+                      "value": "A"
+                    },
+                    {
+                      "key": "operation",
+                      "value": "OP 10"
+                    },
+                    {
+                      "key": "insp_ident_1",
+                      "value": "PO-12345"
+                    },
+                    {
+                      "key": "insp_ident_2",
+                      "value": "C-B12345"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "Acme Industries"
+                    },
+                    {
+                      "key": "project_identifier",
+                      "value": "Bearings"
+                    },
+                    {
+                      "key": "site",
+                      "value": "QC Lab"
+                    },
+                    {
+                      "key": "type",
+                      "value": "Standard"
+                    },
+                    {
+                      "key": "insp_status",
+                      "value": "Accepted"
+                    },
+                    {
+                      "key": "closed_after",
+                      "value": "2021-07-14T08:00:00-08:00"
+                    },
+                    {
+                      "key": "review_status",
+                      "value": "Reviewed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8652b642-c092-481b-ae38-a4893fe5381a",
+          "name": "1Factory Creates a New Manufacturing First-article Inspection for Your Organization.",
+          "request": {
+            "name": "1Factory Creates a New Manufacturing First-article Inspection for Your Organization.",
+            "description": {
+              "content": "A new manufacturing first-article inspection is created, ready for inspection data to be entered. \n\nThe plan used by the inspection is identified by part number and rev. An active version of a Plan for the specified part must exist when creating the inspection. \n\nThe inspection is identified by its inspection identifiers and inspection type. A unique combination of work order identifiers and inspection type must be specified when creating a new inspection. If an inspection already exists with the specified identifiers and type, an error will be returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mfg",
+                "fais"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"insp_ident_1\": \"<string>\",\n  \"insp_ident_2\": \"<string>\",\n  \"part_number\": \"<string>\",\n  \"rev\": \"<string>\",\n  \"fai_type\": \"<string>\",\n  \"number_of_parts\": \"<integer>\",\n  \"customer_name\": \"<string>\",\n  \"supplier_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "724c239c-57ba-4503-b878-f6de5d0e752a",
+              "name": "Created. Successfully created first-article inspection entry is returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "fais"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"insp_ident_1\": \"example-value\",\n  \"insp_ident_2\": \"example-value\",\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"fai_type\": \"AS9102\",\n  \"number_of_parts\": 42,\n  \"customer_name\": \"example-value\",\n  \"supplier_name\": \"example-value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ID\": 42,\n  \"insp_ident_1\": \"example-value\",\n  \"insp_ident_2\": \"example-value\",\n  \"insp_ident_3\": \"example-value\",\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"part_description\": \"example-value\",\n  \"operation\": \"example-value\",\n  \"customer_name\": \"example-value\",\n  \"supplier_name\": \"example-value\",\n  \"supplier_number\": \"example-value\",\n  \"project_identifier\": \"example-value\",\n  \"site\": \"example-value\",\n  \"created_by_name\": \"example-value\",\n  \"created_on\": \"2025-03-15T14:30:00Z\",\n  \"in_spec_pct\": 3.14,\n  \"inspection_status\": \"Pending\",\n  \"inspected_by_name\": \"example-value\",\n  \"inspected_on\": \"2025-03-15T14:30:00Z\",\n  \"review_status\": \"Pending\",\n  \"reviewed_by_name\": \"example-value\",\n  \"reviewed_on\": \"2025-03-15T14:30:00Z\",\n  \"notes\": \"example-value\",\n  \"ncrs\": [\n    \"example-value\"\n  ],\n  \"updated_on\": \"2025-03-15T14:30:00Z\",\n  \"closed_on\": \"2025-03-15T14:30:00Z\",\n  \"fai_type\": \"AS9102\",\n  \"number_of_parts\": 42\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2153eb88-0810-4701-9302-52248a585d7b",
+              "name": "Invalid request. A problem with the request prevented it from being processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "fais"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"insp_ident_1\": \"example-value\",\n  \"insp_ident_2\": \"example-value\",\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"fai_type\": \"AS9102\",\n  \"number_of_parts\": 42,\n  \"customer_name\": \"example-value\",\n  \"supplier_name\": \"example-value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-10\",\n  \"message\": \"Invalid request body: 'Ad-hoc' is not a valid value for 'fai_type'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "995ff24e-d3d8-444b-94c5-e9cff126a062",
+              "name": "Unauthorized. Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "fais"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"insp_ident_1\": \"example-value\",\n  \"insp_ident_2\": \"example-value\",\n  \"part_number\": \"example-value\",\n  \"rev\": \"example-value\",\n  \"fai_type\": \"AS9102\",\n  \"number_of_parts\": 42,\n  \"customer_name\": \"example-value\",\n  \"supplier_name\": \"example-value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "15f8d93e-0c70-4369-987e-7696bd009f95",
+          "name": "1Factory Gets a Detailed Manufacturing First-article Inspection Record.",
+          "request": {
+            "name": "1Factory Gets a Detailed Manufacturing First-article Inspection Record.",
+            "description": {
+              "content": "Returns the specified first-article inspection record, including measurement data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mfg",
+                "fais",
+                ":inspection_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "inspection_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd40da47-595e-47ff-9f8b-b192024799b5",
+              "name": "Returns a detailed first-article inspection record, including measurement data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "fais",
+                    ":inspection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "inspection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4761a54-6528-4a4b-9679-9f21033a513c",
+              "name": "Invalid request. A problem with the request path parameters prevents it from being processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "fais",
+                    ":inspection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "inspection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-12\",\n  \"message\": \"Invalid path parameter: 'badID' is not a valid value for 'ID'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c63c66ad-8390-4606-bbc5-ba31ed670658",
+              "name": "Unauthorized. Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "fais",
+                    ":inspection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "inspection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0077340-b6fe-4f8f-b73f-410f5014c330",
+              "name": "Inspection does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mfg",
+                    "fais",
+                    ":inspection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "inspection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-1factory-org",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"FAC-20\",\n  \"message\": \"Not found: Manufacturing FAI '12345' does not exist.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.1factory.co/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-1factory-org"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5343a7c3-657f-49c3-bc8d-2eabcc26b4dc",
+    "name": "1Factory Customers Manufacturing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This API allows you to create and query a number of objects in your 1Factory account.\n\n The API accepts and returns request and response bodies as JSON, using UTF-8 encoding.\n\nClients may request that response bodies are compressed using gzip compression by passing 'gzip' in the 'Accept-Encoding' header.\n\nIn order to use the API, you need to generate an API key for your organization in the API section of the Settings page.\n\nEach API request must include the API key and your organization's ID as header parameters. You can also find your organization ID in the Settings page.\n\nAll date time values used in the API are in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) date-time format, and include a timezone offset value. Incoming values can specify any timezone offset.\n\nErrors returned by the API include an error code. An explanation of these error codes is available [here](./errors.html).\n\nUsage of the API is rate-limited - current default limits are:\n- 60 requests per minute\n- 1000 requests per day\n\nExceeding these limits will result in subsequent API requests returning a 429 error code. The daily request limit resets at midnight UTC.\n\n API responses include the following headers to allow clients to determine how close they are to exceeding them limits:\n- **x-ratelimit-minute-limit** permitted number of API calls per minute\n- **x-ratelimit-minute-reset** seconds remaining until minute limit resets\n- **x-ratelimit-minute-remaining** number of calls remaining until reaching limit\n- **x-ratelimit-day-limit** permitted number of API calls per minute\n- **x-ratelimit-day-reset** seconds remaining until minute limit resets\n- **x-ratelimit-day-remaining** number of calls remaining until reaching limit\n\nIf you find you require a higher usage limit, please contact 1Factory support to discuss your use case.\n\nContact Support:\n Name: API Support\n Email: support@1factory.com",
+      "type": "text/plain"
+    }
+  }
+}

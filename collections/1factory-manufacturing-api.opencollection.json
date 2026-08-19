@@ -1,0 +1,449 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Factory Customers Manufacturing API",
+    "version": "24.31"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-1factory-org",
+      "value": "{{x-1factory-org}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Manufacturing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "1Factory Gets a List of Manufacturing Plans for Your Organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.1factory.co/api/v1/mfg/plans",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
+              },
+              {
+                "name": "part_number",
+                "value": "",
+                "type": "query",
+                "description": "Part name / number to filter on."
+              },
+              {
+                "name": "rev",
+                "value": "",
+                "type": "query",
+                "description": "Part rev to filter on. Typically used in conjunction with the part_number query parameter."
+              },
+              {
+                "name": "operation",
+                "value": "",
+                "type": "query",
+                "description": "Operation of the inspection, FAI or Plan. \n\n(Only available if Inspection By Operation or Plan By Operation are enabled.)"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status to filter on."
+              },
+              {
+                "name": "version_status",
+                "value": "",
+                "type": "query",
+                "description": "Version status to filter on. Approval status is only available to Organizations with plan approvals enabled. Active is the released and highest version."
+              },
+              {
+                "name": "approval_status",
+                "value": "",
+                "type": "query",
+                "description": "The status of an object that requires approval before releasing or closing.\n\n(Availability depends on Organization settings.)"
+              },
+              {
+                "name": "customer",
+                "value": "",
+                "type": "query",
+                "description": "Name of customer to filter on."
+              },
+              {
+                "name": "is_tablulated",
+                "value": "",
+                "type": "query",
+                "description": "If tabulated plans should be filtered on."
+              },
+              {
+                "name": "is_spec_lib",
+                "value": "",
+                "type": "query",
+                "description": "If spec library plans should be filtered on."
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Return objects created after the specified date-time"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Return objects created before the specified date-time"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Return objects updated after the specified date-time"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "Return objects updated before the specified date-time"
+              },
+              {
+                "name": "closed_after",
+                "value": "",
+                "type": "query",
+                "description": "Return only approved or rejected objects closed after the specified date-time."
+              },
+              {
+                "name": "closed_before",
+                "value": "",
+                "type": "query",
+                "description": "Return only approved or rejected objects closed before the specified date-time."
+              }
+            ]
+          },
+          "docs": "The list of manufacturing plans can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Plan objects returned. By default, the first 100 plans are returned."
+        },
+        {
+          "info": {
+            "name": "1Factory Gets a Detailed Manufacturing Plan Record.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.1factory.co/api/v1/mfg/plans/:plan_id",
+            "params": [
+              {
+                "name": "plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified plan record, including specifications."
+        },
+        {
+          "info": {
+            "name": "1Factory Gets a List of Manufacturing Inspections for Your Organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.1factory.co/api/v1/mfg/inspections",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
+              },
+              {
+                "name": "part_number",
+                "value": "",
+                "type": "query",
+                "description": "Part name / number to filter on."
+              },
+              {
+                "name": "rev",
+                "value": "",
+                "type": "query",
+                "description": "Part rev to filter on. Typically used in conjunction with the part_number query parameter."
+              },
+              {
+                "name": "insp_ident_1",
+                "value": "",
+                "type": "query",
+                "description": "Primary identifier to filter on for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'."
+              },
+              {
+                "name": "insp_ident_2",
+                "value": "",
+                "type": "query",
+                "description": "Secondary identifier to filter on for an inspection or FAI, for example a Customer Purchase Order or Lot #. For FAIs this is the 'PO Number'."
+              },
+              {
+                "name": "customer",
+                "value": "",
+                "type": "query",
+                "description": "Name of customer to filter on."
+              },
+              {
+                "name": "project_identifier",
+                "value": "",
+                "type": "query",
+                "description": "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
+              },
+              {
+                "name": "operation",
+                "value": "",
+                "type": "query",
+                "description": "Operation of the inspection, FAI or Plan. \n\n(Only available if Inspection By Operation or Plan By Operation are enabled.)"
+              },
+              {
+                "name": "site",
+                "value": "",
+                "type": "query",
+                "description": "Location where inspection was performed. Must come from your organization's Sites List of Values."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of inspection to filter on, from your organization's Inspection Types List of Values."
+              },
+              {
+                "name": "insp_status",
+                "value": "",
+                "type": "query",
+                "description": "Inspection status to filter on."
+              },
+              {
+                "name": "review_status",
+                "value": "",
+                "type": "query",
+                "description": "Review status to filter on."
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Return objects created after the specified date-time"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Return objects created before the specified date-time"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Return objects updated after the specified date-time"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "Return objects updated before the specified date-time"
+              },
+              {
+                "name": "closed_after",
+                "value": "",
+                "type": "query",
+                "description": "Return only approved or rejected objects closed after the specified date-time."
+              },
+              {
+                "name": "closed_before",
+                "value": "",
+                "type": "query",
+                "description": "Return only approved or rejected objects closed before the specified date-time."
+              }
+            ]
+          },
+          "docs": "The list of manufacturing inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned."
+        },
+        {
+          "info": {
+            "name": "1Factory Creates a New Manufacturing Inspection for Your Organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.1factory.co/api/v1/mfg/inspections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A new manufacturing inspection is created, ready for inspection data to be entered. \n\n ## Plan Identification \nThe plan used by the inspection is identified by part number and rev. An active version of a Plan for the specified part must exist when creating the inspection. \n\nFor Inspections that are for a Plan associated with a ToS part enter the part number and rev for the ToS entry.\n\n ## Uniqueness \nThe inspection is identified by its inspection identifiers and inspection type. A unique combina"
+        },
+        {
+          "info": {
+            "name": "1Factory Gets a Detailed Manufacturing Inspection Record.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.1factory.co/api/v1/mfg/inspections/:inspection_id",
+            "params": [
+              {
+                "name": "inspection_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified inspection record, including measurement data."
+        },
+        {
+          "info": {
+            "name": "1Factory Gets a List of Manufacturing First-article Inspections for Your Organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.1factory.co/api/v1/mfg/fais",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
+              },
+              {
+                "name": "part_number",
+                "value": "",
+                "type": "query",
+                "description": "Part name / number to filter on."
+              },
+              {
+                "name": "rev",
+                "value": "",
+                "type": "query",
+                "description": "Part rev to filter on. Typically used in conjunction with the part_number query parameter."
+              },
+              {
+                "name": "operation",
+                "value": "",
+                "type": "query",
+                "description": "Operation of the inspection, FAI or Plan. \n\n(Only available if Inspection By Operation or Plan By Operation are enabled.)"
+              },
+              {
+                "name": "insp_ident_1",
+                "value": "",
+                "type": "query",
+                "description": "Primary identifier to filter on for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'."
+              },
+              {
+                "name": "insp_ident_2",
+                "value": "",
+                "type": "query",
+                "description": "Secondary identifier to filter on for an inspection or FAI, for example a Customer Purchase Order or Lot #. For FAIs this is the 'PO Number'."
+              },
+              {
+                "name": "customer",
+                "value": "",
+                "type": "query",
+                "description": "Name of customer to filter on."
+              },
+              {
+                "name": "project_identifier",
+                "value": "",
+                "type": "query",
+                "description": "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
+              },
+              {
+                "name": "site",
+                "value": "",
+                "type": "query",
+                "description": "Location where inspection was performed. Must come from your organization's Sites List of Values."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of first-article inspection to filter on."
+              },
+              {
+                "name": "insp_status",
+                "value": "",
+                "type": "query",
+                "description": "Inspection status to filter on."
+              },
+              {
+                "name": "closed_after",
+                "value": "",
+                "type": "query",
+                "description": "Return only approved or rejected objects closed after the specified date-time."
+              },
+              {
+                "name": "review_status",
+                "value": "",
+                "type": "query",
+                "description": "Review status to filter on."
+              }
+            ]
+          },
+          "docs": "The list of manufacturing first-article inspections can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Inspection objects returned. By default, the first 100 inspections are returned."
+        },
+        {
+          "info": {
+            "name": "1Factory Creates a New Manufacturing First-article Inspection for Your Organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.1factory.co/api/v1/mfg/fais",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A new manufacturing first-article inspection is created, ready for inspection data to be entered. \n\nThe plan used by the inspection is identified by part number and rev. An active version of a Plan for the specified part must exist when creating the inspection. \n\nThe inspection is identified by its inspection identifiers and inspection type. A unique combination of work order identifiers and inspection type must be specified when creating a new inspection. If an inspection already exists with th"
+        },
+        {
+          "info": {
+            "name": "1Factory Gets a Detailed Manufacturing First-article Inspection Record.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.1factory.co/api/v1/mfg/fais/:inspection_id",
+            "params": [
+              {
+                "name": "inspection_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified first-article inspection record, including measurement data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

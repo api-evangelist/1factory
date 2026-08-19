@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Factory Customers Part Master API",
+    "version": "24.31"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-1factory-org",
+      "value": "{{x-1factory-org}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Part Master",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "1Factory Gets a List of Part Masters for Your Organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.1factory.co/api/v1/partMasters",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
+              },
+              {
+                "name": "part_number",
+                "value": "",
+                "type": "query",
+                "description": "Part name / number to filter on."
+              },
+              {
+                "name": "rev",
+                "value": "",
+                "type": "query",
+                "description": "Part rev to filter on. Typically used in conjunction with the part_number query parameter."
+              },
+              {
+                "name": "parent_part_number",
+                "value": "example-value",
+                "type": "query",
+                "description": "Parent Part number to filter on for Table of Size entries."
+              },
+              {
+                "name": "parent_rev",
+                "value": "example-value",
+                "type": "query",
+                "description": "Parent Part rev to filter on for Table of Size entries."
+              },
+              {
+                "name": "is_library",
+                "value": "",
+                "type": "query",
+                "description": "If the part is a configured as a library."
+              },
+              {
+                "name": "is_assembly",
+                "value": "",
+                "type": "query",
+                "description": "If the part is a configured as an assembly."
+              },
+              {
+                "name": "is_itar",
+                "value": "",
+                "type": "query",
+                "description": "If the part is a configured as an ITAR part."
+              },
+              {
+                "name": "has_ppap",
+                "value": "",
+                "type": "query",
+                "description": "If the part has any PPAP documents."
+              },
+              {
+                "name": "type",
+                "value": "example-value",
+                "type": "query",
+                "description": "If the part has any PPAP documents."
+              },
+              {
+                "name": "project_identifier",
+                "value": "",
+                "type": "query",
+                "description": "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status to filter on."
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Return objects created after the specified date-time"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Return objects created before the specified date-time"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Return objects updated after the specified date-time"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "Return objects updated before the specified date-time"
+              }
+            ]
+          },
+          "docs": "The list of part master entries that can be filtered by specifying query parameters. \n Paging parameters control the number of rows of part master objects returned. By default, the first 100 part masters are returned."
+        },
+        {
+          "info": {
+            "name": "1Factory Creates a New (or Updates Existing) Part Master Entry for Your Organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.1factory.co/api/v1/partMasters",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new part master entry that can be used when referring to parts when creating Plans, Inspections, FAIs etc. \n\n The part number and rev must be unique - if a part master with the same part number and revision already exists, the existing Part Master entry will be overwritten."
+        },
+        {
+          "info": {
+            "name": "1Factory Defines Assembly Relationships Between Part Masters.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.1factory.co/api/v1/partMasters/assemblies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Defines (or replaces) the list of parts that make up an assembly part. All referenced part numbers & revisions must already exist as Part Master entries."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

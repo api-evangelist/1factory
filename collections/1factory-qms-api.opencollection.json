@@ -1,0 +1,209 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Factory Customers QMS API",
+    "version": "24.31"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-1factory-org",
+      "value": "{{x-1factory-org}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "QMS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "1Factory Gets a List of NCRs for Your Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.1factory.co/api/v1/qms/ncrs",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Return objects created after the specified date-time"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Return objects created before the specified date-time"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Return objects updated after the specified date-time"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "Return objects updated before the specified date-time"
+              },
+              {
+                "name": "closed_after",
+                "value": "",
+                "type": "query",
+                "description": "Return only approved or rejected objects closed after the specified date-time."
+              },
+              {
+                "name": "closed_before",
+                "value": "",
+                "type": "query",
+                "description": "Return only approved or rejected objects closed before the specified date-time."
+              }
+            ]
+          },
+          "docs": "The list of NCRs can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows NCR objects returned. By default, the first 100 NCRs are returned."
+        },
+        {
+          "info": {
+            "name": "1Factory Gets a List of CAPAs for Your Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.1factory.co/api/v1/qms/capas",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Return objects created after the specified date-time"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Return objects created before the specified date-time"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Return objects updated after the specified date-time"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "Return objects updated before the specified date-time"
+              },
+              {
+                "name": "closed_after",
+                "value": "",
+                "type": "query",
+                "description": "Return only approved or rejected objects closed after the specified date-time."
+              },
+              {
+                "name": "closed_before",
+                "value": "",
+                "type": "query",
+                "description": "Return only approved or rejected objects closed before the specified date-time."
+              }
+            ]
+          },
+          "docs": "The list of CAPAs can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows CAPA objects returned. By default, the first 100 CAPAs are returned."
+        },
+        {
+          "info": {
+            "name": "1Factory Gets a List of Complaints for Your Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.1factory.co/api/v1/qms/complaints",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Return objects created after the specified date-time"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Return objects created before the specified date-time"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Return objects updated after the specified date-time"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "Return objects updated before the specified date-time"
+              },
+              {
+                "name": "closed_after",
+                "value": "",
+                "type": "query",
+                "description": "Return only approved or rejected objects closed after the specified date-time."
+              },
+              {
+                "name": "closed_before",
+                "value": "",
+                "type": "query",
+                "description": "Return only approved or rejected objects closed before the specified date-time."
+              }
+            ]
+          },
+          "docs": "The list of Complaints can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Complaint objects returned. By default, the first 100 Complaints are returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
