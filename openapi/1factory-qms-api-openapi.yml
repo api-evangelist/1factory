@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 1Factory Customers QMS API
-  description: "This API allows you to create and query a number of objects in your 1Factory account.\n\n The API accepts and returns request and response bodies as JSON, using UTF-8 encoding.\n\nClients may request that response bodies are compressed using gzip compression by passing 'gzip' in the 'Accept-Encoding' header.\n\nIn order to use the API, you need to generate an API key for your organization in the API section of the Settings page.\n\nEach API request must include the API key and your organization's ID as header parameters. You can also find your organization ID in the Settings page.\n\nAll date time values used in the API are in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) date-time format, and include a timezone offset value. Incoming values can specify any timezone offset.\n\nErrors returned by the API include an error code. An explanation of these error codes is available [here](./errors.html).\n\nUsage of the API is rate-limited - current default limits are:\n- 60 requests per minute\n- 1000 requests per day\n\nExceeding these limits will result in subsequent API requests returning a 429 error code. The daily request limit resets at midnight UTC.\n\n API responses include the following headers to allow clients to determine how close they are to exceeding them limits:\n- **x-ratelimit-minute-limit** permitted number of API calls per minute\n- **x-ratelimit-minute-reset** seconds remaining until minute limit resets\n- **x-ratelimit-minute-remaining** number of calls remaining until reaching limit\n- **x-ratelimit-day-limit** permitted number of API calls per minute\n- **x-ratelimit-day-reset** seconds remaining until minute limit resets\n- **x-ratelimit-day-remaining** number of calls remaining until reaching limit\n\nIf you find you require a higher usage limit, please contact 1Factory support to discuss your use case."
+  title: 1Factory QMS API
+  description: This API allows you to create and query a number of objects in your 1Factory account.
   version: '24.31'
   termsOfService: https://www.1factory.com/resources/TOS%20May%2020%202021.pdf
   contact:
@@ -72,6 +72,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: getQmsNcrs
+      x-operation-id-source: derived
   /qms/capas:
     get:
       tags:
@@ -118,6 +120,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: getQmsCapas
+      x-operation-id-source: derived
   /qms/complaints:
     get:
       tags:
@@ -164,8 +168,167 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: getQmsComplaints
+      x-operation-id-source: derived
 components:
+  responses:
+    '401':
+      description: Unauthorized. Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: FAC-2
+            message: Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.
+    InvalidQueryParam:
+      description: Invalid request. A problem with the request query parameters prevents it from being processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: FAC-11
+            message: 'Invalid query parameter: ''-1'' is not a valid value for ''page_size''.'
   schemas:
+    Error:
+      properties:
+        code:
+          type: string
+          description: Error code identifying type of error.
+        message:
+          type: string
+          description: Error message.
+    updated_on:
+      type: string
+      format: date-time
+      description: Date & time that an object was last updated.
+      example: '2021-07-17T12:14:42-08:00'
+    supplier_name:
+      type:
+      - string
+      - 'null'
+      description: The name of the supplier (for receiving or supplier inspections).
+      example: Acme Industries
+    Ncr:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Issue'
+      - properties:
+          description:
+            type:
+            - string
+            - 'null'
+            maxLength: 255
+            description: Description of the part.
+            example: Three Lobe Shaft
+          use_as_is_quantity:
+            type:
+            - number
+            - 'null'
+            description: The number of parts that failed inspection that can be used as-is without rework or scrapping.
+            example: 3
+          scrap_quantity:
+            type:
+            - number
+            - 'null'
+            description: The number of parts that failed inspection that must be scrapped.
+            example: 3
+          return_quantity:
+            type:
+            - number
+            - 'null'
+            description: The number of parts that failed inspection that must be returned to the supplier.
+            example: 3
+          rework_quantity:
+            type:
+            - number
+            - 'null'
+            description: The number of parts that failed inspection that can be reworked to pass inspection.
+            example: 3
+          repair_quantity:
+            type:
+            - number
+            - 'null'
+            description: The number of parts that failed inspection that can be repaired to pass inspection.
+            example: 3
+          no_defect_quantity:
+            type:
+            - number
+            - 'null'
+            description: The number of parts in the lot that do not have any defects.
+            example: 3
+          inventory_location:
+            type:
+            - string
+            - 'null'
+            description: ''
+            example: Warehouse
+          rma_number:
+            type:
+            - string
+            - 'null'
+            description: RMA number, if any, for the returned parts in the NCR.
+            example: rma-202405
+          rework_po:
+            type:
+            - string
+            - 'null'
+            description: ''
+            example: po-202407-1
+          shipment:
+            type:
+            - string
+            - 'null'
+            description: Shipment number, if any, for parts in the NCR
+            example: ''
+          mrb_meeting_notes:
+            type:
+            - string
+            - 'null'
+            description: Any meeting notes for this NCR from a MBR meeting.
+            example: ''
+          mrb_dispositions:
+            type: array
+            description: MRB dispositions for this NCR.
+            items:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: REWORK
+                qty:
+                  type: number
+                  example: 2
+          serial_numbers:
+            type:
+            - string
+            - 'null'
+            description: Serial number(s) for this NCR.
+            example: SN123456
+    created_on:
+      type: string
+      format: date-time
+      description: Date & time that an object was created.
+      example: '2021-07-15T09:14:42-08:00'
+    customer_name:
+      type:
+      - string
+      - 'null'
+      description: The name of the customer (for manufacturing inspections).
+      example: Rocket Company
+    ID:
+      type: integer
+      format: int32
+      description: Unique identifier for the Inspection, assigned by 1Factory.
+      readOnly: true
+      example: 12345
+    ComplaintList:
+      type: array
+      minItems: 0
+      maxItems: 500
+      items:
+        $ref: '#/components/schemas/Complaint'
     Issue:
       type: object
       properties:
@@ -184,16 +347,18 @@ components:
         customer_name:
           $ref: '#/components/schemas/customer_name'
         customer_ident:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 255
           description: 'Your Organization''s custom identifier for customer NCRs (ex. Customer PO #)'
           example: PO-1234
         supplier_name:
           $ref: '#/components/schemas/supplier_name'
         supplier_ident:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 255
           description: 'Your Organization''s custom identifier for supplier NCRs (ex. Supplier Lot #)'
           example: '123456'
@@ -209,42 +374,43 @@ components:
           - Cust.
           - Devn.
         mfg_insp_ident_1:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 255
           description: 'Your Organization''s custom primary identifier for manufacturing inspection identifiers. (ex. Job #)'
           example: job-20240003
         mfg_insp_ident_2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 255
           description: 'Your Organization''s custom secondary identifier for manufacturing inspection identifiers. (ex. PO #)'
           example: po-20240065
         rec_insp_ident_1:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 255
           description: 'Your Organization''s custom primary identifier for receiving inspection identifiers. (ex. Job #)'
           example: job-20240003
         rec_insp_ident_2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 255
           description: 'Your Organization''s custom secondary identifier for receiving inspection identifiers. (ex. PO #)'
           example: po-20240065
         lot_quantity:
           type: number
-          nullable: false
           description: The number of parts in the lot of the NCR
           example: 100
         inspection_quantity:
           type: number
-          nullable: false
           description: The number of parts in the lot that were inspected as part of the NCR
           example: 10
         defective_quantity:
           type: number
-          nullable: false
           description: The number of parts rejected as part of the NCR
           example: 3
         impact:
@@ -256,34 +422,40 @@ components:
           - MEDIUM
           - HIGH
         detected_at:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Where the problem for the NCR was detected.
           example: Final Inspection
         problem_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: A simple description of the problem.
           example: Out-of-spec
         root_cause:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The root cause of the problem.
           example: Machining Error
         caused_by:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The department or group that caused the problem.
           example: Engineering
         problem_summary:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 255
           description: Problem summary of the NCR.
           example: Manufacturing defect
         total_cost:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           description: Cost of the NCR
           example: 1000.0
         status:
@@ -295,7 +467,6 @@ components:
           - CLOSED
         task_status:
           type: string
-          nullable: false
           description: Status of all tasks on NCR.
           example: OPEN
           enum:
@@ -304,7 +475,6 @@ components:
           - CLOSED
         task_count:
           type: number
-          nullable: false
           description: Number of tasks for the NCR.
           example: 3
         owner:
@@ -317,6 +487,17 @@ components:
           $ref: '#/components/schemas/updated_on'
         closed_on:
           $ref: '#/components/schemas/closed_on'
+    rev:
+      type:
+      - string
+      - 'null'
+      maxLength: 255
+      description: Part revision. Together with part number, uniquely identifies a part.
+      example: A
+    created_by_username:
+      type: string
+      description: Name of user that created the entity.
+      example: Oleg Nickolayev
     Complaint:
       type: object
       allOf:
@@ -361,43 +542,29 @@ components:
             format: date-time
             description: Date & time of the original complaint.
             example: '2021-07-21T07:14:42-08:00'
-    part_description:
-      type: string
-      nullable: true
-      maxLength: 255
-      description: Description of the part.
-      example: Three Lobe Shaft
-    closed_on:
-      type: string
-      format: date-time
-      description: Date & time that an object was closed.
-      example: '2021-07-21T07:14:42-08:00'
-    created_by_username:
-      type: string
-      description: Name of user that created the entity.
-      example: Oleg Nickolayev
+    CapaList:
+      type: array
+      minItems: 0
+      maxItems: 500
+      items:
+        $ref: '#/components/schemas/Capa'
     NcrList:
       type: array
       minItems: 0
       maxItems: 500
       items:
         $ref: '#/components/schemas/Ncr'
+    part_description:
+      type:
+      - string
+      - 'null'
+      maxLength: 255
+      description: Description of the part.
+      example: Three Lobe Shaft
     owner:
       type: string
       description: Name of user that owns the entity.
       example: Oleg Nickolayev
-    rev:
-      type: string
-      nullable: true
-      maxLength: 255
-      description: Part revision. Together with part number, uniquely identifies a part.
-      example: A
-    ComplaintList:
-      type: array
-      minItems: 0
-      maxItems: 500
-      items:
-        $ref: '#/components/schemas/Complaint'
     Capa:
       type: object
       allOf:
@@ -408,137 +575,17 @@ components:
             format: date-time
             description: Date & time that a CAPA is due.
             example: '2021-07-21T07:14:42-08:00'
-    ID:
-      type: integer
-      format: int32
-      description: Unique identifier for the Inspection, assigned by 1Factory.
-      readOnly: true
-      example: 12345
-    Ncr:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Issue'
-      - properties:
-          description:
-            type: string
-            nullable: true
-            maxLength: 255
-            description: Description of the part.
-            example: Three Lobe Shaft
-          use_as_is_quantity:
-            type: number
-            nullable: true
-            description: The number of parts that failed inspection that can be used as-is without rework or scrapping.
-            example: 3
-          scrap_quantity:
-            type: number
-            nullable: true
-            description: The number of parts that failed inspection that must be scrapped.
-            example: 3
-          return_quantity:
-            type: number
-            nullable: true
-            description: The number of parts that failed inspection that must be returned to the supplier.
-            example: 3
-          rework_quantity:
-            type: number
-            nullable: true
-            description: The number of parts that failed inspection that can be reworked to pass inspection.
-            example: 3
-          repair_quantity:
-            type: number
-            nullable: true
-            description: The number of parts that failed inspection that can be repaired to pass inspection.
-            example: 3
-          no_defect_quantity:
-            type: number
-            nullable: true
-            description: The number of parts in the lot that do not have any defects.
-            example: 3
-          inventory_location:
-            type: string
-            nullable: true
-            description: ''
-            example: Warehouse
-          rma_number:
-            type: string
-            nullable: true
-            description: RMA number, if any, for the returned parts in the NCR.
-            example: rma-202405
-          rework_po:
-            type: string
-            nullable: true
-            description: ''
-            example: po-202407-1
-          shipment:
-            type: string
-            nullable: true
-            description: Shipment number, if any, for parts in the NCR
-            example: ''
-          mrb_meeting_notes:
-            type: string
-            nullable: true
-            description: Any meeting notes for this NCR from a MBR meeting.
-            example: ''
-          mrb_dispositions:
-            type: array
-            nullable: false
-            description: MRB dispositions for this NCR.
-            items:
-              type: object
-              properties:
-                type:
-                  type: string
-                  nullable: false
-                  example: REWORK
-                qty:
-                  type: number
-                  example: 2
-          serial_numbers:
-            type: string
-            nullable: true
-            description: Serial number(s) for this NCR.
-            example: SN123456
     part_number:
       type: string
       maxLength: 255
       description: Part number. Together with rev, uniquely identifies a part.
       example: 10-12345-12
       minLength: 1
-    created_on:
+    closed_on:
       type: string
       format: date-time
-      description: Date & time that an object was created.
-      example: '2021-07-15T09:14:42-08:00'
-    supplier_name:
-      type: string
-      nullable: true
-      description: The name of the supplier (for receiving or supplier inspections).
-      example: Acme Industries
-    Error:
-      properties:
-        code:
-          type: string
-          description: Error code identifying type of error.
-        message:
-          type: string
-          description: Error message.
-    CapaList:
-      type: array
-      minItems: 0
-      maxItems: 500
-      items:
-        $ref: '#/components/schemas/Capa'
-    updated_on:
-      type: string
-      format: date-time
-      description: Date & time that an object was last updated.
-      example: '2021-07-17T12:14:42-08:00'
-    customer_name:
-      type: string
-      nullable: true
-      description: The name of the customer (for manufacturing inspections).
-      example: Rocket Company
+      description: Date & time that an object was closed.
+      example: '2021-07-21T07:14:42-08:00'
   parameters:
     createdBefore:
       name: created_before
@@ -549,34 +596,6 @@ components:
         format: date-time
         example: '2021-07-14T08:00:00-08:00'
       description: Return objects created before the specified date-time
-    updatedAfter:
-      name: updated_after
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-07-14T08:00:00-08:00'
-      description: Return objects updated after the specified date-time
-    updatedBefore:
-      name: updated_before
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-07-14T08:00:00-08:00'
-      description: Return objects updated before the specified date-time
-    page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        minimum: 0
-        default: 0
-      description: Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).
     pageSize:
       name: page_size
       in: query
@@ -588,6 +607,16 @@ components:
         maximum: 500
         default: 100
       description: The maximum number of records to return from the query. Defaults to 100, maximum value 500.
+    page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 0
+        default: 0
+      description: Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).
     closedBefore:
       name: closed_before
       in: query
@@ -615,25 +644,24 @@ components:
         format: date-time
         example: '2021-07-14T08:00:00-08:00'
       description: Return objects created after the specified date-time
-  responses:
-    '401':
-      description: Unauthorized. Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: FAC-2
-            message: Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.
-    InvalidQueryParam:
-      description: Invalid request. A problem with the request query parameters prevents it from being processed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: FAC-11
-            message: 'Invalid query parameter: ''-1'' is not a valid value for ''page_size''.'
+    updatedAfter:
+      name: updated_after
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-07-14T08:00:00-08:00'
+      description: Return objects updated after the specified date-time
+    updatedBefore:
+      name: updated_before
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-07-14T08:00:00-08:00'
+      description: Return objects updated before the specified date-time
   securitySchemes:
     OrgId:
       type: apiKey

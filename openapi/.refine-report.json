@@ -1,13 +1,7 @@
 {
   "provider": "1factory",
   "sources": [
-    "1factory-customers-api-openapi.yml",
-    "1factory-manufacturing-api-openapi.yml",
-    "1factory-part-master-api-openapi.yml",
-    "1factory-qms-api-openapi.yml",
-    "1factory-receiving-api-openapi.yml",
-    "1factory-suppliers-api-openapi.yml",
-    "1factory-work-orders-api-openapi.yml"
+    "_original/1factory-openapi.json"
   ],
   "outputs": [
     "1factory-customers-api-openapi.yml",
@@ -21,6 +15,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "1factory-openapi.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "1factory-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "1factory-manufacturing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "1factory-part-master-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "1factory-qms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "1factory-receiving-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "1factory-suppliers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "1factory-work-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

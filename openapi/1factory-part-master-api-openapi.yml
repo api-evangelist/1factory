@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 1Factory Customers Part Master API
-  description: "This API allows you to create and query a number of objects in your 1Factory account.\n\n The API accepts and returns request and response bodies as JSON, using UTF-8 encoding.\n\nClients may request that response bodies are compressed using gzip compression by passing 'gzip' in the 'Accept-Encoding' header.\n\nIn order to use the API, you need to generate an API key for your organization in the API section of the Settings page.\n\nEach API request must include the API key and your organization's ID as header parameters. You can also find your organization ID in the Settings page.\n\nAll date time values used in the API are in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) date-time format, and include a timezone offset value. Incoming values can specify any timezone offset.\n\nErrors returned by the API include an error code. An explanation of these error codes is available [here](./errors.html).\n\nUsage of the API is rate-limited - current default limits are:\n- 60 requests per minute\n- 1000 requests per day\n\nExceeding these limits will result in subsequent API requests returning a 429 error code. The daily request limit resets at midnight UTC.\n\n API responses include the following headers to allow clients to determine how close they are to exceeding them limits:\n- **x-ratelimit-minute-limit** permitted number of API calls per minute\n- **x-ratelimit-minute-reset** seconds remaining until minute limit resets\n- **x-ratelimit-minute-remaining** number of calls remaining until reaching limit\n- **x-ratelimit-day-limit** permitted number of API calls per minute\n- **x-ratelimit-day-reset** seconds remaining until minute limit resets\n- **x-ratelimit-day-remaining** number of calls remaining until reaching limit\n\nIf you find you require a higher usage limit, please contact 1Factory support to discuss your use case."
+  title: 1Factory Part Master API
+  description: This API allows you to create and query a number of objects in your 1Factory account.
   version: '24.31'
   termsOfService: https://www.1factory.com/resources/TOS%20May%2020%202021.pdf
   contact:
@@ -32,8 +32,11 @@ paths:
     put:
       tags:
       - Part Master
-      summary: 1Factory Creates a New (or Updates Existing) Part Master Entry for Your Organization.
-      description: "Create a new part master entry that can be used when referring to parts when creating Plans, Inspections, FAIs etc. \n\n The part number and rev must be unique - if a part master with the same part number and revision already exists, the existing Part Master entry will be overwritten."
+      summary: 1Factory Creates a New (or Updates Existing) Part Master Entry for Your…
+      description: 'Create a new part master entry that can be used when referring to parts when creating Plans, Inspections, FAIs etc.
+
+
+        The part number and rev must be unique - if a part master with the same part number and revision already exists, the existing Part Master entry will be overwritten.'
       requestBody:
         required: true
         content:
@@ -151,11 +154,15 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: putPartMasters
+      x-operation-id-source: derived
     get:
       tags:
       - Part Master
-      summary: 1Factory Gets a List of Part Masters for Your Organization.
-      description: "The list of part master entries that can be filtered by specifying query parameters. \n Paging parameters control the number of rows of part master objects returned. By default, the first 100 part masters are returned."
+      summary: 1Factory Gets a List of Part Masters for Your Organization
+      description: 'The list of part master entries that can be filtered by specifying query parameters.
+
+        Paging parameters control the number of rows of part master objects returned. By default, the first 100 part masters are returned.'
       parameters:
       - $ref: '#/components/parameters/page'
         example: example-value
@@ -170,7 +177,6 @@ paths:
         required: false
         schema:
           type: string
-          nullable: false
           example: 12-34567-89
         description: Parent Part number to filter on for Table of Size entries.
         example: example-value
@@ -179,7 +185,6 @@ paths:
         required: false
         schema:
           type: string
-          nullable: false
           example: A
         description: Parent Part rev to filter on for Table of Size entries.
         example: example-value
@@ -188,7 +193,6 @@ paths:
         required: false
         schema:
           type: boolean
-          nullable: false
           example: true
         description: If the part is a configured as a library.
       - name: is_assembly
@@ -196,7 +200,6 @@ paths:
         required: false
         schema:
           type: boolean
-          nullable: false
           example: true
         description: If the part is a configured as an assembly.
       - name: is_itar
@@ -204,7 +207,6 @@ paths:
         required: false
         schema:
           type: boolean
-          nullable: false
           example: true
         description: If the part is a configured as an ITAR part.
       - name: has_ppap
@@ -212,7 +214,6 @@ paths:
         required: false
         schema:
           type: boolean
-          nullable: false
           example: true
         description: If the part has any PPAP documents.
       - name: type
@@ -220,7 +221,6 @@ paths:
         required: false
         schema:
           type: string
-          nullable: false
           enum:
           - Tabulated
           - ToS Entry
@@ -292,11 +292,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: getPartMasters
+      x-operation-id-source: derived
   /partMasters/assemblies:
     put:
       tags:
       - Part Master
-      summary: 1Factory Defines Assembly Relationships Between Part Masters.
+      summary: 1Factory Defines Assembly Relationships Between Part Masters
       description: Defines (or replaces) the list of parts that make up an assembly part. All referenced part numbers & revisions must already exist as Part Master entries.
       requestBody:
         required: true
@@ -366,114 +368,20 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: putPartMastersAssemblies
+      x-operation-id-source: derived
 components:
-  parameters:
-    createdBefore:
-      name: created_before
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-07-14T08:00:00-08:00'
-      description: Return objects created before the specified date-time
-    rev:
-      name: rev
-      in: query
-      required: false
-      schema:
-        type: string
-        nullable: false
-        example: A
-      description: Part rev to filter on. Typically used in conjunction with the part_number query parameter.
-    updatedAfter:
-      name: updated_after
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-07-14T08:00:00-08:00'
-      description: Return objects updated after the specified date-time
-    project_identifier:
-      name: project_identifier
-      in: query
-      required: false
-      schema:
-        type: string
-        nullable: true
-        example: Bearings
-      description: "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
-    updatedBefore:
-      name: updated_before
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-07-14T08:00:00-08:00'
-      description: Return objects updated before the specified date-time
-    page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        minimum: 0
-        default: 0
-      description: Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).
-    pageSize:
-      name: page_size
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        maximum: 500
-        default: 100
-      description: The maximum number of records to return from the query. Defaults to 100, maximum value 500.
-    status:
-      name: status
-      in: query
-      required: false
-      schema:
-        type: string
-        nullable: false
-        enum:
-        - Active
-        - Inactive
-        example: Active
-      description: Status to filter on.
-    part_number:
-      name: part_number
-      in: query
-      required: false
-      schema:
-        type: string
-        nullable: false
-        example: 12-34567-89
-      description: Part name / number to filter on.
-    createdAfter:
-      name: created_after
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-07-14T08:00:00-08:00'
-      description: Return objects created after the specified date-time
+  responses:
+    '401':
+      description: Unauthorized. Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: FAC-2
+            message: Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.
   schemas:
-    project_identifier:
-      name: project_identifier
-      in: query
-      required: false
-      schema:
-        type: string
-        nullable: true
-        example: Bearings
-      description: "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
     Assembly:
       type: object
       required:
@@ -486,6 +394,149 @@ components:
           $ref: '#/components/schemas/rev'
         sub_parts:
           $ref: '#/components/schemas/SubPartList'
+    AssemblyEntry:
+      type: object
+      required:
+      - part_number
+      - rev
+      - quantity
+      properties:
+        part_number:
+          $ref: '#/components/schemas/part_number'
+        rev:
+          $ref: '#/components/schemas/rev'
+        quantity:
+          type: number
+          minimum: 0
+          description: Number of instances of this part in the assembly.
+          example: 4.0
+    Error:
+      properties:
+        code:
+          type: string
+          description: Error code identifying type of error.
+        message:
+          type: string
+          description: Error message.
+    NewPartMaster:
+      type: object
+      required:
+      - part_number
+      properties:
+        part_number:
+          $ref: '#/components/schemas/part_number'
+        rev:
+          $ref: '#/components/schemas/rev'
+        description:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          description: Description of the part. (Optional).
+          example: Three Lobe Shaft
+        status:
+          type: string
+          enum:
+          - Active
+          - Inactive
+          default: Active
+          description: Status of Part Master entry.
+        alt_part_number:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          description: 'An alternative identifier used to identify a part, such as Drawing #, or customer / supplier part number.'
+          example: DN-1234568
+        alt_rev:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          description: An alternate part revision, such as a drawing revision, or customer / supplier part revision.
+          example: B
+        alt_part_number2:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          description: 'A second alternative identifier used to identify a part, such as Drawing #, or customer / supplier part number.'
+          example: CN-1234569
+        alt_rev2:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          description: A second alternate part revision, such as a drawing revision, or customer / supplier part revision.
+          example: C
+        project_identifier:
+          $ref: '#/components/schemas/project_identifier'
+        cost:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Cost of the part. (Optional).
+          example: 3.5
+        unit:
+          type: string
+          description: Unit used for determine part cost. (Optional)
+          example: Each
+        is_assembly:
+          type: boolean
+          default: false
+          description: If true, indicates part is an assembly. (Optional)
+        is_itar:
+          type: boolean
+          default: false
+          description: If true, indicates part is an ITAR part with additional controls. (Optional)
+        is_buy:
+          type: boolean
+          default: false
+          description: If true, indicates part is bought, rather than made. (Optional)
+        comments:
+          type:
+          - string
+          - 'null'
+          maxLength: 32000
+          description: Detailed comments regarding the part. (Optional)
+          example: This is a brand new part that we are prototyping.
+    SubPartList:
+      type: array
+      minItems: 1
+      description: List of parts that make up this assembly. Each listed part must already exist as a Part Master entry.
+      items:
+        $ref: '#/components/schemas/AssemblyEntry'
+      example:
+      - part_number: 12-54321-21
+        rev: C
+        quantity: 4
+      - part_number: 12-54322-11
+        rev: B
+        quantity: 2
+    project_identifier:
+      name: project_identifier
+      in: query
+      required: false
+      schema:
+        type:
+        - string
+        - 'null'
+        example: Bearings
+      description: "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
+    ID:
+      type: integer
+      format: int32
+      description: Unique identifier for the Inspection, assigned by 1Factory.
+      readOnly: true
+      example: 12345
+    rev:
+      type:
+      - string
+      - 'null'
+      maxLength: 255
+      description: Part revision. Together with part number, uniquely identifies a part.
+      example: A
     PartMaster:
       type: object
       required:
@@ -498,40 +549,44 @@ components:
         rev:
           $ref: '#/components/schemas/rev'
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 255
           description: Description of the part. (Optional).
           example: Three Lobe Shaft
         status:
           type: string
-          nullable: false
           enum:
           - Active
           - Inactive
           default: Active
           description: Status of Part Master entry.
         alt_part_number:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 255
           description: 'An alternative identifier used to identify a part, such as Drawing #, or customer / supplier part number.'
           example: DN-1234568
         alt_rev:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 255
           description: An alternate part revision, such as a drawing revision, or customer / supplier part revision.
           example: B
         alt_part_number2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 255
           description: 'A second alternative identifier used to identify a part, such as Drawing #, or customer / supplier part number.'
           example: CN-1234569
         alt_rev2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 255
           description: A second alternate part revision, such as a drawing revision, or customer / supplier part revision.
           example: C
@@ -539,12 +594,10 @@ components:
           $ref: '#/components/schemas/project_identifier'
         plan_count:
           type: number
-          nullable: false
           description: The number of plans this Part Master is associated with.
           example: 2
         ncr_count:
           type: number
-          nullable: false
           description: The number of NCRs this Part Master is associated with.
           example: 3
         type:
@@ -561,8 +614,9 @@ components:
           type: string
           description: The part revision of the parent part if this part is a Table of Size entry.
         cost:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           format: double
           description: Cost of the part. (Optional).
           example: 3.5
@@ -599,161 +653,119 @@ components:
           default: false
           description: If true, indicates part is bought, rather than made. (Optional)
         comments:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 32000
           description: Detailed comments regarding the part. (Optional)
           example: This is a brand new part that we are prototyping.
-    rev:
-      type: string
-      nullable: true
-      maxLength: 255
-      description: Part revision. Together with part number, uniquely identifies a part.
-      example: A
     PartMasterList:
       type: array
       minItems: 0
       maxItems: 500
       items:
         $ref: '#/components/schemas/PartMaster'
-    SubPartList:
-      type: array
-      minItems: 1
-      nullable: false
-      description: List of parts that make up this assembly. Each listed part must already exist as a Part Master entry.
-      items:
-        $ref: '#/components/schemas/AssemblyEntry'
-      example:
-      - part_number: 12-54321-21
-        rev: C
-        quantity: 4
-      - part_number: 12-54322-11
-        rev: B
-        quantity: 2
-    ID:
-      type: integer
-      format: int32
-      description: Unique identifier for the Inspection, assigned by 1Factory.
-      readOnly: true
-      example: 12345
     part_number:
       type: string
       maxLength: 255
       description: Part number. Together with rev, uniquely identifies a part.
       example: 10-12345-12
       minLength: 1
-    Error:
-      properties:
-        code:
-          type: string
-          description: Error code identifying type of error.
-        message:
-          type: string
-          description: Error message.
-    AssemblyEntry:
-      type: object
-      required:
-      - part_number
-      - rev
-      - quantity
-      properties:
-        part_number:
-          $ref: '#/components/schemas/part_number'
-        rev:
-          $ref: '#/components/schemas/rev'
-        quantity:
-          type: number
-          nullable: false
-          minimum: 0
-          description: Number of instances of this part in the assembly.
-          example: 4.0
-    NewPartMaster:
-      type: object
-      required:
-      - part_number
-      properties:
-        part_number:
-          $ref: '#/components/schemas/part_number'
-        rev:
-          $ref: '#/components/schemas/rev'
-        description:
-          type: string
-          nullable: true
-          maxLength: 255
-          description: Description of the part. (Optional).
-          example: Three Lobe Shaft
-        status:
-          type: string
-          nullable: false
-          enum:
-          - Active
-          - Inactive
-          default: Active
-          description: Status of Part Master entry.
-        alt_part_number:
-          type: string
-          nullable: true
-          maxLength: 255
-          description: 'An alternative identifier used to identify a part, such as Drawing #, or customer / supplier part number.'
-          example: DN-1234568
-        alt_rev:
-          type: string
-          nullable: true
-          maxLength: 255
-          description: An alternate part revision, such as a drawing revision, or customer / supplier part revision.
-          example: B
-        alt_part_number2:
-          type: string
-          nullable: true
-          maxLength: 255
-          description: 'A second alternative identifier used to identify a part, such as Drawing #, or customer / supplier part number.'
-          example: CN-1234569
-        alt_rev2:
-          type: string
-          nullable: true
-          maxLength: 255
-          description: A second alternate part revision, such as a drawing revision, or customer / supplier part revision.
-          example: C
-        project_identifier:
-          $ref: '#/components/schemas/project_identifier'
-        cost:
-          type: number
-          nullable: true
-          format: double
-          description: Cost of the part. (Optional).
-          example: 3.5
-        unit:
-          type: string
-          description: Unit used for determine part cost. (Optional)
-          example: Each
-        is_assembly:
-          type: boolean
-          default: false
-          description: If true, indicates part is an assembly. (Optional)
-        is_itar:
-          type: boolean
-          default: false
-          description: If true, indicates part is an ITAR part with additional controls. (Optional)
-        is_buy:
-          type: boolean
-          default: false
-          description: If true, indicates part is bought, rather than made. (Optional)
-        comments:
-          type: string
-          nullable: true
-          maxLength: 32000
-          description: Detailed comments regarding the part. (Optional)
-          example: This is a brand new part that we are prototyping.
-  responses:
-    '401':
-      description: Unauthorized. Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: FAC-2
-            message: Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.
+  parameters:
+    project_identifier:
+      name: project_identifier
+      in: query
+      required: false
+      schema:
+        type:
+        - string
+        - 'null'
+        example: Bearings
+      description: "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
+    updatedBefore:
+      name: updated_before
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-07-14T08:00:00-08:00'
+      description: Return objects updated before the specified date-time
+    createdBefore:
+      name: created_before
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-07-14T08:00:00-08:00'
+      description: Return objects created before the specified date-time
+    pageSize:
+      name: page_size
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 500
+        default: 100
+      description: The maximum number of records to return from the query. Defaults to 100, maximum value 500.
+    part_number:
+      name: part_number
+      in: query
+      required: false
+      schema:
+        type: string
+        example: 12-34567-89
+      description: Part name / number to filter on.
+    page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 0
+        default: 0
+      description: Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).
+    createdAfter:
+      name: created_after
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-07-14T08:00:00-08:00'
+      description: Return objects created after the specified date-time
+    rev:
+      name: rev
+      in: query
+      required: false
+      schema:
+        type: string
+        example: A
+      description: Part rev to filter on. Typically used in conjunction with the part_number query parameter.
+    updatedAfter:
+      name: updated_after
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-07-14T08:00:00-08:00'
+      description: Return objects updated after the specified date-time
+    status:
+      name: status
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - Active
+        - Inactive
+        example: Active
+      description: Status to filter on.
   securitySchemes:
     OrgId:
       type: apiKey
