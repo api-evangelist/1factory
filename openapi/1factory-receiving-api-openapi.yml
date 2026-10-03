@@ -615,475 +615,7 @@ paths:
       operationId: getRecFaisByInspectionId
       x-operation-id-source: derived
 components:
-  parameters:
-    faiType:
-      name: type
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - Standard
-        - AS9102
-        example: Standard
-      description: Type of first-article inspection to filter on.
-    is_spec_lib:
-      name: is_spec_lib
-      in: query
-      required: false
-      schema:
-        type: boolean
-        example: false
-      description: If spec library plans should be filtered on.
-    page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        minimum: 0
-        default: 0
-      description: Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).
-    supplier:
-      name: supplier
-      in: query
-      required: false
-      schema:
-        type:
-        - string
-        - 'null'
-        example: Acme Industries
-      description: Name of supplier to filter on.
-    inspectionID:
-      name: inspection_id
-      in: path
-      required: true
-      schema:
-        type: integer
-        example: 12345
-    createdAfter:
-      name: created_after
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-07-14T08:00:00-08:00'
-      description: Return objects created after the specified date-time
-    project_identifier:
-      name: project_identifier
-      in: query
-      required: false
-      schema:
-        type:
-        - string
-        - 'null'
-        example: Bearings
-      description: "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
-    rev:
-      name: rev
-      in: query
-      required: false
-      schema:
-        type: string
-        example: A
-      description: Part rev to filter on. Typically used in conjunction with the part_number query parameter.
-    is_tabulated:
-      name: is_tablulated
-      in: query
-      required: false
-      schema:
-        type: boolean
-        example: false
-      description: If tabulated plans should be filtered on.
-    approval_status:
-      name: approval_status
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - N/a
-        - Pending
-        - Assigned
-        - Approved
-        - Rejected
-      description: 'The status of an object that requires approval before releasing or closing.
-
-
-        (Availability depends on Organization settings.)'
-    updatedBefore:
-      name: updated_before
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-07-14T08:00:00-08:00'
-      description: Return objects updated before the specified date-time
-    inspectionStatus:
-      name: insp_status
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - Pending
-        - Accepted
-        - Rejected
-        example: Accepted
-      description: Inspection status to filter on.
-    closedBefore:
-      name: closed_before
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-07-14T08:00:00-08:00'
-      description: Return only approved or rejected objects closed before the specified date-time.
-    planID:
-      name: plan_id
-      in: path
-      required: true
-      schema:
-        type: integer
-        example: 12345
-    updatedAfter:
-      name: updated_after
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-07-14T08:00:00-08:00'
-      description: Return objects updated after the specified date-time
-    version_status:
-      name: version_status
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - Active
-        - Draft
-        - Approval
-        - Released
-        - Inactive
-        example: Active
-      description: Version status to filter on. Approval status is only available to Organizations with plan approvals enabled. Active is the released and highest version.
-    site:
-      name: site
-      in: query
-      required: false
-      schema:
-        type:
-        - string
-        - 'null'
-        example: QC Lab
-      description: Location where inspection was performed. Must come from your organization's Sites List of Values.
-    inspectionType:
-      name: type
-      in: query
-      required: false
-      schema:
-        type: string
-        example: Final
-      description: Type of inspection to filter on, from your organization's Inspection Types List of Values.
-    status:
-      name: status
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - Active
-        - Inactive
-        example: Active
-      description: Status to filter on.
-    reviewStatus:
-      name: review_status
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - Pending
-        - Reviewed
-        example: Reviewed
-      description: Review status to filter on.
-    pageSize:
-      name: page_size
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        maximum: 500
-        default: 100
-      description: The maximum number of records to return from the query. Defaults to 100, maximum value 500.
-    createdBefore:
-      name: created_before
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-07-14T08:00:00-08:00'
-      description: Return objects created before the specified date-time
-    inspIdent2:
-      name: insp_ident_2
-      in: query
-      required: false
-      schema:
-        type: string
-        example: C-B12345
-      description: 'Secondary identifier to filter on for an inspection or FAI, for example a Customer Purchase Order or Lot #. For FAIs this is the ''PO Number''.'
-    inspIdent1:
-      name: insp_ident_1
-      in: query
-      required: false
-      schema:
-        type: string
-        example: PO-12345
-      description: Primary identifier to filter on for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'.
-    part_number:
-      name: part_number
-      in: query
-      required: false
-      schema:
-        type: string
-        example: 12-34567-89
-      description: Part name / number to filter on.
-    closedAfter:
-      name: closed_after
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: '2021-07-14T08:00:00-08:00'
-      description: Return only approved or rejected objects closed after the specified date-time.
   schemas:
-    created_on:
-      type: string
-      format: date-time
-      description: Date & time that an object was created.
-      example: '2021-07-15T09:14:42-08:00'
-    created_by_username:
-      type: string
-      description: Name of user that created the entity.
-      example: Oleg Nickolayev
-    lot_size:
-      type:
-      - integer
-      - 'null'
-      format: int32
-      minimum: 0
-      description: Number of parts in lot being inspected
-      example: 100
-    NewInspection:
-      type: object
-      properties:
-        insp_ident_1:
-          $ref: '#/components/schemas/insp_ident_1'
-        insp_ident_2:
-          $ref: '#/components/schemas/insp_ident_2'
-        insp_ident_3:
-          $ref: '#/components/schemas/insp_ident_3'
-        part_number:
-          $ref: '#/components/schemas/part_number'
-        rev:
-          $ref: '#/components/schemas/rev'
-        inspection_type:
-          $ref: '#/components/schemas/inspection_type'
-        lot_size:
-          $ref: '#/components/schemas/lot_size'
-    closed_on:
-      type: string
-      format: date-time
-      description: Date & time that an object was closed.
-      example: '2021-07-21T07:14:42-08:00'
-    PlanDetail:
-      type: object
-      properties:
-        ID:
-          $ref: '#/components/schemas/ID'
-        part_number:
-          $ref: '#/components/schemas/part_number'
-        rev:
-          $ref: '#/components/schemas/rev'
-        part_description:
-          $ref: '#/components/schemas/part_description'
-        operation:
-          $ref: '#/components/schemas/operation'
-        project_identifier:
-          $ref: '#/components/schemas/project_identifier'
-        status:
-          $ref: '#/components/schemas/status'
-        version:
-          type: number
-          description: Version of the plan.
-          example: 4
-        version_status:
-          type: string
-          enum:
-          - Active
-          - Draft
-          - Approval
-          - Released
-          - Inactive
-        approval_status:
-          type: string
-          enum:
-          - N/a
-          - Pending
-          - Assigned
-          - Approved
-          - Rejected
-          description: 'The status of a plan that requires approval before releasing or closing.
-
-
-            (Availability depends on Organization settings.)'
-        customer_name:
-          $ref: '#/components/schemas/customer_name'
-        supplier_name:
-          $ref: '#/components/schemas/supplier_name'
-        supplier_number:
-          $ref: '#/components/schemas/supplier_number'
-        is_tabulated:
-          type: boolean
-          example: false
-          description: If the plan is for a tabulated part.
-        is_spec_lib:
-          type: boolean
-          example: false
-          description: If the plan is a spec library
-        created_by_name:
-          $ref: '#/components/schemas/created_by_username'
-        created_on:
-          $ref: '#/components/schemas/created_on'
-        updated_on:
-          $ref: '#/components/schemas/updated_on'
-        specifications:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/Specification'
-            - type: object
-              properties:
-                inspection_types:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/SpecInspectionType'
-    updated_on:
-      type: string
-      format: date-time
-      description: Date & time that an object was last updated.
-      example: '2021-07-17T12:14:42-08:00'
-    insp_ident_1:
-      type: string
-      minLength: 1
-      maxLength: 255
-      description: Primary identifier for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'. Must be unique for each entry when used in a Work Order List.
-      example: PO-12345
-    PlanList:
-      type: array
-      minItems: 0
-      maxItems: 500
-      items:
-        $ref: '#/components/schemas/Plan'
-    InspectionDetail:
-      type: object
-      description: Detailed inspection data, including feature specifications and measurement data.
-      allOf:
-      - $ref: '#/components/schemas/Inspection'
-      - type: object
-        properties:
-          specifications:
-            type: array
-            minItems: 1
-            items:
-              $ref: '#/components/schemas/Specification'
-          part_data:
-            type: array
-            minItems: 0
-            items:
-              $ref: '#/components/schemas/PartData'
-    fai_type:
-      type: string
-      description: Type of first-article inspection.
-      enum:
-      - Standard
-      - AS9102
-      example: Standard
-    machines:
-      type: array
-      description: List of machines for the inspection. Only for manufacturing inspections. Entries in this list must match the Mfg. Resources - Machines LOV configured for your organization.
-      items:
-        type: string
-        minItems: 0
-    operation:
-      type:
-      - string
-      - 'null'
-      description: Operation of the inspection. No operation specified or an operation of 'All' indicates that an inspection is for all operations in the inspection Plan. (Only for manufacturing inspections, and if the 'Inspections by Op' configuration is enabled for your organization.)
-      example: OP 10
-    rev:
-      type:
-      - string
-      - 'null'
-      maxLength: 255
-      description: Part revision. Together with part number, uniquely identifies a part.
-      example: A
-    NewFai:
-      type: object
-      properties:
-        insp_ident_1:
-          $ref: '#/components/schemas/insp_ident_1'
-        insp_ident_2:
-          $ref: '#/components/schemas/insp_ident_2'
-        part_number:
-          $ref: '#/components/schemas/part_number'
-        rev:
-          $ref: '#/components/schemas/rev'
-        fai_type:
-          $ref: '#/components/schemas/fai_type'
-        number_of_parts:
-          $ref: '#/components/schemas/number_of_parts'
-        customer_name:
-          $ref: '#/components/schemas/customer_name'
-        supplier_name:
-          $ref: '#/components/schemas/supplier_name'
-    InspectionList:
-      type: array
-      minItems: 0
-      maxItems: 500
-      items:
-        $ref: '#/components/schemas/Inspection'
-    number_of_parts:
-      type: integer
-      format: int32
-      minimum: 1
-      description: Number of parts inspected.
-      example: 3
-    insp_ident_2:
-      type:
-      - string
-      - 'null'
-      minLength: 0
-      maxLength: 255
-      description: 'Secondary identifier for an inspection or FAI, for example a Customer Purchase Order or Lot #. For FAIs this is the ''PO Number''. (Optional)'
-      example: C-B12345
-    part_description:
-      type:
-      - string
-      - 'null'
-      maxLength: 255
-      description: Description of the part.
-      example: Three Lobe Shaft
     Inspection:
       type: object
       properties:
@@ -1200,127 +732,14 @@ components:
           $ref: '#/components/schemas/parts_passed'
         parts_failed:
           $ref: '#/components/schemas/parts_failed'
-    supplier_name:
+    insp_ident_2:
       type:
       - string
       - 'null'
-      description: The name of the supplier (for receiving or supplier inspections).
-      example: Acme Industries
-    parts_passed:
-      type: number
-      description: The number of parts that pass inspection.
-      minimum: 0
-      example: 95
-    FaiDetail:
-      type: object
-      description: Detailed first-article inspection data, including feature specifications and measurement data.
-      allOf:
-      - $ref: '#/components/schemas/Fai'
-      - type: object
-        properties:
-          specifications:
-            type: array
-            minItems: 1
-            items:
-              $ref: '#/components/schemas/Specification'
-          part_data:
-            type: array
-            minItems: 0
-            items:
-              $ref: '#/components/schemas/PartData'
-    FaiList:
-      type: array
-      minItems: 0
-      maxItems: 500
-      items:
-        $ref: '#/components/schemas/Fai'
-    SpecInspectionType:
-      type: object
-      properties:
-        inspection_type:
-          $ref: '#/components/schemas/inspection_type'
-        inspection_method:
-          type:
-          - string
-          - 'null'
-          description: How the feature should be inspected.
-          example: CMM
-        sampling_rule:
-          type:
-          - string
-          - 'null'
-          description: How frequently should the feature be checked.
-          example: 1 in 10
-        data_type:
-          type: string
-          enum:
-          - NUM
-          - P/F
-          - CALC
-          description: How the data for this specification is recorded - numerically, as a pass/fail, or calculated from other features.
-          example: NUM
-    inspection_type:
-      type: string
-      description: Type of inspection, as defined in your organization's Inspection Types List of Values
-      example: Final
-    status:
-      type: string
-      description: The status of the object
-      enum:
-      - Active
-      - Inactive
-    NewRecInspection:
-      allOf:
-      - $ref: '#/components/schemas/NewInspection'
-      - type: object
-        properties:
-          supplier_name:
-            $ref: '#/components/schemas/supplier_name'
-    PartData:
-      type: object
-      description: Inspection data for a single part.
-      properties:
-        grp_ident:
-          type:
-          - string
-          - 'null'
-          description: Identifier for a grouping of parts.
-          example: CAVITY1
-        row_ident:
-          type:
-          - string
-          - 'null'
-          description: Identifier for a unique part, sucha as a serial number.
-          example: SN100001
-        updated_on:
-          type: string
-          description: Date & time that data for this part was last updated.
-          example: '2021-07-16T17:53:41-08:00'
-        measurements:
-          type: array
-          minimum: 1
-          description: List of measurements recorded for part. Order of entries corresponds to order of specifications, so index of a measurement corresponds to the index of the feature specification & place it is for.
-          items:
-            type:
-            - object
-            - 'null'
-            properties:
-              value:
-                type: number
-                description: Actual measurement recorded. For a pass/fail specification, 1.0 corresponds to PASS, 0.0 corresponds to FAIL.
-                example: 1.1234
-              bonus:
-                type:
-                - number
-                - 'null'
-                description: For GD&T specs that allow a bonus tolerance, the bonus tolerance to apply to actual measurement.
-                example: 0.02
-    part_number:
-      type: string
+      minLength: 0
       maxLength: 255
-      description: Part number. Together with rev, uniquely identifies a part.
-      example: 10-12345-12
-      minLength: 1
+      description: 'Secondary identifier for an inspection or FAI, for example a Customer Purchase Order or Lot #. For FAIs this is the ''PO Number''. (Optional)'
+      example: C-B12345
     Error:
       properties:
         code:
@@ -1329,6 +748,13 @@ components:
         message:
           type: string
           description: Error message.
+    part_description:
+      type:
+      - string
+      - 'null'
+      maxLength: 255
+      description: Description of the part.
+      example: Three Lobe Shaft
     insp_ident_3:
       type:
       - string
@@ -1337,28 +763,17 @@ components:
       maxLength: 255
       description: 'Tertiary identifier for an inspection, for example a Customer Purchase Order or Lot #. (Optional)'
       example: 1A
-    supplier_number:
-      type:
-      - string
-      - 'null'
-      description: The supplier number / vendor code (for receiving or supplier inspections).
-      example: S12345
-    ID:
-      type: integer
-      format: int32
-      description: Unique identifier for the Inspection, assigned by 1Factory.
-      readOnly: true
-      example: 12345
-    project_identifier:
-      name: project_identifier
-      in: query
-      required: false
-      schema:
-        type:
-        - string
-        - 'null'
-        example: Bearings
-      description: "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
+    closed_on:
+      type: string
+      format: date-time
+      description: Date & time that an object was closed.
+      example: '2021-07-21T07:14:42-08:00'
+    insp_ident_1:
+      type: string
+      minLength: 1
+      maxLength: 255
+      description: Primary identifier for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'. Must be unique for each entry when used in a Work Order List.
+      example: PO-12345
     Plan:
       type: object
       properties:
@@ -1420,17 +835,13 @@ components:
           $ref: '#/components/schemas/created_on'
         updated_on:
           $ref: '#/components/schemas/updated_on'
-    parts_failed:
-      type: number
-      description: The number of parts that failed inspection.
-      minimum: 0
-      example: 5
-    customer_name:
-      type:
-      - string
-      - 'null'
-      description: The name of the customer (for manufacturing inspections).
-      example: Rocket Company
+    fai_type:
+      type: string
+      description: Type of first-article inspection.
+      enum:
+      - Standard
+      - AS9102
+      example: Standard
     Specification:
       type: object
       description: Specification that defines feature to be measured.
@@ -1554,6 +965,74 @@ components:
           type: boolean
           description: Indicates if feature is key for quality.
           example: true
+    operation:
+      type:
+      - string
+      - 'null'
+      description: Operation of the inspection. No operation specified or an operation of 'All' indicates that an inspection is for all operations in the inspection Plan. (Only for manufacturing inspections, and if the 'Inspections by Op' configuration is enabled for your organization.)
+      example: OP 10
+    supplier_number:
+      type:
+      - string
+      - 'null'
+      description: The supplier number / vendor code (for receiving or supplier inspections).
+      example: S12345
+    NewInspection:
+      type: object
+      properties:
+        insp_ident_1:
+          $ref: '#/components/schemas/insp_ident_1'
+        insp_ident_2:
+          $ref: '#/components/schemas/insp_ident_2'
+        insp_ident_3:
+          $ref: '#/components/schemas/insp_ident_3'
+        part_number:
+          $ref: '#/components/schemas/part_number'
+        rev:
+          $ref: '#/components/schemas/rev'
+        inspection_type:
+          $ref: '#/components/schemas/inspection_type'
+        lot_size:
+          $ref: '#/components/schemas/lot_size'
+    PartData:
+      type: object
+      description: Inspection data for a single part.
+      properties:
+        grp_ident:
+          type:
+          - string
+          - 'null'
+          description: Identifier for a grouping of parts.
+          example: CAVITY1
+        row_ident:
+          type:
+          - string
+          - 'null'
+          description: Identifier for a unique part, sucha as a serial number.
+          example: SN100001
+        updated_on:
+          type: string
+          description: Date & time that data for this part was last updated.
+          example: '2021-07-16T17:53:41-08:00'
+        measurements:
+          type: array
+          minimum: 1
+          description: List of measurements recorded for part. Order of entries corresponds to order of specifications, so index of a measurement corresponds to the index of the feature specification & place it is for.
+          items:
+            type:
+            - object
+            - 'null'
+            properties:
+              value:
+                type: number
+                description: Actual measurement recorded. For a pass/fail specification, 1.0 corresponds to PASS, 0.0 corresponds to FAIL.
+                example: 1.1234
+              bonus:
+                type:
+                - number
+                - 'null'
+                description: For GD&T specs that allow a bonus tolerance, the bonus tolerance to apply to actual measurement.
+                example: 0.02
     Fai:
       type: object
       properties:
@@ -1664,16 +1143,528 @@ components:
           $ref: '#/components/schemas/fai_type'
         number_of_parts:
           $ref: '#/components/schemas/number_of_parts'
+    part_number:
+      type: string
+      maxLength: 255
+      description: Part number. Together with rev, uniquely identifies a part.
+      example: 10-12345-12
+      minLength: 1
+    parts_passed:
+      type: number
+      description: The number of parts that pass inspection.
+      minimum: 0
+      example: 95
+    created_on:
+      type: string
+      format: date-time
+      description: Date & time that an object was created.
+      example: '2021-07-15T09:14:42-08:00'
+    status:
+      type: string
+      description: The status of the object
+      enum:
+      - Active
+      - Inactive
+    inspection_type:
+      type: string
+      description: Type of inspection, as defined in your organization's Inspection Types List of Values
+      example: Final
+    FaiDetail:
+      type: object
+      description: Detailed first-article inspection data, including feature specifications and measurement data.
+      allOf:
+      - $ref: '#/components/schemas/Fai'
+      - type: object
+        properties:
+          specifications:
+            type: array
+            minItems: 1
+            items:
+              $ref: '#/components/schemas/Specification'
+          part_data:
+            type: array
+            minItems: 0
+            items:
+              $ref: '#/components/schemas/PartData'
+    NewRecInspection:
+      allOf:
+      - $ref: '#/components/schemas/NewInspection'
+      - type: object
+        properties:
+          supplier_name:
+            $ref: '#/components/schemas/supplier_name'
+    rev:
+      type:
+      - string
+      - 'null'
+      maxLength: 255
+      description: Part revision. Together with part number, uniquely identifies a part.
+      example: A
+    supplier_name:
+      type:
+      - string
+      - 'null'
+      description: The name of the supplier (for receiving or supplier inspections).
+      example: Acme Industries
+    created_by_username:
+      type: string
+      description: Name of user that created the entity.
+      example: Oleg Nickolayev
+    machines:
+      type: array
+      description: List of machines for the inspection. Only for manufacturing inspections. Entries in this list must match the Mfg. Resources - Machines LOV configured for your organization.
+      items:
+        type: string
+        minItems: 0
+    customer_name:
+      type:
+      - string
+      - 'null'
+      description: The name of the customer (for manufacturing inspections).
+      example: Rocket Company
+    InspectionList:
+      type: array
+      minItems: 0
+      maxItems: 500
+      items:
+        $ref: '#/components/schemas/Inspection'
+    project_identifier:
+      name: project_identifier
+      in: query
+      required: false
+      schema:
+        type:
+        - string
+        - 'null'
+        example: Bearings
+      description: "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
+    FaiList:
+      type: array
+      minItems: 0
+      maxItems: 500
+      items:
+        $ref: '#/components/schemas/Fai'
+    parts_failed:
+      type: number
+      description: The number of parts that failed inspection.
+      minimum: 0
+      example: 5
+    NewFai:
+      type: object
+      properties:
+        insp_ident_1:
+          $ref: '#/components/schemas/insp_ident_1'
+        insp_ident_2:
+          $ref: '#/components/schemas/insp_ident_2'
+        part_number:
+          $ref: '#/components/schemas/part_number'
+        rev:
+          $ref: '#/components/schemas/rev'
+        fai_type:
+          $ref: '#/components/schemas/fai_type'
+        number_of_parts:
+          $ref: '#/components/schemas/number_of_parts'
+        customer_name:
+          $ref: '#/components/schemas/customer_name'
+        supplier_name:
+          $ref: '#/components/schemas/supplier_name'
+    InspectionDetail:
+      type: object
+      description: Detailed inspection data, including feature specifications and measurement data.
+      allOf:
+      - $ref: '#/components/schemas/Inspection'
+      - type: object
+        properties:
+          specifications:
+            type: array
+            minItems: 1
+            items:
+              $ref: '#/components/schemas/Specification'
+          part_data:
+            type: array
+            minItems: 0
+            items:
+              $ref: '#/components/schemas/PartData'
+    updated_on:
+      type: string
+      format: date-time
+      description: Date & time that an object was last updated.
+      example: '2021-07-17T12:14:42-08:00'
+    ID:
+      type: integer
+      format: int32
+      description: Unique identifier for the Inspection, assigned by 1Factory.
+      readOnly: true
+      example: 12345
+    SpecInspectionType:
+      type: object
+      properties:
+        inspection_type:
+          $ref: '#/components/schemas/inspection_type'
+        inspection_method:
+          type:
+          - string
+          - 'null'
+          description: How the feature should be inspected.
+          example: CMM
+        sampling_rule:
+          type:
+          - string
+          - 'null'
+          description: How frequently should the feature be checked.
+          example: 1 in 10
+        data_type:
+          type: string
+          enum:
+          - NUM
+          - P/F
+          - CALC
+          description: How the data for this specification is recorded - numerically, as a pass/fail, or calculated from other features.
+          example: NUM
+    number_of_parts:
+      type: integer
+      format: int32
+      minimum: 1
+      description: Number of parts inspected.
+      example: 3
+    lot_size:
+      type:
+      - integer
+      - 'null'
+      format: int32
+      minimum: 0
+      description: Number of parts in lot being inspected
+      example: 100
+    PlanDetail:
+      type: object
+      properties:
+        ID:
+          $ref: '#/components/schemas/ID'
+        part_number:
+          $ref: '#/components/schemas/part_number'
+        rev:
+          $ref: '#/components/schemas/rev'
+        part_description:
+          $ref: '#/components/schemas/part_description'
+        operation:
+          $ref: '#/components/schemas/operation'
+        project_identifier:
+          $ref: '#/components/schemas/project_identifier'
+        status:
+          $ref: '#/components/schemas/status'
+        version:
+          type: number
+          description: Version of the plan.
+          example: 4
+        version_status:
+          type: string
+          enum:
+          - Active
+          - Draft
+          - Approval
+          - Released
+          - Inactive
+        approval_status:
+          type: string
+          enum:
+          - N/a
+          - Pending
+          - Assigned
+          - Approved
+          - Rejected
+          description: 'The status of a plan that requires approval before releasing or closing.
+
+
+            (Availability depends on Organization settings.)'
+        customer_name:
+          $ref: '#/components/schemas/customer_name'
+        supplier_name:
+          $ref: '#/components/schemas/supplier_name'
+        supplier_number:
+          $ref: '#/components/schemas/supplier_number'
+        is_tabulated:
+          type: boolean
+          example: false
+          description: If the plan is for a tabulated part.
+        is_spec_lib:
+          type: boolean
+          example: false
+          description: If the plan is a spec library
+        created_by_name:
+          $ref: '#/components/schemas/created_by_username'
+        created_on:
+          $ref: '#/components/schemas/created_on'
+        updated_on:
+          $ref: '#/components/schemas/updated_on'
+        specifications:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Specification'
+            - type: object
+              properties:
+                inspection_types:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SpecInspectionType'
+    PlanList:
+      type: array
+      minItems: 0
+      maxItems: 500
+      items:
+        $ref: '#/components/schemas/Plan'
+  parameters:
+    createdBefore:
+      name: created_before
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-07-14T08:00:00-08:00'
+      description: Return objects created before the specified date-time
+    planID:
+      name: plan_id
+      in: path
+      required: true
+      schema:
+        type: integer
+        example: 12345
+    createdAfter:
+      name: created_after
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-07-14T08:00:00-08:00'
+      description: Return objects created after the specified date-time
+    page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 0
+        default: 0
+      description: Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).
+    faiType:
+      name: type
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - Standard
+        - AS9102
+        example: Standard
+      description: Type of first-article inspection to filter on.
+    rev:
+      name: rev
+      in: query
+      required: false
+      schema:
+        type: string
+        example: A
+      description: Part rev to filter on. Typically used in conjunction with the part_number query parameter.
+    closedAfter:
+      name: closed_after
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-07-14T08:00:00-08:00'
+      description: Return only approved or rejected objects closed after the specified date-time.
+    closedBefore:
+      name: closed_before
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-07-14T08:00:00-08:00'
+      description: Return only approved or rejected objects closed before the specified date-time.
+    is_spec_lib:
+      name: is_spec_lib
+      in: query
+      required: false
+      schema:
+        type: boolean
+        example: false
+      description: If spec library plans should be filtered on.
+    approval_status:
+      name: approval_status
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - N/a
+        - Pending
+        - Assigned
+        - Approved
+        - Rejected
+      description: 'The status of an object that requires approval before releasing or closing.
+
+
+        (Availability depends on Organization settings.)'
+    inspectionType:
+      name: type
+      in: query
+      required: false
+      schema:
+        type: string
+        example: Final
+      description: Type of inspection to filter on, from your organization's Inspection Types List of Values.
+    inspectionStatus:
+      name: insp_status
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - Pending
+        - Accepted
+        - Rejected
+        example: Accepted
+      description: Inspection status to filter on.
+    reviewStatus:
+      name: review_status
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - Pending
+        - Reviewed
+        example: Reviewed
+      description: Review status to filter on.
+    inspIdent1:
+      name: insp_ident_1
+      in: query
+      required: false
+      schema:
+        type: string
+        example: PO-12345
+      description: Primary identifier to filter on for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'.
+    updatedBefore:
+      name: updated_before
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-07-14T08:00:00-08:00'
+      description: Return objects updated before the specified date-time
+    supplier:
+      name: supplier
+      in: query
+      required: false
+      schema:
+        type:
+        - string
+        - 'null'
+        example: Acme Industries
+      description: Name of supplier to filter on.
+    inspIdent2:
+      name: insp_ident_2
+      in: query
+      required: false
+      schema:
+        type: string
+        example: C-B12345
+      description: 'Secondary identifier to filter on for an inspection or FAI, for example a Customer Purchase Order or Lot #. For FAIs this is the ''PO Number''.'
+    part_number:
+      name: part_number
+      in: query
+      required: false
+      schema:
+        type: string
+        example: 12-34567-89
+      description: Part name / number to filter on.
+    is_tabulated:
+      name: is_tablulated
+      in: query
+      required: false
+      schema:
+        type: boolean
+        example: false
+      description: If tabulated plans should be filtered on.
+    version_status:
+      name: version_status
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - Active
+        - Draft
+        - Approval
+        - Released
+        - Inactive
+        example: Active
+      description: Version status to filter on. Approval status is only available to Organizations with plan approvals enabled. Active is the released and highest version.
+    site:
+      name: site
+      in: query
+      required: false
+      schema:
+        type:
+        - string
+        - 'null'
+        example: QC Lab
+      description: Location where inspection was performed. Must come from your organization's Sites List of Values.
+    project_identifier:
+      name: project_identifier
+      in: query
+      required: false
+      schema:
+        type:
+        - string
+        - 'null'
+        example: Bearings
+      description: "Name of project_identifier to filter on. Must come from your organization's Part Master Project Identifier LOV. \n\n(The name used in the UI for this LOV is configured in your organization's Part Master settings and might not be 'Project Identifier')."
+    status:
+      name: status
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - Active
+        - Inactive
+        example: Active
+      description: Status to filter on.
+    pageSize:
+      name: page_size
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 500
+        default: 100
+      description: The maximum number of records to return from the query. Defaults to 100, maximum value 500.
+    inspectionID:
+      name: inspection_id
+      in: path
+      required: true
+      schema:
+        type: integer
+        example: 12345
+    updatedAfter:
+      name: updated_after
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2021-07-14T08:00:00-08:00'
+      description: Return objects updated after the specified date-time
   responses:
-    InvalidQueryParam:
-      description: Invalid request. A problem with the request query parameters prevents it from being processed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: FAC-11
-            message: 'Invalid query parameter: ''-1'' is not a valid value for ''page_size''.'
     DuplicateInspection:
       description: Conflict. An inspection using the same identifier(s) and type already exists.
       content:
@@ -1683,6 +1674,15 @@ components:
           example:
             code: FAC-21
             message: 'Duplicate resource: An inspection with insp_ident_1: ''PO-12345'', insp_ident_2: ''C-B12345'', and inspection_type: ''Final'' already exists.'
+    InvalidQueryParam:
+      description: Invalid request. A problem with the request query parameters prevents it from being processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: FAC-11
+            message: 'Invalid query parameter: ''-1'' is not a valid value for ''page_size''.'
     InvalidPathParam:
       description: Invalid request. A problem with the request path parameters prevents it from being processed.
       content:
