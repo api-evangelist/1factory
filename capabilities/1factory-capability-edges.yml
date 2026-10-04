@@ -1,0 +1,58 @@
+slug: 1factory
+provider: 1Factory
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: QMS
+  spec_file: 1factory-qms-api-openapi.yml
+  capability_id: BC-720.40
+  capability_id_l1: BC-720
+  capability_name: Non-Conformance Management
+  confidence: 0.88
+  evidence: '"Gets a List of NCRs for Your Organization"; "Gets a List of CAPAs for Your Organization";
+    schemas Ncr, Capa, Complaint'
+  reason: NCR and CAPA registers are exactly Non-Conformance Management (NCR, deviations, CAPA); complaints
+    are handled alongside as quality issues.
+- tag: Manufacturing
+  spec_file: 1factory-manufacturing-api-openapi.yml
+  capability_id: BC-720.30
+  capability_id_l1: BC-720
+  capability_name: Quality Control Management
+  confidence: 0.82
+  evidence: '"1Factory Creates a New Manufacturing Inspection for Your Organization"; "Gets a List of
+    Manufacturing First-article Inspections"; schemas Inspection, Specification, parts_passed'
+  reason: Operations create and retrieve manufacturing inspection plans, inspections and first-article
+    inspections with specifications and pass counts — inspection/testing against acceptance criteria,
+    i.e. Quality Control Management.
+- tag: Receiving
+  spec_file: 1factory-receiving-api-openapi.yml
+  capability_id: BC-720.30
+  capability_id_l1: BC-720
+  capability_name: Quality Control Management
+  confidence: 0.75
+  evidence: '"1Factory Creates a New Receiving Inspection for Your Organization"; "Gets a List of Receiving
+    First-article Inspections"; schemas Inspection, Specification, supplier_number'
+  reason: Incoming-goods inspection plans and inspection records against specifications — inspection/testing
+    and acceptance, i.e. Quality Control Management (on received material rather than warehouse receipt
+    processing).
+- tag: Suppliers
+  spec_file: 1factory-suppliers-api-openapi.yml
+  capability_id: BC-510
+  capability_id_l1: BC-510
+  capability_name: Supplier Management
+  confidence: 0.7
+  evidence: '"Gets a List of Suppliers in Your Organization"; "Get Detailed Supplier Record"; schemas
+    Supplier, Certification, Qualification, SupplierList'
+  reason: Supplier directory and detailed supplier records carrying certifications and qualifications,
+    plus quality records shared by suppliers — supplier management. Evidence spans qualification and performance
+    aspects, so L1 only.

@@ -245,6 +245,9 @@ apis:
   - type: JSONSchema
     url: json-schema/1factory-supplier-schema.json
 common:
+  - type: CapabilityMap
+    url: capabilities/1factory-capability-edges.yml
+    name: 1Factory Business Capability Map
   - type: AgenticAccess
     url: agentic-access/1factory-agentic-access.yml
   - type: DomainSecurity
