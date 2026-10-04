@@ -105,29 +105,14 @@ paths:
       operationId: putRecWorkOrderList
       x-operation-id-source: derived
 components:
+  requestBodies:
+    WorkOrderListRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WorkOrderList'
   schemas:
-    insp_ident_2:
-      type:
-      - string
-      - 'null'
-      minLength: 0
-      maxLength: 255
-      description: 'Secondary identifier for an inspection or FAI, for example a Customer Purchase Order or Lot #. For FAIs this is the ''PO Number''. (Optional)'
-      example: C-B12345
-    Error:
-      properties:
-        code:
-          type: string
-          description: Error code identifying type of error.
-        message:
-          type: string
-          description: Error message.
-    insp_ident_1:
-      type: string
-      minLength: 1
-      maxLength: 255
-      description: Primary identifier for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'. Must be unique for each entry when used in a Work Order List.
-      example: PO-12345
     WorkOrderList:
       type: array
       minItems: 0
@@ -149,6 +134,28 @@ components:
             minimum: 0
             description: The lot size for this order. (Optional).
             example: 50
+    Error:
+      properties:
+        code:
+          type: string
+          description: Error code identifying type of error.
+        message:
+          type: string
+          description: Error message.
+    insp_ident_2:
+      type:
+      - string
+      - 'null'
+      minLength: 0
+      maxLength: 255
+      description: 'Secondary identifier for an inspection or FAI, for example a Customer Purchase Order or Lot #. For FAIs this is the ''PO Number''. (Optional)'
+      example: C-B12345
+    insp_ident_1:
+      type: string
+      minLength: 1
+      maxLength: 255
+      description: Primary identifier for an inspection or FAI, for example a Work Order or Purchase Order. For FAIs, this is the 'FAI Number'. Must be unique for each entry when used in a Work Order List.
+      example: PO-12345
   responses:
     '401':
       description: Unauthorized. Missing or invalid API key.
@@ -166,13 +173,6 @@ components:
             type: string
             example: OK. Successfully updated.
       description: OK. Success message returned.
-  requestBodies:
-    WorkOrderListRequest:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WorkOrderList'
   securitySchemes:
     OrgId:
       type: apiKey
