@@ -136,6 +136,8 @@ apis:
   humanURL: https://www.1factory.com/api-doc/index.html
   baseURL: https://www.1factory.com/api/v1
   tags:
+  - Quality Management
+  tags_raw:
   - QMS
   properties:
   - type: OpenAPI
