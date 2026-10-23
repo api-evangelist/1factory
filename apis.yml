@@ -247,6 +247,8 @@ apis:
   - type: JSONSchema
     url: json-schema/1factory-supplier-schema.json
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/1factory/overview
   - type: Plans
     url: plans/1factory-plans-pricing.yml
   - type: FinOps
