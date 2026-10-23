@@ -1712,3 +1712,9 @@ components:
       in: header
       name: x-1factory-key
       description: API key for your organization. Generated in the Settings page of the 1Factory application.
+x-provenance:
+  method: harvested
+  publisher: 1Factory
+  source: https://www.1factory.com/api/v1/1factory-api.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
