@@ -1,971 +1,1037 @@
 {
+  "info": {
+    "_postman_id": "ebab1872-7c66-439f-8dbb-039937f52e17",
+    "name": "1Factory QMS API",
+    "description": "This API allows you to create and query a number of objects in your 1Factory account.\n\nContact Support:\n Name: API Support\n Email: support@1factory.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:06:17.000Z",
+    "updatedAt": "2026-10-21T21:06:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ebab1872-7c66-439f-8dbb-039937f52e17"
+  },
   "item": [
     {
-      "id": "ab5f0b0f-9bc2-4405-89fe-5f91a10715c3",
-      "name": "QMS",
-      "description": {
-        "content": "Data related to Quality",
-        "type": "text/plain"
-      },
+      "name": "qms",
       "item": [
         {
-          "id": "b4b43b27-ced6-4806-bf43-f7212cbf599e",
-          "name": "1Factory Gets a List of NCRs for Your Organization",
-          "request": {
-            "name": "1Factory Gets a List of NCRs for Your Organization",
-            "description": {
-              "content": "The list of NCRs can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows NCR objects returned. By default, the first 100 NCRs are returned.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "qms",
-                "ncrs"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "0",
-                  "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
-                },
-                {
-                  "disabled": false,
-                  "key": "page_size",
-                  "value": "100",
-                  "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
-                },
-                {
-                  "disabled": false,
-                  "key": "created_after",
-                  "value": "<dateTime>",
-                  "description": "Return objects created after the specified date-time"
-                },
-                {
-                  "disabled": false,
-                  "key": "created_before",
-                  "value": "<dateTime>",
-                  "description": "Return objects created before the specified date-time"
-                },
-                {
-                  "disabled": false,
-                  "key": "updated_after",
-                  "value": "<dateTime>",
-                  "description": "Return objects updated after the specified date-time"
-                },
-                {
-                  "disabled": false,
-                  "key": "updated_before",
-                  "value": "<dateTime>",
-                  "description": "Return objects updated before the specified date-time"
-                },
-                {
-                  "disabled": false,
-                  "key": "closed_after",
-                  "value": "<dateTime>",
-                  "description": "Return only approved or rejected objects closed after the specified date-time."
-                },
-                {
-                  "disabled": false,
-                  "key": "closed_before",
-                  "value": "<dateTime>",
-                  "description": "Return only approved or rejected objects closed before the specified date-time."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "ncrs",
+          "item": [
             {
-              "id": "491def46-d959-42ca-a066-876f212649fa",
-              "name": "Returns a list of NCRs, most recently created first. Utilize paging query parameters to query older NCRs. By default the 100 most recent are returned.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "qms",
-                    "ncrs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "0"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "100"
-                    },
-                    {
-                      "key": "created_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "created_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "updated_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "updated_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "closed_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "closed_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    }
-                  ],
-                  "variable": []
-                },
+              "name": "1Factory Gets a List of NCRs for Your Organization",
+              "id": "fa0de84a-7c4e-4e15-9b34-50cd5d560110",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-1factory-org",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {}\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "07b3f498-8170-4730-a32b-60b2294019ea",
-              "name": "Invalid request. A problem with the request query parameters prevents it from being processed.",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/qms/ncrs?page=0&page_size=100&created_after=<dateTime>&created_before=<dateTime>&updated_after=<dateTime>&updated_before=<dateTime>&closed_after=<dateTime>&closed_before=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "qms",
                     "ncrs"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).",
                       "key": "page",
                       "value": "0"
                     },
                     {
+                      "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500.",
                       "key": "page_size",
                       "value": "100"
                     },
                     {
+                      "description": "Return objects created after the specified date-time",
                       "key": "created_after",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return objects created before the specified date-time",
                       "key": "created_before",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return objects updated after the specified date-time",
                       "key": "updated_after",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return objects updated before the specified date-time",
                       "key": "updated_before",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return only approved or rejected objects closed after the specified date-time.",
                       "key": "closed_after",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return only approved or rejected objects closed before the specified date-time.",
                       "key": "closed_before",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
+                    }
+                  ]
+                },
+                "description": "The list of NCRs can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows NCR objects returned. By default, the first 100 NCRs are returned."
+              },
+              "response": [
+                {
+                  "id": "98ef1b5c-97fb-448f-a969-57b2aaf33f4a",
+                  "name": "Returns a list of NCRs, most recently created first. Utilize paging query parameters to query older NCRs. By default the 100 most recent are returned.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-1factory-org",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/qms/ncrs?page=0&page_size=100&created_after=<dateTime>&created_before=<dateTime>&updated_after=<dateTime>&updated_before=<dateTime>&closed_after=<dateTime>&closed_before=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "qms",
+                        "ncrs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).",
+                          "key": "page",
+                          "value": "0"
+                        },
+                        {
+                          "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500.",
+                          "key": "page_size",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Return objects created after the specified date-time",
+                          "key": "created_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects created before the specified date-time",
+                          "key": "created_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated after the specified date-time",
+                          "key": "updated_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated before the specified date-time",
+                          "key": "updated_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed after the specified date-time.",
+                          "key": "closed_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed before the specified date-time.",
+                          "key": "closed_before",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Cust.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"CLOSED\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Mfg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Cust.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Mfg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"CLOSED\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Mfg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Devn.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"CLOSED\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Devn.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Rcvg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Cust.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Cust.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Rcvg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Rcvg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"CLOSED\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Mfg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Devn.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Mfg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Mfg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"CLOSED\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"use_as_is_quantity\": \"<number,null>\",\n    \"scrap_quantity\": \"<number,null>\",\n    \"return_quantity\": \"<number,null>\",\n    \"rework_quantity\": \"<number,null>\",\n    \"repair_quantity\": \"<number,null>\",\n    \"no_defect_quantity\": \"<number,null>\",\n    \"inventory_location\": \"<string,null>\",\n    \"rma_number\": \"<string,null>\",\n    \"rework_po\": \"<string,null>\",\n    \"shipment\": \"<string,null>\",\n    \"mrb_meeting_notes\": \"<string,null>\",\n    \"mrb_dispositions\": [\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"qty\": \"<number>\"\n      }\n    ],\n    \"serial_numbers\": \"<string,null>\"\n  }\n]",
+                  "createdAt": "2026-10-21T21:06:18.000Z",
+                  "updatedAt": "2026-10-21T21:06:18.000Z",
+                  "uid": "35240-98ef1b5c-97fb-448f-a969-57b2aaf33f4a"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-1factory-org",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"FAC-11\",\n  \"message\": \"Invalid query parameter: '-1' is not a valid value for 'page_size'.\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b0d38bf2-ad49-4e09-a7d9-8f68d88edc6b",
-              "name": "Unauthorized. Missing or invalid API key.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "qms",
-                    "ncrs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "d1df097d-fce3-4b87-ae2a-2bbb8e5e1648",
+                  "name": "Invalid request. A problem with the request query parameters prevents it from being processed.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-1factory-org",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/qms/ncrs?page=0&page_size=100&created_after=<dateTime>&created_before=<dateTime>&updated_after=<dateTime>&updated_before=<dateTime>&closed_after=<dateTime>&closed_before=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "qms",
+                        "ncrs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).",
+                          "key": "page",
+                          "value": "0"
+                        },
+                        {
+                          "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500.",
+                          "key": "page_size",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Return objects created after the specified date-time",
+                          "key": "created_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects created before the specified date-time",
+                          "key": "created_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated after the specified date-time",
+                          "key": "updated_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated before the specified date-time",
+                          "key": "updated_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed after the specified date-time.",
+                          "key": "closed_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed before the specified date-time.",
+                          "key": "closed_before",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "page",
-                      "value": "0"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "100"
-                    },
-                    {
-                      "key": "created_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "created_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "updated_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "updated_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "closed_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "closed_before",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:06:18.000Z",
+                  "updatedAt": "2026-10-21T21:06:18.000Z",
+                  "uid": "35240-d1df097d-fce3-4b87-ae2a-2bbb8e5e1648"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-1factory-org",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "e3887ca8-0f99-4489-a789-66b3c4ae498f",
+                  "name": "Unauthorized. Missing or invalid API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-1factory-org",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/qms/ncrs?page=0&page_size=100&created_after=<dateTime>&created_before=<dateTime>&updated_after=<dateTime>&updated_before=<dateTime>&closed_after=<dateTime>&closed_before=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "qms",
+                        "ncrs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).",
+                          "key": "page",
+                          "value": "0"
+                        },
+                        {
+                          "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500.",
+                          "key": "page_size",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Return objects created after the specified date-time",
+                          "key": "created_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects created before the specified date-time",
+                          "key": "created_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated after the specified date-time",
+                          "key": "updated_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated before the specified date-time",
+                          "key": "updated_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed after the specified date-time.",
+                          "key": "closed_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed before the specified date-time.",
+                          "key": "closed_before",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:06:18.000Z",
+                  "updatedAt": "2026-10-21T21:06:18.000Z",
+                  "uid": "35240-e3887ca8-0f99-4489-a789-66b3c4ae498f"
                 }
               ],
-              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T21:06:18.000Z",
+              "updatedAt": "2026-10-21T21:06:18.000Z",
+              "uid": "35240-fa0de84a-7c4e-4e15-9b34-50cd5d560110"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "fbfa3d70-7cc6-482c-bf86-41ce206c954b",
+          "createdAt": "2026-10-21T21:06:18.000Z",
+          "updatedAt": "2026-10-21T21:06:18.000Z",
+          "uid": "35240-fbfa3d70-7cc6-482c-bf86-41ce206c954b"
         },
         {
-          "id": "9e5c1bf9-7e64-45fc-8ffd-84c4ecba1630",
-          "name": "1Factory Gets a List of CAPAs for Your Organization",
-          "request": {
-            "name": "1Factory Gets a List of CAPAs for Your Organization",
-            "description": {
-              "content": "The list of CAPAs can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows CAPA objects returned. By default, the first 100 CAPAs are returned.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "qms",
-                "capas"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "0",
-                  "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
-                },
-                {
-                  "disabled": false,
-                  "key": "page_size",
-                  "value": "100",
-                  "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
-                },
-                {
-                  "disabled": false,
-                  "key": "created_after",
-                  "value": "<dateTime>",
-                  "description": "Return objects created after the specified date-time"
-                },
-                {
-                  "disabled": false,
-                  "key": "created_before",
-                  "value": "<dateTime>",
-                  "description": "Return objects created before the specified date-time"
-                },
-                {
-                  "disabled": false,
-                  "key": "updated_after",
-                  "value": "<dateTime>",
-                  "description": "Return objects updated after the specified date-time"
-                },
-                {
-                  "disabled": false,
-                  "key": "updated_before",
-                  "value": "<dateTime>",
-                  "description": "Return objects updated before the specified date-time"
-                },
-                {
-                  "disabled": false,
-                  "key": "closed_after",
-                  "value": "<dateTime>",
-                  "description": "Return only approved or rejected objects closed after the specified date-time."
-                },
-                {
-                  "disabled": false,
-                  "key": "closed_before",
-                  "value": "<dateTime>",
-                  "description": "Return only approved or rejected objects closed before the specified date-time."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "capas",
+          "item": [
             {
-              "id": "72fd7468-a298-4466-a8f3-11c22c485f79",
-              "name": "Returns a list of CAPAs, most recently created first. Utilize paging query parameters to query older CAPAs. By default the 100 most recent are returned.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "qms",
-                    "capas"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "0"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "100"
-                    },
-                    {
-                      "key": "created_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "created_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "updated_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "updated_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "closed_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "closed_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    }
-                  ],
-                  "variable": []
-                },
+              "name": "1Factory Gets a List of CAPAs for Your Organization",
+              "id": "ab0e229b-a8b2-448a-aa38-1547040702ab",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-1factory-org",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {}\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a6f114be-32ce-4dbd-acd9-d7b034de37e3",
-              "name": "Invalid request. A problem with the request query parameters prevents it from being processed.",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/qms/capas?page=0&page_size=100&created_after=<dateTime>&created_before=<dateTime>&updated_after=<dateTime>&updated_before=<dateTime>&closed_after=<dateTime>&closed_before=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "qms",
                     "capas"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).",
                       "key": "page",
                       "value": "0"
                     },
                     {
+                      "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500.",
                       "key": "page_size",
                       "value": "100"
                     },
                     {
+                      "description": "Return objects created after the specified date-time",
                       "key": "created_after",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return objects created before the specified date-time",
                       "key": "created_before",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return objects updated after the specified date-time",
                       "key": "updated_after",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return objects updated before the specified date-time",
                       "key": "updated_before",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return only approved or rejected objects closed after the specified date-time.",
                       "key": "closed_after",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return only approved or rejected objects closed before the specified date-time.",
                       "key": "closed_before",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
+                    }
+                  ]
+                },
+                "description": "The list of CAPAs can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows CAPA objects returned. By default, the first 100 CAPAs are returned."
+              },
+              "response": [
+                {
+                  "id": "92eba60d-5d8e-4e94-9dd2-273435d8c092",
+                  "name": "Returns a list of CAPAs, most recently created first. Utilize paging query parameters to query older CAPAs. By default the 100 most recent are returned.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-1factory-org",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/qms/capas?page=0&page_size=100&created_after=<dateTime>&created_before=<dateTime>&updated_after=<dateTime>&updated_before=<dateTime>&closed_after=<dateTime>&closed_before=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "qms",
+                        "capas"
+                      ],
+                      "query": [
+                        {
+                          "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).",
+                          "key": "page",
+                          "value": "0"
+                        },
+                        {
+                          "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500.",
+                          "key": "page_size",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Return objects created after the specified date-time",
+                          "key": "created_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects created before the specified date-time",
+                          "key": "created_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated after the specified date-time",
+                          "key": "updated_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated before the specified date-time",
+                          "key": "updated_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed after the specified date-time.",
+                          "key": "closed_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed before the specified date-time.",
+                          "key": "closed_before",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Rcvg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Cust.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Cust.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Devn.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Devn.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Cust.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Devn.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Mfg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Mfg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Cust.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Rcvg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Rcvg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Devn.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Cust.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Mfg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"CLOSED\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Mfg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"date_due\": \"<dateTime>\"\n  }\n]",
+                  "createdAt": "2026-10-21T21:06:18.000Z",
+                  "updatedAt": "2026-10-21T21:06:18.000Z",
+                  "uid": "35240-92eba60d-5d8e-4e94-9dd2-273435d8c092"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-1factory-org",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"FAC-11\",\n  \"message\": \"Invalid query parameter: '-1' is not a valid value for 'page_size'.\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7bec1421-3af9-48be-839b-5007b1721b12",
-              "name": "Unauthorized. Missing or invalid API key.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "qms",
-                    "capas"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "89ffc479-fe02-4ddd-82e1-6b57c08a640d",
+                  "name": "Invalid request. A problem with the request query parameters prevents it from being processed.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-1factory-org",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/qms/capas?page=0&page_size=100&created_after=<dateTime>&created_before=<dateTime>&updated_after=<dateTime>&updated_before=<dateTime>&closed_after=<dateTime>&closed_before=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "qms",
+                        "capas"
+                      ],
+                      "query": [
+                        {
+                          "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).",
+                          "key": "page",
+                          "value": "0"
+                        },
+                        {
+                          "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500.",
+                          "key": "page_size",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Return objects created after the specified date-time",
+                          "key": "created_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects created before the specified date-time",
+                          "key": "created_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated after the specified date-time",
+                          "key": "updated_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated before the specified date-time",
+                          "key": "updated_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed after the specified date-time.",
+                          "key": "closed_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed before the specified date-time.",
+                          "key": "closed_before",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "page",
-                      "value": "0"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "100"
-                    },
-                    {
-                      "key": "created_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "created_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "updated_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "updated_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "closed_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "closed_before",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:06:18.000Z",
+                  "updatedAt": "2026-10-21T21:06:18.000Z",
+                  "uid": "35240-89ffc479-fe02-4ddd-82e1-6b57c08a640d"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-1factory-org",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "8c42fc8d-16bb-4739-8fc3-22462242c919",
+                  "name": "Unauthorized. Missing or invalid API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-1factory-org",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/qms/capas?page=0&page_size=100&created_after=<dateTime>&created_before=<dateTime>&updated_after=<dateTime>&updated_before=<dateTime>&closed_after=<dateTime>&closed_before=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "qms",
+                        "capas"
+                      ],
+                      "query": [
+                        {
+                          "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).",
+                          "key": "page",
+                          "value": "0"
+                        },
+                        {
+                          "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500.",
+                          "key": "page_size",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Return objects created after the specified date-time",
+                          "key": "created_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects created before the specified date-time",
+                          "key": "created_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated after the specified date-time",
+                          "key": "updated_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated before the specified date-time",
+                          "key": "updated_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed after the specified date-time.",
+                          "key": "closed_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed before the specified date-time.",
+                          "key": "closed_before",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:06:18.000Z",
+                  "updatedAt": "2026-10-21T21:06:18.000Z",
+                  "uid": "35240-8c42fc8d-16bb-4739-8fc3-22462242c919"
                 }
               ],
-              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T21:06:18.000Z",
+              "updatedAt": "2026-10-21T21:06:18.000Z",
+              "uid": "35240-ab0e229b-a8b2-448a-aa38-1547040702ab"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "15db246f-df08-4f35-b98a-fd889312f9c4",
+          "createdAt": "2026-10-21T21:06:18.000Z",
+          "updatedAt": "2026-10-21T21:06:18.000Z",
+          "uid": "35240-15db246f-df08-4f35-b98a-fd889312f9c4"
         },
         {
-          "id": "06f84a76-120c-4f68-9627-95512bf4ba27",
-          "name": "1Factory Gets a List of Complaints for Your Organization",
-          "request": {
-            "name": "1Factory Gets a List of Complaints for Your Organization",
-            "description": {
-              "content": "The list of Complaints can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Complaint objects returned. By default, the first 100 Complaints are returned.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "qms",
-                "complaints"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "0",
-                  "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size)."
-                },
-                {
-                  "disabled": false,
-                  "key": "page_size",
-                  "value": "100",
-                  "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500."
-                },
-                {
-                  "disabled": false,
-                  "key": "created_after",
-                  "value": "<dateTime>",
-                  "description": "Return objects created after the specified date-time"
-                },
-                {
-                  "disabled": false,
-                  "key": "created_before",
-                  "value": "<dateTime>",
-                  "description": "Return objects created before the specified date-time"
-                },
-                {
-                  "disabled": false,
-                  "key": "updated_after",
-                  "value": "<dateTime>",
-                  "description": "Return objects updated after the specified date-time"
-                },
-                {
-                  "disabled": false,
-                  "key": "updated_before",
-                  "value": "<dateTime>",
-                  "description": "Return objects updated before the specified date-time"
-                },
-                {
-                  "disabled": false,
-                  "key": "closed_after",
-                  "value": "<dateTime>",
-                  "description": "Return only approved or rejected objects closed after the specified date-time."
-                },
-                {
-                  "disabled": false,
-                  "key": "closed_before",
-                  "value": "<dateTime>",
-                  "description": "Return only approved or rejected objects closed before the specified date-time."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "complaints",
+          "item": [
             {
-              "id": "702216aa-7b40-44b5-ba30-2d4556920b5a",
-              "name": "Returns a list of Complaints, most recently created first. Utilize paging query parameters to query older Complaints. By default the 100 most recent are returned.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "qms",
-                    "complaints"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "0"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "100"
-                    },
-                    {
-                      "key": "created_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "created_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "updated_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "updated_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "closed_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "closed_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    }
-                  ],
-                  "variable": []
-                },
+              "name": "1Factory Gets a List of Complaints for Your Organization",
+              "id": "fabec2a2-3c11-491b-a04e-76e833541605",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-1factory-org",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {}\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f27c4859-9bb6-44f9-86ed-e692702397dd",
-              "name": "Invalid request. A problem with the request query parameters prevents it from being processed.",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/qms/complaints?page=0&page_size=100&created_after=<dateTime>&created_before=<dateTime>&updated_after=<dateTime>&updated_before=<dateTime>&closed_after=<dateTime>&closed_before=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "qms",
                     "complaints"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).",
                       "key": "page",
                       "value": "0"
                     },
                     {
+                      "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500.",
                       "key": "page_size",
                       "value": "100"
                     },
                     {
+                      "description": "Return objects created after the specified date-time",
                       "key": "created_after",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return objects created before the specified date-time",
                       "key": "created_before",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return objects updated after the specified date-time",
                       "key": "updated_after",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return objects updated before the specified date-time",
                       "key": "updated_before",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return only approved or rejected objects closed after the specified date-time.",
                       "key": "closed_after",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
                     },
                     {
+                      "description": "Return only approved or rejected objects closed before the specified date-time.",
                       "key": "closed_before",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "value": "<dateTime>"
+                    }
+                  ]
+                },
+                "description": "The list of Complaints can be filtered by specifying query parameters.\n\nPaging parameters control the number of rows Complaint objects returned. By default, the first 100 Complaints are returned."
+              },
+              "response": [
+                {
+                  "id": "8247c4b3-63bd-47f2-b6d4-3c793d7dbcc4",
+                  "name": "Returns a list of Complaints, most recently created first. Utilize paging query parameters to query older Complaints. By default the 100 most recent are returned.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-1factory-org",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/qms/complaints?page=0&page_size=100&created_after=<dateTime>&created_before=<dateTime>&updated_after=<dateTime>&updated_before=<dateTime>&closed_after=<dateTime>&closed_before=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "qms",
+                        "complaints"
+                      ],
+                      "query": [
+                        {
+                          "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).",
+                          "key": "page",
+                          "value": "0"
+                        },
+                        {
+                          "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500.",
+                          "key": "page_size",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Return objects created after the specified date-time",
+                          "key": "created_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects created before the specified date-time",
+                          "key": "created_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated after the specified date-time",
+                          "key": "updated_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated before the specified date-time",
+                          "key": "updated_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed after the specified date-time.",
+                          "key": "closed_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed before the specified date-time.",
+                          "key": "closed_before",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Customer\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Customer\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Devn.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Field\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Rcvg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Field\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"CLOSED\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Customer\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Cust.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Field\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Cust.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Customer\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Mfg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Customer\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"CLOSED\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Field\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Mfg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Customer\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Rcvg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Field\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"CLOSED\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Customer\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Field\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Rcvg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Customer\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Mfg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Field\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Cust.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Customer\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Mfg.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"HIGH\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Customer\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Cust.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Customer\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Devn.\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"MEDIUM\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"OPEN\",\n    \"task_status\": \"OPEN\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Customer\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  },\n  {\n    \"ID\": \"<integer>\",\n    \"number\": \"<number>\",\n    \"part_number\": \"<string>\",\n    \"rev\": \"<string,null>\",\n    \"part_description\": \"<string,null>\",\n    \"customer_name\": \"<string,null>\",\n    \"customer_ident\": \"<string,null>\",\n    \"supplier_name\": \"<string,null>\",\n    \"supplier_ident\": \"<string,null>\",\n    \"type\": \"Field\",\n    \"mfg_insp_ident_1\": \"<string,null>\",\n    \"mfg_insp_ident_2\": \"<string,null>\",\n    \"rec_insp_ident_1\": \"<string,null>\",\n    \"rec_insp_ident_2\": \"<string,null>\",\n    \"lot_quantity\": \"<number>\",\n    \"inspection_quantity\": \"<number>\",\n    \"defective_quantity\": \"<number>\",\n    \"impact\": \"LOW\",\n    \"detected_at\": \"<string,null>\",\n    \"problem_type\": \"<string,null>\",\n    \"root_cause\": \"<string,null>\",\n    \"caused_by\": \"<string,null>\",\n    \"problem_summary\": \"<string,null>\",\n    \"total_cost\": \"<number,null>\",\n    \"status\": \"CLOSED\",\n    \"task_status\": \"N/A\",\n    \"task_count\": \"<number>\",\n    \"owner\": \"<string>\",\n    \"created_by_name\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"updated_on\": \"<dateTime>\",\n    \"closed_on\": \"<dateTime>\",\n    \"source\": \"Field\",\n    \"customer_address\": \"<string>\",\n    \"contact_first_name\": \"<string>\",\n    \"contact_last_name\": \"<string>\",\n    \"contact_email\": \"<string>\",\n    \"contact_phone\": \"<string>\",\n    \"customer_ncr_no\": \"<string>\",\n    \"rma_no\": \"<string>\",\n    \"device_identifier\": \"<string>\",\n    \"serial_nos\": \"<string>\",\n    \"capa_required\": \"<boolean>\",\n    \"capa_id\": \"<number>\",\n    \"date_due\": \"<dateTime>\",\n    \"complaint_on\": \"<dateTime>\"\n  }\n]",
+                  "createdAt": "2026-10-21T21:06:18.000Z",
+                  "updatedAt": "2026-10-21T21:06:18.000Z",
+                  "uid": "35240-8247c4b3-63bd-47f2-b6d4-3c793d7dbcc4"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-1factory-org",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"FAC-11\",\n  \"message\": \"Invalid query parameter: '-1' is not a valid value for 'page_size'.\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c6705380-e1f3-4dbe-b7b3-dcfeea665328",
-              "name": "Unauthorized. Missing or invalid API key.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "qms",
-                    "complaints"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "a1ba3531-b21b-4ac9-be05-d26c38d13435",
+                  "name": "Invalid request. A problem with the request query parameters prevents it from being processed.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-1factory-org",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/qms/complaints?page=0&page_size=100&created_after=<dateTime>&created_before=<dateTime>&updated_after=<dateTime>&updated_before=<dateTime>&closed_after=<dateTime>&closed_before=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "qms",
+                        "complaints"
+                      ],
+                      "query": [
+                        {
+                          "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).",
+                          "key": "page",
+                          "value": "0"
+                        },
+                        {
+                          "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500.",
+                          "key": "page_size",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Return objects created after the specified date-time",
+                          "key": "created_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects created before the specified date-time",
+                          "key": "created_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated after the specified date-time",
+                          "key": "updated_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated before the specified date-time",
+                          "key": "updated_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed after the specified date-time.",
+                          "key": "closed_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed before the specified date-time.",
+                          "key": "closed_before",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "page",
-                      "value": "0"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "100"
-                    },
-                    {
-                      "key": "created_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "created_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "updated_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "updated_before",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "closed_after",
-                      "value": "2021-07-14T08:00:00-08:00"
-                    },
-                    {
-                      "key": "closed_before",
-                      "value": "2021-07-14T08:00:00-08:00"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:06:18.000Z",
+                  "updatedAt": "2026-10-21T21:06:18.000Z",
+                  "uid": "35240-a1ba3531-b21b-4ac9-be05-d26c38d13435"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-1factory-org",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "55149170-9621-40b4-a06c-5d9e9c35fb8b",
+                  "name": "Unauthorized. Missing or invalid API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-1factory-org",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/qms/complaints?page=0&page_size=100&created_after=<dateTime>&created_before=<dateTime>&updated_after=<dateTime>&updated_before=<dateTime>&closed_after=<dateTime>&closed_before=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "qms",
+                        "complaints"
+                      ],
+                      "query": [
+                        {
+                          "description": "Starting page for queried rows - defaults to 0 (the start of the list). Returned rows will start at index (page * page_size).",
+                          "key": "page",
+                          "value": "0"
+                        },
+                        {
+                          "description": "The maximum number of records to return from the query. Defaults to 100, maximum value 500.",
+                          "key": "page_size",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Return objects created after the specified date-time",
+                          "key": "created_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects created before the specified date-time",
+                          "key": "created_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated after the specified date-time",
+                          "key": "updated_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return objects updated before the specified date-time",
+                          "key": "updated_before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed after the specified date-time.",
+                          "key": "closed_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Return only approved or rejected objects closed before the specified date-time.",
+                          "key": "closed_before",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:06:18.000Z",
+                  "updatedAt": "2026-10-21T21:06:18.000Z",
+                  "uid": "35240-55149170-9621-40b4-a06c-5d9e9c35fb8b"
                 }
               ],
-              "body": "{\n  \"code\": \"FAC-2\",\n  \"message\": \"Invalid api key. Ensure the value provided in the x-1factory-key request header matches the API key in your 1Factory settings page.\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T21:06:18.000Z",
+              "updatedAt": "2026-10-21T21:06:18.000Z",
+              "uid": "35240-fabec2a2-3c11-491b-a04e-76e833541605"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "d271a035-d177-4f6a-a5ad-7b412b3b68d6",
+          "createdAt": "2026-10-21T21:06:18.000Z",
+          "updatedAt": "2026-10-21T21:06:18.000Z",
+          "uid": "35240-d271a035-d177-4f6a-a5ad-7b412b3b68d6"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://www.1factory.co/api/v1",
-      "key": "baseUrl"
+      "id": "07c02c55-80e1-4cf2-b036-2a6d42eb2404",
+      "createdAt": "2026-10-21T21:06:18.000Z",
+      "updatedAt": "2026-10-21T21:06:18.000Z",
+      "uid": "35240-07c02c55-80e1-4cf2-b036-2a6d42eb2404"
     }
   ],
   "auth": {
@@ -973,25 +1039,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-1factory-org"
+        "value": "x-1factory-org",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "e96e690f-958e-4d8c-b2e5-d7bf455c8e2f",
-    "name": "1Factory Customers QMS API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "This API allows you to create and query a number of objects in your 1Factory account.\n\n The API accepts and returns request and response bodies as JSON, using UTF-8 encoding.\n\nClients may request that response bodies are compressed using gzip compression by passing 'gzip' in the 'Accept-Encoding' header.\n\nIn order to use the API, you need to generate an API key for your organization in the API section of the Settings page.\n\nEach API request must include the API key and your organization's ID as header parameters. You can also find your organization ID in the Settings page.\n\nAll date time values used in the API are in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) date-time format, and include a timezone offset value. Incoming values can specify any timezone offset.\n\nErrors returned by the API include an error code. An explanation of these error codes is available [here](./errors.html).\n\nUsage of the API is rate-limited - current default limits are:\n- 60 requests per minute\n- 1000 requests per day\n\nExceeding these limits will result in subsequent API requests returning a 429 error code. The daily request limit resets at midnight UTC.\n\n API responses include the following headers to allow clients to determine how close they are to exceeding them limits:\n- **x-ratelimit-minute-limit** permitted number of API calls per minute\n- **x-ratelimit-minute-reset** seconds remaining until minute limit resets\n- **x-ratelimit-minute-remaining** number of calls remaining until reaching limit\n- **x-ratelimit-day-limit** permitted number of API calls per minute\n- **x-ratelimit-day-reset** seconds remaining until minute limit resets\n- **x-ratelimit-day-remaining** number of calls remaining until reaching limit\n\nIf you find you require a higher usage limit, please contact 1Factory support to discuss your use case.\n\nContact Support:\n Name: API Support\n Email: support@1factory.com",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.1factory.co/api/v1"
     }
-  }
+  ]
 }
